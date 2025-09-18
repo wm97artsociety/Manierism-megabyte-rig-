@@ -319,9 +319,13 @@ Electricity produced from run.py to run power to power banks 
 
 
 
+Auctions to raise money for halving
 
+A graded 1982 d penny vauled at $18,000-$40,000 being donated to the community when sold after tax money of 42% approximately is took out for gov and rest donated in cash to pool for mining 
 
+Auction starts tomorrow 
 
+Unknown time of sale so shoot for a couple years down the road 
 
 
 
