@@ -154,6 +154,79 @@ Raw MB: $0.10–$1
 
 Processed MB: ~$5 (RAM, CDs, software)
 
+Bandwidth is vauled at $0.42 a mb/s
+
+Kilowatts are based in area growth from regions for example $0.17 a kilowatt a hour 
+
+--------
+
+What can megabytes do 
+
+Megabyte do alot of things but you can program you're own cds, sdrams, ssd drives for stroage, digital storage systems, video games, just about any thing out of megabytes even pcs or cell phones with you're own software and logic its all about you're own software and logic to run the system when you deal with window gateway intel ryzen hp any company that deals in software its rooted in their logic to make you're own you must create a system of you're own to produce the right software you need for the tools you want in this blockchain we will learn how to make operating systems, computers, phones and other software together in a safe and team like effort when no one is more valuable then the enxt but everyone is reward with tools to brighten their life
+
+
+What can bandwidth do bandwidth is special it can run airwaves, phone signals, satellite, and so many other things like radio stations and more 
+
+
+What can i do with it
+
+You can start a business offering cheap phone services through guest ports of numbers rented from you're phone line where each user has wifi or calling, txting or any feature you want say you have tv program that lets you rent out spaces for cell phone users you can port over their user through a terminal and set them up a tv program, you can run a fm am radio picking up local and world wide channels and so many other features just waiting to a good creatuon to be made loved and used
+
+
+What about kilowatts 
+
+This one is easy kilowatts was used for electricity to produce quantum json files and harvest energy hopefully with the hopes to quick charge devices within 5 minutes in the future or 1 minutes on lighting speed having this thought is hard because you have to base the formula on electronic abilty and process of mah of phone abilty to a phone only gets 500 mah which is 1 hour to use you must set a file to 475mah to 500 mah no more to receive the right electronic abilty to change the cell phone or device and with that it needs it own logic system and software to do quantum which is not hard but processing in files so it takes time to sort out as we shoot for November for our tesla style launch on charging batteries with our quantum files we will process every test to make the battery charge from slow charge, drip charging, and fast charging, lighting charging when we get it set up correctly then that system will be released to the public 
+
+
+How did I come up with this formula for bandwidth and electricity? 
+
+I uses the standard formula of each bandwidth and electricity and took it back to square one of the solution using =^2 which does two equations at one time to find a solution my own way of solving the mathematical equations and formulas 
+
+For example
+
+
+A*B=C
+E*Y=H
+
+A*B=C/B/A=H/Y/E=^2CH
+
+it roots the problem back to the root of the answer and allows multiple results just like power symbol 
+
+Whats amazing avout power symbol ^
+
+Is that if you have a lottery ticket
+
+At 3 balls to pick 
+
+30 iptuons 
+
+You have 300 choices
+
+But 27,000 options to win 
+
+It gi es total number of bet 
+
+But if i take 
+
+3^30 or 30^3 you get roughly 27,000 options 
+
+But you do 3=^30 or 30=^3
+
+You get the exact number it takes to win the game in bets 
+
+Take this to the games ratio of wins for half a year 180 days
+
+You have 50% chance of winning Wrighting down wins for balls
+
+Highest lowest and middles 
+
+Then you play those sets and within 1-20 days you hit a jackpot of a lottery win 
+
+Tricky part getting lottery to pay you sadly but it is fun 
+
+
+
+-------
 
 Future Potential:
 
@@ -301,7 +374,9 @@ Altering or tampering with software is not allowed and will not be tolerated or 
 Updates coming to the blockchain 
 
 
- p2p pool for megabytes, hashpower, bandwidth, kilowatts, manierism tokens 
+ p2p pool for megabytes, hashpower, bandwidth, kilowatts, manierism tokens to exchange, sell and buy while also extraction of megabytes in any size, kilowatts in future, hashpower and bandwith tokens for manierism are special because its the main token and the harder reward meaning its more rare then other mining features but with less usefulness in features at the moment so its a cross road at the moment tell the nft market comes out 
+
+ You're not just mining one reward you are mining a capsule just like when you store a time capsule one is unlocked in time each time you mine a reward unlocking more storage, bandwidth and power for so many useful tools on the internet including megabytes which are the branch of the tree of the internet. 
 
 Nft marketplace 
 
