@@ -161,7 +161,7 @@ Run operating systems directly from MB storage
 
 Power devices without traditional kilowatt plugs
 
-Unlock full OS hash power (e.g., U.S. phone: 77 H/s → unlocked bootloader: 220,000 kH/s)
+Unlock full OS hash power (e.g., U.S. phone: 77 H/s on monero → unlocked bootloader: 220,000 kH/s)
 
 
 
