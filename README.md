@@ -16,7 +16,7 @@ Manierism Megabyte Capsule Rig is a blockchain-based mining platform that tracks
 🔋 Real Energy (kWh)
 
 
-This system models rigs with real-world parameters, including kilowatt consumption, data throughput, and incremental rig performance. Every rig is assigned a unique wallet ID, and the system is designed to run continuously for decades, modeling long-term mining efficiency.
+This system models rigs with real-world parameters, including kilowatt consumption, data throughput, and incremental rig performance. Every rig is assigned a unique wallet ID, and the system is designed to run continuously for decades, modeling long-term mining efficiency while also offering a node system to send payments.
 
 
 ---
@@ -142,6 +142,34 @@ Mining Contribution: hash power rises with rewards and donations.
 
 Daily MB Requirement for 75-Year Growth: ~4,566 MB/day
 
+
+
+Enter number or Wallet ID: 1. Whole amounts       percentage     Percentage           Percentage
+Minted Capsule: handrichism | MB: 5.301329 | H/s: 10093.549661 | kWh: 18.709932 | Bandwidth: 0.093550 MB/s
+Minted Capsule: manierism | MB: 5.754563 | H/s: 10094.125117 | kWh: 18.825023 | Bandwidth: 0.094125 MB/s
+
+
+Menu screen 
+
+1. Start CPU Mining
+2. Start Wi-Fi Mining
+3. Start SHA Capsule Mining
+4. Create New Rig / Wallet
+5. View Wallets & Rigs
+6. Exit
+Enter option (1-6): 5
+
+
+Wallet dashboard 
+
+--- Capsule Rig Dashboard — trust fund ---
+Wallet ID: trust fund
+Hash Power: 10093.019528
+Capsule MB: 930.195279 doesnt have a usd vaule added yet next update
+Real kWh: 18.603906 
+USD Value: $46.51
+Bandwidth: 0.093020 MB/s
+Bandwidth USD: $0.000025
 
 
 ---
