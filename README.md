@@ -291,7 +291,7 @@ But you do 3=^30 or 30=^3
 
 30^3÷30×3=^2 2700 bets to win
 
-Or if you wanted to win rate
+Or if you wanted to (win rate) 
 
 30^3÷30÷3=^2 300 bets in  1.21666666666666666 average win rate per time spand
 
@@ -304,7 +304,7 @@ But you do 4=^40 or 40=^3
 
 40^4÷40×4=^2 256,000 bets to win
 
-Or if you wanted to be 80% win rate at around 300 days
+Or if you wanted to be 80% win (rate at around 300 days) 
 
 40^4÷40÷4=^2 16000 bets in  43.8356164383561643 average win rate per time spand
 
@@ -315,7 +315,7 @@ But you do 5=^69 or 69=^5
 
 69^5÷69×5=^2 113,335,605 bets to win
 
-Or if you wanted to be 80% win rate at around 300 days
+Or if you wanted to win (rate) 
 
 69^5÷69÷5=^2. 4,533,424.2  bets in 12,420.3402739726027 average win rate per time spand
 
