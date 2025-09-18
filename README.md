@@ -144,9 +144,7 @@ Daily MB Requirement for 75-Year Growth: ~4,566 MB/day
 
 
 
-Enter number or Wallet ID: 1. Whole amounts       percentage     Percentage           Percentage
-Minted Capsule: handrichism | MB: 5.301329 | H/s: 10093.549661 | kWh: 18.709932 | Bandwidth: 0.093550 MB/s
-Minted Capsule: manierism | MB: 5.754563 | H/s: 10094.125117 | kWh: 18.825023 | Bandwidth: 0.094125 MB/s
+---
 
 
 Menu screen 
@@ -170,6 +168,37 @@ Real kWh: 18.603906
 USD Value: $46.51
 Bandwidth: 0.093020 MB/s
 Bandwidth USD: $0.000025
+
+
+
+
+Mining capsule rewards thwt grow over time due to hashpower increase
+
+Bandwidth could be updated to 1mb/s to 11mb/s just like it is for megabytes if the community would like the update next round comment a yes to 1mb/s to 11mb/s update or no keep small and grow in time with hashpower 
+
+Enter number or Wallet ID: 1
+Minted Capsule: ram | MB: 3.946946 | H/s: 10116.753263 | kWh: 23.350653 | Bandwidth: 0.116753 MB/s
+Minted Capsule: terabyte | MB: 7.375682 | H/s: 10117.490831 | kWh: 23.498166 | Bandwidth: 0.117491 MB/s
+Minted Capsule: terabyte | MB: 1.167445 | H/s: 10117.607575 | kWh: 23.521515 | Bandwidth: 0.117608 MB/s
+Minted Capsule: petabyte | MB: 8.227642 | H/s: 10118.430340 | kWh: 23.686068 | Bandwidth: 0.118430 MB/s
+Minted Capsule: handrichism | MB: 9.205671 | H/s: 10119.350907 | kWh: 23.870181 | Bandwidth: 0.119351 MB/s
+Minted Capsule: terabyte | MB: 2.483987 | H/s: 10119.599305 | kWh: 23.919861 | Bandwidth: 0.119599 MB/s
+Minted Capsule: sha | MB: 9.885322 | H/s: 10120.587838 | kWh: 24.117568 | Bandwidth: 0.120588 MB/s
+Minted Capsule: terabyte | MB: 7.722694 | H/s: 10121.360107 | kWh: 24.272021 | Bandwidth: 0.121360 MB/s
+Minted Capsule: bandwidth | MB: 9.632970 | H/s: 10122.323404 | kWh: 24.464681 | Bandwidth: 0.122323 MB/s
+Minted Capsule: terabyte | MB: 4.922993 | H/s: 10122.815703 | kWh: 24.563141 | Bandwidth: 0.122816 MB/s
+Minted Capsule: electrism | MB: 4.108177 | H/s: 10123.226521 | kWh: 24.645304 | Bandwidth: 0.123227 MB/s
+Minted Capsule: pib | MB: 4.115736 | H/s: 10123.638095 | kWh: 24.727619 | Bandwidth: 0.123638 MB/s
+Minted Capsule: bandwidth | MB: 6.608036 | H/s: 10124.298898 | kWh: 24.859780 | Bandwidth: 0.124299 MB/s
+Minted Capsule: gigabyte | MB: 9.294556 | H/s: 10125.228354 | kWh: 25.045671 | Bandwidth: 0.125228 MB/s
+Minted Capsule: sha | MB: 4.433264 | H/s: 10125.671680 | kWh: 25.134336 | Bandwidth: 0.125672 MB/s
+Minted Capsule: gigabyte | MB: 8.543887 | H/s: 10126.526069 | kWh: 25.305214 | Bandwidth: 0.126526 MB/s
+Minted Capsule: sha | MB: 7.683920 | H/s: 10127.294461 | kWh: 25.458892 | Bandwidth: 0.127294 MB/s
+Minted Capsule: ram | MB: 7.249530 | H/s: 10128.019414 | kWh: 25.603883 | Bandwidth: 0.128019 MB/s
+
+
+
+
 
 ---
 
