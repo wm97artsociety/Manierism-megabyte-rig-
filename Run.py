@@ -3,6 +3,8 @@ import os
 import time
 import json
 import random
+import socket
+import threading
 from decimal import Decimal, getcontext
 
 # High precision
@@ -14,6 +16,10 @@ TARGETDIR = os.path.join(BASEDIR, "rigs")
 os.makedirs(TARGETDIR, exist_ok=True)
 
 DONATION_WALLET_ID = "WM-CPH0O7J3"
+
+# Node networking
+NODE_PORT = 5000
+NODE_BROADCAST = '255.255.255.255'
 
 # --- Wallet Utilities ---
 def save_wallet(wallet):
@@ -52,6 +58,41 @@ def create_wallet(wallet_id, rig_id=None):
 # Ensure donation wallet exists
 if not load_wallet(DONATION_WALLET_ID):
     create_wallet(DONATION_WALLET_ID, "donations")
+
+# --- Networking: Node Transactions ---
+def broadcast_transaction(transaction):
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+    message = json.dumps(transaction).encode('utf-8')
+    sock.sendto(message, (NODE_BROADCAST, NODE_PORT))
+
+def listen_for_transactions():
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.bind(('', NODE_PORT))
+    while True:
+        data, addr = sock.recvfrom(4096)
+        try:
+            transaction = json.loads(data.decode('utf-8'))
+            process_incoming_transaction(transaction)
+        except Exception as e:
+            print("⚠️ Failed processing incoming transaction:", e)
+
+def process_incoming_transaction(tx):
+    wallet_id = tx['target_wallet']
+    amount = Decimal(str(tx['amount_mb']))
+    wallet = load_wallet(wallet_id)
+    if not wallet:
+        wallet = create_wallet(wallet_id)
+    wallet["capsule_value_mb"] += amount
+    wallet["rig_hash_power"] += int(amount) * Decimal("0.1")  # optional: add hash power
+    wallet["real_kwh"] += amount * Decimal("0.02")
+    wallet["bandwidth_MBps"] += amount * Decimal("0.0001")
+    save_wallet(wallet)
+    print(f"📥 Received {amount} MB for wallet {wallet_id} from {tx['sender_wallet']}")
+
+# Start listener thread
+listener_thread = threading.Thread(target=listen_for_transactions, daemon=True)
+listener_thread.start()
 
 # --- Capsule & Mining ---
 def mint_capsule(wallet, capsule_type, reward_mb):
@@ -99,14 +140,14 @@ def wallet_transaction_menu(wallet):
             amt = Decimal(input("Amount MB to send: ").strip())
             if wallet["capsule_value_mb"] >= amt:
                 wallet["capsule_value_mb"] -= amt
-                target = load_wallet(target_id)
-                if not target:
-                    # Create wallet if it doesn't exist yet
-                    target = create_wallet(target_id)
-                target["capsule_value_mb"] += amt
-                save_wallet(target)
                 save_wallet(wallet)
-                print(f"✅ Sent {amt} MB from {wallet['wallet_id']} to {target_id}")
+                transaction = {
+                    "sender_wallet": wallet['wallet_id'],
+                    "target_wallet": target_id,
+                    "amount_mb": float(amt)
+                }
+                broadcast_transaction(transaction)
+                print(f"✅ Sent {amt} MB from {wallet['wallet_id']} to {target_id} (broadcasted)")
             else:
                 print("⚠️ Not enough MB balance.")
 
@@ -116,27 +157,20 @@ def wallet_transaction_menu(wallet):
 
         elif option == "3":
             amt = Decimal(input("Amount MB to donate: ").strip())
-            if wallet["capsule_value_mb"] >= amt:
-                donate_mb_for_hash(wallet, amt)
+            donation_wallet = load_wallet(DONATION_WALLET_ID)
+            if wallet["capsule_value_mb"] >= amt and donation_wallet:
+                wallet["capsule_value_mb"] -= amt
+                donation_wallet["capsule_value_mb"] += amt
+                save_wallet(wallet)
+                save_wallet(donation_wallet)
+                print(f"🙏 Donated {amt} MB. Hash power added to your wallet/rig.")
             else:
-                print("⚠️ Not enough MB balance.")
+                print("⚠️ Not enough MB or donation wallet missing.")
 
         elif option == "4":
             break
         else:
             print("⚠️ Invalid option.")
-
-def donate_mb_for_hash(sender_wallet, amount_mb):
-    donation_wallet = load_wallet(DONATION_WALLET_ID)
-    if not donation_wallet:
-        print("⚠️ Donation wallet not found.")
-        return
-    sender_wallet["capsule_value_mb"] -= amount_mb
-    donation_wallet["capsule_value_mb"] += amount_mb
-    sender_wallet["rig_hash_power"] += int(amount_mb)  # Add hash to sender
-    save_wallet(donation_wallet)
-    save_wallet(sender_wallet)
-    print(f"🙏 Donated {amount_mb} MB. Hash power added to your wallet/rig.")
 
 # --- Wallet / Rig Selection ---
 def select_wallet_or_rig():
@@ -186,14 +220,8 @@ def main_menu():
         print("5. View Wallets & Rigs")
         print("6. Exit")
         choice = input("Enter option (1-6): ").strip()
-        if choice == "1":
-            print("Starting CPU Mining...")
-            rig_mining_submenu()
-        elif choice == "2":
-            print("Starting Wi-Fi Mining...")
-            rig_mining_submenu()
-        elif choice == "3":
-            print("Starting SHA Capsule Mining...")
+        if choice in ["1","2","3"]:
+            print("Starting Mining...")
             rig_mining_submenu()
         elif choice == "4":
             rig_id = input("Enter Rig ID or Wallet Name: ").strip()
