@@ -231,7 +231,16 @@ Menu Options:
 
 Python 3.9+
 
+Pip installments
+
 pip install cryptography requests
+
+import os
+import time
+import json
+import random
+from decimal import Decimal, getcontext
+from cryptography.fernet import Fernet
 
 
 
@@ -258,17 +267,6 @@ wallet.py (wallet class for balance, deposits, withdrawals, and MB→HS donation
 
 wallet.json (an initialized wallet file that the software will use)
 
-
-----
-
-Imports
-
-import os
-import time
-import json
-import random
-from decimal import Decimal, getcontext
-from cryptography.fernet import Fernet
 
 
 ---------------
