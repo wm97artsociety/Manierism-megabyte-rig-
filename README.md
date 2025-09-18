@@ -253,11 +253,11 @@ Power ball
 
 But you do 5=^69 or 69=^5
 
-69^5÷69×5=^2  bets to win
+69^5÷69×5=^2 113,335,605 bets to win
 
 Or if you wanted to be 80% win rate at around 300 days
 
-69^5÷69÷5=^2 bets in  average win rate per time spand
+69^5÷69÷5=^2. 4,533,424.2  bets in 12,420.3402739726027 average win rate per time spand
 
 
 
