@@ -204,7 +204,7 @@ You have 300 choices
 
 But 27,000 options to win 
 
-It gi es total number of bet 
+It get total number of bet 
 
 But if i take 
 
@@ -223,6 +223,42 @@ Highest lowest and middles
 Then you play those sets and within 1-20 days you hit a jackpot of a lottery win 
 
 Tricky part getting lottery to pay you sadly but it is fun 
+
+
+Daily 3
+
+But you do 3=^30 or 30=^3
+
+30^3÷30×3=^2 2700 bets to win
+
+Or if you wanted to be 80% win rate at around 300 days
+
+30^3÷30÷3=^2 300 bets in  1.21666666666666666 average win rate per time spand
+
+
+
+Daily 4
+
+
+But you do 4=^40 or 40=^3
+
+40^4÷40×4=^2 256,000 bets to win
+
+Or if you wanted to be 80% win rate at around 300 days
+
+40^4÷40÷4=^2 16000 bets in  43.8356164383561643 average win rate per time spand
+
+
+Power ball
+
+But you do 5=^69 or 69=^5
+
+69^5÷69×5=^2  bets to win
+
+Or if you wanted to be 80% win rate at around 300 days
+
+69^5÷69÷5=^2 bets in  average win rate per time spand
+
 
 
 
