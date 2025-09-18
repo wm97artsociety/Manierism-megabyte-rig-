@@ -153,7 +153,7 @@ Menu screen
 
 1. Start CPU Mining
 2. Start Wi-Fi Mining
-3. Start SHA Capsule Mining
+3. Start SHA Capsule Mining is fixed by next update to add 1/4 extra hash power 
 4. Create New Rig / Wallet
 5. View Wallets & Rigs
 6. Exit
