@@ -231,7 +231,7 @@ But you do 3=^30 or 30=^3
 
 30^3÷30×3=^2 2700 bets to win
 
-Or if you wanted to be 80% win rate at around 300 days
+Or if you wanted to win rate
 
 30^3÷30÷3=^2 300 bets in  1.21666666666666666 average win rate per time spand
 
