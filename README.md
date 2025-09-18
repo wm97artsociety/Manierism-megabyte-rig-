@@ -3,6 +3,70 @@
 
 🛡️ Manierism Megabyte Capsule Rig
 
+----
+
+Update to run. Py
+
+Option 5 fix update
+
+Submenu option 3 fix
+
+Hashpower is injected within rig from megabytes giving extra hashpower kilowatts and bandwidth
+
+
+1. Start CPU Mining
+2. Start Wi-Fi Mining
+3. Start SHA Capsule Mining
+4. Create New Rig / Wallet
+5. View Wallets & Rigs
+6. Exit
+Enter option (1-6): 5
+
+Select a Rig/Wallet or type Wallet ID:
+1. family trust funf
+2. WM-CPH0O7J3
+Enter number or Wallet ID: 1
+
+--- Capsule Rig Dashboard — family trust fund ---
+Wallet ID: trust 
+Hash Power: 10155.139661
+Capsule MB: 8.396613
+Real kWh: 31.027932
+USD Value: $0.42
+Bandwidth: 0.155140 MB/s
+Bandwidth USD: $0.000042
+
+1. Send MB / Hash Power
+2. Receive MB / Hash Power
+3. Donate MB to Creator / Add Hash
+4. Back to Main Menu
+Enter option: 3
+Amount MB to donate: 8
+🙏 Donated 8 MB to Creator.
+💪 Your hash power increased by 0.800000 H/s
+
+--- Capsule Rig Dashboard — family trust fund ---
+Wallet ID: trust 
+Hash Power: 10155.939661
+Capsule MB: 0.396613
+Real kWh: 31.187932
+USD Value: $0.02
+Bandwidth: 0.155940 MB/s
+Bandwidth USD: $0.000042
+
+1. Send MB / Hash Power
+2. Receive MB / Hash Power
+3. Donate MB to Creator / Add Hash
+4. Back to Main Menu
+Enter option:
+
+
+Does need a kilowatt and bandwidth updater at bottom for future update
+
+
+
+----
+
 Overview
 
 Manierism Megabyte Capsule Rig is a blockchain-based mining platform that tracks digital rewards in terms of:
