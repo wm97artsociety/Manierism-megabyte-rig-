@@ -166,6 +166,9 @@ Unlock full OS hash power (e.g., U.S. phone: 77 H/s on monero → unlocked bootl
 
 
 
+
+Megabytes have always been installed onto a computer in the early days of computers they had 256 megabyte ram and 512 megabyte ram which would run a pc using this logic gave the idea for this blockchain 
+
 ---
 
 📦 Wallet Module
