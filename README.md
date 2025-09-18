@@ -321,19 +321,24 @@ Electricity produced from run.py to run power to power banks 
 
 Auctions to raise money for halving
 
-A graded 1982 d penny vauled at $18,000-$40,000 being donated to the community when sold after tax money of 42% approximately is took out for gov and rest donated in cash to pool for mining for megabytes 
+1) A graded 1982 d penny vauled at $18,000-$40,000 being donated to the community when sold after tax money of 42% approximately is took out for gov and rest donated in cash to pool for mining for megabytes 
 
 Auction starts tomorrow 
 
 Unknown time of sale so shoot for a couple years down the road 
 
 
+2) a pair of emerald cufflinks worth 25 million will be auctioned of starting at $175,000 with donation amount of $35,000 given to the community for megabytes and the rest donated to a single mother with multiple sclerosis sick from cancer 
 
 
+Auction will be placed on ebay starting tomorrow 
 
+Fees
 
+Shipping cost
+45% fee to government for sale + ebay fee + promotion cost
 
-
+Links for auctions set up by tomorrow 
 
 
 
