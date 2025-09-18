@@ -171,6 +171,9 @@ USD Value: $46.51
 Bandwidth: 0.093020 MB/s
 Bandwidth USD: $0.000025
 
+---
+
+Node setup for sending payments and transactions 
 
 ---
 
