@@ -499,8 +499,7 @@ Auction starts tomorrow
 Unknown time of sale so shoot for a couple years down the road 
 
 
-2) a pair of emerald cufflinks worth 25 million will be auctioned of starting at $175,000 with donation amount of $35,000 given to the community for megabytes and the rest donated to a single mother with multiple sclerosis sick from cancer 
-
+2) a pair of emerald cufflinks worth 25 million will be auctioned of starting at $175,000 with donation amount of $35,000 given to the community for megabytes and the rest used for the project the mother who was sick did not care to receive the money 
 
 Auction will be placed on ebay starting tomorrow 
 
