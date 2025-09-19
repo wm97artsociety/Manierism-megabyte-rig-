@@ -8,6 +8,9 @@ i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennesse
 
 ----
 
+I one step closer to adding Monroe and Bitcoin mining to the rig through data / data to unlock full hash power and produce the race hash power over to bitcoin or Monroe under a new feature (next update) 
+
+
 Update to run. Py
 
 Option 5 fix update
