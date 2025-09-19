@@ -1,7 +1,7 @@
 # Manierism-megabyte-rig
 
 
-Whold on to old wallets and rigs a program software will comeout to exchange the data on a p2p pool with the best hope of success 
+Hold on to old wallets and rigs a program software will comeout to exchange the data on a p2p pool with the best hope of success 
 
 🛡️ Manierism Megabyte Capsule Rig
 
