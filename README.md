@@ -1,14 +1,16 @@
 # Manierism-megabyte-rig
 
 
+Whold on to old wallets and rigs a program software will comeout to exchange the data on a p2p pool with the best hope of success 
+
 🛡️ Manierism Megabyte Capsule Rig
 
 
-i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennessee 
+i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennessee that help. Build the atomic bomb 
 
 ----
 
-I one step closer to adding Monroe and Bitcoin mining to the rig through data / data to unlock full hash power and produce the race hash power over to bitcoin or Monroe under a new feature (next update) 
+ one step closer to adding Monroe and Bitcoin mining to the rig through data / data to unlock full hash power and produce the race hash power over to bitcoin or Monroe under a new feature (next update) 
 
 Non root data/data operating system lets celebrate 
 
@@ -40,6 +42,61 @@ Absolutely, William. Let’s break this down carefully so you have the precise m
    Cache rig (addon bring you're owm cache reedem hashpower no metadata ip addresses or tracking privacy at its fullest sned and receive megabytes in whole file of cache data while trying to lower size amounts to send micro amounts) 
 
 Data/Data operating system for cache data (still in beta mode will. Be fully fixed by next update) 
+
+~/manierism $ python run.py
+
+1. Start CPU Mining
+2. Start Wi-Fi Mining
+3. Start SHA Capsule Mining
+4. Start Cache Mining
+5. Create New Rig / Wallet
+6. View Wallets & Rigs / Dashboard
+7. Exit
+Enter option (1-7): 6
+
+Select a Rig/Wallet or type Wallet ID:
+1. WM-CPH0O7J3
+2. trust
+Enter number or Wallet ID: 2
+
+--- Capsule Rig Dashboard — trust ---
+Wallet ID: trust
+🌠 Hash Power: 10000.000000
+💾 Capsule MB: 0.000000
+📦 Cache MB: 0.000000
+📥 Device Cache (User Folders): 8458.590783 MB
+⚡ Real kWh: 0.000000
+USD Value: $0.00
+📡 Bandwidth: 0.000000 MB/s
+Bandwidth USD: $0.000000
+
+1. Send MB / Hash Power
+2. Receive MB / Hash Power
+3. Send Cache / Receive Cache / Add Hash
+4. Back to Main Menu
+Enter option: 3
+📦 Total Spendable Cache MB (Wallet + Device): 8458.590783
+Enter 'send', 'receive', or 'addhash': addhash
+🌟 Added 8446.182076 H/s using device cache MB!
+
+--- Capsule Rig Dashboard — trust ---
+Wallet ID: trust
+🌠 Hash Power: 18446.182076
+💾 Capsule MB: 0.000000
+📦 Cache MB: 0.000000
+📥 Device Cache (User Folders): 0.000188 MB
+⚡ Real kWh: 0.000000
+USD Value: $0.00
+📡 Bandwidth: 0.000000 MB/s
+Bandwidth USD: $0.000000
+
+1. Send MB / Hash Power
+2. Receive MB / Hash Power
+3. Send Cache / Receive Cache / Add Hash
+4. Back to Main Menu
+Enter option:
+
+---
 
 Formulas & Conversion Rates:
 -----------------------------
