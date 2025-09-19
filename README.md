@@ -3,6 +3,9 @@
 
 🛡️ Manierism Megabyte Capsule Rig
 
+
+i graduated from a Elise School from the Manhattan Project in Oak Ridge Tennessee 
+
 ----
 
 Update to run. Py
