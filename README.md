@@ -4,7 +4,7 @@
 🛡️ Manierism Megabyte Capsule Rig
 
 
-i graduated from a Elise School from the Manhattan Project in Oak Ridge Tennessee 
+i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennessee 
 
 ----
 
@@ -33,6 +33,8 @@ Absolutely, William. Let’s break this down carefully so you have the precise m
    real kWh per MB conversion.
 
    Cache rig (addon bring you're owm cache reedem hashpower no metadata ip addresses or tracking privacy at its fullest sned and receive megabytes in whole file of cache data while trying to lower size amounts to send micro amounts) 
+
+Data/Data operating system for cache data 
 
 Formulas & Conversion Rates:
 -----------------------------
