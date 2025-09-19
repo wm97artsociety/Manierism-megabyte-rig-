@@ -1,19 +1,21 @@
 #!/usr/bin/env python3
+
 import os
 import time
 import json
 import random
 from decimal import Decimal, getcontext
+import math
 
-# High precision math
-getcontext().prec = 200
+getcontext().prec = 200  # high precision
 
-# --- Paths & constants ---
+# --- Paths & Constants ---
 BASEDIR = "/storage/emulated/0/Download/manierismmegabytes"
 TARGETDIR = os.path.join(BASEDIR, "rigs")
 os.makedirs(TARGETDIR, exist_ok=True)
 
 DONATION_WALLET_ID = "WM-CPH0O7J3"
+SHA_HASH_BOOST_FRACTION = Decimal("0.25")
 
 # --- Wallet Utilities ---
 def save_wallet(wallet):
@@ -31,10 +33,9 @@ def load_wallet(wallet_id):
         return None
     with open(wallet_file, "r") as f:
         data = json.load(f)
-    # Convert back to Decimal
-    for key in ["capsule_value_mb", "rig_hash_power", "real_kwh", "bandwidth_MBps", "sha_boost_applied"]:
+    for key in ["capsule_value_mb", "rig_hash_power", "real_kwh", "bandwidth_MBps"]:
         if key in data:
-            data[key] = Decimal(data[key]) if key != "sha_boost_applied" else bool(data[key])
+            data[key] = Decimal(data[key])
     return data
 
 def create_wallet(wallet_id, rig_id=None):
@@ -42,10 +43,10 @@ def create_wallet(wallet_id, rig_id=None):
         "wallet_id": wallet_id,
         "rig_id": rig_id or wallet_id,
         "capsule_value_mb": Decimal("0"),
-        "rig_hash_power": Decimal("10000"),  # Base hash power
+        "rig_hash_power": Decimal("10000"),
         "real_kwh": Decimal("0"),
         "bandwidth_MBps": Decimal("0"),
-        "sha_boost_applied": False,  # Track SHA 1/4 boost
+        "sha_boosted": False  # track if SHA already applied
     }
     save_wallet(wallet)
     return wallet
@@ -54,41 +55,51 @@ def create_wallet(wallet_id, rig_id=None):
 if not load_wallet(DONATION_WALLET_ID):
     create_wallet(DONATION_WALLET_ID, "donations")
 
-# --- Capsule & Mining ---
-def mint_capsule(wallet, capsule_type, reward_mb, kwh_rate=0.02):
+# --- Conversion Rates ---
+KWH_RATES = {
+    "nuclear": Decimal("0.01"),
+    "solar_pv": Decimal("0.005"),
+    "onshore": Decimal("0.002"),
+    "TE": Decimal("3"),
+    "2piE^2": Decimal("3"),
+    "TE2pi^2": Decimal("3.875")
+}
+
+# --- Capsule & Mining Logic ---
+def mb_to_kwh(capsule_type, mb_amount):
+    gamma = KWH_RATES.get(capsule_type.lower(), Decimal("0.001"))
+    return mb_amount * gamma
+
+def mint_capsule(wallet, capsule_type, reward_mb):
+    # SHA mining 1/4 boost applied once
+    if capsule_type.lower() == "sha" and not wallet.get("sha_boosted", False):
+        wallet["rig_hash_power"] += wallet["rig_hash_power"] * SHA_HASH_BOOST_FRACTION
+        wallet["sha_boosted"] = True
+
     wallet["capsule_value_mb"] += reward_mb
-    wallet["real_kwh"] += reward_mb * Decimal(kwh_rate)
+    wallet["rig_hash_power"] += reward_mb * Decimal("0.1")  # baseline scaling
+    kwh_reward = mb_to_kwh(capsule_type, reward_mb)
+    wallet["real_kwh"] += kwh_reward
     wallet["bandwidth_MBps"] += reward_mb * Decimal("0.0001")
-    # SHA boost logic: apply 1/4 only once
-    if capsule_type == "sha" and not wallet["sha_boost_applied"]:
-        wallet["rig_hash_power"] += wallet["rig_hash_power"] * Decimal("0.25")
-        wallet["sha_boost_applied"] = True
-    else:
-        wallet["rig_hash_power"] += reward_mb * Decimal("0.1")
     save_wallet(wallet)
-    metadata = {
+    return {
         "capsuletype": capsule_type,
         "reward_mb": float(reward_mb),
         "real_kwh": float(wallet["real_kwh"])
     }
-    return metadata
 
 def unified_mining_loop(wallet):
     capsule_types = [
-        "sha", "bandwidth", "electrism", "manierism", "handrichism",
-        "gigabyte", "terabyte", "pib", "petabyte", "sdram", "ram",
-        "TE_Energy"  # New reward
+        "sha","bandwidth","electrism","manierism","handrichism",
+        "gigabyte","terabyte","pib","petabyte","sdram","ram",
+        "nuclear","solar_pv","onshore",
+        "TE","2piE^2","TE2pi^2"
     ]
     try:
         while True:
             capsule_type = random.choice(capsule_types)
-            if capsule_type == "TE_Energy":
-                reward_mb = Decimal("15")  # Start at 15 MB
-                kwh_rate = Decimal("0.03")  # TE Energy conversion
-            else:
-                reward_mb = Decimal(random.uniform(1,11))
-                kwh_rate = Decimal("0.02")
-            metadata = mint_capsule(wallet, capsule_type, reward_mb, kwh_rate)
+            reward_mb = Decimal(random.uniform(1,11))
+            metadata = mint_capsule(wallet, capsule_type, reward_mb)
             print(f"Minted Capsule: {capsule_type} | MB: {reward_mb:.6f} | "
                   f"H/s: {wallet['rig_hash_power']:.6f} | kWh: {metadata['real_kwh']:.6f} | "
                   f"Bandwidth: {wallet['bandwidth_MBps']:.6f} MB/s")
@@ -105,7 +116,6 @@ def wallet_transaction_menu(wallet):
         print("3. Donate MB to Creator / Add Hash")
         print("4. Back to Main Menu")
         option = input("Enter option: ").strip()
-
         if option == "1":
             target_id = input("Enter target Wallet ID: ").strip()
             amt = Decimal(input("Amount MB to send: ").strip())
@@ -120,11 +130,9 @@ def wallet_transaction_menu(wallet):
                 print(f"✅ Sent {amt} MB from {wallet['wallet_id']} to {target_id}")
             else:
                 print("⚠️ Not enough MB balance.")
-
         elif option == "2":
             print(f"📥 Your Wallet ID: {wallet['wallet_id']}")
             print("Share this ID to receive MB / Hash Power.")
-
         elif option == "3":
             amt = Decimal(input("Amount MB to donate: ").strip())
             donation_wallet = load_wallet(DONATION_WALLET_ID)
@@ -136,17 +144,15 @@ def wallet_transaction_menu(wallet):
                 wallet["bandwidth_MBps"] += amt * Decimal("0.0001")
                 save_wallet(wallet)
                 save_wallet(donation_wallet)
-                print(f"🙏 Donated {amt} MB to Creator.")
-                print(f"💪 Your hash power increased by {amt * Decimal('0.1'):.6f} H/s")
+                print(f"🙏 Donated {amt} MB to Creator. Hash power increased by {amt*Decimal('0.1'):.6f}")
             else:
                 print("⚠️ Not enough MB or donation wallet missing.")
-
         elif option == "4":
             break
         else:
             print("⚠️ Invalid option.")
 
-# --- Wallet / Rig Selection ---
+# --- Wallet Selection ---
 def select_wallet_or_rig():
     files = [f for f in os.listdir(TARGETDIR) if f.endswith("_wallet.json")]
     if not files:
@@ -174,6 +180,7 @@ def show_rig_dashboard(wallet):
     print(f"Bandwidth: {wallet['bandwidth_MBps']:.6f} MB/s")
     print(f"Bandwidth USD: ${float(wallet['bandwidth_MBps'])*0.00027:.6f}")
 
+# --- Mining Submenus ---
 def rig_mining_submenu():
     wallet = select_wallet_or_rig()
     if wallet:
