@@ -32,6 +32,8 @@ Absolutely, William. Let’s break this down carefully so you have the precise m
 4. Physical energy capsules: Nuclear, Solar PV, Onshore Wind with 
    real kWh per MB conversion.
 
+   Cache rig (addon bring you're owm cache reedem hashpower no metadata ip addresses or tracking privacy at its fullest sned and receive megabytes in whole file of cache data while trying to lower size amounts to send micro amounts) 
+
 Formulas & Conversion Rates:
 -----------------------------
 - TE Energy: Power_regen = TE * β = ((T * c) / ^2) * β
@@ -52,7 +54,14 @@ Formulas & Conversion Rates:
 - TE2π=^2 = 16 MB -> 62 kWh
 
 ==================================================
-"""
+Imports
+
+import os        # For file and directory operations
+import time      # For sleep/delay functions
+import json      # For reading/writing wallet JSON files
+import random    # For random reward generation
+from decimal import Decimal, getcontext  # For high-precision calculations
+
 
 
 ---
