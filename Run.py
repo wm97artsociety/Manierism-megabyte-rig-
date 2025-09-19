@@ -31,9 +31,12 @@ def load_wallet(wallet_id):
         return None
     with open(wallet_file, "r") as f:
         data = json.load(f)
+    # Convert back to Decimal
     for key in ["capsule_value_mb", "rig_hash_power", "real_kwh", "bandwidth_MBps"]:
         if key in data:
             data[key] = Decimal(data[key])
+    if "sha_bonus_applied" not in data:
+        data["sha_bonus_applied"] = False
     return data
 
 def create_wallet(wallet_id, rig_id=None):
@@ -41,25 +44,22 @@ def create_wallet(wallet_id, rig_id=None):
         "wallet_id": wallet_id,
         "rig_id": rig_id or wallet_id,
         "capsule_value_mb": Decimal("0"),
-        "rig_hash_power": Decimal("10000"),
+        "rig_hash_power": Decimal("10000"),  # Base hash power
         "real_kwh": Decimal("0"),
         "bandwidth_MBps": Decimal("0"),
+        "sha_bonus_applied": False,
     }
     save_wallet(wallet)
     return wallet
 
+# Ensure donation wallet exists
 if not load_wallet(DONATION_WALLET_ID):
     create_wallet(DONATION_WALLET_ID, "donations")
 
 # --- Capsule & Mining ---
-def mint_capsule(wallet, capsule_type, reward_mb, sha_boost=False):
+def mint_capsule(wallet, capsule_type, reward_mb):
     wallet["capsule_value_mb"] += reward_mb
-    # Base hash increment
-    hash_increase = reward_mb * Decimal("0.1")
-    if sha_boost:
-        # Add 1/4 of total hash power
-        hash_increase += wallet["rig_hash_power"] * Decimal("0.25")
-    wallet["rig_hash_power"] += hash_increase
+    wallet["rig_hash_power"] += reward_mb * Decimal("0.1")  # normal reward
     wallet["real_kwh"] += reward_mb * Decimal("0.02")
     wallet["bandwidth_MBps"] += reward_mb * Decimal("0.0001")
     save_wallet(wallet)
@@ -70,19 +70,34 @@ def mint_capsule(wallet, capsule_type, reward_mb, sha_boost=False):
     }
     return metadata
 
-def unified_mining_loop(wallet, sha_boost=False):
+def mining_loop(wallet, mining_type="cpu"):
     capsule_types = [
         "sha","bandwidth","electrism","manierism","handrichism",
-        "gigabyte","terabyte","pib","petabyte","sdram","ram"
+        "gigabyte","terabyte","pib","petabyte","sdram","ram",
+        "solar_pv","onshore_wind","nuclear"
     ]
+    
+    # Apply 25% SHA bonus once
+    if mining_type == "sha" and not wallet.get("sha_bonus_applied"):
+        wallet["rig_hash_power"] *= Decimal("1.25")
+        wallet["sha_bonus_applied"] = True
+        save_wallet(wallet)
+        print(f"\n💥 SHA Mining Bonus Applied! Hash Power +25% → {wallet['rig_hash_power']:.6f}\n")
+
     try:
         while True:
             capsule_type = random.choice(capsule_types)
-            reward_mb = Decimal(random.uniform(1,11))
-            metadata = mint_capsule(wallet, capsule_type, reward_mb, sha_boost)
-            print(f"Minted Capsule: {capsule_type} | MB: {reward_mb:.6f} | "
-                  f"H/s: {wallet['rig_hash_power']:.6f} | kWh: {metadata['real_kwh']:.6f} | "
-                  f"Bandwidth: {wallet['bandwidth_MBps']:.6f} MB/s")
+            
+            # Reward ranges
+            if capsule_type in ["solar_pv","onshore_wind","nuclear"]:
+                reward_mb = Decimal(random.uniform(12,14))
+            else:
+                reward_mb = Decimal(random.uniform(1,11))
+            
+            metadata = mint_capsule(wallet, capsule_type, reward_mb)
+            print(f"Minted Capsule: {capsule_type}  \nMB: {reward_mb:.6f}  \n"
+                  f"H/s: {wallet['rig_hash_power']:.6f}  \nkWh: {metadata['real_kwh']:.6f}  \n"
+                  f"Bandwidth: {wallet['bandwidth_MBps']:.6f} MB/s\n")
             time.sleep(random.randint(5,150))
     except KeyboardInterrupt:
         print("\n⛔ Mining stopped.")
@@ -165,10 +180,10 @@ def show_rig_dashboard(wallet):
     print(f"Bandwidth: {wallet['bandwidth_MBps']:.6f} MB/s")
     print(f"Bandwidth USD: ${float(wallet['bandwidth_MBps'])*0.00027:.6f}")
 
-def rig_mining_submenu(sha_boost=False):
+def rig_mining_submenu(mining_type="cpu"):
     wallet = select_wallet_or_rig()
     if wallet:
-        unified_mining_loop(wallet, sha_boost)
+        mining_loop(wallet, mining_type)
 
 def view_wallets_rigs_menu():
     wallet = select_wallet_or_rig()
@@ -187,13 +202,13 @@ def main_menu():
         choice = input("Enter option (1-6): ").strip()
         if choice == "1":
             print("Starting CPU Mining...")
-            rig_mining_submenu()
+            rig_mining_submenu("cpu")
         elif choice == "2":
             print("Starting Wi-Fi Mining...")
-            rig_mining_submenu()
+            rig_mining_submenu("wifi")
         elif choice == "3":
             print("Starting SHA Capsule Mining...")
-            rig_mining_submenu(sha_boost=True)  # <-- 25% hash boost applied
+            rig_mining_submenu("sha")
         elif choice == "4":
             rig_id = input("Enter Rig ID or Wallet Name: ").strip()
             wallet_id = input("Enter Wallet ID: ").strip()
@@ -207,5 +222,6 @@ def main_menu():
         else:
             print("⚠️ Invalid selection.")
 
+# --- Entry Point ---
 if __name__ == "__main__":
     main_menu()
