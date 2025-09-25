@@ -8,12 +8,78 @@ Hold on to old wallets and rigs a program software will comeout to exchange the 
 
 i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennessee that help. Build the atomic bomb 
 
+---
+
+September 24th 2025
+
+
+
+Manierism Megabytes Software – Update Overview
+
+Version: Latest update
+
+This update expands the mining and wallet management software to allow full tracking and storage of multiple types of resources:
+
+1. Balances & Mining Types
+
+Tracks Capsule MB (standard mined megabytes), Cache MB, Real kWh (energy), and Bandwidth MB/s.
+
+Mining rewards now directly increase these balances, along with hash power for your rigs.
+
+SHA capsules apply a one-time hash boost per wallet.
+
+
+
+2. File Creation / Downloads
+
+You can now convert balances into downloadable files stored directly on your device.
+
+File types and formats:
+
+Capsule MB → .bin
+
+Cache MB → .cache
+
+Real kWh → .json
+
+Bandwidth → .bandwidth
+
+
+Users specify file name and size, which is subtracted from the balance, preventing creation beyond your current resources.
+
+All files are saved in a dedicated folder on your storage:
+
+/storage/emulated/0/Download/manierismmegabytes/rigs
+
+
+
+3. Wallet & Rig Management
+
+Each wallet is unique; no sample wallets are preloaded.
+
+Users can create new rigs/wallets, send/receive resources, and add hash power using device cache.
+
+The dashboard now shows Capsule MB, Cache MB, kWh, Bandwidth, Hash Power, and USD values.
+
+
+
+4. Device Cache Integration
+
+The software can scan common user folders (Downloads, Documents, Pictures, Movies, Music) to calculate and optionally use cache data.
+
+Cache data can be added to hash power or converted into files.
+
+
+
+5. Unified Mining Loop
+
+Supports CPU, Wi-Fi, SHA, and Cache mining.
+
+Rewards are automatically applied to the corresponding balances and displayed in real-time.
+
 ----
 
- one step closer to adding Monroe and Bitcoin mining to the rig through data / data to unlock full hash power and produce the race hash power over to bitcoin or Monroe under a new feature (next update) 
-
-Non root data/data operating system lets celebrate 
-
+September 17th 2025
 
 Update to run. Py
 
