@@ -165,8 +165,9 @@ def wallet_transaction_menu(wallet):
         print("\n1. Send MB / Hash Power")
         print("2. Receive MB / Hash Power")
         print("3. Send Cache / Receive Cache / Add Hash")
-        print("4. Download / Create Files")
-        print("5. Back to Main Menu")
+        print("4. Send/Receive/Create MB & Cache for Hash Power")  # New section
+        print("5. --- Download Section ---")
+        print("6. Back to Main Menu")
         option = input("Enter option: ").strip()
 
         if option == "1":
@@ -178,9 +179,10 @@ def wallet_transaction_menu(wallet):
                 if not target:
                     target = create_wallet(target_id)
                 target["capsule_value_mb"] += amt
+                wallet["rig_hash_power"] += amt / 2  # Half hash power given
                 save_wallet(wallet)
                 save_wallet(target)
-                print(f"✅ Sent {amt} MB from {wallet['wallet_id']} to {target_id}")
+                print(f"✅ Sent {amt} MB (+{amt/2:.6f} H/s) from {wallet['wallet_id']} to {target_id}")
             else:
                 print("⚠️ Not enough MB balance.")
 
@@ -201,10 +203,10 @@ def wallet_transaction_menu(wallet):
                     if not target:
                         target = create_wallet(target_id)
                     target["cache_value_mb"] += amt
-                    wallet["rig_hash_power"] += amt
+                    wallet["rig_hash_power"] += amt / 2  # Half hash power from cache
                     save_wallet(wallet)
                     save_wallet(target)
-                    print(f"✅ Sent {amt} Cache MB (+{amt} H/s) to {target_id}")
+                    print(f"✅ Sent {amt} Cache MB (+{amt/2:.6f} H/s) to {target_id}")
                 else:
                     print("⚠️ Not enough Cache MB.")
             elif subopt == "receive":
@@ -228,11 +230,71 @@ def wallet_transaction_menu(wallet):
                 print("⚠️ Invalid option.")
 
         elif option == "4":
+            print("\n--- MB & Cache Hash Power Section ---")
+            print("1. Send MB to Donation Wallet for hash power")
+            print("2. Receive MB from others")
+            print("3. Increase hash power using MB")
+            print("4. Send Cache to Donation Wallet for hash power")
+            print("5. Receive Cache from others")
+            print("6. Increase hash power using Cache")
+            print("7. Back")
+            sub = input("Enter option: ").strip()
+            donation_wallet = load_wallet(DONATION_WALLET_ID)
+            if sub == "1":
+                amt = Decimal(input("Enter MB to send: ").strip())
+                if wallet["capsule_value_mb"] >= amt:
+                    wallet["capsule_value_mb"] -= amt
+                    donation_wallet["capsule_value_mb"] += amt
+                    wallet["rig_hash_power"] += amt / 2
+                    save_wallet(wallet)
+                    save_wallet(donation_wallet)
+                    print(f"✅ Sent {amt} MB to donation wallet (+{amt/2:.6f} H/s)")
+                else:
+                    print("⚠️ Not enough MB balance.")
+            elif sub == "2":
+                print(f"📥 Your Wallet ID: {wallet['wallet_id']}")
+            elif sub == "3":
+                amt = Decimal(input("Enter MB to convert into hash power: ").strip())
+                if wallet["capsule_value_mb"] >= amt:
+                    wallet["capsule_value_mb"] -= amt
+                    wallet["rig_hash_power"] += amt
+                    save_wallet(wallet)
+                    print(f"🌟 Added {amt:.6f} H/s from MB!")
+                else:
+                    print("⚠️ Not enough MB balance.")
+            elif sub == "4":
+                amt = Decimal(input("Enter Cache MB to send: ").strip())
+                if wallet["cache_value_mb"] >= amt:
+                    wallet["cache_value_mb"] -= amt
+                    donation_wallet["cache_value_mb"] += amt
+                    wallet["rig_hash_power"] += amt / 2
+                    save_wallet(wallet)
+                    save_wallet(donation_wallet)
+                    print(f"✅ Sent {amt} Cache MB to donation wallet (+{amt/2:.6f} H/s)")
+                else:
+                    print("⚠️ Not enough Cache MB.")
+            elif sub == "5":
+                print(f"📥 Your Cache MB: {wallet['cache_value_mb']:.6f}")
+            elif sub == "6":
+                amt = Decimal(input("Enter Cache MB to convert into hash power: ").strip())
+                if wallet["cache_value_mb"] >= amt:
+                    wallet["cache_value_mb"] -= amt
+                    wallet["rig_hash_power"] += amt
+                    save_wallet(wallet)
+                    print(f"🌟 Added {amt:.6f} H/s from Cache!")
+                else:
+                    print("⚠️ Not enough Cache MB balance.")
+            elif sub == "7":
+                continue
+            else:
+                print("⚠️ Invalid option.")
+
+        elif option == "5":
             print("\n--- Download / Create Files ---")
-            print(f"1. Capsule MB (.bin)")
-            print(f"2. kWh (.json)")
-            print(f"3. Cache MB (.cache)")
-            print(f"4. Bandwidth (.bandwidth)")
+            print("1. Capsule MB (.bin)")
+            print("2. kWh (.json)")
+            print("3. Cache MB (.cache)")
+            print("4. Bandwidth (.bandwidth)")
             print("5. Back")
             choice = input("Enter option: ").strip()
             if choice in ["1","2","3","4"]:
@@ -252,10 +314,11 @@ def wallet_transaction_menu(wallet):
             else:
                 print("⚠️ Invalid option.")
 
-        elif option == "5":
+        elif option == "6":
             break
         else:
             print("⚠️ Invalid option.")
+
 
 # --- Wallet / Rig Selection ---
 def select_wallet_or_rig():
@@ -275,6 +338,7 @@ def select_wallet_or_rig():
             return load_wallet(wallet_id)
     return load_wallet(choice)
 
+
 def show_rig_dashboard(wallet):
     print(f"\n--- Capsule Rig Dashboard — {wallet['rig_id']} ---")
     print(f"Wallet ID: {wallet['wallet_id']}")
@@ -288,42 +352,8 @@ def show_rig_dashboard(wallet):
     print(f"📡 Bandwidth: {wallet['bandwidth_MBps']:.6f} MB/s")
     print(f"Bandwidth USD: ${float(wallet['bandwidth_MBps'])*0.00027:.6f}")
 
-# --- Unified Mining Loop ---
-def unified_mining_loop(wallet, mining_type):
-    capsule_types = [
-        "sha","bandwidth","electrism","manierism","handrichism",
-        "gigabyte","terabyte","pib","petabyte","sdram","ram",
-        "nuclear","solar","onshore","TE","TE2π","2πE","cache"
-    ]
-    try:
-        while True:
-            if mining_type == "cache":
-                reward_mb, _ = scan_device_cache_mb()
-                capsule_type = "cache"
-            else:
-                capsule_type = random.choice([c for c in capsule_types if c != "cache"])
-                reward_mb = Decimal(random.uniform(1,11))
 
-            metadata = mint_capsule(wallet, capsule_type, reward_mb, mining_type)
-            print(f"🚀 Minted Capsule: {capsule_type} | 💾 MB: {reward_mb:.6f} | "
-                  f"🌠 H/s: {wallet['rig_hash_power']:.6f} | ⚡ kWh: {metadata['real_kwh']:.6f} | "
-                  f"📡 Bandwidth: {wallet['bandwidth_MBps']:.6f} MB/s\n")
-            time.sleep(random.randint(5,150))
-    except KeyboardInterrupt:
-        print("\n🚪 Exiting mining mode.\n")
-
-# --- Submenus ---
-def rig_mining_submenu(mining_type):
-    wallet = select_wallet_or_rig()
-    if wallet:
-        unified_mining_loop(wallet, mining_type)
-
-def view_wallets_rigs_menu():
-    wallet = select_wallet_or_rig()
-    if wallet:
-        wallet_transaction_menu(wallet)
-
-# --- Main Menu ---
+# --- Entry Point / Main Menu ---
 def main_menu():
     while True:
         print("\n1. Start CPU Mining")
@@ -355,6 +385,44 @@ def main_menu():
         else:
             print("⚠️ Invalid selection.")
 
-# --- Entry Point ---
+
+# --- Rig Mining / Wallet Viewing Submenus ---
+def rig_mining_submenu(mining_type):
+    wallet = select_wallet_or_rig()
+    if wallet:
+        unified_mining_loop(wallet, mining_type)
+
+def view_wallets_rigs_menu():
+    wallet = select_wallet_or_rig()
+    if wallet:
+        wallet_transaction_menu(wallet)
+
+
+# --- Unified Mining Loop ---
+def unified_mining_loop(wallet, mining_type):
+    capsule_types = [
+        "sha","bandwidth","electrism","manierism","handrichism",
+        "gigabyte","terabyte","pib","petabyte","sdram","ram",
+        "nuclear","solar","onshore","TE","TE2π","2πE","cache"
+    ]
+    try:
+        while True:
+            if mining_type == "cache":
+                reward_mb, _ = scan_device_cache_mb()
+                capsule_type = "cache"
+            else:
+                capsule_type = random.choice([c for c in capsule_types if c != "cache"])
+                reward_mb = Decimal(random.uniform(1,11))
+
+            metadata = mint_capsule(wallet, capsule_type, reward_mb, mining_type)
+            print(f"🚀 Minted Capsule: {capsule_type} | 💾 MB: {reward_mb:.6f} | "
+                  f"🌠 H/s: {wallet['rig_hash_power']:.6f} | ⚡ kWh: {metadata['real_kwh']:.6f} | "
+                  f"📡 Bandwidth: {wallet['bandwidth_MBps']:.6f} MB/s\n")
+            time.sleep(random.randint(5,150))
+    except KeyboardInterrupt:
+        print("\n🚪 Exiting mining mode.\n")
+
+
+# --- Program Entry Point ---
 if __name__ == "__main__":
     main_menu()
