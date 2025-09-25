@@ -23,7 +23,6 @@ def generate_node_id():
 
 # --- Wallet Utilities ---
 def save_wallet(wallet):
-    """Saves the wallet, converting Decimal objects to float for JSON."""
     wallet_copy = wallet.copy()
     for key, value in wallet_copy.items():
         if isinstance(value, Decimal):
@@ -33,7 +32,6 @@ def save_wallet(wallet):
         json.dump(wallet_copy, f, indent=4)
 
 def _ensure_wallet_has_node(data):
-    """Checks if a wallet has a 'node_id' and assigns/saves one if missing."""
     if "node_id" not in data or not data["node_id"]:
         data["node_id"] = generate_node_id()
         save_wallet(data)
@@ -41,7 +39,6 @@ def _ensure_wallet_has_node(data):
     return data
 
 def load_wallet(wallet_id):
-    """Loads a wallet, converts fields to Decimal, and ensures Node ID."""
     wallet_file = os.path.join(TARGETDIR, f"{wallet_id}_wallet.json")
     if not os.path.exists(wallet_file):
         return None
@@ -54,7 +51,6 @@ def load_wallet(wallet_id):
     return data
 
 def create_wallet(wallet_id, rig_id=None):
-    """Creates a new wallet with initial values and unique Node ID."""
     existing = load_wallet(wallet_id)
     if existing:
         return existing
@@ -75,7 +71,7 @@ def create_wallet(wallet_id, rig_id=None):
 if not load_wallet(DONATION_WALLET_ID):
     create_wallet(DONATION_WALLET_ID, "donations")
 
-# --- Scan device cache ---
+# --- Device cache scan ---
 def scan_device_cache_mb(delete_after=False):
     total_cache = Decimal("0")
     all_files = []
@@ -89,19 +85,20 @@ def scan_device_cache_mb(delete_after=False):
     ]
     seen = set()
     for path in user_paths:
-        if os.path.exists(path):
-            for root, dirs, files in os.walk(path):
-                for f in files:
-                    file_path = os.path.join(root, f)
-                    if file_path in seen:
-                        continue
-                    seen.add(file_path)
-                    try:
-                        size_mb = Decimal(os.path.getsize(file_path)) / Decimal(1024*1024)
-                        total_cache += size_mb
-                        all_files.append((file_path, size_mb))
-                    except Exception:
-                        continue
+        if not os.path.exists(path):
+            continue
+        for root, dirs, files in os.walk(path):
+            for f in files:
+                file_path = os.path.join(root, f)
+                if file_path in seen:
+                    continue
+                seen.add(file_path)
+                try:
+                    size_mb = Decimal(os.path.getsize(file_path)) / Decimal(1024*1024)
+                    total_cache += size_mb
+                    all_files.append((file_path, size_mb))
+                except Exception:
+                    continue
     if delete_after:
         for file_path, _ in all_files:
             try:
@@ -110,50 +107,29 @@ def scan_device_cache_mb(delete_after=False):
                 continue
     return total_cache, all_files
 
-# --- Capsule & Mining ---
-ENERGY_RATES = {
-    "cpu": Decimal("0.02"),
-    "sha": Decimal("0.02"),
-    "cache": Decimal("0.015"),
-    "wifi": Decimal("0.01"),
-}
-
+# --- Mining ---
 sha_boost_applied = {}
 
-def mint_capsule(wallet, capsule_type, reward_mb, mining_type):
-    reward_mb = Decimal(str(reward_mb))
-    if capsule_type == "cache":
-        wallet["cache_value_mb"] += reward_mb
-    else:
-        wallet["capsule_value_mb"] += reward_mb
-
-    kwh_rate = ENERGY_RATES.get(mining_type, Decimal("0.02"))
-    wallet["real_kwh"] += reward_mb * kwh_rate
-    wallet["bandwidth_MBps"] += reward_mb * Decimal("0.01")
-    wallet["rig_hash_power"] += reward_mb * Decimal("0.01")
-
-    sha_boost = Decimal("0")
-    if mining_type == "sha" and capsule_type == "sha":
-        if wallet["wallet_id"] not in sha_boost_applied:
-            sha_boost = wallet["rig_hash_power"] / Decimal("4")
-            wallet["rig_hash_power"] += sha_boost
-            sha_boost_applied[wallet["wallet_id"]] = True
-            print(f"🌠 SHA Boost applied! +{sha_boost:.6f} H/s")
-
-    save_wallet(wallet)
-    metadata = {
-        "capsuletype": capsule_type,
-        "reward_mb": float(reward_mb),
-        "real_kwh": float(wallet["real_kwh"]),
-        "sha_boost": float(sha_boost)
-    }
-    return metadata
-
 def unified_mining_loop(wallet, mining_type):
-    capsule_types = [
-        "sha","bandwidth","electrism","manierism","handrichism",
-        "gigabyte","terabyte","pib","petabyte","sdram","ram"
-    ]
+    """Mining loop with fixed rewards per capsule type."""
+    rewards = {
+        "2piE": 5,
+        "TE": 7,
+        "TE2pi": 3,
+        "Manierism": 6,
+        "Handrichism": 4,
+        "RAM": 8,
+        "SDRAM": 2,
+        "SHA": 10,
+        "Nuclear": 9,
+        "Onshore": 1,
+        "Gigabyte": 12,
+        "Terabyte": 11,
+        "Petabyte": 15,
+        "PIB": 14,
+        "Electrism": 13
+    }
+
     try:
         while True:
             wallet = load_wallet(wallet['wallet_id'])
@@ -161,29 +137,33 @@ def unified_mining_loop(wallet, mining_type):
                 print("⚠️ Wallet disappeared. Stopping mining.")
                 break
 
-            if mining_type == "cache":
-                device_cache, _ = scan_device_cache_mb()
-                reward_mb = Decimal(random.uniform(5, 20))
-                capsule_type = "cache"
-            elif mining_type == "sha":
-                reward_mb = Decimal(random.uniform(2, 15))
-                capsule_type = "sha"
-            elif mining_type == "wifi":
-                reward_mb = Decimal(random.uniform(1, 12))
-                capsule_type = "bandwidth"
-            else:
-                reward_mb = Decimal(random.uniform(1, 10))
-                capsule_type = random.choice(capsule_types)
+            capsule_type = random.choice(list(rewards.keys()))
+            reward_mb = Decimal(rewards[capsule_type])
 
-            metadata = mint_capsule(wallet, capsule_type, reward_mb, mining_type)
-            print(f"🚀 Minted Capsule: {capsule_type} | 💾 MB: {reward_mb:.6f} | "
-                  f"🌠 H/s: {wallet['rig_hash_power']:.6f} | ⚡ kWh: {metadata['real_kwh']:.6f} | "
-                  f"📡 Bandwidth: {wallet['bandwidth_MBps']:.6f} MB/s\n")
+            # Update wallet
+            wallet["capsule_value_mb"] += reward_mb
+            wallet["rig_hash_power"] += reward_mb * Decimal("0.1")
+            wallet["real_kwh"] += reward_mb * Decimal("0.02")
+            wallet["bandwidth_MBps"] += reward_mb * Decimal("0.001")
+
+            sha_boost = Decimal("0")
+            if capsule_type == "SHA" and wallet["wallet_id"] not in sha_boost_applied:
+                sha_boost = wallet["rig_hash_power"] / Decimal("4")
+                wallet["rig_hash_power"] += sha_boost
+                sha_boost_applied[wallet["wallet_id"]] = True
+                print(f"🌠 SHA Boost applied! +{sha_boost:.6f} H/s")
+
+            save_wallet(wallet)
+
+            print(f"🚀 Mined Capsule: {capsule_type} | 💾 MB: {reward_mb:.6f} | "
+                  f"🌠 H/s: {wallet['rig_hash_power']:.6f} | ⚡ kWh: {wallet['real_kwh']:.6f} | "
+                  f"📡 Bandwidth: {wallet['bandwidth_MBps']:.6f} MB/s | SHA Boost: {sha_boost:.6f}")
+
             time.sleep(random.randint(5, 150))
     except KeyboardInterrupt:
         print("\n⛔ Mining stopped.")
 
-# --- Wallet Actions ---
+# --- Wallet Transactions & Donations ---
 def wallet_transaction_menu(wallet):
     while True:
         wallet = load_wallet(wallet['wallet_id'])
@@ -192,18 +172,19 @@ def wallet_transaction_menu(wallet):
 
         show_rig_dashboard(wallet)
         print("\n--- Wallet Actions ---")
-        print("1. Send Capsule MB")
-        print("2. Send Cache MB")
-        print("3. Send kWh")
-        print("4. Send Bandwidth")
-        print("5. Donate Capsule MB (Gain Hash)")
-        print("6. Donate Cache MB (Gain Hash)")
-        print("7. Donate kWh (Gain Hash)")
-        print("8. Donate Bandwidth (Gain Hash)")
-        print("9. View Receive Info")
-        print("10. Help / Instructions")
-        print("11. Download Resource File")
+        print("1. Send Capsule MB to another Wallet")
+        print("2. Send Cache MB to another Wallet")
+        print("3. Send kWh to another Wallet")
+        print("4. Send Bandwidth to another Wallet")
+        print("5. Donate Capsule MB to Creator (Gain Hash Power)")
+        print("6. Donate Cache MB to Creator (Gain Hash Power)")
+        print("7. Donate kWh to Creator (Gain Hash Power)")
+        print("8. Donate Bandwidth to Creator (Gain Hash Power)")
+        print("9. View Receive Info (Wallet/Node IDs)")
+        print("10. Download Resource to File")
+        print("11. Help / Instructions")
         print("12. Back to Main Menu")
+        print("-" * 40)
         option = input("Enter option: ").strip()
 
         if option == "1":
@@ -225,9 +206,9 @@ def wallet_transaction_menu(wallet):
         elif option == "9":
             show_receive_info(wallet)
         elif option == "10":
-            show_help()
+            download_resource_menu(wallet)
         elif option == "11":
-            download_resource_file(wallet)
+            show_help()
         elif option == "12":
             break
         else:
@@ -240,17 +221,13 @@ def send_resource(wallet, resource_name):
         if amt <= 0:
             print("⚠️ Enter a positive amount.")
             return
-        if wallet.get(resource_name, 0) >= amt:
+        if wallet.get(resource_name, Decimal("0")) >= amt:
             wallet[resource_name] -= amt
-            target = load_wallet(target_id)
-            if not target:
-                target = create_wallet(target_id)
-            if resource_name not in target:
-                target[resource_name] = Decimal("0")
-            target[resource_name] += amt
+            target = load_wallet(target_id) or create_wallet(target_id)
+            target[resource_name] = target.get(resource_name, Decimal("0")) + amt
             save_wallet(wallet)
             save_wallet(target)
-            print(f"✅ Sent {amt} {resource_name.replace('_',' ')} to {target_id}")
+            print(f"✅ Sent {amt} {resource_name.replace('_',' ')} from {wallet['wallet_id']} to {target_id}")
         else:
             print(f"⚠️ Not enough {resource_name.replace('_',' ')} balance.")
     except Exception as e:
@@ -266,88 +243,83 @@ def donate_for_hash(wallet, resource_name):
         if amt <= 0:
             print("⚠️ Enter a positive amount.")
             return
-        if wallet.get(resource_name, 0) >= amt:
+        if wallet.get(resource_name, Decimal("0")) >= amt:
             wallet[resource_name] -= amt
-            if resource_name not in donation_wallet:
-                donation_wallet[resource_name] = Decimal("0")
-            donation_wallet[resource_name] += amt
+            donation_wallet[resource_name] = donation_wallet.get(resource_name, Decimal("0")) + amt
             wallet["rig_hash_power"] += amt
             save_wallet(wallet)
             save_wallet(donation_wallet)
-            print(f"🙏 Donated {amt}. Hash power added to your rig!")
+            print(f"🙏 Donated {amt} {resource_name.replace('_',' ')}. Hash power added!")
         else:
             print(f"⚠️ Not enough {resource_name.replace('_',' ')} balance.")
     except Exception as e:
         print(f"❌ Error: {e}")
 
 def show_receive_info(wallet):
-    print("\n--- Receive Information ---")
+    print("\n--- Receive Info ---")
     print(f"📥 Wallet ID: {wallet['wallet_id']}")
     print(f"🌐 Node ID: {wallet['node_id']}")
     print(f"💾 Capsule MB: {wallet['capsule_value_mb']:.6f}")
     print(f"📦 Cache MB: {wallet['cache_value_mb']:.6f}")
-    print(f"⚡ Real kWh: {wallet['real_kwh']:.6f}")
+    print(f"⚡ kWh: {wallet['real_kwh']:.6f}")
     print(f"📡 Bandwidth: {wallet['bandwidth_MBps']:.6f} MB/s")
+    print("Share Wallet/Node IDs to receive resources.")
 
 def show_help():
-    print("\n--- Instructions ---")
-    print("• Mining increases resources over time.")
-    print("• Send/Donate options move resources and can increase hash power.")
-    print("• Use Wallet ID & Node ID to receive resources.")
-    print("• Download Resource File to create MB, kWh, bandwidth, or cache files.")
-    print("-" * 40)
+    print("\n--- Node & Wallet Instructions ---")
+    print("• Send/Donate Capsule MB, Cache MB, kWh, or Bandwidth between wallets.")
+    print("• Donations add Hash Power to your rig.")
+    print("• Mining increases Capsule MB, Cache MB, kWh, and Bandwidth.")
+    print("• SHA capsules may trigger boosts.")
+    print("• Download resource to file for local storage.")
+    print("-"*40)
 
-# --- Download Resource ---
-def download_resource_file(wallet):
-    print("\n--- Download Resource File ---")
-    print("1. Capsule MB (Bin)")
-    print("2. Kilowatts (JSON)")
-    print("3. Bandwidth (JSON)")
-    print("4. Cache (JSON)")
-    print("5. Back")
-    choice = input("Select resource to download: ").strip()
+# --- Download System ---
+def download_resource_menu(wallet):
+    print("\n--- Download Resource ---")
+    print("1. Capsule MB (.bin)")
+    print("2. Cache MB (.bin)")
+    print("3. kWh (.json)")
+    print("4. Bandwidth (.json)")
+    option = input("Select resource type to download: ").strip()
 
     resource_map = {
-        "1": ("capsule_value_mb", ".bin"),
-        "2": ("real_kwh", ".json"),
-        "3": ("bandwidth_MBps", ".json"),
-        "4": ("cache_value_mb", ".json")
+        "1": ("capsule_value_mb", "bin"),
+        "2": ("cache_value_mb", "bin"),
+        "3": ("real_kwh", "json"),
+        "4": ("bandwidth_MBps", "json")
     }
-
-    if choice not in resource_map:
+    if option not in resource_map:
+        print("⚠️ Invalid option.")
         return
 
-    resource_name, ext = resource_map[choice]
+    resource_name, ext = resource_map[option]
     current_value = wallet.get(resource_name, Decimal("0"))
+    print(f"Available {resource_name.replace('_',' ')}: {current_value:.6f}")
 
+    amt = Decimal(input(f"Enter amount to download (min 1 MB/unit): ").strip())
+    if amt < 1 or amt > current_value:
+        print("⚠️ Invalid amount.")
+        return
+
+    file_name = input("Enter file name (without extension): ").strip()
+    full_path = os.path.join(BASEDIR, f"{file_name}.{ext}")
+
+    # Deduct from wallet
+    wallet[resource_name] -= amt
+    save_wallet(wallet)
+
+    # Create file
     try:
-        amt = Decimal(input(f"Enter amount to download (MB, min 1): ").strip())
-        if amt < 1:
-            print("⚠️ Minimum download is 1 MB.")
-            return
-        if amt > current_value:
-            print(f"⚠️ Not enough {resource_name.replace('_',' ')} in wallet.")
-            return
-        filename = input("Enter the name of the file to save: ").strip()
-        if not filename:
-            filename = f"{resource_name}_download"
-
-        filepath = os.path.join(BASEDIR, f"{filename}{ext}")
-
-        if ext == ".bin":
-            with open(filepath, "wb") as f:
-                f.write(b'\0' * int(amt * 1024 * 1024))
+        if ext == "bin":
+            with open(full_path, "wb") as f:
+                f.write(os.urandom(int(amt*1024*1024)))  # exact MB
         else:
-            data = {resource_name: float(amt)}
-            with open(filepath, "w") as f:
-                json.dump(data, f, indent=4)
-
-        wallet[resource_name] -= amt
-        save_wallet(wallet)
-        print(f"✅ Saved {amt} MB of {resource_name.replace('_',' ')} as {filename}{ext} in {BASEDIR}")
-
+            with open(full_path, "w") as f:
+                json.dump({resource_name: float(amt)}, f, indent=4)
+        print(f"✅ Downloaded {amt} {resource_name.replace('_',' ')} to {full_path}")
     except Exception as e:
-        print(f"❌ Error during download: {e}")
+        print(f"❌ Failed to download: {e}")
 
 # --- Wallet / Rig Selection ---
 def select_wallet_or_rig():
@@ -363,11 +335,11 @@ def select_wallet_or_rig():
     if choice.isdigit():
         idx = int(choice)
         if 1 <= idx <= len(files):
-            wallet_id = files[idx - 1].replace("_wallet.json", "")
+            wallet_id = files[idx-1].replace("_wallet.json", "")
             return load_wallet(wallet_id)
     return load_wallet(choice)
 
-# --- Dashboard ---
+# --- Rig Dashboard ---
 def show_rig_dashboard(wallet):
     device_cache, _ = scan_device_cache_mb()
     print(f"\n--- Capsule Rig Dashboard — {wallet['rig_id']} ---")
@@ -381,7 +353,33 @@ def show_rig_dashboard(wallet):
     print(f"📡 Bandwidth: {wallet['bandwidth_MBps']:.6f} MB/s")
     print(f"💰 USD Value: ${(float(wallet['capsule_value_mb'])*0.05 + float(wallet['cache_value_mb'])*0.03):.2f}")
 
-# --- Mining Flow ---
+# --- Mining Loop with Custom Rewards ---
+CUSTOM_REWARDS = [
+    "2piE", "TE", "TE2pi", "Manierism", "Handrichism",
+    "RAM", "SDRAM", "SHA", "Nuclear", "Onshore",
+    "Gigabyte", "Terabyte", "Petabyte", "PiB", "Electrism"
+]
+
+def unified_mining_loop(wallet, mining_type):
+    try:
+        while True:
+            wallet = load_wallet(wallet['wallet_id'])
+            if not wallet:
+                print("⚠️ Wallet disappeared. Stopping mining.")
+                break
+
+            capsule_type = random.choice(CUSTOM_REWARDS)
+            reward_mb = Decimal(random.randint(1,15))
+
+            metadata = mint_capsule(wallet, capsule_type, reward_mb, mining_type)
+            print(f"🚀 Minted Capsule: {capsule_type} | 💾 MB: {reward_mb:.6f} | "
+                  f"🌠 H/s: {wallet['rig_hash_power']:.6f} | ⚡ kWh: {metadata['real_kwh']:.6f} | "
+                  f"📡 Bandwidth: {wallet['bandwidth_MBps']:.6f} MB/s\n")
+            time.sleep(random.randint(5, 150))
+    except KeyboardInterrupt:
+        print("\n⛔ Mining stopped.")
+
+# --- Mining Start Flow ---
 def start_mining(mining_type):
     wallet_id = input("Enter Wallet ID to start mining: ").strip()
     wallet = load_wallet(wallet_id)
@@ -391,11 +389,47 @@ def start_mining(mining_type):
     else:
         print("⚠️ Wallet not found. Aborting mining.")
 
-# --- Wallet / Rig Menu ---
+# --- View Wallets / Rigs Menu ---
 def view_wallets_rigs_menu():
     wallet = select_wallet_or_rig()
     if wallet:
         wallet_transaction_menu(wallet)
+
+# --- Mining Loop with Custom Rewards ---
+CUSTOM_REWARDS = [
+    "2piE", "TE", "TE2pi", "Manierism", "Handrichism",
+    "RAM", "SDRAM", "SHA", "Nuclear", "Onshore",
+    "Gigabyte", "Terabyte", "Petabyte", "PiB", "Electrism"
+]
+
+def unified_mining_loop(wallet, mining_type):
+    """Mining loop with fixed rewards per capsule type."""
+    try:
+        while True:
+            wallet = load_wallet(wallet['wallet_id'])
+            if not wallet:
+                print("⚠️ Wallet disappeared. Stopping mining.")
+                break
+
+            capsule_type = random.choice(CUSTOM_REWARDS)
+            reward_mb = Decimal(random.randint(1, 15))
+
+            # --- Update wallet directly instead of mint_capsule ---
+            wallet["capsule_value_mb"] += reward_mb
+            wallet["rig_hash_power"] += reward_mb * Decimal("0.1")
+            wallet["real_kwh"] += reward_mb * Decimal("0.02")
+            wallet["bandwidth_MBps"] += reward_mb * Decimal("0.001")
+
+            save_wallet(wallet)
+
+            print(f"🚀 Mined Capsule: {capsule_type} | 💾 MB: {reward_mb:.6f} | "
+                  f"🌠 H/s: {wallet['rig_hash_power']:.6f} | "
+                  f"⚡ kWh: {wallet['real_kwh']:.6f} | "
+                  f"📡 Bandwidth: {wallet['bandwidth_MBps']:.6f} MB/s")
+
+            time.sleep(random.randint(5, 150))
+    except KeyboardInterrupt:
+        print("\n⛔ Mining stopped.")
 
 # --- Main Menu ---
 def main_menu():
@@ -410,6 +444,7 @@ def main_menu():
         print("6. View Wallets & Rigs / Wallet Actions")
         print("7. Exit")
         choice = input("Enter option (1-7): ").strip()
+
         if choice == "1":
             start_mining("cpu")
         elif choice == "2":
