@@ -105,9 +105,6 @@ def mint_capsule(wallet, capsule_type, reward_mb, mining_type):
 
 # --- Scan device user-accessible folders ---
 def scan_device_cache_mb(delete_after=False):
-    """
-    Scan accessible folders for cache/data: Download, Documents, Pictures, Movies, Music
-    """
     total_cache = Decimal("0")
     all_files = []
 
@@ -131,7 +128,6 @@ def scan_device_cache_mb(delete_after=False):
                     except Exception:
                         continue
 
-    # Optional deletion
     if delete_after:
         for file_path, size_mb in all_files:
             try:
@@ -141,29 +137,26 @@ def scan_device_cache_mb(delete_after=False):
 
     return total_cache, all_files
 
-# --- Unified Mining Loop ---
-def unified_mining_loop(wallet, mining_type):
-    capsule_types = [
-        "sha","bandwidth","electrism","manierism","handrichism",
-        "gigabyte","terabyte","pib","petabyte","sdram","ram",
-        "nuclear","solar","onshore","TE","TE2π","2πE","cache"
-    ]
-    try:
-        while True:
-            if mining_type == "cache":
-                reward_mb, _ = scan_device_cache_mb()
-                capsule_type = "cache"
-            else:
-                capsule_type = random.choice([c for c in capsule_types if c != "cache"])
-                reward_mb = Decimal(random.uniform(1,11))
-
-            metadata = mint_capsule(wallet, capsule_type, reward_mb, mining_type)
-            print(f"🚀 Minted Capsule: {capsule_type} | 💾 MB: {reward_mb:.6f} | "
-                  f"🌠 H/s: {wallet['rig_hash_power']:.6f} | ⚡ kWh: {metadata['real_kwh']:.6f} | "
-                  f"📡 Bandwidth: {wallet['bandwidth_MBps']:.6f} MB/s\n")
-            time.sleep(random.randint(5,150))
-    except KeyboardInterrupt:
-        print("\n🚪 Exiting mining mode.\n")
+# --- File Creation for Downloads ---
+def create_file(wallet, balance_name, filename, size_mb, extension):
+    available = wallet[balance_name]
+    if size_mb > available:
+        print("⚠️ Not enough balance to create this file!")
+        return
+    wallet[balance_name] -= size_mb
+    save_wallet(wallet)
+    filepath = os.path.join(TARGETDIR, f"{filename}{extension}")
+    size_bytes = int(size_mb * 1024 * 1024)
+    if extension == ".json":
+        kb_per_entry = 1024
+        total_entries = size_bytes // kb_per_entry
+        data = [{"kWh": round(random.uniform(0.1, 10.0), 4)} for _ in range(total_entries)]
+        with open(filepath, "w") as f:
+            json.dump(data, f)
+    else:
+        with open(filepath, "wb") as f:
+            f.write(os.urandom(size_bytes))
+    print(f"✅ Created {filepath} ({size_mb} MB). New {balance_name} balance: {wallet[balance_name]:.6f}")
 
 # --- Wallet Transactions ---
 def wallet_transaction_menu(wallet):
@@ -172,7 +165,8 @@ def wallet_transaction_menu(wallet):
         print("\n1. Send MB / Hash Power")
         print("2. Receive MB / Hash Power")
         print("3. Send Cache / Receive Cache / Add Hash")
-        print("4. Back to Main Menu")
+        print("4. Download / Create Files")
+        print("5. Back to Main Menu")
         option = input("Enter option: ").strip()
 
         if option == "1":
@@ -234,6 +228,31 @@ def wallet_transaction_menu(wallet):
                 print("⚠️ Invalid option.")
 
         elif option == "4":
+            print("\n--- Download / Create Files ---")
+            print(f"1. Capsule MB (.bin)")
+            print(f"2. kWh (.json)")
+            print(f"3. Cache MB (.cache)")
+            print(f"4. Bandwidth (.bandwidth)")
+            print("5. Back")
+            choice = input("Enter option: ").strip()
+            if choice in ["1","2","3","4"]:
+                if choice=="1":
+                    balance_name="capsule_value_mb"; ext=".bin"
+                elif choice=="2":
+                    balance_name="real_kwh"; ext=".json"
+                elif choice=="3":
+                    balance_name="cache_value_mb"; ext=".cache"
+                elif choice=="4":
+                    balance_name="bandwidth_MBps"; ext=".bandwidth"
+                size = Decimal(input("Enter size to create (1MB or higher): ").strip())
+                filename = input("Enter file name (without extension): ").strip()
+                create_file(wallet, balance_name, filename, size, ext)
+            elif choice=="5":
+                continue
+            else:
+                print("⚠️ Invalid option.")
+
+        elif option == "5":
             break
         else:
             print("⚠️ Invalid option.")
@@ -268,6 +287,30 @@ def show_rig_dashboard(wallet):
     print(f"USD Value: ${float(wallet['capsule_value_mb'])*0.05:.2f}")
     print(f"📡 Bandwidth: {wallet['bandwidth_MBps']:.6f} MB/s")
     print(f"Bandwidth USD: ${float(wallet['bandwidth_MBps'])*0.00027:.6f}")
+
+# --- Unified Mining Loop ---
+def unified_mining_loop(wallet, mining_type):
+    capsule_types = [
+        "sha","bandwidth","electrism","manierism","handrichism",
+        "gigabyte","terabyte","pib","petabyte","sdram","ram",
+        "nuclear","solar","onshore","TE","TE2π","2πE","cache"
+    ]
+    try:
+        while True:
+            if mining_type == "cache":
+                reward_mb, _ = scan_device_cache_mb()
+                capsule_type = "cache"
+            else:
+                capsule_type = random.choice([c for c in capsule_types if c != "cache"])
+                reward_mb = Decimal(random.uniform(1,11))
+
+            metadata = mint_capsule(wallet, capsule_type, reward_mb, mining_type)
+            print(f"🚀 Minted Capsule: {capsule_type} | 💾 MB: {reward_mb:.6f} | "
+                  f"🌠 H/s: {wallet['rig_hash_power']:.6f} | ⚡ kWh: {metadata['real_kwh']:.6f} | "
+                  f"📡 Bandwidth: {wallet['bandwidth_MBps']:.6f} MB/s\n")
+            time.sleep(random.randint(5,150))
+    except KeyboardInterrupt:
+        print("\n🚪 Exiting mining mode.\n")
 
 # --- Submenus ---
 def rig_mining_submenu(mining_type):
