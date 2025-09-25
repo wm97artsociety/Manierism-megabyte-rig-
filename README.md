@@ -77,6 +77,56 @@ Supports CPU, Wi-Fi, SHA, and Cache mining.
 
 Rewards are automatically applied to the corresponding balances and displayed in real-time.
 
+
+
+--- Capsule Rig Dashboard — trust ---
+Wallet ID: trust
+🌐 Node ID: 318d0d17...
+🌠 Hash Power: 60597.855026
+💾 Capsule MB: 14643.999408
+📦 Cache MB: 0.000000
+📥 Device Cache (User Folders): 138.107770 MB
+⚡ Real kWh: 746.323594
+📡 Bandwidth: 144.439710 MB/s
+💰 USD Value: $732.20
+
+--- Wallet Actions ---
+1. Send Capsule MB
+2. Send Cache MB
+3. Send kWh
+4. Send Bandwidth
+5. Donate Capsule MB (Gain Hash)
+6. Donate Cache MB (Gain Hash)
+7. Donate kWh (Gain Hash)
+8. Donate Bandwidth (Gain Hash)
+9. View Receive Info
+10. Help / Instructions
+11. Download Resource File
+12. Back to Main Menu
+
+
+ Help Instructions 
+• Mining increases resources over time.
+• Send/Donate options move resources and can increase hash power.
+• Use Wallet ID & Node ID to receive resources.
+• Download Resource File to create MB, kWh, bandwidth, or cache files.
+
+
+
+Download Resource Files
+1. Capsule MB (Bin)
+2. Kilowatts (JSON)
+3. Bandwidth (JSON)
+4. Cache (JSON)
+5. Back
+Select resource to download:
+
+
+Local node added to receive, send, add hashpower from WM-CPH0O7J3 node address 0bfe0867-10d4-4a38-ac48-7b927cb91f90
+
+Test senind payments on a test wallet before sending physical payments to others 
+
+
 ----
 
 September 17th 2025
