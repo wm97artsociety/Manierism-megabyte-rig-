@@ -127,6 +127,30 @@ Local node added to receive, send, add hashpower from WM-CPH0O7J3 node address 0
 Test senind payments on a test wallet before sending physical payments to others 
 
 
+
+Update of working nodes
+
+1 million megabytes given to creator 😍😭
+
+--- Receive Information ---
+📥 Wallet ID: WM-CPH0O7J3
+🌐 Node ID: 0bfe0867-10d4-4a38-ac48-7b927cb91f90
+💾 Capsule MB: 1000004.000000
+📦 Cache MB: 0.000000
+⚡ Real kWh: 0.000000
+📡 Bandwidth: 0.000000 MB/s
+
+--- Capsule Rig Dashboard — donations ---
+Wallet ID: WM-CPH0O7J3
+🌐 Node ID: 0bfe0867...
+🌠 Hash Power: 10000.000000
+💾 Capsule MB: 1000004.000000
+📦 Cache MB: 0.000000
+📥 Device Cache (User Folders): 138.107770 MB
+⚡ Real kWh: 0.000000
+📡 Bandwidth: 0.000000 MB/s
+💰 USD Value: $50000.20
+
 ----
 
 September 17th 2025
