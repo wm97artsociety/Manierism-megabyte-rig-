@@ -43,6 +43,8 @@ bandwidth kilowatts and megabytes have been updated to 1 to 15 MB rewards, kilow
 
 One 4th sha boost readded
 
+feel free to edit the Emojis and their placements through the file from where the file has set up emojis 
+
 
 ----
 
