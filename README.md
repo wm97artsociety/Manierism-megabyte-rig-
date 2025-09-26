@@ -10,7 +10,7 @@ i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennesse
 
 ---
 
-Since $5 million has been given to the community fund we will. Be doing a airdrop to the community and people interested as we raise more funding for the largest megabytes airdrop in history to this day guaranteed 100,000 spots at current supply increasing supply leads to more people being able to have 10 megabytes each worth $50 total. 
+Since $5 million has been given to the community fund we will Be doing a airdrop to the community and people interested as we raise more funding for the largest megabytes airdrop in history to this day guaranteed 100,000 spots at current supply increasing supply leads to more people being able to have 10 megabytes each worth $50 total. We hope to habe the airdrop in the next 3 months as we make the p2pool
 
 Wallet balance prices will be updated bext update due to megabytes are $5 a raw megabyte 
 
