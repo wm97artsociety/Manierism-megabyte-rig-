@@ -39,9 +39,9 @@ Wallet ID: WM-CPH0O7J3
 
 
 
+bandwidth kilowatts and megabytes have been updated to 1 to 15 MB rewards, kilowatts and bandwidth 
 
-
-
+One 4th sha boost readded
 
 
 ----
