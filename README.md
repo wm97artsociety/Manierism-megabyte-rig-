@@ -10,6 +10,42 @@ i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennesse
 
 ---
 
+Since $5 million has been given to the community fund we will. Be doing a airdrop to the community and people interested as we raise more funding for the largest megabytes airdrop in history to this day guaranteed 100,000 spots at current supply increasing supply leads to more people being able to have 10 megabytes each worth $50 total. 
+
+Wallet balance prices will be updated bext update 
+
+
+--- Receive Info ---
+📥 Wallet ID: WM-CPH0O7J3
+🌐 Node ID: 0bfe0867-10d4-4a38-ac48-7b927cb91f90
+💾 Capsule MB: 1016697.000000
+📦 Cache MB: 0.000000
+⚡ kWh: 0.000000
+📡 Bandwidth: 0.000000 MB/s
+Share Wallet/Node IDs to receive resources.
+
+--- Capsule Rig Dashboard — donations ---
+Wallet ID: WM-CPH0O7J3
+🌐 Node ID: 0bfe0867...
+🌠 Hash Power: 10000.000000
+💾 Capsule MB: 1016697.000000
+📦 Cache MB: 0.000000
+📥 Device Cache (User Folders): 506.138498 MB
+⚡ Real kWh: 0.000000
+📡 Bandwidth: 0.000000 MB/s
+💰 USD Value: $5083485
+
+
+
+
+
+
+
+
+
+
+----
+
 September 24th 2025
 
 
