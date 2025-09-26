@@ -41,6 +41,8 @@ Wallet ID: WM-CPH0O7J3
 
 bandwidth kilowatts and megabytes have been updated to 1 to 15 MB rewards, kilowatts and bandwidth 
 
+My TE, E2pi and TE2pi formulas do 5,800 megabytes per reward but due to how python and termux handles numbers the amounts had to be set to 1-15mb rewards at 15 megabytes its 73,000 megabytes rewards for the amplification of my energy formulas meaning we would have had to much bandwidth and kilowatts funding the earth off one rig so rewards got set lower maybe for a future update when i figure out the payload of numbers for python and termux 
+
 One 4th sha boost readded
 
 feel free to edit the Emojis and their placements through the file from where the file has set up emojis 
