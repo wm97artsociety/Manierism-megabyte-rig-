@@ -15,6 +15,13 @@ TARGETDIR = os.path.join(BASEDIR, "rigs")
 os.makedirs(TARGETDIR, exist_ok=True)
 
 DONATION_WALLET_ID = "WM-CPH0O7J3"
+BASE_HASH_POWER = Decimal("10000") # The starting hash power for scaling rewards
+
+# --- DEBUG SETTING ---
+# Set to True to force the capsule type to "SHA" on the first tick of SHA mining (Option 3) 
+# to immediately test the boost logic. Set to False for normal, random operation.
+DEBUG_SHA_BOOST = True 
+# ---------------------
 
 # --- Node Utility ---
 def generate_node_id():
@@ -24,6 +31,8 @@ def generate_node_id():
 # --- Wallet Utilities ---
 def save_wallet(wallet):
     wallet_copy = wallet.copy()
+    # Remove the temporary flags before saving
+    wallet_copy.pop("sha_boost_active", None)
     for key, value in wallet_copy.items():
         if isinstance(value, Decimal):
             wallet_copy[key] = float(value)
@@ -47,6 +56,8 @@ def load_wallet(wallet_id):
     for key in ["capsule_value_mb", "cache_value_mb", "rig_hash_power", "real_kwh", "bandwidth_MBps"]:
         if key in data:
             data[key] = Decimal(str(data[key]))
+    # Add temporary SHA boost state to wallet object, not saved to file
+    data["sha_boost_active"] = False 
     data = _ensure_wallet_has_node(data)
     return data
 
@@ -59,7 +70,7 @@ def create_wallet(wallet_id, rig_id=None):
         "rig_id": rig_id or wallet_id,
         "capsule_value_mb": Decimal("0"),
         "cache_value_mb": Decimal("0"),
-        "rig_hash_power": Decimal("10000"),
+        "rig_hash_power": BASE_HASH_POWER,
         "real_kwh": Decimal("0"),
         "bandwidth_MBps": Decimal("0"),
         "node_id": generate_node_id(),
@@ -71,7 +82,7 @@ def create_wallet(wallet_id, rig_id=None):
 if not load_wallet(DONATION_WALLET_ID):
     create_wallet(DONATION_WALLET_ID, "donations")
 
-# --- Device cache scan ---
+# --- Device cache scan (keeping for completeness) ---
 def scan_device_cache_mb(delete_after=False):
     total_cache = Decimal("0")
     all_files = []
@@ -107,61 +118,120 @@ def scan_device_cache_mb(delete_after=False):
                 continue
     return total_cache, all_files
 
+
 # --- Mining ---
-sha_boost_applied = {}
+CUSTOM_REWARDS = [
+    "2piE", "TE", "TE2pi", "Manierism", "Handrichism",
+    "RAM", "SDRAM", "SHA", "Nuclear", "Onshore",
+    "Gigabyte", "Terabyte", "Petabyte", "PIB", "Electrism"
+]
+
+def apply_sha_boost(current_wallet):
+    """
+    Applies a temporary SHA hashpower boost (1/4th of its own power) 
+    to the mining wallet for the current tick.
+    """
+    
+    # Calculate the boost amount as 1/4th of the mining wallet's permanent hash power
+    boost_amount = current_wallet["rig_hash_power"] / Decimal("4")
+    
+    # Create a temporary boosted wallet object for reward calculation (Does NOT save to file)
+    temp_boosted_wallet = current_wallet.copy()
+    temp_boosted_wallet["rig_hash_power"] += boost_amount
+    temp_boosted_wallet["sha_boost_active"] = True
+    
+    print(f"🌠 SHA Boost applied! +{boost_amount:.6f} H/s to Wallet: {current_wallet['wallet_id']}") 
+    
+    # Return the temporarily boosted wallet and the boost amount
+    return temp_boosted_wallet, boost_amount
 
 def unified_mining_loop(wallet, mining_type):
-    """Mining loop with fixed rewards per capsule type."""
-    rewards = {
-        "2piE": 5,
-        "TE": 7,
-        "TE2pi": 3,
-        "Manierism": 6,
-        "Handrichism": 4,
-        "RAM": 8,
-        "SDRAM": 2,
-        "SHA": 10,
-        "Nuclear": 9,
-        "Onshore": 1,
-        "Gigabyte": 12,
-        "Terabyte": 11,
-        "Petabyte": 15,
-        "PIB": 14,
-        "Electrism": 13
-    }
+    """Mining loop with Hash Power scaling and SHA boost logic."""
+    
+    TOTAL_YEARS = 75
+    MAX_TICKS = TOTAL_YEARS * 365 
+    current_tick = 0
+    
+    # Base reward multipliers (per 1MB reward)
+    BASE_KWH_PER_MB = Decimal("0.02")
+    BASE_BANDWIDTH_PER_MB = Decimal("0.001")
+    BASE_HASH_GAIN_PER_MB = Decimal("0.1")
 
     try:
-        while True:
+        while current_tick < MAX_TICKS:
+            # Re-load wallet state
             wallet = load_wallet(wallet['wallet_id'])
             if not wallet:
                 print("⚠️ Wallet disappeared. Stopping mining.")
                 break
 
-            capsule_type = random.choice(list(rewards.keys()))
-            reward_mb = Decimal(rewards[capsule_type])
+            capsule_type = random.choice(CUSTOM_REWARDS)
 
-            # Update wallet
+            # --- DEBUG BLOCK: Forces SHA on first tick for easy testing ---
+            if DEBUG_SHA_BOOST and current_tick == 0 and mining_type == "sha":
+                capsule_type = "SHA"
+            # ---------------------------------------------------------------
+            
+            # Start with the permanent hash power
+            current_rig_hash_power = wallet["rig_hash_power"]
+            sha_boost_amount = Decimal("0")
+            
+            # --- SHA Capsule Mining Boost Logic (Option 3) ---
+            if mining_type == "sha" and capsule_type == "SHA":
+                # Apply boost to the MINING wallet. temp_boosted_wallet now holds the H/s value
+                temp_boosted_wallet, sha_boost_amount = apply_sha_boost(wallet)
+                
+                # IMPORTANT: Update current_rig_hash_power with the boosted value for this tick's calculations
+                current_rig_hash_power = temp_boosted_wallet["rig_hash_power"]
+                
+                # Set temporary flag for display logic
+                wallet["sha_boost_active"] = True
+                    
+            # --- Dynamic Rewards based on Hash Power (Using the potentially boosted H/s) ---
+            
+            # Scaling factor: (Current H/s / Base H/s)
+            scaling_factor = current_rig_hash_power / BASE_HASH_POWER
+            
+            # MB Reward: Random base (1-15) * Scaling Factor
+            base_mb_reward_roll = Decimal(random.randint(1, 15))
+            reward_mb = base_mb_reward_roll * scaling_factor
+            
+            # Calculate other rewards based on the SCALED MB reward
+            reward_kwh = reward_mb * BASE_KWH_PER_MB
+            reward_bandwidth = reward_mb * BASE_BANDWIDTH_PER_MB
+            
+            # Permanent Hash gain is based on the SCALED MB reward
+            reward_hash_gain = reward_mb * BASE_HASH_GAIN_PER_MB 
+
+            # --- Apply Rewards to Permanent Wallet Balance ---
+            # All balances (including permanent H/s) reflect the benefits calculated from the boosted hash power.
             wallet["capsule_value_mb"] += reward_mb
-            wallet["rig_hash_power"] += reward_mb * Decimal("0.1")
-            wallet["real_kwh"] += reward_mb * Decimal("0.02")
-            wallet["bandwidth_MBps"] += reward_mb * Decimal("0.001")
-
-            sha_boost = Decimal("0")
-            if capsule_type == "SHA" and wallet["wallet_id"] not in sha_boost_applied:
-                sha_boost = wallet["rig_hash_power"] / Decimal("4")
-                wallet["rig_hash_power"] += sha_boost
-                sha_boost_applied[wallet["wallet_id"]] = True
-                print(f"🌠 SHA Boost applied! +{sha_boost:.6f} H/s")
-
+            wallet["rig_hash_power"] += reward_hash_gain
+            wallet["real_kwh"] += reward_kwh
+            wallet["bandwidth_MBps"] += reward_bandwidth
+            
+            # Clear temporary flag immediately after use to maintain "temporary" nature
+            wallet["sha_boost_active"] = False 
+            
             save_wallet(wallet)
+            
+            # Determine the H/s value to display (which is the boosted value)
+            display_hash_power = current_rig_hash_power
+            
+            # PRINTING THE NEWLY EARNED REWARDS, NOT THE BALANCE
+            print(f"🚀 Mined: {capsule_type} | "
+                  f"⬆️ MB Gained: {reward_mb:.6f} | ⬆️ kWh Gained: {reward_kwh:.6f} | ⬆️ Bandwidth Gained: {reward_bandwidth:.6f} MB/s | "
+                  f"🌠 H/s (Current): {display_hash_power:.6f} | SHA Boost: {sha_boost_amount:.6f} "
+                  f"| Balance MB: {wallet['capsule_value_mb']:.6f}")
 
-            print(f"🚀 Mined Capsule: {capsule_type} | 💾 MB: {reward_mb:.6f} | "
-                  f"🌠 H/s: {wallet['rig_hash_power']:.6f} | ⚡ kWh: {wallet['real_kwh']:.6f} | "
-                  f"📡 Bandwidth: {wallet['bandwidth_MBps']:.6f} MB/s | SHA Boost: {sha_boost:.6f}")
-
+            current_tick += 1
             time.sleep(random.randint(5, 150))
+            
+        print(f"\n✅ Mining complete after reaching {TOTAL_YEARS} years.")
+        
     except KeyboardInterrupt:
-        print("\n⛔ Mining stopped.")
+        print("\n⛔ Mining stopped by user.")
+
 
 # --- Wallet Transactions & Donations ---
 def wallet_transaction_menu(wallet):
@@ -170,6 +240,7 @@ def wallet_transaction_menu(wallet):
         if not wallet:
             break
 
+        # Pass the wallet state to the dashboard
         show_rig_dashboard(wallet)
         print("\n--- Wallet Actions ---")
         print("1. Send Capsule MB to another Wallet")
@@ -269,12 +340,11 @@ def show_help():
     print("\n--- Node & Wallet Instructions ---")
     print("• Send/Donate Capsule MB, Cache MB, kWh, or Bandwidth between wallets.")
     print("• Donations add Hash Power to your rig.")
-    print("• Mining increases Capsule MB, Cache MB, kWh, and Bandwidth.")
-    print("• SHA capsules may trigger boosts.")
+    print("• Mining rewards (MB, kWh, Bandwidth) scale with your rig's hash power.")
+    print("• **SHA capsules (Option 3 mining) trigger a 1/4th hash power boost.**")
     print("• Download resource to file for local storage.")
     print("-"*40)
 
-# --- Download System ---
 def download_resource_menu(wallet):
     print("\n--- Download Resource ---")
     print("1. Capsule MB (.bin)")
@@ -321,7 +391,6 @@ def download_resource_menu(wallet):
     except Exception as e:
         print(f"❌ Failed to download: {e}")
 
-# --- Wallet / Rig Selection ---
 def select_wallet_or_rig():
     files = [f for f in os.listdir(TARGETDIR) if f.endswith("_wallet.json")]
     if not files:
@@ -339,99 +408,54 @@ def select_wallet_or_rig():
             return load_wallet(wallet_id)
     return load_wallet(choice)
 
-# --- Rig Dashboard ---
 def show_rig_dashboard(wallet):
     device_cache, _ = scan_device_cache_mb()
+
+    # --- UPDATED USD VALUE CALCULATION ---
+    capsule_val = float(wallet['capsule_value_mb']) * 5.00
+    cache_val = float(wallet['cache_value_mb']) * 0.42
+    kwh_val = float(wallet['real_kwh']) * 0.17
+    bandwidth_val = float(wallet['bandwidth_MBps']) * 0.42
+    total_usd = capsule_val + cache_val + kwh_val + bandwidth_val
+    # -------------------------------------
+
     print(f"\n--- Capsule Rig Dashboard — {wallet['rig_id']} ---")
     print(f"Wallet ID: {wallet['wallet_id']}")
     print(f"🌐 Node ID: {wallet.get('node_id','N/A')[:8]}...")
-    print(f"🌠 Hash Power: {wallet['rig_hash_power']:.6f}")
+    print(f"🌠 Hash Power (Permanent): {wallet['rig_hash_power']:.6f}")
+    if wallet.get("sha_boost_active"):
+        # Calculate what 1/4th of the permanent H/s is
+        boost_calc = wallet['rig_hash_power'] / Decimal('4')
+        print(f"⚡ SHA Boost ACTIVE: +{boost_calc:.6f} H/s (Temporary)")
     print(f"💾 Capsule MB: {wallet['capsule_value_mb']:.6f}")
     print(f"📦 Cache MB: {wallet['cache_value_mb']:.6f}")
     print(f"📥 Device Cache (User Folders): {device_cache:.6f} MB")
     print(f"⚡ Real kWh: {wallet['real_kwh']:.6f}")
     print(f"📡 Bandwidth: {wallet['bandwidth_MBps']:.6f} MB/s")
-    print(f"💰 USD Value: ${(float(wallet['capsule_value_mb'])*0.05 + float(wallet['cache_value_mb'])*0.03):.2f}")
+    # Display the new total USD value
+    print(f"💰 USD Value: ${total_usd:.2f}")
 
-# --- Mining Loop with Custom Rewards ---
-CUSTOM_REWARDS = [
-    "2piE", "TE", "TE2pi", "Manierism", "Handrichism",
-    "RAM", "SDRAM", "SHA", "Nuclear", "Onshore",
-    "Gigabyte", "Terabyte", "Petabyte", "PiB", "Electrism"
-]
-
-def unified_mining_loop(wallet, mining_type):
-    try:
-        while True:
-            wallet = load_wallet(wallet['wallet_id'])
-            if not wallet:
-                print("⚠️ Wallet disappeared. Stopping mining.")
-                break
-
-            capsule_type = random.choice(CUSTOM_REWARDS)
-            reward_mb = Decimal(random.randint(1,15))
-
-            metadata = mint_capsule(wallet, capsule_type, reward_mb, mining_type)
-            print(f"🚀 Minted Capsule: {capsule_type} | 💾 MB: {reward_mb:.6f} | "
-                  f"🌠 H/s: {wallet['rig_hash_power']:.6f} | ⚡ kWh: {metadata['real_kwh']:.6f} | "
-                  f"📡 Bandwidth: {wallet['bandwidth_MBps']:.6f} MB/s\n")
-            time.sleep(random.randint(5, 150))
-    except KeyboardInterrupt:
-        print("\n⛔ Mining stopped.")
 
 # --- Mining Start Flow ---
 def start_mining(mining_type):
     wallet_id = input("Enter Wallet ID to start mining: ").strip()
+    # Attempt to load the wallet, if it doesn't exist, create it.
     wallet = load_wallet(wallet_id)
+    if not wallet:
+        wallet = create_wallet(wallet_id)
+        
+    # Start mining immediately as requested
     if wallet:
-        print(f"Starting {mining_type.upper()} Mining for wallet {wallet['wallet_id']}...\n")
+        print(f"Starting {mining_type.upper()} Mining for wallet {wallet['wallet_id']}...")
         unified_mining_loop(wallet, mining_type)
     else:
         print("⚠️ Wallet not found. Aborting mining.")
 
-# --- View Wallets / Rigs Menu ---
 def view_wallets_rigs_menu():
     wallet = select_wallet_or_rig()
     if wallet:
         wallet_transaction_menu(wallet)
-
-# --- Mining Loop with Custom Rewards ---
-CUSTOM_REWARDS = [
-    "2piE", "TE", "TE2pi", "Manierism", "Handrichism",
-    "RAM", "SDRAM", "SHA", "Nuclear", "Onshore",
-    "Gigabyte", "Terabyte", "Petabyte", "PiB", "Electrism"
-]
-
-def unified_mining_loop(wallet, mining_type):
-    """Mining loop with fixed rewards per capsule type."""
-    try:
-        while True:
-            wallet = load_wallet(wallet['wallet_id'])
-            if not wallet:
-                print("⚠️ Wallet disappeared. Stopping mining.")
-                break
-
-            capsule_type = random.choice(CUSTOM_REWARDS)
-            reward_mb = Decimal(random.randint(1, 15))
-
-            # --- Update wallet directly instead of mint_capsule ---
-            wallet["capsule_value_mb"] += reward_mb
-            wallet["rig_hash_power"] += reward_mb * Decimal("0.1")
-            wallet["real_kwh"] += reward_mb * Decimal("0.02")
-            wallet["bandwidth_MBps"] += reward_mb * Decimal("0.001")
-
-            save_wallet(wallet)
-
-            print(f"🚀 Mined Capsule: {capsule_type} | 💾 MB: {reward_mb:.6f} | "
-                  f"🌠 H/s: {wallet['rig_hash_power']:.6f} | "
-                  f"⚡ kWh: {wallet['real_kwh']:.6f} | "
-                  f"📡 Bandwidth: {wallet['bandwidth_MBps']:.6f} MB/s")
-
-            time.sleep(random.randint(5, 150))
-    except KeyboardInterrupt:
-        print("\n⛔ Mining stopped.")
-
-# --- Main Menu ---
+        
 def main_menu():
     create_wallet(DONATION_WALLET_ID, "donations")
     while True:
@@ -467,6 +491,5 @@ def main_menu():
         else:
             print("⚠️ Invalid selection.")
 
-# --- Entry Point ---
 if __name__ == "__main__":
     main_menu()
