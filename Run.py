@@ -152,9 +152,8 @@ def unified_mining_loop(wallet, mining_type):
     MAX_TICKS = TOTAL_YEARS * 365 
     current_tick = 0
     
-    # Base reward multipliers (per 1MB reward)
-    BASE_KWH_PER_MB = Decimal("0.02")
-    BASE_BANDWIDTH_PER_MB = Decimal("0.001")
+    # Base reward multipliers 
+    # kWh/Bandwidth will be based on their own 1-15 roll * scaling factor
     BASE_HASH_GAIN_PER_MB = Decimal("0.1")
 
     try:
@@ -192,13 +191,19 @@ def unified_mining_loop(wallet, mining_type):
             # Scaling factor: (Current H/s / Base H/s)
             scaling_factor = current_rig_hash_power / BASE_HASH_POWER
             
-            # MB Reward: Random base (1-15) * Scaling Factor
+            # --- REVISED REWARD CALCULATION (ALL 1-15 BASE ROLL * SCALING FACTOR) ---
+            
+            # 1. Capsule MB Reward: Random base (1-15) * Scaling Factor
             base_mb_reward_roll = Decimal(random.randint(1, 15))
             reward_mb = base_mb_reward_roll * scaling_factor
             
-            # Calculate other rewards based on the SCALED MB reward
-            reward_kwh = reward_mb * BASE_KWH_PER_MB
-            reward_bandwidth = reward_mb * BASE_BANDWIDTH_PER_MB
+            # 2. kWh Reward: Independent Random base (1-15) * Scaling Factor
+            base_kwh_roll = Decimal(random.randint(1, 15))
+            reward_kwh = base_kwh_roll * scaling_factor
+            
+            # 3. Bandwidth Reward: Independent Random base (1-15) * Scaling Factor
+            base_bandwidth_roll = Decimal(random.randint(1, 15))
+            reward_bandwidth = base_bandwidth_roll * scaling_factor
             
             # Permanent Hash gain is based on the SCALED MB reward
             reward_hash_gain = reward_mb * BASE_HASH_GAIN_PER_MB 
@@ -220,8 +225,8 @@ def unified_mining_loop(wallet, mining_type):
             
             # PRINTING THE NEWLY EARNED REWARDS, NOT THE BALANCE
             print(f"🚀 Mined: {capsule_type} | "
-                  f"⬆️ MB Gained: {reward_mb:.6f} | ⬆️ kWh Gained: {reward_kwh:.6f} | ⬆️ Bandwidth Gained: {reward_bandwidth:.6f} MB/s | "
-                  f"🌠 H/s (Current): {display_hash_power:.6f} | SHA Boost: {sha_boost_amount:.6f} "
+                  f" 💵 MB Gained: {reward_mb:.6f} |kWh Gained: {reward_kwh:.6f} | 🛰️ Bandwidth Gained: {reward_bandwidth:.6f} MB/s | "
+                  f"🌠 H/s: {display_hash_power:.6f} |        🚀SHA Boost: {sha_boost_amount:.6f} "
                   f"| Balance MB: {wallet['capsule_value_mb']:.6f}")
 
             current_tick += 1
