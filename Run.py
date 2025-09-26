@@ -126,39 +126,19 @@ CUSTOM_REWARDS = [
     "Gigabyte", "Terabyte", "Petabyte", "PIB", "Electrism"
 ]
 
-def apply_sha_boost(current_wallet):
-    """
-    Applies a temporary SHA hashpower boost (1/4th of its own power) 
-    to the mining wallet for the current tick.
-    """
-    
-    # Calculate the boost amount as 1/4th of the mining wallet's permanent hash power
-    boost_amount = current_wallet["rig_hash_power"] / Decimal("4")
-    
-    # Create a temporary boosted wallet object for reward calculation (Does NOT save to file)
-    temp_boosted_wallet = current_wallet.copy()
-    temp_boosted_wallet["rig_hash_power"] += boost_amount
-    temp_boosted_wallet["sha_boost_active"] = True
-    
-    print(f"🌠 SHA Boost applied! +{boost_amount:.6f} H/s to Wallet: {current_wallet['wallet_id']}") 
-    
-    # Return the temporarily boosted wallet and the boost amount
-    return temp_boosted_wallet, boost_amount
-
 def unified_mining_loop(wallet, mining_type):
-    """Mining loop with Hash Power scaling and SHA boost logic."""
+    """Mining loop with Hash Power scaling and TEMPORARY SHA boost logic."""
     
     TOTAL_YEARS = 75
     MAX_TICKS = TOTAL_YEARS * 365 
     current_tick = 0
     
     # Base reward multipliers 
-    # kWh/Bandwidth will be based on their own 1-15 roll * scaling factor
     BASE_HASH_GAIN_PER_MB = Decimal("0.1")
 
     try:
         while current_tick < MAX_TICKS:
-            # Re-load wallet state
+            # Re-load wallet state to get the latest permanent hash power
             wallet = load_wallet(wallet['wallet_id'])
             if not wallet:
                 print("⚠️ Wallet disappeared. Stopping mining.")
@@ -171,27 +151,33 @@ def unified_mining_loop(wallet, mining_type):
                 capsule_type = "SHA"
             # ---------------------------------------------------------------
             
-            # Start with the permanent hash power
+            # Start with the permanent hash power from the wallet
             current_rig_hash_power = wallet["rig_hash_power"]
-            sha_boost_amount = Decimal("0")
+            sha_boost_amount_added = Decimal("0")
             
-            # --- SHA Capsule Mining Boost Logic (Option 3) ---
+            # --- SHA Capsule Mining TEMPORARY Boost Logic (Option 3) ---
             if mining_type == "sha" and capsule_type == "SHA":
-                # Apply boost to the MINING wallet. temp_boosted_wallet now holds the H/s value
-                temp_boosted_wallet, sha_boost_amount = apply_sha_boost(wallet)
                 
-                # IMPORTANT: Update current_rig_hash_power with the boosted value for this tick's calculations
-                current_rig_hash_power = temp_boosted_wallet["rig_hash_power"]
+                # Calculate the temporary boost amount (1/4th of the current PERMANENT hash power)
+                boost_amount = wallet["rig_hash_power"] / Decimal("4")
                 
-                # Set temporary flag for display logic
+                # *** IMPORTANT CHANGE: DO NOT add to wallet["rig_hash_power"] permanently ***
+                # *** The base permanent rig_hash_power remains unchanged. ***
+                
+                # Use the boosted hash power for the CURRENT tick's reward calculation
+                current_rig_hash_power += boost_amount
+                sha_boost_amount_added = boost_amount
+                
+                # Set temporary flag for display logic (cleared before save)
                 wallet["sha_boost_active"] = True
-                    
-            # --- Dynamic Rewards based on Hash Power (Using the potentially boosted H/s) ---
+                print(f"🌠 SHA Boost +{boost_amount:.6f} H/s to Wallet: {wallet['wallet_id']}") 
+            
+            # --- Dynamic Rewards based on Hash Power (Using the potentially temporarily boosted H/s) ---
             
             # Scaling factor: (Current H/s / Base H/s)
             scaling_factor = current_rig_hash_power / BASE_HASH_POWER
             
-            # --- REVISED REWARD CALCULATION (ALL 1-15 BASE ROLL * SCALING FACTOR) ---
+            # --- REWARD CALCULATION (ALL 1-15 BASE ROLL * SCALING FACTOR) ---
             
             # 1. Capsule MB Reward: Random base (1-15) * Scaling Factor
             base_mb_reward_roll = Decimal(random.randint(1, 15))
@@ -205,13 +191,13 @@ def unified_mining_loop(wallet, mining_type):
             base_bandwidth_roll = Decimal(random.randint(1, 15))
             reward_bandwidth = base_bandwidth_roll * scaling_factor
             
-            # Permanent Hash gain is based on the SCALED MB reward
+            # Permanent Hash gain (This is the slow, permanent growth)
             reward_hash_gain = reward_mb * BASE_HASH_GAIN_PER_MB 
 
             # --- Apply Rewards to Permanent Wallet Balance ---
-            # All balances (including permanent H/s) reflect the benefits calculated from the boosted hash power.
+            # NOTE: Only the small, MB-derived hash gain is PERMANENTLY applied here.
             wallet["capsule_value_mb"] += reward_mb
-            wallet["rig_hash_power"] += reward_hash_gain
+            wallet["rig_hash_power"] += reward_hash_gain 
             wallet["real_kwh"] += reward_kwh
             wallet["bandwidth_MBps"] += reward_bandwidth
             
@@ -225,8 +211,8 @@ def unified_mining_loop(wallet, mining_type):
             
             # PRINTING THE NEWLY EARNED REWARDS, NOT THE BALANCE
             print(f"🚀 Mined: {capsule_type} | "
-                  f" 💵 MB Gained: {reward_mb:.6f} |kWh Gained: {reward_kwh:.6f} | 🛰️ Bandwidth Gained: {reward_bandwidth:.6f} MB/s | "
-                  f"🌠 H/s: {display_hash_power:.6f} |        🚀SHA Boost: {sha_boost_amount:.6f} "
+                  f"💵 MB Gained: {reward_mb:.6f} | ⚡ kWh Gained: {reward_kwh:.6f} | 🛰️ Bandwidth Gained: {reward_bandwidth:.6f} MB/s | "
+                  f"🌠 H/s (Current): {display_hash_power:.6f} | SHA Boost: {sha_boost_amount_added:.6f} "
                   f"| Balance MB: {wallet['capsule_value_mb']:.6f}")
 
             current_tick += 1
@@ -430,8 +416,9 @@ def show_rig_dashboard(wallet):
     print(f"🌠 Hash Power (Permanent): {wallet['rig_hash_power']:.6f}")
     if wallet.get("sha_boost_active"):
         # Calculate what 1/4th of the permanent H/s is
-        boost_calc = wallet['rig_hash_power'] / Decimal('4')
-        print(f"⚡ SHA Boost ACTIVE: +{boost_calc:.6f} H/s (Temporary)")
+        # Note: This displays the *temporary* boost applied to the last mining tick
+        boost_calc = wallet['rig_hash_power'] / Decimal('4') 
+        print(f"⚡ SHA Boost ACTIVE: +{boost_calc:.6f} H/s ") 
     print(f"💾 Capsule MB: {wallet['capsule_value_mb']:.6f}")
     print(f"📦 Cache MB: {wallet['cache_value_mb']:.6f}")
     print(f"📥 Device Cache (User Folders): {device_cache:.6f} MB")
