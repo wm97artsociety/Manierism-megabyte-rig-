@@ -127,7 +127,10 @@ CUSTOM_REWARDS = [
 ]
 
 def unified_mining_loop(wallet, mining_type):
-    """Mining loop with Hash Power scaling and TEMPORARY SHA boost logic."""
+    """Mining loop with Hash Power scaling and TEMPORARY SHA boost logic.
+    
+    Update: kWh reward is now exactly equal to MB reward (1 MB = 1 kWh).
+    """
     
     TOTAL_YEARS = 75
     MAX_TICKS = TOTAL_YEARS * 365 
@@ -183,9 +186,9 @@ def unified_mining_loop(wallet, mining_type):
             base_mb_reward_roll = Decimal(random.randint(1, 15))
             reward_mb = base_mb_reward_roll * scaling_factor
             
-            # 2. kWh Reward: Independent Random base (1-15) * Scaling Factor
-            base_kwh_roll = Decimal(random.randint(1, 15))
-            reward_kwh = base_kwh_roll * scaling_factor
+            # 2. kWh Reward: *** PATCHED TO BE 1:1 WITH MB REWARD (1 MB = 1 kWh) ***
+            # The previous independent random kwh roll is removed.
+            reward_kwh = reward_mb
             
             # 3. Bandwidth Reward: Independent Random base (1-15) * Scaling Factor
             base_bandwidth_roll = Decimal(random.randint(1, 15))
@@ -210,6 +213,7 @@ def unified_mining_loop(wallet, mining_type):
             display_hash_power = current_rig_hash_power
             
             # PRINTING THE NEWLY EARNED REWARDS, NOT THE BALANCE
+            # Note how reward_mb and reward_kwh will always be the same value here:
             print(f"🚀 Mined: {capsule_type} | "
                   f"💵 MB Gained: {reward_mb:.6f} | ⚡ kWh Gained: {reward_kwh:.6f} | 🛰️ Bandwidth Gained: {reward_bandwidth:.6f} MB/s | "
                   f"🌠 H/s (Current): {display_hash_power:.6f} | SHA Boost: {sha_boost_amount_added:.6f} "
@@ -345,22 +349,26 @@ def download_resource_menu(wallet):
     option = input("Select resource type to download: ").strip()
 
     resource_map = {
-        "1": ("capsule_value_mb", "bin"),
-        "2": ("cache_value_mb", "bin"),
-        "3": ("real_kwh", "json"),
-        "4": ("bandwidth_MBps", "json")
+        "1": ("capsule_value_mb", "bin", "MB"),
+        "2": ("cache_value_mb", "bin", "MB"),
+        "3": ("real_kwh", "json", "kWh"),
+        "4": ("bandwidth_MBps", "json", "MB/s")
     }
     if option not in resource_map:
         print("⚠️ Invalid option.")
         return
 
-    resource_name, ext = resource_map[option]
+    resource_name, ext, unit_name = resource_map[option]
     current_value = wallet.get(resource_name, Decimal("0"))
-    print(f"Available {resource_name.replace('_',' ')}: {current_value:.6f}")
+    print(f"Available {resource_name.replace('_',' ')}: {current_value:.6f} {unit_name}")
 
-    amt = Decimal(input(f"Enter amount to download (min 1 MB/unit): ").strip())
+    # --- UPDATED PROMPT AND MINIMUM CHECK ---
+    # The prompt now dynamically shows the unit (e.g., min 1 kWh).
+    amt = Decimal(input(f"Enter amount to download (min 1 {unit_name}): ").strip())
+    
+    # The minimum is consistently set to 1 for all resource types.
     if amt < 1 or amt > current_value:
-        print("⚠️ Invalid amount.")
+        print(f"⚠️ Invalid amount. Please enter a value between 1 and {current_value:.6f} {unit_name}.")
         return
 
     file_name = input("Enter file name (without extension): ").strip()
@@ -373,9 +381,11 @@ def download_resource_menu(wallet):
     # Create file
     try:
         if ext == "bin":
+            # MB files are handled as binary data
             with open(full_path, "wb") as f:
                 f.write(os.urandom(int(amt*1024*1024)))  # exact MB
         else:
+            # kWh and Bandwidth files are handled as JSON data
             with open(full_path, "w") as f:
                 json.dump({resource_name: float(amt)}, f, indent=4)
         print(f"✅ Downloaded {amt} {resource_name.replace('_',' ')} to {full_path}")
