@@ -15,7 +15,7 @@ PRE GAME HALVING STARTS AT 10PM eastern Standard Time on September 28th 2025
 
 79,000+ mbs bandwidth every 5 - 150 seconds
 
-79,000 megabytes every 5 - 150 seconds
+79,000+ megabytes every 5 - 150 seconds
 
 
 This is to help start the blockchain off with funding for the community 
