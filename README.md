@@ -21,6 +21,10 @@ PRE GAME HALVING STARTS AT 10PM eastern Standard Time on September 28th 2025
 This is to help start the blockchain off with funding for the community 
 
 While this halving will only last roughly 2 weeks stopping on the 12th of October 2025
+Once halving is over we appreciate and focus on going back to normal amount of mining 
+While you will need to discard the file and update to the previous one with new updates 
+After oct 13th caughting using halving against community is call for forbidden and not use of software in future 
+This project has turned to a utility meaning the sec will not allow false use of token or mining aspect 
 
 We hope you join us in this craze of electricism and science while learning blockchain together 
 
@@ -29,6 +33,89 @@ We hope you join us in this craze of electricism and science while learning bloc
 A wonderful note has been give saying that it is possible to mine the electricity or electrism 
 From the rig and charge a device with the power in later time we will do a trial and test on 
 The experiment to see if we can complete the powering of a device and stop wasteful use of electricity 
+
+Halving mining mode and download feature fix
+
+=== Manierism Megabytes Mining Menu ===
+1. Start CPU Mining
+2. Start Wi-Fi Mining
+3. Start SHA Capsule Mining
+4. Start Cache Mining
+5. Create New Rig / Wallet
+6. View Wallets & Rigs / Wallet Actions
+7. Exit
+Enter option (1-7): 1
+Enter Wallet ID to start mining: 2
+Starting CPU Mining for wallet 2...
+
+--- Capsule Mined: 2piE ---
+💵 MB Gained:      3727220.000000
+⚡ kWh Gained:     3727220.000000
+🛰️ Bandwidth Gained: 3727220.000000 MB/s
+--------------------------
+🌠 H/s (Current):  33700.000000
+SHA Boost:        0.000000
+Balance MB:       3964220.000000
+
+
+=== Manierism Megabytes Mining Menu ===
+1. Start CPU Mining
+2. Start Wi-Fi Mining
+3. Start SHA Capsule Mining
+4. Start Cache Mining
+5. Create New Rig / Wallet
+6. View Wallets & Rigs / Wallet Actions
+7. Exit
+Enter option (1-7): 6
+
+Select a Rig/Wallet or type Wallet ID:
+1. trust
+2. WM-CPH0O7J3
+3. default_wallet
+4. 1
+5. default
+6. 2
+Enter number or Wallet ID: 2
+
+
+
+--- Capsule Rig Dashboard — 2 ---
+Wallet ID: 2
+🌐 Node ID: ae53d352...
+🌠 Hash Power (Permanent): 406422.000000
+💾 Capsule MB: 3964220.000000
+📦 Cache MB: 0.000000
+📥 Device Cache (User Folders): 2700.763760 MB
+⚡ Real kWh: 3964220.000000
+📡 Bandwidth: 4122220.000000 MB/s
+💰 USD Value: $22226349.80
+
+--- Wallet Actions ---
+1. Send Capsule MB to another Wallet
+2. Send Cache MB to another Wallet
+3. Send kWh to another Wallet
+4. Send Bandwidth to another Wallet
+5. Donate Capsule MB to Creator (Gain Hash Power)
+6. Donate Cache MB to Creator (Gain Hash Power)
+7. Donate kWh to Creator (Gain Hash Power)
+8. Donate Bandwidth to Creator (Gain Hash Power)
+9. View Receive Info (Wallet/Node IDs)
+10. Download Resource to File
+11. Help / Instructions
+12. Back to Main Menu
+
+Enter option: 10
+
+--- Download Resource ---
+1. Capsule MB (.bin)
+2. Cache MB (.bin)
+3. kWh (.json)
+4. Bandwidth (.json)
+Select resource type to download: 3
+Available real kwh: 3964220.000000 kWh
+Enter amount to download (min 1 kWh):
+
+
 
 ---
 
