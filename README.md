@@ -9,6 +9,28 @@ Hold on to old wallets and rigs a program software will comeout to exchange the 
 i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennessee that help. Build the atomic bomb 
 
 ---
+PRE GAME HALVING STARTS AT 10PM eastern Standard Time on September 28th 2025
+
+79,000+ Kilowatts every 5 - 150 seconds
+
+79,000+ mbs bandwidth every 5 - 150 seconds
+
+79,000 megabytes every 5 - 150 seconds
+
+
+This is to help start the blockchain off with funding for the community 
+
+While this halving will only last roughly 2 weeks stopping on the 12th of October 2025
+
+We hope you join us in this craze of electricism and science while learning blockchain together 
+
+
+
+A wonderful note has been give saying that it is possible to mine the electricity or electrism 
+From the rig and charge a device with the power in later time we will do a trial and test on 
+The experiment to see if we can complete the powering of a device and stop wasteful use of electricity 
+
+---
 
 Since $5 million has been given to the community fund we will Be doing a airdrop to the community and people interested as we raise more funding for the largest megabytes airdrop in history to this day guaranteed 100,000 spots at current supply increasing supply leads to more people being able to have 10 megabytes each worth $50 total. We hope to habe the airdrop in the next 3 months as we make the p2pool
 
