@@ -8,15 +8,30 @@ Hold on to old wallets and rigs a program software will comeout to exchange the 
 
 i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennessee that help. Build the atomic bomb 
 
----
+----
+
 PRE GAME HALVING STARTS AT 10PM eastern Standard Time on September 28th 2025
 
-79,000+ Kilowatts every 5 - 150 seconds
+79,000+ Kilowatts every 5 - 150 seconds per megabyte 
 
-79,000+ mbs bandwidth every 5 - 150 seconds
+79,000+ mbs bandwidth every 5 - 150 seconds per megabyte 
 
-79,000+ megabytes every 5 - 150 seconds
+79,000+ megabytes every 5 - 150 seconds per megabyte 
 
+For example a 2mb reward gives 474,000 kilowatts, bandwidth, and megabytes together 
+total in rewards for that 5-150 second reward
+
+Reward method example 
+
+79000×3×2
+
+79,000 reward multiple 
+
+3 rewards such as megabytes bandwidth and kilowatts 
+
+2 megabytes multiplier 
+
+----
 
 This is to help start the blockchain off with funding for the community 
 
