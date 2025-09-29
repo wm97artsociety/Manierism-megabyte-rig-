@@ -8,6 +8,8 @@ Hold on to old wallets and rigs a program software will comeout to exchange the 
 
 i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennessee that help. Build the atomic bomb 
 
+
+Everyone can be rich now im homeless by January 
 ----
 
 PRE GAME HALVING STARTS AT 10PM eastern Standard Time on September 28th 2025
