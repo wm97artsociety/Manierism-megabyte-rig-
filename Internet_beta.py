@@ -38,7 +38,7 @@ def get_mayan_calendar(day_query=None):
     return f"Mayan Calendar for {today}: {tzolkin_number} {tzolkin_sign}"
 
 # ---------------- weather ----------------
-def real_weather(city="Flint"):
+def simulated_weather(city="Flint"):
     now = datetime.datetime.now()
     output = f"🌆 Local weather for {city} 🌆\n\n"
     
@@ -129,23 +129,3 @@ def main():
         if "weather" in query.lower():
             city = query.lower().replace("weather", "").strip() or "Flint"
             print(simulate_weather(city))
-            input("\nPress Enter for new search...")
-            continue
-
-        # Repurpose 'mayan' queries for calendar
-        if "mayan" in query.lower():
-            print(get_mayan_calendar())
-            input("\nPress Enter for new search...")
-            continue
-
-        # Bing feed for other searches
-        links = fetch_bing_links(query, max_links=5)
-        if not links:
-            print("No results found.")
-            input("\nPress Enter for new search...")
-            continue
-        display_feed(links, query)
-        input("\nPress Enter for new search...")
-
-if __name__ == "__main__":
-    main()
