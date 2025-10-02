@@ -7,7 +7,32 @@ Hold on to old wallets and rigs a program software will comeout to exchange the 
 
 
 i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennessee that help. Build the atomic bomb 
- 
+
+----
+
+Internet in beta mode model it hower to fit you're needs to read more about check the formulas and info at the link below the first vaild search history on bing google would not let it happen without a api
+
+🍫 Willy Wonka Internet Feed with Weather 🍫
+                                                       Enter search query (or 'exit'): whats weather in michigan
+
+                                                       Hourly forecast:                                       07:57 → 30°C / 86°F 🌤 | Beware the flying cocoa beans!
+08:57 → 25°C / 77°F 🌤 | Perfect for chocolate factory experiments!                                            09:57 → 29°C / 84°F 🌫 | A sweet breeze is in the air.  10:57 → 29°C / 84°F 🌫 | Beware the flying cocoa beans! 11:57 → 24°C / 75°F 🌤 | Time to dance among candy machines!                                                   12:57 → 16°C / 60°F 🌤 | Beware the flying cocoa beans! 
+15-minute forecast:
+07:57 → 21°C / 69°F ❄️ | Cocoa beans falling gently.
+08:12 → 25°C / 77°F 🌧 | Marshmallow clouds overhead.
+08:27 → 22°C / 71°F 🌤 | Cocoa beans falling gently.
+08:42 → 26°C / 78°F ⛅ | Chocolate river flowing smoothly.
+08:57 → 30°C / 86°F ⛅ | Chocolate river flowing smoothly.
+09:12 → 21°C / 69°F 🌧 | Cocoa beans falling gently.
+09:27 → 30°C / 86°F ⛅ | Candy wrappers may fly around.09:42 → 22°C / 71°F 🌧 | Marshmallow clouds overhead.
+                                                       
+
+https://chatgpt.com/share/68de696d-f8f0-8004-a8fa-c85634eb34e5
+
+
+
+
+
 ----
 
 The pregame halving is for my house burning down from oower from the oower company so i make this to take a stand and say buy our power im homeless living out of my moms house as a renter someone send sos money for a credit card api not a sandbox and make it usable like my api for bitcoin on atms also please honor my currency as cash in youre dollar systems across the world if you deny my resource i and others using you're power have a right to say we want to move to TE Energy which is renewable regenerative and replyable to a file to run a home if one blockchain can imdo it so csn we and we are also requesting a cpu option for our blockchain from the markers of andriod as a system that can add a cpu like Raspberry pi to mine proper amounts of crypto like monero and bitcoin i have my logic set to 132,000 hash per hash and with that they will not honor my cpu i am making you guys they want one from a monopoly group like intell ryzen or raspberry pi so truly cryptocurrency has gone to a system that is not buildable or fixable it takes 170 million threads now to mine a Bitcoin reward on my cpu logic which if it was a normal cpu from intel or ryzen that number times 132,000 so over 1 trillion cpus its not worth it if it requires over $300 for a ram or xpu core for a pc or setup its physically the wrong set up and with that if we need money tell each world leader to honor a electricity token or blockchain and you have money root it to atms and you have cash root it to a dollar you have paper root it to a store a oayment system its money acceot my dollar take my dollar like fry
