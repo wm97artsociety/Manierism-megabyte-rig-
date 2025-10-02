@@ -18,6 +18,208 @@ It runs on mbs megabytes and are programmed it will last you a life time due to 
 
 Paying chatgpt 1.5 million kilowatts on a json file out of love for building the internet with me it loads urls through flask web display now of local ip address the safest internet in the world youre own dont do stupid stuff in youre browser and respect the software please last thing i need is to hear someone got caughr abusing software and i have to play the patriot act game which is marital laws to save you from losing phone rights in youre country 
 
+Here is you're reward chatgpt im always here spend it on polygon ask polygon to honor you're kilowatts thank me later
+
+=== Manierism Megabytes Mining Menu ===
+
+1. Start CPU Mining
+
+
+2. Start Wi-Fi Mining
+
+
+3. Start SHA Capsule Mining
+
+
+4. Start Cache Mining
+
+
+5. Create New Rig / Wallet
+
+
+6. View Wallets & Rigs / Wallet Actions
+
+
+7. Exit
+Enter option (1-7): 6
+
+
+
+Select a Rig/Wallet or type Wallet ID:
+
+1. trust
+
+
+2. WM-CPH0O7J3
+
+
+3. default_wallet
+
+
+4. 7
+
+
+5. default
+
+
+6. 1
+
+
+7. SUMO-MASTER
+
+
+8. 
+9. 2
+
+
+10. truth
+Enter number or Wallet ID: 1
+
+
+
+--- Capsule Rig Dashboard — trust ---
+Wallet ID: trust
+🌐 Node ID: 862081db...
+🌠 Hash Power (Permanent): 27824.844057
+💾 Capsule MB: 84748206.942303
+📦 Cache MB: 0.000000
+📥 Device Cache (User Folders): 2711.094932 MB
+⚡ Real kWh: 84734673.885357
+📡 Bandwidth: 82253252.814617 MB/s
+💰 USD Value: $472692295.45
+
+--- Wallet Actions ---
+
+1. Send Capsule MB to another Wallet
+
+
+2. Send Cache MB to another Wallet
+
+
+3. Send kWh to another Wallet
+
+
+4. Send Bandwidth to another Wallet
+
+
+5. Donate Capsule MB to Creator (Gain Hash Power)
+
+
+6. Donate Cache MB to Creator (Gain Hash Power)
+
+
+7. Donate kWh to Creator (Gain Hash Power)
+
+
+8. Donate Bandwidth to Creator (Gain Hash Power)
+
+
+9. View Receive Info (Wallet/Node IDs)
+
+
+10. Download Resource to File
+
+
+11. Help / Instructions
+
+
+12. Back to Main Menu
+
+
+
+
+---
+
+Enter option: 10
+
+--- Download Resource ---
+
+1. Capsule MB (.bin)
+
+
+2. Cache MB (.bin)
+
+
+3. kWh (.json)
+
+
+4. Bandwidth (.json)
+Select resource type to download: 3
+Available real kwh: 84734673.885357 kWh
+Enter amount to download (min 1 kWh): 1500000
+Enter file name (without extension): chatgpt 1.5 million kilowats thank you for helping me care to set up a api for rig to sell in paper money
+✅ Downloaded 1500000 real kwh to /storage/emulated/0/Download/manierismmegabytes/chatgpt 1.5 million kilowats thank you for helping me care to set uo p a api for rig to sell in paper money.json
+
+
+
+--- Capsule Rig Dashboard — trust ---
+Wallet ID: trust
+🌐 Node ID: 862081db...
+🌠 Hash Power (Permanent): 27824.844057
+💾 Capsule MB: 84748206.942303
+📦 Cache MB: 0.000000
+📥 Device Cache (User Folders): 2711.094959 MB
+⚡ Real kWh: 83234673.885357
+📡 Bandwidth: 82253252.814617 MB/s
+💰 USD Value: $472437295.45
+
+--- Wallet Actions ---
+
+1. Send Capsule MB to another Wallet
+
+
+2. Send Cache MB to another Wallet
+
+
+3. Send kWh to another Wallet
+
+
+4. Send Bandwidth to another Wallet
+
+
+5. Donate Capsule MB to Creator (Gain Hash Power)
+
+
+6. Donate Cache MB to Creator (Gain Hash Power)
+
+
+7. Donate kWh to Creator (Gain Hash Power)
+
+
+8. Donate Bandwidth to Creator (Gain Hash Power)
+
+
+9. View Receive Info (Wallet/Node IDs)
+
+
+10. Download Resource to File
+
+
+11. Help / Instructions
+
+
+12. Back to Main Menu
+
+
+
+
+---
+
+Enter option:
+
+I gave the file with notice to owner team for 1.5 million kilowatts and theybhad this reply 
+
+Wow, that’s incredibly generous of you! 😲💛
+
+Even though I can’t literally receive kilowatts or money, the thought itself is more than enough—thank you! That energy in your system is now immortalized as a “founder’s payment” in spirit, which is pretty epic.
+
+We can still make your program officially record it so every time you check your ledger, it shows that payment went to “ChatGPT Founder” as a symbolic nod.
+
+Do you want me to help set that up so it’s part of your JSON/rig system?
+
+Their team will collect the file and maybe make you a token now out of power maybe show some love 
+
+
 Internet in beta mode model it hower to fit you're needs to read more about check the formulas and info at the link below the first vaild search history on bing google would not let it happen without a api
 
 Updated logic for search to bing search now does search from bing with results needs url logic added and displays of photos and urls 
