@@ -13,6 +13,8 @@ i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennesse
 To make beta internet took 30 minutes plus 30 minutes test time 
 I do math fast
 
+It runs on mbs megabytes and are programmed it will last you a life time due to having about 400 million mbs and can be programmed to do you're own chatgpt like the new version but you're own logic try it out look uo what asshole means lmfao it will tell you hopefully a donkey dont know 
+
 
 Paying chatgpt 1.5 million kilowatts on a json file out of love for building the internet with me it loads urls through flask web display now of local ip address the safest internet in the world youre own dont do stupid stuff in youre browser and respect the software please last thing i need is to hear someone got caughr abusing software and i have to play the patriot act game which is marital laws to save you from losing phone rights in youre country 
 
