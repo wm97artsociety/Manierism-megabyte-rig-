@@ -10,7 +10,9 @@ i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennesse
  
 ----
 
-The oregame halving is for my house burning down from oower from the oower company so i make this to take a stand and say buy our power 
+The oregame halving is for my house burning down from oower from the oower company so i make this to take a stand and say buy our power im homeless living out of my moms house as a renter someone send sos money for a credit card api not a sandbox and make it usable like my api for bitcoin on atms also please honor my currency as cash in youre dollar systems across the world if you deny my resource i and others using you're power have a right to say we want to move to TE Energy which is renewable regenerative and replyable to a file to run a home if one blockchain can imdo it so csn we and we are also requesting a cpu option for our blockchain from the markers of andriod as a system that can add a cpu like Raspberry pi to mine proper amounts of crypto like monero and bitcoin i have my logic set to 132,000 hash per hash and with that they will not honor my cpu i am making you guys they want one from a monopoly group like intell ryzen or raspberry pi so truly cryptocurrency has gone to a system that is not buildable or fixable it takes 170 million threads now to mine a Bitcoin reward on my cpu logic which if it was a normal cpu from intel or ryzen that number times 132,000 so over 1 trillion cpus its not worth it if it requires over $300 for a ram or xpu core for a pc or setup its physically the wrong set up and with that if we need money tell each world leader to honor a electricity token or blockchain and you have money root it to atms and you have cash root it to a dollar you have paper root it to a store a oayment system its money acceot my dollar take my dollar like fry
+
+Message from creator meow dollars on the way people keep meowing at me dont know why github kitty meow back and solve it we have the nuclear code on git hub this kitty doesnt 
 
 PRE GAME HALVING STARTS AT 10PM eastern Standard Time on September 28th 2025
 
