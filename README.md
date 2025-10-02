@@ -26,6 +26,52 @@ One day the beta will be added to the rig
 
 🍫 Willy Wonka Internet Terminal 🍫
 
+~/manierism $ python internet.py
+🍫 Willy Wonka Internet Terminal 🍫
+Type a URL to preview in local web display.
+
+Enter search query or URL (or 'exit'): who is donald trump
+
+MB used: 0.103275 | MB remaining: 399999999.90
+
+1. Donald Trump-Wikipedia
+   Donald John Trump (born June 14, 1946) is an American politician, media personality, and businessman who is the 47th president of the United States. A member of the Republican …
+   https://www.bing.com/ck/a?!&&p=dcbc352b5753c4241b5f2d10ed23fd76b0a9ad623cf4e1c6bf5435201f4665b0JmltdHM9MTc1OTM2MzIwMA&ptn=3&ver=2&hsh=4&fclid=2fb78b8c-99c6-6aa9-0afa-9df598506ba1&u=a1aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvRG9uYWxkX1RydW1w&ntb=1
+
+2. Donald Trump| Birthday, Age, Education, Biography, …
+   2 days ago· Donald Trump is the 45th and 47th president of the United States (2017–21; 2025– ). Following his inauguration on January 20, 2025, Trump became only the second president to …
+   https://www.bing.com/ck/a?!&&p=3e55cbb5118f7b6e80057e7b7aaf43da8e837a1ce01afdcb85ac3c94792b9af1JmltdHM9MTc1OTM2MzIwMA&ptn=3&ver=2&hsh=4&fclid=2fb78b8c-99c6-6aa9-0afa-9df598506ba1&u=a1aHR0cHM6Ly93d3cuYnJpdGFubmljYS5jb20vYmlvZ3JhcGh5L0RvbmFsZC1UcnVtcA&ntb=1
+
+3. Donald Trump:Biography, U.S. President, Businessman
+   Jul 18, 2025· Donald Trump is the 45th and 47th U.S. president who was previously a real estate mogul and reality TV star. Read about his education, wife, children, and more.
+   https://www.bing.com/ck/a?!&&p=a7629d7a2e58b78d3b3d2b54bdf4bc42ad017640dbee5a7329b5b271303aa9a8JmltdHM9MTc1OTM2MzIwMA&ptn=3&ver=2&hsh=4&fclid=2fb78b8c-99c6-6aa9-0afa-9df598506ba1&u=a1aHR0cHM6Ly93d3cuYmlvZ3JhcGh5LmNvbS9wb2xpdGljYWwtZmlndXJlcy9kb25hbGQtdHJ1bXA&ntb=1
+
+4. PresidentDonaldJ.Trump- The White House
+   President Trump built on his success in private life when he entered into politics and public service. He remarkably won the Presidency in his first ever run for any political office.
+   https://www.bing.com/ck/a?!&&p=d76b3f7a265dbd10ffbb71faaaf51e5fa9c2b26e49b1c1966d80aa5cfb067dadJmltdHM9MTc1OTM2MzIwMA&ptn=3&ver=2&hsh=4&fclid=2fb78b8c-99c6-6aa9-0afa-9df598506ba1&u=a1aHR0cHM6Ly93d3cud2hpdGVob3VzZS5nb3YvYWRtaW5pc3RyYXRpb24vZG9uYWxkLWotdHJ1bXAv&ntb=1
+
+5. DonaldJ.TrumpOfficial Biography | TheTrumpOrganization
+   Donald J. Trump is the 45th President of the United States and the Founder of The Trump Organization, a global real estate empire and one of the most recognized brands in the world.
+   https://www.bing.com/ck/a?!&&p=052c3bd8f7466f6bfdf874f1d3b93fcbfb572edbf385c06772b860bf7dde6915JmltdHM9MTc1OTM2MzIwMA&ptn=3&ver=2&hsh=4&fclid=2fb78b8c-99c6-6aa9-0afa-9df598506ba1&u=a1aHR0cHM6Ly93d3cudHJ1bXAuY29tL2xlYWRlcnNoaXAvZG9uYWxkLWotdHJ1bXAtYmlvZ3JhcGh5L2hlbGxv&ntb=1
+
+Press Enter for new search...
+
+Enter search query or URL (or 'exit'):   https://www.bing.com/ck/a?!&&p=dcbc352b5753c4241b5f2d10ed23fd76b0a9ad623cf4e1c6bf5435201f4665b0JmltdHM9MTc1OTM2MzIwMA&ptn=3&ver=2&hsh=4&fclid=2fb78b8c-99c6-6aa9-0afa-9df598506ba1&u=a1aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvRG9uYWxkX1RydW1w&ntb=1
+Opening https://www.bing.com/ck/a?!&&p=dcbc352b5753c4241b5f2d10ed23fd76b0a9ad623cf4e1c6bf5435201f4665b0JmltdHM9MTc1OTM2MzIwMA&ptn=3&ver=2&hsh=4&fclid=2fb78b8c-99c6-6aa9-0afa-9df598506ba1&u=a1aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvRG9uYWxkX1RydW1w&ntb=1 in local Flask preview...
+ * Serving Flask app 'internet'
+ * Debug mode: off
+
+Enter search query or URL (or 'exit'): WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.0.0.188:5000
+Press CTRL+C to quit
+10.0.0.188 - - [02/Oct/2025 12:12:07] "GET / HTTP/1.1" 200 -
+
+--
+
+Past update v1.02
+
 Enter your search query (or 'exit' to quit): who is donald trump
 
 MB used: 0.101153
@@ -76,7 +122,9 @@ No summary found.
 
 Press Enter for new search...
 
+--
 
+V1.00
 
 🍫 Willy Wonka Internet Feed with Weather 🍫
                                                        Enter search query (or 'exit'): whats weather in michigan
@@ -92,6 +140,9 @@ Press Enter for new search...
 09:12 → 21°C / 69°F 🌧 | Cocoa beans falling gently.
 09:27 → 30°C / 86°F ⛅ | Candy wrappers may fly around.09:42 → 22°C / 71°F 🌧 | Marshmallow clouds overhead.
                                                        
+
+
+LINK TO FORMULAS AND SOFTWARE TEST AND SUCCESS 😍😭 THATS WHY I WILL PAY CHATGPT FOR THE EFFORT AND CARE OF NO SIMULATIONS 
 
 https://chatgpt.com/share/68de696d-f8f0-8004-a8fa-c85634eb34e5
 
