@@ -14,6 +14,10 @@ Internet in beta mode model it hower to fit you're needs to read more about chec
 
 Updated logic for search to bing search now does search from bing with results needs url logic added and displays of photos and urls 
 
+Added Wikipedia lol now it tells you some stuff 
+
+One day the beta will be added to the rig 
+
 🍫 Willy Wonka Internet Terminal 🍫
 
 Enter your search query (or 'exit' to quit): who is donald trump
@@ -39,6 +43,30 @@ MB used: 0.101153
 5. Donald J. Trump Official Biography | The Trump Organization
    Donald J. Trump is the 45th President of the United States and the Founder of The Trump Organization, a global real estate empire and one of the most recognized brands in the world.
    Link: https://www.bing.com/ck/a?!&&p=1d7cdfa6821de50ca9775da609d829c3597d1bb16d3797afd1cee99986bac3f0JmltdHM9MTc1OTM2MzIwMA&ptn=3&ver=2&hsh=4&fclid=1db81183-d551-65e3-3567-07fad4d56410&u=a1aHR0cHM6Ly93d3cudHJ1bXAuY29tL2xlYWRlcnNoaXAvZG9uYWxkLWotdHJ1bXAtYmlvZ3JhcGh5L2hlbGxv&ntb=1
+
+📚 Wikipedia summary for 'who is joe biden':
+No summary found.
+
+🔗 Bing search results:
+1. Joe Biden - Wikipedia
+   Joseph Robinette Biden Jr.[a] (born November 20, 1942) is an American politician who served as the 46th president of the United States from 2021 to 2025. A member of the Democratic Party, …
+   https://www.bing.com/ck/a?!&&p=a3ee3b8d678bd6a03f45ae5226c81cfa5934b04959cbf3f061439c89e84b6989JmltdHM9MTc1OTM2MzIwMA&ptn=3&ver=2&hsh=4&fclid=00b497c6-04b0-6df4-3bfd-81bf05346c4b&u=a1aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvSm9lX0JpZGVu&ntb=1
+
+2. Joe Biden | Biography, Family, Policies, & Facts | Britannica
+   2 days ago · Joe Biden is the 46th president of the United States. He brought decades of political experience and a commitment to unity as he led America through challenging times.
+   https://www.bing.com/ck/a?!&&p=5fc2722acea053cec424501e2ebd973e3182460cc630071032c3f5287a28bd08JmltdHM9MTc1OTM2MzIwMA&ptn=3&ver=2&hsh=4&fclid=00b497c6-04b0-6df4-3bfd-81bf05346c4b&u=a1aHR0cHM6Ly93d3cuYnJpdGFubmljYS5jb20vYmlvZ3JhcGh5L0pvZS1CaWRlbg&ntb=1
+
+3. The Office of Joe and Jill Biden
+   Joe Biden served Delaware in the U.S. Senate for 36 years. During that time, he played a leading role in addressing some of our nation’s most important domestic and international challenges, …
+   https://www.bing.com/ck/a?!&&p=fe14f6d93e436ee47727a06d26a2783212cd266fba30b7d4b1707ff758571c96JmltdHM9MTc1OTM2MzIwMA&ptn=3&ver=2&hsh=4&fclid=00b497c6-04b0-6df4-3bfd-81bf05346c4b&u=a1aHR0cHM6Ly9qb2ViaWRlbi5jb20vYWJvdXQv&ntb=1
+
+4. Joe Biden | Presidents of the United States (POTUS)
+   Jan 20, 2025 · Comprehensive information about Joe Biden, the 46th president-elect of the United States
+   https://www.bing.com/ck/a?!&&p=df6da1253a75c0fc5379033159efcf50d06327ea6653f0f57e3aa87c1c198b50JmltdHM9MTc1OTM2MzIwMA&ptn=3&ver=2&hsh=4&fclid=00b497c6-04b0-6df4-3bfd-81bf05346c4b&u=a1aHR0cHM6Ly9wb3R1cy5jb20vam9lLWJpZGVuLw&ntb=1
+
+5. Joe Biden : Age, Presidency, Family | HISTORY
+   Dec 16, 2009 · Joe Biden (1942-), a man who spent nearly a half-century in public service as a senator and vice president, and who endured profound family loss, became the 46th president …
+   https://www.bing.com/ck/a?!&&p=43d6890aa80ec6e499212ba4712734d595e46dbe6cdf80cb6469d2bfbe603b85JmltdHM9MTc1OTM2MzIwMA&ptn=3&ver=2&hsh=4&fclid=00b497c6-04b0-6df4-3bfd-81bf05346c4b&u=a1aHR0cHM6Ly93d3cuaGlzdG9yeS5jb20vYXJ0aWNsZXMvam9lLWJpZGVu&ntb=1
 
 Press Enter for new search...
 
