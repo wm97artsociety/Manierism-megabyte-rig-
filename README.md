@@ -12,6 +12,38 @@ i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennesse
 
 Internet in beta mode model it hower to fit you're needs to read more about check the formulas and info at the link below the first vaild search history on bing google would not let it happen without a api
 
+Updated logic for search to bing search now does search from bing with results needs url logic added and displays of photos and urls 
+
+🍫 Willy Wonka Internet Terminal 🍫
+
+Enter your search query (or 'exit' to quit): who is donald trump
+
+MB used: 0.101153
+
+1. Donald Trump - Wikipedia
+   Donald John Trump (born June 14, 1946) is an American politician, media personality, and businessman who is the 47th president of the United States. A member of the Republican …
+   Link: https://www.bing.com/ck/a?!&&p=7c09a31b435e7576ffdf41fbe213e5d6177dc971a66853dd1a232e04fd07251aJmltdHM9MTc1OTM2MzIwMA&ptn=3&ver=2&hsh=4&fclid=1db81183-d551-65e3-3567-07fad4d56410&u=a1aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvRG9uYWxkX1RydW1w&ntb=1
+
+2. Donald Trump | Birthday, Age, Education, Biography, …
+   2 days ago · Donald Trump is the 45th and 47th president of the United States (2017–21; 2025– ). Following his inauguration on January 20, 2025, Trump became only the second president to …
+   Link: https://www.bing.com/ck/a?!&&p=658950cb312ce2bb5994501e870b7d5c1718c5bb820ea0dccdd47695d517f608JmltdHM9MTc1OTM2MzIwMA&ptn=3&ver=2&hsh=4&fclid=1db81183-d551-65e3-3567-07fad4d56410&u=a1aHR0cHM6Ly93d3cuYnJpdGFubmljYS5jb20vYmlvZ3JhcGh5L0RvbmFsZC1UcnVtcA&ntb=1
+
+3. Donald Trump : Biography , U.S. President, Businessman
+   Jul 18, 2025 · Donald Trump is the 45th and 47th U.S. president who was previously a real estate mogul and reality TV star. Read about his education, wife, children, and more.
+   Link: https://www.bing.com/ck/a?!&&p=71185d3a8b9af03c3322f98df54c7da36361ced59e1fd1cfa072c5f07822c03cJmltdHM9MTc1OTM2MzIwMA&ptn=3&ver=2&hsh=4&fclid=1db81183-d551-65e3-3567-07fad4d56410&u=a1aHR0cHM6Ly93d3cuYmlvZ3JhcGh5LmNvbS9wb2xpdGljYWwtZmlndXJlcy9kb25hbGQtdHJ1bXA&ntb=1
+
+4. President Donald J. Trump - The White House
+   President Trump built on his success in private life when he entered into politics and public service. He remarkably won the Presidency in his first ever run for any political office.
+   Link: https://www.bing.com/ck/a?!&&p=d12ed900481c051029a3a636a4498d2445462895c0c93f1668458b1df95019a4JmltdHM9MTc1OTM2MzIwMA&ptn=3&ver=2&hsh=4&fclid=1db81183-d551-65e3-3567-07fad4d56410&u=a1aHR0cHM6Ly93d3cud2hpdGVob3VzZS5nb3YvYWRtaW5pc3RyYXRpb24vZG9uYWxkLWotdHJ1bXAv&ntb=1
+
+5. Donald J. Trump Official Biography | The Trump Organization
+   Donald J. Trump is the 45th President of the United States and the Founder of The Trump Organization, a global real estate empire and one of the most recognized brands in the world.
+   Link: https://www.bing.com/ck/a?!&&p=1d7cdfa6821de50ca9775da609d829c3597d1bb16d3797afd1cee99986bac3f0JmltdHM9MTc1OTM2MzIwMA&ptn=3&ver=2&hsh=4&fclid=1db81183-d551-65e3-3567-07fad4d56410&u=a1aHR0cHM6Ly93d3cudHJ1bXAuY29tL2xlYWRlcnNoaXAvZG9uYWxkLWotdHJ1bXAtYmlvZ3JhcGh5L2hlbGxv&ntb=1
+
+Press Enter for new search...
+
+
+
 🍫 Willy Wonka Internet Feed with Weather 🍫
                                                        Enter search query (or 'exit'): whats weather in michigan
 
