@@ -10,6 +10,10 @@ i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennesse
 
 ----
 
+To make beta internet took 30 minutes plus 30 minutes test time 
+I do math fast
+
+
 Internet in beta mode model it hower to fit you're needs to read more about check the formulas and info at the link below the first vaild search history on bing google would not let it happen without a api
 
 Updated logic for search to bing search now does search from bing with results needs url logic added and displays of photos and urls 
