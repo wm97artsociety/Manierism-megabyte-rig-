@@ -14,6 +14,19 @@ oct 3rd 2025
 i have updated the run.py to not be a Sandbox dollar value no more and have all USD value be backed by actual kilowatts meaning it's no longer a sand dollar or a Sandbox currency but an actual back currency by kilowatts if your value of your wallet has been affected please contact me and I can fix your wallet so before updating to the new file please write down balances and make sure that your wallet has not been affected from the update no settings for IPs for local IP addresses seem to cause problems sometimes when updating other than that i've checked two wallets and they are both the same with one that I'm questioning may have a little bit of errors in value from updating to the new file but it is backed by kilowatts for the dollar system and now you officially have a dollar that is backed by an actual asset 
 
 
+if caught breaking this rule for fixing wallets you will be told to leave the project respectfully 
+
+The reason i say this is for the reason its a tool used to fix courrupt wallets and rigs when files get updated
+
+So if you head to termux in a wallet that lost balance 
+
+Cd emulated/0/download/manierismmegabytes/(usewalletrigheretoupdatebalance) 
+
+You will not lose you're money no more 
+
+
+
+
 ---
 
 I forgot to mention you habe the rights to remix and sell megabytes, bandwidth, cache megabytes and kilowatts json files through marketplaces i grant ip approval of selling 
