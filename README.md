@@ -1492,6 +1492,8 @@ Pip installments
 
 pip install cryptography requests
 
+Also add wake screen to keeo screen active while mining in background 
+
 import os
 import time
 import json
