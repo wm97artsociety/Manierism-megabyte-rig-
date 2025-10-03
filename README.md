@@ -9,6 +9,12 @@ Hold on to old wallets and rigs a program software will comeout to exchange the 
 i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennessee that help. Build the atomic bomb 
 
 ----
+oct 3rd 2025 
+
+i have updated the run.py to not be a Sandbox dollar value no more and have all USD value be backed by actual kilowatts meaning it's no longer a sand dollar or a Sandbox currency but an actual back currency by kilowatts if your value of your wallet has been affected please contact me and I can fix your wallet so before updating to the new file please write down balances and make sure that your wallet has not been affected from the update no settings for IPs for local IP addresses seem to cause problems sometimes when updating other than that i've checked two wallets and they are both the same with one that I'm questioning may have a little bit of errors in value from updating to the new file but it is backed by kilowatts for the dollar system and now you officially have a dollar that is backed by an actual asset 
+
+
+---
 
 I forgot to mention you habe the rights to remix and sell megabytes, bandwidth, cache megabytes and kilowatts json files through marketplaces i grant ip approval of selling 
 
