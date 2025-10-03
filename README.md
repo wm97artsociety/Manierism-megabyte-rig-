@@ -10,6 +10,12 @@ i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennesse
 
 ----
 
+I forgot to mention you habe the rights to remix and sell megabytes, bandwidth, cache megabytes and kilowatts json files through marketplaces i grant ip approval of selling 
+
+From founder shitoshi 
+
+---
+
 To make beta internet took 30 minutes plus 30 minutes test time 
 I do math fast
 
