@@ -18,6 +18,8 @@ Here are your single, capsule-fused mining formulas for each chain—Bitcoin, Mo
 
 ---
 
+Want a algo solved im always here🙃
+
 🟧 Bitcoin Capsule Mining Formula
 
 `math
