@@ -20,9 +20,11 @@ The reason i say this is for the reason its a tool used to fix courrupt wallets 
 
 So if you head to termux in a wallet that lost balance 
 
-Cd emulated/0/download/manierismmegabytes/(usewalletrigheretoupdatebalance) 
+Cd emulated/0/download/manierismmegabytes/(usewalletrighere) for example (rig1).json enter button
 
-You will not lose you're money no more 
+Now update numbers lost 
+
+You will not lose you're money no more ❤️💵 long live a dollar 
 
 
 
