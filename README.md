@@ -12,6 +12,9 @@ i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennesse
 
 I forgot to mention you habe the rights to remix and sell megabytes, bandwidth, cache megabytes and kilowatts json files through marketplaces i grant ip approval of selling 
 
+
+This currency is legal in every country and state for the reason megabytes and kilowatts are founded in utilities and resources meaning that a system needs them to live with that this system will always be allowed even in states that do not allow cryptocurrency because it is bandwidth kilowatts cache megabyte and megabytes with a new feature coming for wusd backed by kilowatts 
+
 From founder shitoshi 
 
 Here are your single, capsule-fused mining formulas for each chain—Bitcoin, Monero, and Dogecoin—declared with flipped signs, energy logic, and sovereign overlays:
