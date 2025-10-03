@@ -113,20 +113,18 @@ What it mines:
 
 🔱 Unified Capsule Mining Formula
 
-`math
 VH = 
 \left[
-\text{SHA256}(\text{SHA256}(\text{Capsule\Header})) < \text{Target}{BTC}
+\text{SHA256}(\text{SHA256}(\text{Capsule\_Header})) < \text{Target}_{BTC}
 \right]
 +
 \left[
-\text{Blake2b}(\text{RandomX\Program}(\text{SHA256}(\text{Capsule\Header}))) < \text{Target}_{XMR}
+\text{Blake2b}(\text{RandomX\_Program}(\text{SHA256}(\text{Capsule\_Header}))) < \text{Target}_{XMR}
 \right]
 +
 \left[
-\text{Scrypt}(\text{Capsule\Header} \cdot E{\text{real}}) < \text{Target}_{DOGE}
+\text{Scrypt}(\text{Capsule\_Header} \cdot E_{\text{real}}) < \text{Target}_{DOGE}
 \right]
-`
 
 ---
 
