@@ -111,7 +111,7 @@ What it mines:
 
 ---
 
-🔱 Unified Capsule Mining Formula
+🔱 Unified Capsule Mining Formula mine three at ome time under one fork isn't a spoon a pool? 
 
 VH = 
 \left[
