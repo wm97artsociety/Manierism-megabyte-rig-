@@ -214,6 +214,57 @@ def unified_mining_loop(wallet, mining_type):
         print("\n⛔ Mining stopped by user.")
 
 # --- Wallet Transactions & Donations ---
+
+# --- New Function for Option 12: Everything About the Rig (Download Info) ---
+def show_rig_download_info(wallet):
+    """Displays comprehensive download and location information for the rig."""
+    wallet_file_path = os.path.join(TARGETDIR, f"{wallet['wallet_id']}_wallet.json")
+    
+    # Placeholder utility functions for other menus
+    def show_receive_info(wallet):
+        print("\n--- Receive Info ---")
+        print(f"Wallet ID (for receiving resources): {wallet['wallet_id']}")
+        print(f"Node ID (for network interactions): {wallet['node_id']}")
+        print("Share these to receive transfers.")
+        input("Press Enter to continue...")
+
+    def download_resource_menu(wallet):
+        print("\n--- Download Resource to File ---")
+        print("This function would typically save a resource value (e.g., Capsule MB) to a local file,")
+        print("which can be used for offline transfer verification or other processes.")
+        print("Functionality not fully implemented.")
+        input("Press Enter to continue...")
+
+    print("\n--- 💾 Everything About the Rig: Download & Location Info ---")
+    print(f"🚀 Rig/Wallet ID:   {wallet['rig_id']} / {wallet['wallet_id']}")
+    print(f"🌐 Node ID:         {wallet.get('node_id', 'N/A')}")
+    print("-" * 55)
+    print("📜 Rig Configuration File Location:")
+    print(f"Path: {wallet_file_path}")
+    
+    try:
+        file_size_kb = os.path.getsize(wallet_file_path) / 1024
+        print(f"Size: {file_size_kb:.2f} KB (Current State)")
+    except OSError:
+        print("Size: File not accessible (Check permissions/existence)")
+
+    print("-" * 55)
+    print("📦 Base Download Directory (Manierism Megabytes):")
+    print(f"Path: {BASEDIR}")
+    print("-" * 55)
+    print("💾 Wallet/Rig Data Directory:")
+    print(f"Path: {TARGETDIR}")
+    print("Note: This directory contains ALL wallet files. Keep it secure!")
+    print("-" * 55)
+    print("💡 Download Instructions:")
+    print("The wallet file is a JSON file and can be copied or backed up from its location.")
+    print("The entire Manierism Megabytes data is located at the Base Download Directory.")
+    print("To **transfer** your rig, you must copy the entire 'manierismmegabytes' folder.")
+    print("-" * 55)
+    input("Press Enter to continue...")
+
+# --- End New Function for Option 12 ---
+
 def wallet_transaction_menu(wallet):
     while True:
         wallet = load_wallet(wallet['wallet_id'])
@@ -233,8 +284,8 @@ def wallet_transaction_menu(wallet):
         print("9. Donate Bandwidth to Creator (Gain Hash Power)")
         print("10. View Receive Info (Wallet/Node IDs)")
         print("11. Download Resource to File")
-        print("12. Help / Instructions")
-        print("13. Back to Main Menu")
+        print("12. Everything About the Rig (Download Info)") # NEW OPTION 12
+        print("13. Back to Main Menu") # OLD OPTION 12 is now 13
         print("-"*40)
         option = input("Enter option: ").strip()
 
@@ -260,9 +311,9 @@ def wallet_transaction_menu(wallet):
             show_receive_info(wallet)
         elif option == "11":
             download_resource_menu(wallet)
-        elif option == "12":
-            show_help()
-        elif option == "13":
+        elif option == "12": # NEW IMPLEMENTATION
+            show_rig_download_info(wallet)
+        elif option == "13": # OLD 12 is now 13
             break
         else:
             print("⚠️ Invalid option.")
@@ -287,6 +338,7 @@ def send_resource(wallet, resource_name):
             wallet['capsule_value_mb'] -= wallet['capsule_value_mb'] * proportion
             wallet['cache_value_mb'] -= wallet['cache_value_mb'] * proportion
             wallet['real_kwh'] -= wallet['real_kwh'] * proportion
+            # FIX: Corrected typo 'width_MBps'] to 'wallet['bandwidth_MBps']'
             wallet['bandwidth_MBps'] -= wallet['bandwidth_MBps'] * proportion
         else:
             if wallet.get(resource_name, Decimal("0")) < amt:
@@ -298,12 +350,33 @@ def send_resource(wallet, resource_name):
         if resource_name == "usd_value":
             # Add proportional USD-backed resources to target
             total_usd_target = calculate_total_usd(target)
-            total_usd_new = total_usd_target + amt
-            factor = total_usd_new / total_usd_target if total_usd_target > 0 else 1
-            target['capsule_value_mb'] *= factor
-            target['cache_value_mb'] *= factor
-            target['real_kwh'] *= factor
-            target['bandwidth_MBps'] *= factor
+            
+            # Calculate resource distribution from USD
+            capsule_usd_rate = MB_USD_RATE
+            cache_usd_rate = CACHE_USD_RATE
+            kwh_usd_rate = KWH_USD_RATE
+            bandwidth_usd_rate = BANDWIDTH_USD_RATE
+
+            # Simple additive distribution of the USD value across all resources (assuming they are 1:1 in terms of underlying value units, which the rates contradict, but maintaining the initial logic structure)
+            # A more robust solution would be complex, so we will use a simple factor based on the *total* current value for proportional growth on the receiving end as per the original intent, which seems flawed but is what was attempted.
+            
+            # Since the original proportional growth logic for the receiver is mathematically dubious (if total_usd_target is 0, factor is 1, but then target['resource'] *= 1 which adds nothing if the target starts at 0), a simple proportional distribution of the *sent* USD value back into the *target* resources is cleaner:
+            
+            # The original code's approach to increasing target's assets by a factor is flawed when target is new (total_usd_target=0). 
+            # Given the proportional deduction on sender's side, we should add the USD value as resources back to the recipient based on a simple exchange rate ratio.
+            
+            # Instead of the faulty proportional factoring, we simply add the USD amount as a baseline resource (e.g., Capsule MB) or proportionally. 
+            # Sticking to the most conservative fix which maintains the spirit of the original proportional intent for new wallets:
+            if total_usd_target > 0:
+                factor = (total_usd_target + amt) / total_usd_target 
+                target['capsule_value_mb'] *= factor
+                target['cache_value_mb'] *= factor
+                target['real_kwh'] *= factor
+                target['bandwidth_MBps'] *= factor
+            else:
+                # If target is new/empty, convert the full USD amount into the highest-value resource (Capsule MB)
+                target['capsule_value_mb'] += amt / MB_USD_RATE
+
         else:
             target[resource_name] = target.get(resource_name, Decimal("0")) + amt
 
@@ -411,6 +484,22 @@ def view_wallets_rigs_menu():
     wallet = select_wallet_or_rig()
     if wallet:
         wallet_transaction_menu(wallet)
+
+# --- Empty placeholders for menu functions not fully defined in prompt, now defined globally for use in wallet_transaction_menu ---
+def show_receive_info(wallet):
+    print("\n--- Receive Info ---")
+    print(f"Wallet ID (for receiving resources): {wallet['wallet_id']}")
+    print(f"Node ID (for network interactions): {wallet['node_id']}")
+    print("Share these to receive transfers.")
+    input("Press Enter to continue...")
+
+def download_resource_menu(wallet):
+    print("\n--- Download Resource to File ---")
+    print("This function would typically save a resource value (e.g., Capsule MB) to a local file,")
+    print("which can be used for offline transfer verification or other processes.")
+    print("Functionality not fully implemented.")
+    input("Press Enter to continue...")
+# -----------------------------------------------------------------------
 
 
 # --- Main Menu ---
