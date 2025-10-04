@@ -6,15 +6,104 @@ Hold on to old wallets and rigs a program software will comeout to exchange the 
 🛡️ Manierism Megabyte Capsule Rig
 
 
-i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennessee that help. Build the atomic bomb 
+i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennessee that help Build the atomic bomb 
 
 ----
+
+New feature world debt payment plan backed by watts dollar kilowatts energy backs every dollar
+
+~/manierism $ python run.py
+
+=== Manierism Megabytes Mining Menu ===
+1. Start CPU Mining (Select Rig)
+2. Start Wi-Fi Mining (Select Rig)
+3. Start SHA Capsule Mining (Select Rig)
+4. Start Cache Mining (Select Rig)
+5. Create New Rig / Wallet
+6. View Wallets & Rigs / Wallet Actions
+7. Exit
+Enter option (1-7): 6
+
+Select a Rig/Wallet or type Wallet ID:
+1. world debt fund (WD-P4Y29G7B)
+2. donations (WM-CPH0O7J3)
+3. trust (default)
+4. default_rig (default_wallet)
+5. trust (trust)
+6. truth (truth)
+Enter number or Wallet ID: 3
+
+--- Capsule Rig Dashboard — trust ---
+Wallet ID: trust
+🌐 Node ID: f52f56f4...
+🌠 Hash Power (Permanent): 4637507.364020
+💾 Capsule MB: 2,530,943,905.875084
+📦 Cache MB: 0.000000
+📥 Device Cache (User Folders): 0.000000 MB
+⚡ Real kWh: 2,530,943,905.874916
+📡 Bandwidth: 2,167,943,671.807282 MB/s
+💵 WATTS USD Value: $13,995,516,335.53
+----------------------------------------
+🌎 World Debt Contributed: $52,745,212.00
+----------------------------------------
+
+--- Wallet Actions ---
+1. Send Capsule MB
+2. Send Cache MB
+3. Send kWh
+4. Send Bandwidth
+5. Send Watts USD
+----------------------------------------
+6. Donate Capsule MB to Creator (Gain Hash Power)
+7. Donate Cache MB to Creator (Gain Hash Power)
+8. Donate kWh to Creator (Gain Hash Power)
+9. Donate Bandwidth to Creator (Gain Hash Power)
+----------------------------------------
+10. View Receive Info (Wallet/Node IDs)
+11. Download Resource to File
+12. Everything About the Rig (Download Info)
+13. World Debt Payment Plan 🌎
+14. Back to Main Menu
+----------------------------------------
+Enter option: 13
+
+--- 🌎 World Debt Payment Plan ---
+📊 Global Debt Snapshot (As of October 4th, 2025):
+----------------------------------------
+  Total Starting Debt: $31,300,000,000,000.00
+  Total Debt Paid:     $371,005,457.01 (from all sources)
+  Remaining Debt:      $31,299,628,994,542.99
+----------------------------------------
+💰 Your Total Contribution: $52,745,212.00
+💵 Your Current Watts USD Balance: $13,995,516,335.53
+----------------------------------------
+1. Send Watts USD to Pay World Debt
+2. Back to Wallet Actions
+Enter option: 1
+Amount of Watts USD to contribute: 13995516335.53
+✅ Contributed $13,995,516,335.53 Watts USD to the World Debt Fund.
+
+--- 🌎 World Debt Payment Plan ---
+📊 Global Debt Snapshot (As of October 4th, 2025):
+----------------------------------------
+  Total Starting Debt: $31,300,000,000,000.00
+  Total Debt Paid:     $14,366,521,792.54 (from all sources)
+  Remaining Debt:      $31,285,633,478,207.46
+----------------------------------------
+💰 Your Total Contribution: $14,048,261,547.53
+💵 Your Current Watts USD Balance: $0.00
+----------------------------------------
+1. Send Watts USD to Pay World Debt
+2. Back to Wallet Actions
+Enter option:
+
+---
 oct 3rd/4th 2025 
 
 in beta process of adding internet with a nft project for everybody with its own Marketplace and also a P2P pool to Sally electricity kilowatts bandwidth megabytes and cache megabytes 
 
 
-As the files get updated the hashpower and balances some times get set back to original hash power set up so i guys for the air as I'm trying to fix it but also update the software to better software there is a couple things that you can do when this happens like backing up your wallet and updating the amounts that you have lost which I grant privileged to in rights to when you lose your money files or hashpower that you have the right to get it back and with feel as if you never lsot you're money later in the future their will be a notary section to notarize hash power files and assets within money to verify loss of hash power assets or files a way to fix any errors that will happen from time to time on loss on hashpower files or dollar amount 
+As the files get updated the hashpower and balances some times get set back to original hash power set up so i guys for the air as I'm trying to fix it but also update the software to better software there is a couple things that you can do when this happens like backing up your wallet and updating the amounts that you have lost which I grant privileged to in rights to when you lose your money files or hashpower that you have the right to get it back and with feel as if you never sot you're money later in the future their will be a notary section to notarize hash power files and assets within money to verify loss of hash power assets or files a way to fix any errors that will happen from time to time on loss on hashpower files or dollar amount 
 
 i have updated the run.py to not be a Sandbox dollar value no more and have all USD value be backed by actual kilowatts meaning it's no longer a sand dollar or a Sandbox currency but an actual back currency by kilowatts if your value of your wallet has been affected please contact me and I can fix your wallet so before updating to the new file please write down balances and make sure that your wallet has not been affected from the update no settings for IPs for local IP addresses seem to cause problems sometimes when updating other than that i've checked two wallets and they are both the same with one that I'm questioning may have a little bit of errors in value from updating to the new file but it is backed by kilowatts for the dollar system and now you officially have a dollar that is backed by an actual asset 
 
