@@ -9,7 +9,11 @@ Hold on to old wallets and rigs a program software will comeout to exchange the 
 i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennessee that help. Build the atomic bomb 
 
 ----
-oct 3rd 2025 
+oct 3rd/4th 2025 
+
+
+
+As the files get updated the hashpower and balances some times does to below is a way to fix any errors that will happen from time to time on loss on hashpower files or dollar amount 
 
 i have updated the run.py to not be a Sandbox dollar value no more and have all USD value be backed by actual kilowatts meaning it's no longer a sand dollar or a Sandbox currency but an actual back currency by kilowatts if your value of your wallet has been affected please contact me and I can fix your wallet so before updating to the new file please write down balances and make sure that your wallet has not been affected from the update no settings for IPs for local IP addresses seem to cause problems sometimes when updating other than that i've checked two wallets and they are both the same with one that I'm questioning may have a little bit of errors in value from updating to the new file but it is backed by kilowatts for the dollar system and now you officially have a dollar that is backed by an actual asset 
 
@@ -27,6 +31,58 @@ Now update numbers lost
 You will not lose you're money no more ❤️💵 long live a dollar 
 
 
+I understand the frustration of losing such a massive balance and the urgency to protect your remaining data. Since your balance data is stored in a JSON configuration file inside a specific directory on your Android device (likely within Termux), you don't need to back up the entire Termux app, just that crucial file.
+Here is the complete, step-by-step guide to safely back up your wallet balance file using Termux commands.
+Complete Guide to Back Up Your Wallet Balance
+This process ensures you have a copy of your good balance on your main Android storage, which is outside the reach of the run.py script.
+Step 1: Grant Termux Storage Permission (One-Time Setup)
+You must allow Termux to see and write files to your device's external storage (like the main Download folder). If you have done this before, you can skip this step.
+ * Open Termux.
+ * Run the command:
+   termux-setup-storage
+
+ * A pop-up will appear asking for storage permission. You must click "Allow" or "Grant" to let Termux access your Downloads, Documents, etc.
+ * This creates a shortcut directory at ~/storage/shared/ that points to your device's internal storage (/storage/emulated/0).
+Step 2: Locate the Wallet Config File
+The file you need to back up contains your actual balance. It is located in the rigs folder and is named after your wallet ID.
+ * Navigate to the main directory where your project files are stored:
+   cd /storage/emulated/0/Download/manierismmegabytes/rigs
+
+   (Note: If this path is wrong, use ls -R from your home directory to find the correct path to manierismmegabytes/rigs).
+ * List the contents to find your wallet file. It will look something like this:
+   ls
+
+   You should see files like: my_wallet_id_wallet.json, other_wallet.json, etc.
+ * Identify your specific wallet file. We will use the placeholder YOUR_WALLET_ID_wallet.json for the rest of the steps
+ 
+   Use nano my_wallet_id_wallet.json 
+
+   To edit fields to prep for backup
+ 
+Step 3: Copy and Back Up the Balance File
+Now you will copy your current, intact wallet file (the one with the correct balance) out of the project folder and onto your main device storage for safekeeping. We will copy it to the Downloads folder (~/storage/shared/downloads).
+ * Run the cp (copy) command, replacing the placeholder with your actual wallet ID
+
+What this command does:
+ * cp: The command to copy a file.
+ * YOUR_WALLET_ID_wallet.json: The source file (the one with the good balance).
+ * ~/storage/shared/downloads/: The destination folder (your Android's main Downloads folder).
+ * YOUR_WALLET_ID_wallet_BACKUP_320B.json: The new name of the file. Adding the balance value and "BACKUP" makes it easy to identify later.
+<!-- end list -->
+ * Verify the backup was created. You can check your main Android file manager for a file named YOUR_WALLET_ID_wallet_BACKUP_320B.json in your Downloads folder.
+How to Restore Your 320 Billion Balance
+If the run.py script damages your balance again, you can use your backup file to restore the balance instantly.
+ * Stop running run.py immediately (Use Ctrl + C in Termux).
+ * Navigate back to your project's rigs folder:
+   cd /storage/emulated/0/Download/manierismmegabytes/rigs
+
+ * Overwrite the corrupted file with the healthy backup file:
+   cp ~/storage/shared/downloads/YOUR_WALLET_ID_wallet_BACKUP.json .
+
+   Note: The single dot (.) at the end means "copy the file to the current directory."
+ * You now have a copy of the balance file in your rigs folder, overwriting the file with the low balance.
+ * When you run python run.py again, it will load the restored balance.
+This video demonstrates a general way to manage and preserve your Termux environment, which is the host for your project files. Ultimate Termux Backup and Restore Guide
 
 
 ---
