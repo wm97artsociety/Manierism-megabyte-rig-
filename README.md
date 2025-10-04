@@ -11,6 +11,7 @@ i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennesse
 ----
 oct 3rd/4th 2025 
 
+in beta process of adding internet with a nft project for everybody with its own Marketplace and also a P2P pool to Sally electricity kilowatts bandwidth megabytes and cache megabytes 
 
 
 As the files get updated the hashpower and balances some times get set back to original hash power set up so i guys for the air as I'm trying to fix it but also update the software to better software there is a couple things that you can do when this happens like backing up your wallet and updating the amounts that you have lost which I grant privileged to in rights to when you lose your money files or hashpower that you have the right to get it back and with feel as if you never lsot you're money later in the future their will be a notary section to notarize hash power files and assets within money to verify loss of hash power assets or files a way to fix any errors that will happen from time to time on loss on hashpower files or dollar amount 
