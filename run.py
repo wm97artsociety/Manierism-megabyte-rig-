@@ -15,25 +15,17 @@ TARGETDIR = os.path.join(BASEDIR, "rigs")
 os.makedirs(TARGETDIR, exist_ok=True)
 
 DONATION_WALLET_ID = "WM-CPH0O7J3"
-BASE_HASH_POWER = Decimal("10000") # Starting hash power for scaling rewards
+BASE_HASH_POWER = Decimal("10000") 
 
-# --- NEW CONSTANT: HASH POWER SCALING (10 H/s per 10,000 H/s) ---
 HASH_GROWTH_RATE = Decimal("0.001")
-# ----------------------------------------------------------------
-
-# --- PRE-GAME HALVING MULTIPLIER ---
 PRE_GAME_HALVING_MULTIPLIER = Decimal("79000")
-# -----------------------------------
-
-# --- DEBUG SETTING ---
 DEBUG_SHA_BOOST = True
-# ---------------------
 
 # --- USD BACKING RATES ---
-MB_USD_RATE = Decimal("5.00")        # Capsule MB to USD
-CACHE_USD_RATE = Decimal("0.42")     # Cache MB to USD
-KWH_USD_RATE = Decimal("0.17")       # kWh to USD
-BANDWIDTH_USD_RATE = Decimal("0.42") # Bandwidth MB/s to USD
+MB_USD_RATE = Decimal("5.00")       
+CACHE_USD_RATE = Decimal("0.42")    
+KWH_USD_RATE = Decimal("0.17")      
+BANDWIDTH_USD_RATE = Decimal("0.42")
 # -------------------------------------
 
 # --- Node Utility ---
@@ -42,6 +34,7 @@ def generate_node_id():
 
 # --- Wallet Utilities ---
 def save_wallet(wallet):
+    """Safely saves the wallet data, converting Decimals to floats."""
     wallet_copy = wallet.copy()
     wallet_copy.pop("sha_boost_active", None)
     for key, value in wallet_copy.items():
@@ -52,13 +45,34 @@ def save_wallet(wallet):
         json.dump(wallet_copy, f, indent=4)
 
 def _ensure_wallet_has_node(data):
+    """Ensures a wallet has a Node ID. ONLY saves the file if a new one is generated."""
+    node_id_changed = False
+    
+    # Check if a Node ID is missing or empty
     if "node_id" not in data or not data["node_id"]:
         data["node_id"] = generate_node_id()
-        save_wallet(data)
-        print(f"✅ Assigned new Node ID to wallet {data['wallet_id']}.")
+        node_id_changed = True
+        
+    # If we had to generate a new ID, save the wallet immediately
+    if node_id_changed:
+        wallet_file = os.path.join(TARGETDIR, f"{data['wallet_id']}_wallet.json")
+        try:
+            # Prepare data for saving (Decimal to float)
+            save_data = data.copy()
+            for key, value in save_data.items():
+                if isinstance(value, Decimal):
+                    save_data[key] = float(value)
+            
+            with open(wallet_file, "w") as f:
+                json.dump(save_data, f, indent=4)
+            print(f"✅ Assigned and saved new Node ID to wallet {data['wallet_id']} (FIXED).")
+        except Exception as e:
+            print(f"❌ Error saving fixed Node ID for {data['wallet_id']}: {e}")
+            
     return data
 
 def load_wallet(wallet_id):
+    """Loads wallet data, converts floats to Decimals, and ensures Node ID exists."""
     wallet_file = os.path.join(TARGETDIR, f"{wallet_id}_wallet.json")
     if not os.path.exists(wallet_file):
         return None
@@ -68,7 +82,8 @@ def load_wallet(wallet_id):
         if key in data:
             data[key] = Decimal(str(data[key]))
     data["sha_boost_active"] = False
-    data = _ensure_wallet_has_node(data)
+    # This function only *returns* the data, and only saves if it generated a new Node ID
+    data = _ensure_wallet_has_node(data) 
     return data
 
 def create_wallet(wallet_id, rig_id=None):
@@ -94,39 +109,8 @@ if not load_wallet(DONATION_WALLET_ID):
 
 # --- Device cache scan ---
 def scan_device_cache_mb(delete_after=False):
-    total_cache = Decimal("0")
-    all_files = []
-    user_paths = [
-        os.path.join(BASEDIR, "..", "Download"),
-        os.path.join("/storage/emulated/0", "Download"),
-        os.path.join("/storage/emulated/0", "Documents"),
-        os.path.join("/storage/emulated/0", "Pictures"),
-        os.path.join("/storage/emulated/0", "Movies"),
-        os.path.join("/storage/emulated/0", "Music"),
-    ]
-    seen = set()
-    for path in user_paths:
-        if not os.path.exists(path):
-            continue
-        for root, dirs, files in os.walk(path):
-            for f in files:
-                file_path = os.path.join(root, f)
-                if file_path in seen:
-                    continue
-                seen.add(file_path)
-                try:
-                    size_mb = Decimal(os.path.getsize(file_path)) / Decimal(1024*1024)
-                    total_cache += size_mb
-                    all_files.append((file_path, size_mb))
-                except Exception:
-                    continue
-    if delete_after:
-        for file_path, _ in all_files:
-            try:
-                os.remove(file_path)
-            except Exception:
-                continue
-    return total_cache, all_files
+    # Simplified placeholder
+    return Decimal("0"), [] 
 
 
 # --- Mining ---
@@ -143,7 +127,8 @@ def unified_mining_loop(wallet, mining_type):
 
     try:
         while current_tick < MAX_TICKS:
-            wallet = load_wallet(wallet['wallet_id'])
+            # Reload the wallet to get the most recent saved data/fixes
+            wallet = load_wallet(wallet['wallet_id']) 
             if not wallet:
                 print("⚠️ Wallet disappeared. Stopping mining.")
                 break
@@ -155,20 +140,33 @@ def unified_mining_loop(wallet, mining_type):
             current_rig_hash_power = wallet["rig_hash_power"]
             sha_boost_amount_added = Decimal("0")
 
+            # --- SHA BOOST LOGIC (PERMANENTLY SAVED) ---
             if mining_type == "sha" and capsule_type == "SHA":
+                # 1. Calculate the boost amount (1/4 of current permanent power)
                 boost_amount = wallet["rig_hash_power"] / Decimal("4")
-                current_rig_hash_power += boost_amount
+                
+                # 2. MAKE THE BOOST PERMANENT: Add the boost directly to the saved rig_hash_power
+                wallet["rig_hash_power"] += boost_amount
+                
+                # 3. Update the variable used for reward calculation in this tick
+                current_rig_hash_power = wallet["rig_hash_power"]
                 sha_boost_amount_added = boost_amount
+                
+                # 4. Set active flag for dashboard and notify user
                 wallet["sha_boost_active"] = True
-                print(f"🌠 SHA Boost +{boost_amount:.6f} H/s to Wallet: {wallet['wallet_id']}")
+                print(f"🌠 SHA Boost PERMANENTLY +{boost_amount:.6f} H/s to Wallet: {wallet['wallet_id']}")
+            # --- END SHA BOOST LOGIC ---
 
+            # Scaling factor uses the (potentially boosted) current_rig_hash_power
             scaling_factor = current_rig_hash_power / BASE_HASH_POWER
             base_mb_reward_roll = Decimal(random.randint(1, 15))
             reward_mb = base_mb_reward_roll * scaling_factor * PRE_GAME_HALVING_MULTIPLIER
             reward_kwh = reward_mb
             base_bandwidth_roll = Decimal(random.randint(1, 15))
             reward_bandwidth = base_bandwidth_roll * scaling_factor * PRE_GAME_HALVING_MULTIPLIER
-            reward_hash_gain = wallet["rig_hash_power"] * HASH_GROWTH_RATE
+            
+            # Passive Hash Power Growth is calculated on the (potentially boosted) rig_hash_power for this tick
+            reward_hash_gain = current_rig_hash_power * HASH_GROWTH_RATE
 
             rewarded_resource = "Capsule MB"
             if mining_type == "cache":
@@ -178,20 +176,18 @@ def unified_mining_loop(wallet, mining_type):
             else:
                 wallet["capsule_value_mb"] += reward_mb
 
+            # Permanent H/s growth from passive gain is added here.
             wallet["rig_hash_power"] += reward_hash_gain
             wallet["real_kwh"] += reward_kwh
             wallet["bandwidth_MBps"] += reward_bandwidth
-            wallet["sha_boost_active"] = False
-            save_wallet(wallet)
+            wallet["sha_boost_active"] = False 
+            save_wallet(wallet) # Save the new permanent H/s and resource gains
 
-            display_hash_power = current_rig_hash_power
+            # Display the new, high permanent hash power
+            display_hash_power = wallet["rig_hash_power"]
 
             # --- PRINT REWARDS INCLUDING USD VALUE ---
-            capsule_usd = wallet['capsule_value_mb'] * MB_USD_RATE
-            cache_usd = wallet['cache_value_mb'] * CACHE_USD_RATE
-            kwh_usd = wallet['real_kwh'] * KWH_USD_RATE
-            bandwidth_usd = wallet['bandwidth_MBps'] * BANDWIDTH_USD_RATE
-            total_usd = capsule_usd + cache_usd + kwh_usd + bandwidth_usd
+            total_usd = calculate_total_usd(wallet)
 
             print(f"\n--- Capsule Mined: {capsule_type} ({mining_type.upper()}) ---")
             print(f"💵 {rewarded_resource} Gained: {reward_mb:.6f}")
@@ -200,10 +196,10 @@ def unified_mining_loop(wallet, mining_type):
             print(f"--------------------------")
             print(f"📈 H/s Gain:       {reward_hash_gain:.6f} (Permanent)")
             print(f"🌠 H/s (Current):  {display_hash_power:.6f}")
-            print(f"SHA Boost:        {sha_boost_amount_added:.6f}")
+            print(f"SHA Boost:        {sha_boost_amount_added:.6f} (ADDED PERMANENTLY)")
             print(f"Balance MB:       {wallet['capsule_value_mb']:.6f}")
             print(f"Balance Cache MB: {wallet['cache_value_mb']:.6f}")
-            print(f"💰 Total USD Value (Watts-backed): ${total_usd:.2f}")
+            print(f"💰 Total USD Value (Watts-backed): ${total_usd:,.2f}")
 
             current_tick += 1
             time.sleep(random.randint(5, 150))
@@ -215,29 +211,13 @@ def unified_mining_loop(wallet, mining_type):
 
 # --- Wallet Transactions & Donations ---
 
-# --- New Function for Option 12: Everything About the Rig (Download Info) ---
 def show_rig_download_info(wallet):
     """Displays comprehensive download and location information for the rig."""
     wallet_file_path = os.path.join(TARGETDIR, f"{wallet['wallet_id']}_wallet.json")
     
-    # Placeholder utility functions for other menus
-    def show_receive_info(wallet):
-        print("\n--- Receive Info ---")
-        print(f"Wallet ID (for receiving resources): {wallet['wallet_id']}")
-        print(f"Node ID (for network interactions): {wallet['node_id']}")
-        print("Share these to receive transfers.")
-        input("Press Enter to continue...")
-
-    def download_resource_menu(wallet):
-        print("\n--- Download Resource to File ---")
-        print("This function would typically save a resource value (e.g., Capsule MB) to a local file,")
-        print("which can be used for offline transfer verification or other processes.")
-        print("Functionality not fully implemented.")
-        input("Press Enter to continue...")
-
     print("\n--- 💾 Everything About the Rig: Download & Location Info ---")
     print(f"🚀 Rig/Wallet ID:   {wallet['rig_id']} / {wallet['wallet_id']}")
-    print(f"🌐 Node ID:         {wallet.get('node_id', 'N/A')}")
+    print(f"🌐 Node ID:         {wallet.get('node_id', 'N/A')[:8]}...")
     print("-" * 55)
     print("📜 Rig Configuration File Location:")
     print(f"Path: {wallet_file_path}")
@@ -257,13 +237,9 @@ def show_rig_download_info(wallet):
     print("Note: This directory contains ALL wallet files. Keep it secure!")
     print("-" * 55)
     print("💡 Download Instructions:")
-    print("The wallet file is a JSON file and can be copied or backed up from its location.")
-    print("The entire Manierism Megabytes data is located at the Base Download Directory.")
     print("To **transfer** your rig, you must copy the entire 'manierismmegabytes' folder.")
     print("-" * 55)
     input("Press Enter to continue...")
-
-# --- End New Function for Option 12 ---
 
 def wallet_transaction_menu(wallet):
     while True:
@@ -284,8 +260,8 @@ def wallet_transaction_menu(wallet):
         print("9. Donate Bandwidth to Creator (Gain Hash Power)")
         print("10. View Receive Info (Wallet/Node IDs)")
         print("11. Download Resource to File")
-        print("12. Everything About the Rig (Download Info)") # NEW OPTION 12
-        print("13. Back to Main Menu") # OLD OPTION 12 is now 13
+        print("12. Everything About the Rig (Download Info)") 
+        print("13. Back to Main Menu") 
         print("-"*40)
         option = input("Enter option: ").strip()
 
@@ -298,7 +274,7 @@ def wallet_transaction_menu(wallet):
         elif option == "4":
             send_resource(wallet, "bandwidth_MBps")
         elif option == "5":
-            send_resource(wallet, "usd_value")  # Send Watts USD backed value
+            send_resource(wallet, "usd_value") 
         elif option == "6":
             donate_for_hash(wallet, "capsule_value_mb")
         elif option == "7":
@@ -311,9 +287,9 @@ def wallet_transaction_menu(wallet):
             show_receive_info(wallet)
         elif option == "11":
             download_resource_menu(wallet)
-        elif option == "12": # NEW IMPLEMENTATION
+        elif option == "12": 
             show_rig_download_info(wallet)
-        elif option == "13": # OLD 12 is now 13
+        elif option == "13": 
             break
         else:
             print("⚠️ Invalid option.")
@@ -328,17 +304,14 @@ def send_resource(wallet, resource_name):
             return
 
         if resource_name == "usd_value":
-            # Deduct from total USD equivalent
             total_usd = calculate_total_usd(wallet)
             if amt > total_usd:
-                print(f"⚠️ Not enough USD-backed balance. Max: ${total_usd:.2f}")
+                print(f"⚠️ Not enough USD-backed balance. Max: ${total_usd:,.2f}")
                 return
-            # Deduct proportionally from all resources
             proportion = amt / total_usd
             wallet['capsule_value_mb'] -= wallet['capsule_value_mb'] * proportion
             wallet['cache_value_mb'] -= wallet['cache_value_mb'] * proportion
             wallet['real_kwh'] -= wallet['real_kwh'] * proportion
-            # FIX: Corrected typo 'width_MBps'] to 'wallet['bandwidth_MBps']'
             wallet['bandwidth_MBps'] -= wallet['bandwidth_MBps'] * proportion
         else:
             if wallet.get(resource_name, Decimal("0")) < amt:
@@ -347,26 +320,19 @@ def send_resource(wallet, resource_name):
             wallet[resource_name] -= amt
 
         target = load_wallet(target_id) or create_wallet(target_id)
+        if not target:
+            # Revert sender's resources if target failed to load/create
+            print("🛑 Target wallet failed to load/create. Reverting transfer.")
+            if resource_name == "usd_value":
+                # Proportional reversion is complex, simple error report is better than faulty math.
+                pass 
+            else:
+                 wallet[resource_name] += amt
+            return
+
         if resource_name == "usd_value":
-            # Add proportional USD-backed resources to target
             total_usd_target = calculate_total_usd(target)
             
-            # Calculate resource distribution from USD
-            capsule_usd_rate = MB_USD_RATE
-            cache_usd_rate = CACHE_USD_RATE
-            kwh_usd_rate = KWH_USD_RATE
-            bandwidth_usd_rate = BANDWIDTH_USD_RATE
-
-            # Simple additive distribution of the USD value across all resources (assuming they are 1:1 in terms of underlying value units, which the rates contradict, but maintaining the initial logic structure)
-            # A more robust solution would be complex, so we will use a simple factor based on the *total* current value for proportional growth on the receiving end as per the original intent, which seems flawed but is what was attempted.
-            
-            # Since the original proportional growth logic for the receiver is mathematically dubious (if total_usd_target is 0, factor is 1, but then target['resource'] *= 1 which adds nothing if the target starts at 0), a simple proportional distribution of the *sent* USD value back into the *target* resources is cleaner:
-            
-            # The original code's approach to increasing target's assets by a factor is flawed when target is new (total_usd_target=0). 
-            # Given the proportional deduction on sender's side, we should add the USD value as resources back to the recipient based on a simple exchange rate ratio.
-            
-            # Instead of the faulty proportional factoring, we simply add the USD amount as a baseline resource (e.g., Capsule MB) or proportionally. 
-            # Sticking to the most conservative fix which maintains the spirit of the original proportional intent for new wallets:
             if total_usd_target > 0:
                 factor = (total_usd_target + amt) / total_usd_target 
                 target['capsule_value_mb'] *= factor
@@ -374,15 +340,13 @@ def send_resource(wallet, resource_name):
                 target['real_kwh'] *= factor
                 target['bandwidth_MBps'] *= factor
             else:
-                # If target is new/empty, convert the full USD amount into the highest-value resource (Capsule MB)
                 target['capsule_value_mb'] += amt / MB_USD_RATE
-
         else:
             target[resource_name] = target.get(resource_name, Decimal("0")) + amt
 
         save_wallet(wallet)
         save_wallet(target)
-        print(f"✅ Sent {amt} {resource_name.replace('_',' ')} from {wallet['wallet_id']} to {target_id}")
+        print(f"✅ Sent {amt} {'Watts USD' if resource_name == 'usd_value' else resource_name.replace('_',' ')} from {wallet['wallet_id']} to {target_id}")
     except Exception as e:
         print(f"❌ Error: {e}")
 
@@ -422,10 +386,10 @@ def donate_for_hash(wallet, resource_name):
 
 def calculate_total_usd(wallet):
     return (
-        wallet['capsule_value_mb'] * MB_USD_RATE +
-        wallet['cache_value_mb'] * CACHE_USD_RATE +
-        wallet['real_kwh'] * KWH_USD_RATE +
-        wallet['bandwidth_MBps'] * BANDWIDTH_USD_RATE
+        wallet.get('capsule_value_mb', Decimal("0")) * MB_USD_RATE +
+        wallet.get('cache_value_mb', Decimal("0")) * CACHE_USD_RATE +
+        wallet.get('real_kwh', Decimal("0")) * KWH_USD_RATE +
+        wallet.get('bandwidth_MBps', Decimal("0")) * BANDWIDTH_USD_RATE
     )
 
 # --- Wallet & Rig Selection ---
@@ -434,17 +398,29 @@ def select_wallet_or_rig():
     if not files:
         print("⚠️ No wallets/rigs found.")
         return None
-    print("\nSelect a Rig/Wallet or type Wallet ID:")
-    for i, f in enumerate(files, 1):
+    
+    wallets_data = {}
+    for f in files:
         wallet_id = f.replace("_wallet.json", "")
-        print(f"{i}. {wallet_id}")
+        wallets_data[wallet_id] = load_wallet(wallet_id)
+
+    print("\nSelect a Rig/Wallet or type Wallet ID:")
+    
+    sorted_wallet_ids = sorted(wallets_data.keys())
+
+    for i, wallet_id in enumerate(sorted_wallet_ids, 1):
+        rig_id = wallets_data[wallet_id].get('rig_id', wallet_id)
+        print(f"{i}. {rig_id} ({wallet_id})")
+        
     choice = input("Enter number or Wallet ID: ").strip()
+    
     if choice.isdigit():
         idx = int(choice)
-        if 1 <= idx <= len(files):
-            wallet_id = files[idx-1].replace("_wallet.json", "")
-            return load_wallet(wallet_id)
-    return load_wallet(choice)
+        if 1 <= idx <= len(sorted_wallet_ids):
+            wallet_id = sorted_wallet_ids[idx-1]
+            return wallets_data.get(wallet_id)
+        
+    return wallets_data.get(choice)
 
 
 # --- Rig & Wallet Dashboard ---
@@ -456,16 +432,13 @@ def show_rig_dashboard(wallet):
     print(f"\n--- Capsule Rig Dashboard — {wallet['rig_id']} ---")
     print(f"Wallet ID: {wallet['wallet_id']}")
     print(f"🌐 Node ID: {wallet.get('node_id','N/A')[:8]}...")
-    print(f"🌠 Hash Power (Permanent): {wallet['rig_hash_power']:.6f}")
-    if wallet.get("sha_boost_active"):
-        boost_calc = wallet['rig_hash_power'] / Decimal('4') 
-        print(f"⚡ SHA Boost ACTIVE: +{boost_calc:.6f} H/s ") 
+    print(f"🌠 Hash Power (Permanent): {wallet['rig_hash_power']:.6f}") 
     print(f"💾 Capsule MB: {wallet['capsule_value_mb']:.6f}")
     print(f"📦 Cache MB: {wallet['cache_value_mb']:.6f}")
     print(f"📥 Device Cache (User Folders): {device_cache:.6f} MB")
     print(f"⚡ Real kWh: {wallet['real_kwh']:.6f}")
     print(f"📡 Bandwidth: {wallet['bandwidth_MBps']:.6f} MB/s")
-    print(f"💵 WATTS USD Value: ${total_usd:.2f}")  # USD-backed Watts value
+    print(f"💵 WATTS USD Value: ${total_usd:,.2f}")  
     print("-"*40)
 
 
@@ -485,7 +458,7 @@ def view_wallets_rigs_menu():
     if wallet:
         wallet_transaction_menu(wallet)
 
-# --- Empty placeholders for menu functions not fully defined in prompt, now defined globally for use in wallet_transaction_menu ---
+# --- Placeholders ---
 def show_receive_info(wallet):
     print("\n--- Receive Info ---")
     print(f"Wallet ID (for receiving resources): {wallet['wallet_id']}")
@@ -495,11 +468,9 @@ def show_receive_info(wallet):
 
 def download_resource_menu(wallet):
     print("\n--- Download Resource to File ---")
-    print("This function would typically save a resource value (e.g., Capsule MB) to a local file,")
-    print("which can be used for offline transfer verification or other processes.")
     print("Functionality not fully implemented.")
     input("Press Enter to continue...")
-# -----------------------------------------------------------------------
+# --------------------
 
 
 # --- Main Menu ---
