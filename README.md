@@ -24,6 +24,8 @@ CUSTOM_REWARDS = [
 So if you wanted to put sleepy joe or trumpwow or even btc you could 
 Like this - space "sleeyjoe", or - space after  , symbol quotes "btc" 
 
+Add a favorite meme coin a show the founder you're love ❤️
+
 --- Capsule Mined: Gigabyte (SHA) ---
 💵 Capsule MB Gained: 188,181,802.613414
 ⚡ kWh Gained:     188,181,802.613414
