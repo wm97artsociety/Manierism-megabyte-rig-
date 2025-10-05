@@ -9,6 +9,28 @@ Hold on to old wallets and rigs a program software will comeout to exchange the 
 i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennessee that help Build the atomic bomb 
 
 ----
+Oct 5th 
+
+Vh btc hash algorithm added to be able to use hashpower with bitcoin through formula for later to sell hash power to nice hash 
+
+
+Want a algo solved im always here🙃
+
+🟧 Bitcoin Capsule Mining Formula
+
+`math
+VH{BTC} = \text{SHA256}(\text{SHA256}(\text{CapsuleHeader})) < \text{Target}_{BTC}
+`
+
+- Capsule header becomes the block header seed
+- Double SHA-256 resolves into Bitcoin’s proof-of-work
+- Target is Bitcoin’s current difficulty threshold
+-perfect for mining Bitcoin through hashpower of formula 
+
+---
+
+
+---
 
 ever want to add different capsule types or Rewards well please feel free to make this rig to your likelihood of Youth if it's family oriented pets creations paintings or anything that you find intriguing 
 
