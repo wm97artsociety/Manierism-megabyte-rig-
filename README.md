@@ -10,6 +10,59 @@ i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennesse
 
 ----
 
+ever want to add different capsule types or Rewards well please feel free to make this rig to your likelihood of Youth if it's family oriented pets creations paintings or anything that you find intriguing 
+
+in this section that I am giving here you have the right to edit and add more rewards to your rig which will still hold the same megabyte kilowatts bandwidth and cache amounts randomized but with more or less rewards
+
+# --- Mining ---
+CUSTOM_REWARDS = [
+    "2piE", "TE", "TE2pi", "Manierism", "Handrichism",
+    "RAM", "SDRAM", "SHA", "Nuclear", "Onshore",
+    "Gigabyte", "Terabyte", "Petabyte", "PIB", "Electrism"
+]
+
+So if you wanted to put sleepy joe or trumpwow or even btc you could 
+Like this - space "sleeyjoe", or - space after  , symbol quotes "btc" 
+
+--- Capsule Mined: Gigabyte (SHA) ---
+💵 Capsule MB Gained: 188,181,802.613414
+⚡ kWh Gained:     188,181,802.613414
+🛰️ Bandwidth Gained: 282,272,703.920120 MB/s
+--------------------------
+📈 H/s Gain:       5955.120336 (Passive)
+🌠 H/s (Current):  5961075.456203
+SHA Boost:        0.000000 (ADDED PERMANENTLY)
+Balance MB:       2,482,670,386.364730
+Balance Cache MB: 0.000000
+💰 Total USD Value (Watts-backed): $14,056,232,958.03
+
+--- Capsule Mined: trumpwow (SHA) ---
+💵 Capsule MB Gained: 376,739,968.832054
+⚡ kWh Gained:     376,739,968.832054
+🛰️ Bandwidth Gained: 470,924,961.040067 MB/s
+--------------------------
+📈 H/s Gain:       5961.075456 (Passive)
+🌠 H/s (Current):  5967036.531660
+SHA Boost:        0.000000 (ADDED PERMANENTLY)
+Balance MB:       2,859,410,355.196784
+Balance Cache MB: 0.000000
+💰 Total USD Value (Watts-backed): $16,201,767,080.52
+
+
+--- Capsule Mined: sleepyjoe (SHA) ---
+💵 Capsule MB Gained: 236,405,744.159082
+⚡ kWh Gained:     236,405,744.159082
+🛰️ Bandwidth Gained: 177,304,308.119312 MB/s
+--------------------------
+📈 H/s Gain:       7481.194435 (Passive)
+🌠 H/s (Current):  7488675.629849
+SHA Boost:        0.000000 (ADDED PERMANENTLY)
+Balance MB:       4,428,629,160.387218
+Balance Cache MB: 0.000000
+💰 Total USD Value (Watts-backed): $24,621,927,993.53
+
+---
+
 New feature world debt payment plan backed by watts dollar kilowatts energy backs every dollar
 
 ~/manierism $ python run.py
