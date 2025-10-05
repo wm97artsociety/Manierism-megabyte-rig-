@@ -6,6 +6,7 @@ import json
 import random
 import uuid
 from decimal import Decimal, getcontext
+import hashlib # Added for symbolic SHA256 use
 
 # High precision
 getcontext().prec = 200
@@ -42,6 +43,55 @@ CACHE_USD_RATE = Decimal("0.42")
 KWH_USD_RATE = Decimal("0.17")
 BANDWIDTH_USD_RATE = Decimal("0.42")
 # -------------------------------------
+
+# -----------------------------------------------------------
+# --- NEW HASH FORMULA IMPLEMENTATION ---
+# -----------------------------------------------------------
+
+# Symbolic constants for the hash formula
+TEPI2 = "TEPI2_CONSTANT"
+E2PI = "E2PI_CONSTANT"
+BLOCK_HEADER = "MM_BLOCK_HEADER_2025"
+
+def vh_btc_hash_function(capsule_header, amp_capsule):
+    """
+    Symbolic implementation of the VH_BTC hash formula.
+    VH_BTC = SHA256(CapsuleHeader || SHA256(BlockHeader) || Amp_capsule || TEPI2 || E2PI)
+    In this simulation, the output is a simple string for representation.
+    """
+    # Simulate SHA256(BlockHeader)
+    sha_block = hashlib.sha256(BLOCK_HEADER.encode()).hexdigest()
+    
+    # Concatenate all components symbolically
+    pre_image = f"{capsule_header}{sha_block}{amp_capsule}{TEPI2}{E2PI}"
+    
+    # Simulate final hash result
+    final_hash = hashlib.sha256(pre_image.encode()).hexdigest()
+    
+    return final_hash
+
+def calculate_rig_hash_power(wallet):
+    """
+    The rig's Hash Power (H/s) is now a function of its resources and permanent gains.
+    It serves as the Amp_capsule in the hash formula.
+    Hashpower = (Base_Hash_Power + Gains) * (1 + Resource_Bonus)
+    """
+    # Permanent Hash Power from donations, SHA boosts, and passive growth
+    permanent_hash_power = wallet["rig_hash_power"]
+    
+    # Add a resource bonus based on Cache MB (as Cache MB has the special multiplier)
+    # The resource bonus ensures that owning resources directly boosts the *rate* of hashing.
+    resource_bonus = wallet.get('cache_value_mb', Decimal('0')) / Decimal('1000') 
+    
+    # The actual Hash Power used for mining rate (Amp_capsule)
+    effective_hash_power = permanent_hash_power * (Decimal('1') + resource_bonus)
+    
+    return effective_hash_power.quantize(Decimal('0.000001'))
+
+# -----------------------------------------------------------
+# --- END NEW HASH FORMULA IMPLEMENTATION ---
+# -----------------------------------------------------------
+
 
 # --- Node Utility ---
 def generate_node_id():
@@ -297,9 +347,13 @@ def unified_mining_loop(wallet, mining_type):
             if DEBUG_SHA_BOOST and current_tick == 0 and mining_type == "sha":
                 capsule_type = "SHA"
 
-            current_rig_hash_power = wallet["rig_hash_power"]
+            # --- NEW HASH POWER CALCULATION (VH_BTC Amp_capsule) ---
+            effective_hash_power = calculate_rig_hash_power(wallet)
             sha_boost_amount_added = Decimal("0")
-
+            
+            # Symbolic Execution of the Hash Formula
+            vh_hash = vh_btc_hash_function(capsule_type, str(effective_hash_power))
+            
             # --- PERMANENT SHA BOOST LOGIC ---
             if mining_type == "sha" and capsule_type == "SHA":
                 # 1. Calculate the boost amount (1/4 of current permanent power)
@@ -309,7 +363,6 @@ def unified_mining_loop(wallet, mining_type):
                 wallet["rig_hash_power"] += boost_amount
                 
                 # 3. Update the temporary variable for calculation/display
-                current_rig_hash_power = wallet["rig_hash_power"]
                 sha_boost_amount_added = boost_amount
                 
                 # 4. Set active flag and notify user
@@ -317,7 +370,8 @@ def unified_mining_loop(wallet, mining_type):
                 print(f"🌠 SHA Boost PERMANENTLY +{boost_amount:.6f} H/s to Wallet: {wallet['wallet_id']}")
             # --- END PERMANENT SHA BOOST LOGIC ---
 
-            scaling_factor = current_rig_hash_power / BASE_HASH_POWER
+            # --- REWARD CALCULATION IS NOW BASED ON EFFECTIVE HASH POWER ---
+            scaling_factor = effective_hash_power / BASE_HASH_POWER
             base_mb_reward_roll = Decimal(random.randint(1, 15))
             
             # Apply the pre-game multiplier
@@ -326,8 +380,8 @@ def unified_mining_loop(wallet, mining_type):
             base_bandwidth_roll = Decimal(random.randint(1, 15))
             reward_bandwidth = base_bandwidth_roll * scaling_factor * PRE_GAME_HALVING_MULTIPLIER
             
-            # Passive Hash Power Growth 
-            reward_hash_gain = current_rig_hash_power * HASH_GROWTH_RATE 
+            # Passive Hash Power Growth (Uses permanent H/s, not the effective/resource-boosted H/s)
+            reward_hash_gain = wallet["rig_hash_power"] * HASH_GROWTH_RATE 
 
             rewarded_resource = "Capsule MB"
             if mining_type == "cache":
@@ -346,18 +400,20 @@ def unified_mining_loop(wallet, mining_type):
             save_wallet(wallet)
 
             # Display the new, higher permanent value (which includes the SHA boost if it occurred)
-            display_hash_power = wallet["rig_hash_power"] 
+            display_permanent_hash_power = wallet["rig_hash_power"] 
 
             # --- PRINT REWARDS INCLUDING USD VALUE ---
             total_usd = calculate_total_usd(wallet)
 
             print(f"\n--- Capsule Mined: {capsule_type} ({mining_type.upper()}) ---")
+            print(f"Hash Found (VH_BTC): {vh_hash[:10]}...")
             print(f"💵 {rewarded_resource} Gained: {reward_mb:,.6f}")
             print(f"⚡ kWh Gained:     {reward_kwh:,.6f}")
             print(f"🛰️ Bandwidth Gained: {reward_bandwidth:,.6f} MB/s")
             print(f"--------------------------")
             print(f"📈 H/s Gain:       {reward_hash_gain:.6f} (Passive)")
-            print(f"🌠 H/s (Current):  {display_hash_power:.6f}")
+            print(f"🌠 H/s (Effective):{effective_hash_power:.6f} (Includes Resource Bonus)")
+            print(f"🌠 H/s (Permanent):{display_permanent_hash_power:.6f}")
             print(f"SHA Boost:        {sha_boost_amount_added:.6f} (ADDED PERMANENTLY)")
             print(f"Balance MB:       {wallet['capsule_value_mb']:,.6f}")
             print(f"Balance Cache MB: {wallet['cache_value_mb']:,.6f}")
@@ -537,11 +593,13 @@ def show_rig_dashboard(wallet):
 
     device_cache, _ = scan_device_cache_mb() 
     total_usd = calculate_total_usd(wallet)
+    effective_hash_power = calculate_rig_hash_power(wallet) # Use the new formula
 
     print(f"\n--- Capsule Rig Dashboard — {wallet['rig_id']} ---")
     print(f"Wallet ID: {wallet['wallet_id']}")
     print(f"🌐 Node ID: {wallet.get('node_id','N/A')[:8]}...")
-    print(f"🌠 Hash Power (Permanent): {wallet['rig_hash_power']:.6f}") 
+    print(f"🌠 Hash Power (Permanent): {wallet['rig_hash_power']:.6f}")
+    print(f"🚀 Hash Power (Effective): {effective_hash_power:.6f} (Used for Mining Rate)") 
     if wallet.get("sha_boost_active"):
         boost_calc = wallet['rig_hash_power'] / Decimal('4') 
         print(f"⚡ SHA Boost ACTIVE: +{boost_calc:.6f} H/s ") 
