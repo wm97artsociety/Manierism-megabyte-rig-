@@ -11,7 +11,7 @@ i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennesse
 ----
 Oct 6th
 
-Internet has been added, internet node for sending payments one set closer to nice hash mining yayyyy first step the oh Satoshi got to get those bits first hand me a wrench i got a bit to collect
+Internet has been added, internet node for sending payments and receiving payments updates through local node internet one set closer to nice hash mining yayyyy first step the oh Satoshi got to get those bits first hand me a wrench i got a bit to collect
 
 
 ---
