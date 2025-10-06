@@ -752,6 +752,24 @@ def view_wallets_rigs_menu():
     if wallet:
         wallet_transaction_menu(wallet)
 
+def show_rig_download_info(wallet):
+    """
+    Displays current rig and download info for a wallet.
+    Prevents crash when option 12 calls this menu.
+    """
+    print("\n--- Rig Download Info ---")
+    print(f"Wallet ID: {wallet.get('wallet_id', 'Unknown')}")
+    print(f"Rig ID: {wallet.get('rig_id', 'Unknown')}")
+    print(f"Node ID: {wallet.get('node_id', 'None')}")
+    print(f"Capsule (MB): {wallet.get('capsule_value_mb', 0)}")
+    print(f"Cache (MB): {wallet.get('cache_value_mb', 0)}")
+    print(f"Hash Power: {wallet.get('rig_hash_power', 0)} H/s")
+    print(f"Bandwidth (MBps): {wallet.get('bandwidth_MBps', 0)}")
+    print(f"Energy Used (kWh): {wallet.get('real_kwh', 0)}")
+    print(f"USD Value: ${calculate_total_usd(wallet)}")
+    print("--------------------------\n")
+    input("Press Enter to return to the menu...")
+
 # --- Main Menu ---
 def main_menu():
     _initialize_special_wallets()
