@@ -9,6 +9,13 @@ Hold on to old wallets and rigs a program software will comeout to exchange the 
 i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennessee that help Build the atomic bomb 
 
 ----
+Oct 6th
+
+Internet has been added, internet node for sending payments one set closer to nice hash mining yayyyy first step the oh Satoshi got to get those bits first hand me a wrench i got a bit to collect
+
+
+---
+
 Oct 5th 
 
 Vh btc hash algorithm added to be able to use hashpower with bitcoin through formula for later to sell hash power to nice hash 
