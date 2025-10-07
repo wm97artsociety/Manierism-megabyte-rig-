@@ -11,7 +11,7 @@ i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennesse
 ----
 AI will no longer help with the file so its stuck tell you guys get ai to do the right thing for nicehash for bitcoin i paid them 1 billion kilowatts you guys dont even understand momey no more its sad dont touch my blockchain if you dont understand money also take it up with you're gov ehy they keep you all poor 
 
-I live in a 3rd world country in the usa by the way the money has been lately from the state of this constitution amd they not taking care of their community and feeding them watts dollar is allowed to be a asset that doesnt have to be used in the usa im, done 
+I live in a 3rd world country in the usa by the way the money has been lately from the state of this constitution amd they not taking care of their community and feeding them watts dollar is allowed to be a asset that doesnt have to be used in the usa im, done ive spent 13 years in this country with just $20 to my name they can sign to my dollar now 
 
 
 
