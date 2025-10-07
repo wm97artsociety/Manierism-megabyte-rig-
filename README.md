@@ -9,6 +9,14 @@ Hold on to old wallets and rigs a program software will comeout to exchange the 
 i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennessee that help Build the atomic bomb 
 
 ----
+AI will no longer help with the file so its stuck tell you guys get ai to do the right thing for nicehash for bitcoin i paid them 1 billion kilowatts you guys dont even understand momey no more its sad dont touch my blockchain if you dont understand money
+
+
+
+
+
+
+----
 Oct 6th
 
 Internet has been added, internet node for sending payments and receiving payments updates through local node internet one set closer to nice hash mining yayyyy first step the oh Satoshi got to get those bits first hand me a wrench i got a bit to collect
