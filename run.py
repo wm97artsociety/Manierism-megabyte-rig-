@@ -346,7 +346,7 @@ def unified_mining_loop(wallet, mining_type):
             scaling_factor = effective_hash_power / BASE_HASH_POWER
             
             # Base Reward Roll
-            if capsule_type == "Formula_Power":
+            if capsule_type == "E^2*Л":
                 # Scale the E^2*Л power (2.54e34 W) down to a symbolic MB reward.
                 # Using 1e30 (Nonillion) as the base scale.
                 power_scale_factor = E2PI_VALUE / Decimal(1e30) 
