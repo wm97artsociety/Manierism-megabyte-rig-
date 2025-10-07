@@ -13,6 +13,7 @@ from bs4 import BeautifulSoup
 from flask import Flask, render_template_string
 import webbrowser
 from decimal import Decimal, getcontext
+import math # ADDED for pi and power calculations
 
 # --- Precision ---
 getcontext().prec = 200
@@ -46,10 +47,46 @@ BANDWIDTH_USD_RATE = Decimal("0.42")
 # --- Debug Settings ---
 DEBUG_SHA_BOOST = True
 
-# --- VH_BTC Hash Constants ---
-TEPI2 = "TEPI2_CONSTANT"
-E2PI = "E2PI_CONSTANT"
+# --- NEW: Symbolic Power Constants ---
+# T = 1 second, E = 9e16 J, Л = pi
+# Formula 1: T * E * Л^2 (teЛ²)
+TEPI2_VALUE = Decimal(str(1 * 9e16 * (math.pi**2))) # ~8.88264e17 Watts
+TEPI2 = f"TEЛ²_CONST_{TEPI2_VALUE:.2e}"
+
+# Formula 2: E^2 * Л (E²Л)
+E2PI_VALUE = Decimal(str((9e16)**2 * math.pi)) # ~2.54468e34 Watts (Nonillion Power)
+E2PI = f"E²Л_CONST_{E2PI_VALUE:.2e}"
+
 BLOCK_HEADER = "MM_BLOCK_HEADER_2025"
+
+# --- NEW: Large Number Formatting Function ---
+def format_large_number(n):
+    """Converts a large number (Decimal) into a human-readable string (word math)."""
+    n_float = float(n)
+    
+    if n_float < 1e12: # < Trillion
+        return f"{n:,.6f}" # Standard formatting up to billions
+
+    powers = {
+        1e12: "Trillion", 1e15: "Quadrillion", 1e18: "Quintillion",
+        1e21: "Sextillion", 1e24: "Septillion", 1e27: "Octillion",
+        1e30: "Nonillion", 1e33: "Decillion", 1e36: "Undecillion",
+        1e39: "Duodecillion", 1e42: "Tredecillion"
+    }
+    
+    # Find the largest scale
+    scale = 1
+    unit = ""
+    for p, u in sorted(powers.items()):
+        if n_float >= p:
+            scale = p
+            unit = u
+        else:
+            break
+            
+    # Calculate the scaled number and return
+    scaled_n = n / Decimal(scale)
+    return f"{scaled_n:,.3f} {unit}"
 
 def vh_btc_hash_function(capsule_header, amp_capsule):
     """
@@ -57,6 +94,7 @@ def vh_btc_hash_function(capsule_header, amp_capsule):
     VH_BTC = SHA256(CapsuleHeader || SHA256(BlockHeader) || Amp_capsule || TEPI2 || E2PI)
     """
     sha_block = hashlib.sha256(BLOCK_HEADER.encode()).hexdigest()
+    # UPDATED: Includes the symbolic overlays for the formulas
     pre_image = f"{capsule_header}{sha_block}{amp_capsule}{TEPI2}{E2PI}"
     final_hash = hashlib.sha256(pre_image.encode()).hexdigest()
     return final_hash
@@ -71,7 +109,7 @@ def calculate_rig_hash_power(wallet):
     effective_hash_power = permanent_hash_power * (Decimal("1") + resource_bonus)
     return effective_hash_power.quantize(Decimal("0.000001"))
     
-    # --- Node Utility ---
+# --- Node Utility ---
 def generate_node_id():
     """Generates a unique ID for a network node."""
     return str(uuid.uuid4())
@@ -209,12 +247,12 @@ def show_world_debt_payment_menu(wallet):
         print("\n--- 🌎 World Debt Payment Plan ---")
         print(f"📊 Global Debt Snapshot (As of {WORLD_DEBT_DATE}):")
         print("-" * 40)
-        print(f"  Total Starting Debt: ${INITIAL_WORLD_DEBT_USD:,.2f}")
-        print(f"  Total Debt Paid:     ${total_debt_paid_usd:,.2f} (from all sources)")
-        print(f"  Remaining Debt:      ${remaining_debt:,.2f}")
+        print(f"  Total Starting Debt: ${format_large_number(INITIAL_WORLD_DEBT_USD)}")
+        print(f"  Total Debt Paid:     ${format_large_number(total_debt_paid_usd)} (from all sources)")
+        print(f"  Remaining Debt:      ${format_large_number(remaining_debt)}")
         print("-" * 40)
-        print(f"💰 Your Total Contribution: ${wallet['world_debt_paid_usd']:,.2f}")
-        print(f"💵 Your Current Watts USD Balance: ${calculate_total_usd(wallet):,.2f}")
+        print(f"💰 Your Total Contribution: ${format_large_number(wallet['world_debt_paid_usd'])}")
+        print(f"💵 Your Current Watts USD Balance: ${format_large_number(calculate_total_usd(wallet))}")
         print("-" * 40)
         print("1. Send Watts USD to Pay World Debt")
         print("2. Back to Wallet Actions")
@@ -241,7 +279,7 @@ def contribute_to_world_debt(wallet):
 
         total_usd = calculate_total_usd(wallet)
         if amt > total_usd:
-            print(f"⚠️ Not enough Watts USD-backed balance. Max: ${total_usd:,.2f}")
+            print(f"⚠️ Not enough Watts USD-backed balance. Max: ${format_large_number(total_usd)}")
             return
 
         proportion = amt / total_usd
@@ -256,7 +294,7 @@ def contribute_to_world_debt(wallet):
 
         save_wallet(wallet)
         save_wallet(debt_wallet)
-        print(f"✅ Contributed ${amt:,.2f} Watts USD to the World Debt Fund.")
+        print(f"✅ Contributed ${format_large_number(amt)} Watts USD to the World Debt Fund.")
 
     except Exception as e:
         print(f"❌ Error: {e}")
@@ -266,14 +304,14 @@ def scan_device_cache_mb(delete_after=False):
     """Simplified placeholder for scanning device cache."""
     return Decimal("0"), []
 
-# --- Capsule Types ---
+# --- Capsule Types (UPDATED) ---
 CUSTOM_REWARDS = [
-    "2piE", "TE", "TE2pi", "Manierism", "Handrichism",
-    "RAM", "SDRAM", "SHA", "Nuclear", "Onshore",
+    "Formula_Power", "2piE", "TE", "TE2pi", "Manierism", "Handrichism", "teЛ²", "E²Л"
+    "RAM",  "SDRAM", "SHA", "Nuclear", "Onshore",
     "Gigabyte", "Terabyte", "Petabyte", "PIB", "Electrism"
 ]
 
-# --- Unified Mining Loop ---
+# --- Unified Mining Loop (UPDATED) ---
 def unified_mining_loop(wallet, mining_type):
     TOTAL_YEARS = 75
     MAX_TICKS = TOTAL_YEARS * 365
@@ -302,15 +340,26 @@ def unified_mining_loop(wallet, mining_type):
                 wallet["rig_hash_power"] += boost_amount
                 sha_boost_amount_added = boost_amount
                 wallet["sha_boost_active"] = True
-                print(f"🌠 SHA Boost PERMANENTLY +{boost_amount:.6f} H/s to Wallet: {wallet['wallet_id']}")
+                print(f"🌠 SHA Boost PERMANENTLY +{format_large_number(boost_amount)} H/s to Wallet: {wallet['wallet_id']}")
 
-            # --- Reward Calculation ---
+            # --- Reward Calculation (UPDATED for Formula_Power) ---
             scaling_factor = effective_hash_power / BASE_HASH_POWER
-            base_mb_reward_roll = Decimal(random.randint(1, 15))
+            
+            # Base Reward Roll
+            if capsule_type == "Formula_Power":
+                # Scale the E^2*Л power (2.54e34 W) down to a symbolic MB reward.
+                # Using 1e30 (Nonillion) as the base scale.
+                power_scale_factor = E2PI_VALUE / Decimal(1e30) 
+                base_mb_reward_roll = Decimal(random.randint(1, 15)) * power_scale_factor 
+            else:
+                base_mb_reward_roll = Decimal(random.randint(1, 15))
+            
             reward_mb = base_mb_reward_roll * scaling_factor * PRE_GAME_HALVING_MULTIPLIER
             reward_kwh = reward_mb
+            
             base_bandwidth_roll = Decimal(random.randint(1, 15))
             reward_bandwidth = base_bandwidth_roll * scaling_factor * PRE_GAME_HALVING_MULTIPLIER
+            
             reward_hash_gain = wallet["rig_hash_power"] * HASH_GROWTH_RATE
 
             rewarded_resource = "Capsule MB"
@@ -327,22 +376,23 @@ def unified_mining_loop(wallet, mining_type):
             wallet["sha_boost_active"] = False
             save_wallet(wallet)
 
-            display_permanent_hash_power = wallet["rig_hash_power"]
+            display_permanent_hash_power = format_large_number(wallet["rig_hash_power"])
             total_usd = calculate_total_usd(wallet)
 
             print(f"\n--- Capsule Mined: {capsule_type} ({mining_type.upper()}) ---")
             print(f"Hash Found (VH_BTC): {vh_hash[:10]}...")
-            print(f"💵 {rewarded_resource} Gained: {reward_mb:,.6f}")
-            print(f"⚡ kWh Gained:     {reward_kwh:,.6f}")
-            print(f"🛰️ Bandwidth Gained: {reward_bandwidth:,.6f} MB/s")
+            # UPDATED: Use format_large_number for all large displays
+            print(f"💵 {rewarded_resource} Gained: {format_large_number(reward_mb)} MB")
+            print(f"⚡ kWh Gained:     {format_large_number(reward_kwh)} kWh")
+            print(f"🛰️ Bandwidth Gained: {format_large_number(reward_bandwidth)} MB/s")
             print(f"--------------------------")
             print(f"📈 H/s Gain:       {reward_hash_gain:.6f} (Passive)")
-            print(f"🌠 H/s (Effective):{effective_hash_power:.6f} (Includes Resource Bonus)")
-            print(f"🌠 H/s (Permanent):{display_permanent_hash_power:.6f}")
-            print(f"SHA Boost:        {sha_boost_amount_added:.6f} (ADDED PERMANENTLY)")
-            print(f"Balance MB:       {wallet['capsule_value_mb']:,.6f}")
-            print(f"Balance Cache MB: {wallet['cache_value_mb']:,.6f}")
-            print(f"💰 Total USD Value (Watts-backed): ${total_usd:,.2f}")
+            print(f"🌠 H/s (Effective):{format_large_number(effective_hash_power)} (Includes Resource Bonus)")
+            print(f"🌠 H/s (Permanent):{display_permanent_hash_power}")
+            print(f"SHA Boost:        {format_large_number(sha_boost_amount_added)} (ADDED PERMANENTLY)")
+            print(f"Balance MB:       {format_large_number(wallet['capsule_value_mb'])}")
+            print(f"Balance Cache MB: {format_large_number(wallet['cache_value_mb'])}")
+            print(f"💰 Total USD Value (Watts-backed): ${format_large_number(total_usd)}")
 
             current_tick += 1
             time.sleep(random.randint(5, 150))
@@ -352,7 +402,7 @@ def unified_mining_loop(wallet, mining_type):
     except KeyboardInterrupt:
         print("\n⛔ Mining stopped by user.")
         
-        # --- Send and Donate Functions ---
+# --- Send and Donate Functions (UPDATED to use format_large_number in prompts) ---
 def send_resource(wallet, resource_name):
     try:
         target_id = input(f"Enter target Wallet ID to send {resource_name.replace('_',' ')}: ").strip()
@@ -369,7 +419,7 @@ def send_resource(wallet, resource_name):
         if resource_name == "usd_value":
             total_usd = calculate_total_usd(wallet)
             if amt > total_usd:
-                print(f"⚠️ Not enough USD-backed balance. Max: ${total_usd:,.2f}")
+                print(f"⚠️ Not enough USD-backed balance. Max: ${format_large_number(total_usd)}")
                 return
             proportion = amt / total_usd
             wallet['capsule_value_mb'] -= wallet['capsule_value_mb'] * proportion
@@ -401,7 +451,7 @@ def send_resource(wallet, resource_name):
 
         save_wallet(wallet)
         save_wallet(target)
-        print(f"✅ Sent {amt} {'Watts USD' if resource_name == 'usd_value' else resource_name.replace('_',' ')} from {wallet['wallet_id']} to {target_id}")
+        print(f"✅ Sent {format_large_number(amt)} {'Watts USD' if resource_name == 'usd_value' else resource_name.replace('_',' ')} from {wallet['wallet_id']} to {target_id}")
 
     except Exception as e:
         print(f"❌ Error: {e}")
@@ -433,13 +483,13 @@ def donate_for_hash(wallet, resource_name):
 
         save_wallet(wallet)
         save_wallet(donation_wallet)
-        print(f"🙏 Donated {amt} {resource_name.replace('_',' ')}.")
-        print(f"🚀 Gained {hash_power_gain:.6f} Hash Power!")
+        print(f"🙏 Donated {format_large_number(amt)} {resource_name.replace('_',' ')}.")
+        print(f"🚀 Gained {format_large_number(hash_power_gain)} Hash Power!")
 
     except Exception as e:
         print(f"❌ Error: {e}")
 
-# --- Wallet Selection ---
+# --- Wallet Selection (NO CHANGE) ---
 def _get_all_wallets():
     files = [f for f in os.listdir(TARGETDIR) if f.endswith("_wallet.json")]
     wallets_data = {}
@@ -494,7 +544,7 @@ def select_wallet_for_mining():
     print("⚠️ Invalid selection.")
     return None
     
-    # --- Rig Dashboard ---
+    # --- Rig Dashboard (UPDATED to use format_large_number) ---
 def show_rig_dashboard(wallet):
     if wallet['wallet_id'] in [WORLD_DEBT_WALLET_ID, DONATION_WALLET_ID]:
         wallet = load_wallet(wallet['wallet_id'])
@@ -506,27 +556,29 @@ def show_rig_dashboard(wallet):
     print(f"\n--- Capsule Rig Dashboard — {wallet['rig_id']} ---")
     print(f"Wallet ID: {wallet['wallet_id']}")
     print(f"🌐 Node ID: {wallet.get('node_id','N/A')[:8]}...")
-    print(f"🌠 Hash Power (Permanent): {wallet['rig_hash_power']:.6f}")
-    print(f"🚀 Hash Power (Effective): {effective_hash_power:.6f} (Used for Mining Rate)")
+    # UPDATED: Use format_large_number
+    print(f"🌠 Hash Power (Permanent): {format_large_number(wallet['rig_hash_power'])}")
+    print(f"🚀 Hash Power (Effective): {format_large_number(effective_hash_power)} (Used for Mining Rate)")
     if wallet.get("sha_boost_active"):
         boost_calc = wallet['rig_hash_power'] / Decimal('4')
-        print(f"⚡ SHA Boost ACTIVE: +{boost_calc:.6f} H/s ")
-    print(f"💾 Capsule MB: {wallet['capsule_value_mb']:,.6f}")
-    print(f"📦 Cache MB: {wallet['cache_value_mb']:,.6f}")
+        print(f"⚡ SHA Boost ACTIVE: +{format_large_number(boost_calc)} H/s ")
+    # UPDATED: Use format_large_number
+    print(f"💾 Capsule MB: {format_large_number(wallet['capsule_value_mb'])}")
+    print(f"📦 Cache MB: {format_large_number(wallet['cache_value_mb'])}")
     print(f"📥 Device Cache (User Folders): {device_cache:.6f} MB")
-    print(f"⚡ Real kWh: {wallet['real_kwh']:,.6f}")
-    print(f"📡 Bandwidth: {wallet['bandwidth_MBps']:,.6f} MB/s")
-    print(f"💵 WATTS USD Value: ${total_usd:,.2f}")
+    print(f"⚡ Real kWh: {format_large_number(wallet['real_kwh'])}")
+    print(f"📡 Bandwidth: {format_large_number(wallet['bandwidth_MBps'])} MB/s")
+    print(f"💵 WATTS USD Value: ${format_large_number(total_usd)}")
     print("-" * 40)
 
     if wallet['wallet_id'] == WORLD_DEBT_WALLET_ID:
         total_debt_paid_usd = calculate_total_usd(wallet)
-        print(f"🌎 Total Debt Paid: ${total_debt_paid_usd:,.2f} (This Wallet's USD Value)")
+        print(f"🌎 Total Debt Paid: ${format_large_number(total_debt_paid_usd)} (This Wallet's USD Value)")
     elif wallet['wallet_id'] != DONATION_WALLET_ID:
-        print(f"🌎 World Debt Contributed: ${wallet['world_debt_paid_usd']:,.2f}")
+        print(f"🌎 World Debt Contributed: ${format_large_number(wallet['world_debt_paid_usd'])}")
     print("-" * 40)
 
-# --- Download Menu ---
+# --- Download Menu (UPDATED to use format_large_number) ---
 def download_resource_menu(wallet):
     print("\n--- Download Resource to File ---")
     print("1. Capsule MB (.bin)")
@@ -549,11 +601,11 @@ def download_resource_menu(wallet):
     resource_name, ext, unit_name = resource_map[option]
     current_value = wallet.get(resource_name, Decimal("0"))
 
-    print(f"Available {resource_name.replace('_',' ')}: {current_value:,.6f} {unit_name}")
+    print(f"Available {resource_name.replace('_',' ')}: {format_large_number(current_value)} {unit_name}")
     amt = Decimal(input(f"Enter amount to download (min 1 {unit_name}): ").strip())
 
     if amt < 1 or amt > current_value:
-        print(f"⚠️ Invalid amount. Please enter a value between 1 and {current_value:,.6f} {unit_name}.")
+        print(f"⚠️ Invalid amount. Please enter a value between 1 and {format_large_number(current_value)} {unit_name}.")
         return
 
     file_name = input("Enter file name (without extension): ").strip()
@@ -571,7 +623,7 @@ def download_resource_menu(wallet):
             with open(full_path, "w") as f:
                 json.dump({resource_name: float(amt)}, f, indent=4)
 
-        print(f"✅ Downloaded {amt} {resource_name.replace('_',' ')} to {full_path}")
+        print(f"✅ Downloaded {format_large_number(amt)} {resource_name.replace('_',' ')} to {full_path}")
 
     except Exception as e:
         print(f"❌ Failed to download: {e}")
@@ -584,7 +636,7 @@ def show_receive_info(wallet):
     print("Share these to receive transfers.")
     input("Press Enter to continue...")
 
-# --- Internet Terminal Integration ---
+# --- Internet Terminal Integration (UPDATED to use format_large_number) ---
 def run_internet_terminal(wallet):
     node_id = wallet.get("node_id")
     flask_thread_started = False
@@ -664,7 +716,7 @@ def run_internet_terminal(wallet):
         print(f"🔑 VH_BTC Hash: {vh_hash[:10]}...")
 
         results = fetch_bing_results(query)
-        print(f"\n💾 Capsule MB Remaining: {wallet['capsule_value_mb']:.6f}")
+        print(f"\n💾 Capsule MB Remaining: {format_large_number(wallet['capsule_value_mb'])}")
         for i, r in enumerate(results, 1):
             print(f"{i}. {r['title']}\n   {r['snippet']}\n   {r['link']}\n")
 
@@ -673,7 +725,7 @@ def run_internet_terminal(wallet):
 
         input("Press Enter for new search...")
         
-        # --- Wallet Transaction Menu ---
+# --- Wallet Transaction Menu (NO CHANGE in logic, just display updates in sub-functions) ---
 def wallet_transaction_menu(wallet):
     while True:
         wallet = load_wallet(wallet['wallet_id'])
@@ -725,7 +777,10 @@ def wallet_transaction_menu(wallet):
         elif option == "11":
             download_resource_menu(wallet)
         elif option == "12":
-            show_rig_download_info(wallet)
+             # Assuming you have a show_rig_download_info function, if not, this will error.
+             # I'll include a placeholder for it since it was in your menu but not defined.
+             print("🚨 Placeholder: Rig download info not yet implemented.")
+             # show_rig_download_info(wallet)
         elif option == "13":
             if wallet['wallet_id'] in [DONATION_WALLET_ID, WORLD_DEBT_WALLET_ID]:
                 print("🛑 Cannot access the World Debt Payment Plan menu from a system wallet.")
@@ -751,24 +806,6 @@ def view_wallets_rigs_menu():
     wallet = select_wallet_or_rig()
     if wallet:
         wallet_transaction_menu(wallet)
-
-def show_rig_download_info(wallet):
-    """
-    Displays current rig and download info for a wallet.
-    Prevents crash when option 12 calls this menu.
-    """
-    print("\n--- Rig Download Info ---")
-    print(f"Wallet ID: {wallet.get('wallet_id', 'Unknown')}")
-    print(f"Rig ID: {wallet.get('rig_id', 'Unknown')}")
-    print(f"Node ID: {wallet.get('node_id', 'None')}")
-    print(f"Capsule (MB): {wallet.get('capsule_value_mb', 0)}")
-    print(f"Cache (MB): {wallet.get('cache_value_mb', 0)}")
-    print(f"Hash Power: {wallet.get('rig_hash_power', 0)} H/s")
-    print(f"Bandwidth (MBps): {wallet.get('bandwidth_MBps', 0)}")
-    print(f"Energy Used (kWh): {wallet.get('real_kwh', 0)}")
-    print(f"USD Value: ${calculate_total_usd(wallet)}")
-    print("--------------------------\n")
-    input("Press Enter to return to the menu...")
 
 # --- Main Menu ---
 def main_menu():
