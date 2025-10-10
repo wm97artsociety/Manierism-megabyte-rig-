@@ -12,6 +12,25 @@ i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennesse
 sorry for outburst i have the 28 day later rage disorder and dont do well with people not helping to make the world a better place.
 
 
+i do appreciate the donations of megabytes and other files it lets me know the project is still alive ♥️
+
+
+--- Capsule Rig Dashboard — donations ---
+Wallet ID: WM-CPH0O7J3
+🌐 Node ID: 0bfe0867...
+🌠 Hash Power (Permanent): 10,000.000000
+🚀 Hash Power (Effective): 750,010,000.000000 (Used for Mining Rate)
+💾 Capsule MB: 195.435 Quadrillion
+📦 Cache MB: 75,000,000.000000
+📥 Device Cache (User Folders): 0.000000 MB
+⚡ Real kWh: 977.000 Quadrillion
+📡 Bandwidth: 660.501 Quadrillion MB/s
+💵 WATTS USD Value: $1.421 Quintillion
+----------------------------------------
+----------------------------------------
+
+-----
+
 
 AI will no longer help with the file so its stuck tell you guys get ai to do the right thing for nicehash for bitcoin i paid them 1 billion kilowatts you guys dont even understand momey no more its sad dont touch my blockchain if you dont understand money also take it up with you're gov ehy they keep you all poor 
 
