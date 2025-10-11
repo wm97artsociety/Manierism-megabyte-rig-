@@ -1,24 +1,13 @@
 #!/usr/bin/env python3
 
-# --- Imports ---
-import os
-import time
-import json
-import random
-import uuid
-import hashlib
-import threading
-import requests
+import os, time, json, random, uuid, hashlib, threading, requests, webbrowser
 from bs4 import BeautifulSoup
 from flask import Flask, render_template_string
-import webbrowser
 from decimal import Decimal, getcontext
 import math
 
-# --- Precision ---
 getcontext().prec = 200
 
-# --- GPIO Setup ---
 try:
     import RPi.GPIO as GPIO
     GPIO.setmode(GPIO.BCM)
@@ -32,43 +21,34 @@ try:
 except (ImportError, RuntimeError):
     GPIO_AVAILABLE = False
 
-# --- Paths & Constants ---
 BASEDIR = "/storage/emulated/0/Download/manierismmegabytes"
 TARGETDIR = os.path.join(BASEDIR, "rigs")
 os.makedirs(TARGETDIR, exist_ok=True)
 
-# --- Wallet IDs ---
 DONATION_WALLET_ID = "WM-CPH0O7J3"
 WORLD_DEBT_WALLET_ID = "WD-P4Y29G7B"
-
-# --- World Debt Constants ---
 WORLD_DEBT_NODE_ID = "9efae649-eb1f-4ef0-ac97-ed4df6d2942f"
 INITIAL_WORLD_DEBT_USD = Decimal("31300000000000.00")
 WORLD_DEBT_DATE = "October 4th, 2025"
 DEBT_NODE_PASSIVE_USD_VALUE = Decimal("0.0001")
 
-# --- Hash Power Constants ---
 BASE_HASH_POWER = Decimal("10000")
 HASH_GROWTH_RATE = Decimal("0.001")
 PRE_GAME_HALVING_MULTIPLIER = Decimal("79000")
 
-# --- USD Backing Rates ---
 MB_USD_RATE = Decimal("5.00")
 CACHE_USD_RATE = Decimal("0.42")
 KWH_USD_RATE = Decimal("0.17")
 BANDWIDTH_USD_RATE = Decimal("0.42")
 
-# --- Debug Settings ---
 DEBUG_SHA_BOOST = True
 
-# --- Symbolic Power Constants ---
 TEPI2_VALUE = Decimal(str(1 * 9e16 * (math.pi**2)))
 TEPI2 = f"TEЛ²_CONST_{TEPI2_VALUE:.2e}"
 E2PI_VALUE = Decimal(str((9e16)**2 * math.pi))
 E2PI = f"E²Л_CONST_{E2PI_VALUE:.2e}"
 BLOCK_HEADER = "MM_BLOCK_HEADER_2025"
 
-# --- Large Number Formatting ---
 def format_large_number(n):
     n_float = float(n)
     if n_float < 1e12:
@@ -90,11 +70,9 @@ def format_large_number(n):
     scaled_n = n / Decimal(scale)
     return f"{scaled_n:,.3f} {unit}"
 
-# --- Overlay Formula ---
 def overlay_formula(MB, entropy=Decimal("0.85"), resonance=Decimal("1.2"), resistance=Decimal("0.5")):
     return (MB * entropy * resonance) / resistance
 
-# --- Real Electricity Emission ---
 def spin_coil(speed_percent):
     if GPIO_AVAILABLE:
         pwm = GPIO.PWM(MOTOR_PIN, 1000)
@@ -511,21 +489,6 @@ def select_wallet_for_mining():
     print("⚠️ Invalid selection.")
     return None
 
-def scan_device_cache_mb():
-    base_path = "/storage/emulated/0/"
-    total_bytes = 0
-    folder_count = 0
-    for root, dirs, files in os.walk(base_path):
-        folder_count += 1
-        for f in files:
-            try:
-                fp = os.path.join(root, f)
-                total_bytes += os.path.getsize(fp)
-            except:
-                continue
-    mb = total_bytes / (1024 * 1024)
-    return mb, folder_count
-
 # --- Rig Dashboard ---
 def show_rig_dashboard(wallet):
     if wallet['wallet_id'] in [WORLD_DEBT_WALLET_ID, DONATION_WALLET_ID]:
@@ -661,6 +624,89 @@ def show_receive_info(wallet):
     print("Share these to receive transfers.")
     input("Press Enter to continue...")
 
+# --- Rig Info Export (Option 12) ---
+def show_rig_download_info(wallet):
+    rig_info = {
+        "wallet_id": wallet['wallet_id'],
+        "rig_id": wallet.get('rig_id', wallet['wallet_id']),
+        "node_id": wallet.get('node_id', 'N/A'),
+        "capsule_MB": float(wallet.get('capsule_value_mb', Decimal("0"))),
+        "cache_MB": float(wallet.get('cache_value_mb', Decimal("0"))),
+        "real_kWh": float(wallet.get('real_kwh', Decimal("0"))),
+        "bandwidth_MBps": float(wallet.get('bandwidth_MBps', Decimal("0"))),
+        "rig_hash_power": float(wallet.get('rig_hash_power', BASE_HASH_POWER)),
+        "world_debt_paid_usd": float(wallet.get('world_debt_paid_usd', Decimal("0"))),
+        "total_usd_value": float(calculate_total_usd(wallet)),
+        "timestamp": time.time(),
+        "overlay_constants": {
+            "TEЛ²": str(TEPI2),
+            "E²Л": str(E2PI),
+            "block_header": BLOCK_HEADER
+        }
+    }
+    file_name = f"rig_info_{wallet['wallet_id']}.json"
+    path = os.path.join(BASEDIR, file_name)
+    with open(path, "w") as f:
+        json.dump(rig_info, f, indent=4)
+    print(f"✅ Rig info exported to {path}")
+
+# --- World Debt Payment Plan (Option 13) ---
+def show_world_debt_payment_menu(wallet):
+    print("\n🌎 World Debt Payment Plan 🌎")
+    print(f"Your Wallet ID: {wallet['wallet_id']}")
+    print(f"Your Node ID: {wallet['node_id']}")
+    print(f"Debt Date: {WORLD_DEBT_DATE}")
+    print("-" * 40)
+
+    total_usd = calculate_total_usd(wallet)
+    paid = wallet.get("world_debt_paid_usd", Decimal("0"))
+    remaining = INITIAL_WORLD_DEBT_USD - paid
+
+    print(f"💰 Your Total USD Value: ${format_large_number(total_usd)}")
+    print(f"🌍 Your Debt Paid:       ${format_large_number(paid)}")
+    print(f"🌍 Remaining Global Debt: ${format_large_number(remaining)}")
+    print("-" * 40)
+
+    print("Would you like to contribute Watts USD to the World Debt Wallet?")
+    print("This will symbolically reduce global debt and log your node as a contributor.")
+    choice = input("Type YES to proceed, or press Enter to cancel: ").strip()
+
+    if choice != "YES":
+        print("🛑 Cancelled.")
+        return
+
+    print("💡 Enter amount like 10.0 or 42.50 — no commas, no $ symbol.")
+    try:
+        amt_str = input("Amount to contribute: ").strip()
+        if "$" in amt_str or "," in amt_str:
+            print("⚠️ Please enter a clean number like 10.0 — no $ or commas.")
+            return
+        amt = Decimal(amt_str)
+    except:
+        print("❌ Invalid number format.")
+        return
+
+    available = calculate_total_usd(wallet)
+    if amt > available:
+        print(f"⚠️ Not enough USD-backed balance. Max: ${format_large_number(available)}")
+        return
+
+    proportion = amt / available
+    wallet['capsule_value_mb'] -= wallet['capsule_value_mb'] * proportion
+    wallet['cache_value_mb'] -= wallet['cache_value_mb'] * proportion
+    wallet['real_kwh'] -= wallet['real_kwh'] * proportion
+    wallet['bandwidth_MBps'] -= wallet['bandwidth_MBps'] * proportion
+    wallet['world_debt_paid_usd'] += amt
+
+    debt_wallet = load_wallet(WORLD_DEBT_WALLET_ID)
+    if debt_wallet:
+        debt_wallet['capsule_value_mb'] += amt / MB_USD_RATE
+        save_wallet(debt_wallet)
+
+    save_wallet(wallet)
+    print(f"✅ Contributed ${format_large_number(amt)} to World Debt Wallet.")
+    print("🌍 Your node has been logged as a symbolic contributor to planetary debt reduction.")
+
 # --- Wallet Transaction Menu ---
 def wallet_transaction_menu(wallet):
     while True:
@@ -713,7 +759,7 @@ def wallet_transaction_menu(wallet):
         elif option == "11":
             download_resource_menu(wallet)
         elif option == "12":
-            print("🚨 Placeholder: Rig download info not yet implemented.")
+            show_rig_download_info(wallet)
         elif option == "13":
             if wallet['wallet_id'] in [DONATION_WALLET_ID, WORLD_DEBT_WALLET_ID]:
                 print("🛑 Cannot access the World Debt Payment Plan menu from a system wallet.")
@@ -739,6 +785,72 @@ def view_wallets_rigs_menu():
     wallet = select_wallet_or_rig()
     if wallet:
         wallet_transaction_menu(wallet)
+
+def download_resource_menu(wallet):
+    print("\n📥 Download Resource to File")
+    print("Select which resource to export:")
+    print("1. Capsule MB")
+    print("2. Cache MB")
+    print("3. Real kWh")
+    print("4. Bandwidth MBps")
+    print("5. Watts USD (calculated)")
+    print("6. Cancel")
+    choice = input("Enter option: ").strip()
+
+    resource_map = {
+        "1": "capsule_value_mb",
+        "2": "cache_value_mb",
+        "3": "real_kwh",
+        "4": "bandwidth_MBps",
+        "5": "usd_value"
+    }
+
+    if choice == "6":
+        print("🛑 Cancelled.")
+        return
+
+    resource_key = resource_map.get(choice)
+    if not resource_key:
+        print("⚠️ Invalid selection.")
+        return
+
+    if resource_key == "usd_value":
+        value = float(calculate_total_usd(wallet))
+    else:
+        value = float(wallet.get(resource_key, Decimal("0")))
+
+    filename = f"{wallet['wallet_id']}_{resource_key}_export.json"
+    path = os.path.join(BASEDIR, filename)
+    export_data = {
+        "wallet_id": wallet['wallet_id'],
+        "rig_id": wallet.get('rig_id', wallet['wallet_id']),
+        "node_id": wallet.get('node_id', 'N/A'),
+        "resource": resource_key,
+        "value": value,
+        "timestamp": time.time()
+    }
+
+    with open(path, "w") as f:
+        json.dump(export_data, f, indent=4)
+
+    print(f"✅ Exported {resource_key.replace('_',' ')} to {path}")
+
+def scan_device_cache_mb():
+    total_mb = Decimal("0.0")
+    scanned_paths = []
+
+    for root, dirs, files in os.walk("/storage/emulated/0/"):
+        for name in files:
+            try:
+                path = os.path.join(root, name)
+                size_bytes = os.path.getsize(path)
+                size_mb = Decimal(size_bytes) / Decimal(1024 * 1024)
+                total_mb += size_mb
+                scanned_paths.append(path)
+            except:
+                continue
+
+    return total_mb.quantize(Decimal("0.000001")), scanned_paths
 
 # --- Main Menu ---
 def main_menu():
