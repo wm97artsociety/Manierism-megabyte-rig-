@@ -16,7 +16,7 @@ sorry for outburst i have the 28 day later rage disorder and dont do well with p
 
 update 2.01 manierism megabytes rig 
 
-torrents have been added🤩🤩
+torrents have been added🤩🤩 also saves files in torrents ♥️🙃
 
 
 first payout record 😀
@@ -41,6 +41,48 @@ Balance MB:       10.283 Nonillion
 Balance Cache MB: 0.063001
 💰 Total USD Value (Watts-backed): $59.081 Nonillion
 
+
+
+first stored torrent payout 
+
+--- Capsule Rig Dashboard — trust ---
+Wallet ID: trust
+🌐 Node ID: c590fb1b...
+🌠 Hash Power (Permanent): 3.075 Octillion
+🚀 Hash Power (Effective): 3.075 Octillion (Used for Mining Rate)
+💾 Capsule MB: 10.283 Nonillion
+📦 Cache MB: 0.063001
+📥 Device Cache (User Folders): 14396.523000 MB
+⚡ Real kWh: 20.978 Nonillion
+📡 Bandwidth: 9.324 Nonillion MB/s
+🧲 Torrent Payloads: 36.402 Octillion MB
+💵 WATTS USD Value: $59.081 Nonillion
+----------------------------------------
+🌎 World Debt Contributed: $3.513 Octillion
+----------------------------------------
+
+--- Wallet Actions ---
+1. Send Capsule MB
+2. Send Cache MB
+3. Send kWh
+4. Send Bandwidth
+5. Send Watts USD
+6. Send Torrent MB
+----------------------------------------
+7. Donate Capsule MB to Creator (Gain Hash Power)
+8. Donate Cache MB to Creator (Gain Hash Power)
+9. Donate kWh to Creator (Gain Hash Power)
+10. Donate Bandwidth to Creator (Gain Hash Power)
+11. Donate Torrent MB to Creator (Gain Hash Power)
+----------------------------------------
+12. View Receive Info (Wallet/Node IDs)
+13. Download Resource to File
+14. Everything About the Rig (Download Info)
+15. World Debt Payment Plan 🌎
+16. Back to Main Menu
+17. Access Internet Terminal (Node-Linked)
+----------------------------------------
+Enter option:
 
 torrent rewards and .torrent file generation only happen when the capsule type mined is one of these five:
 
