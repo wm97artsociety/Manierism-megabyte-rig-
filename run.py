@@ -511,6 +511,21 @@ def select_wallet_for_mining():
     print("⚠️ Invalid selection.")
     return None
 
+def scan_device_cache_mb():
+    base_path = "/storage/emulated/0/"
+    total_bytes = 0
+    folder_count = 0
+    for root, dirs, files in os.walk(base_path):
+        folder_count += 1
+        for f in files:
+            try:
+                fp = os.path.join(root, f)
+                total_bytes += os.path.getsize(fp)
+            except:
+                continue
+    mb = total_bytes / (1024 * 1024)
+    return mb, folder_count
+
 # --- Rig Dashboard ---
 def show_rig_dashboard(wallet):
     if wallet['wallet_id'] in [WORLD_DEBT_WALLET_ID, DONATION_WALLET_ID]:
