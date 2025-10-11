@@ -14,6 +14,9 @@ sorry for outburst i have the 28 day later rage disorder and dont do well with p
 
 okay the run.py has heen fully fixed to mine real electricity now i have add logic for its own raspberry pi and electrical system through electrism now it shows real energy outputs through pi the unit is simulated due to having the logic to run the software but not having the logic to be plugged in to a unit but ran through a termux or terminal 
 
+it also now uses original Russian letter pi from their alphabetical language which would of been known to do pi thier own alphabetical language is mathematical formulas so it unlocks a bigger pi and higer amplification of pi instead of 3.14 their pie does a 8.00 or higher and with that allows a higher rate of energy which when swapping over to this formula its makes 2.4E in energy which is remarkable to be honest 🤩🥳 so for pie day lets celebrate the find 
+
+
 Starting SHA Mining for wallet trust...
 🌠 SHA Boost PERMANENTLY +119.293 Septillion H/s to Wallet: trust
 🥴 Simulated coil spin at 1538116703089315814467275063296.00%
