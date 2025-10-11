@@ -18,6 +18,30 @@ update 2.01 manierism megabytes rig
 
 torrents have been added🤩🤩
 
+
+first payout record 😀
+
+🥴 Simulated coil spin at 14851988949093632263002515308544.00%
+🔥 Simulated resistor heat for 148519889490936325444774920192.00 seconds
+⚡ Simulated capacitor discharge
+🧲 Torrent file created: trust_Swarm_capsule.torrent
+🏴‍☠️ Torrent Payload Gained: 36.402 Octillion MB
+
+--- Capsule Mined: Swarm (SHA) ---
+Hash Found (VH_BTC): 3c1fcf60c1...
+💵 Capsule MB Gained: 72.804 Octillion MB
+⚡ kWh Gained:     148.520 Octillion kWh
+🛰️ Bandwidth Gained: 364.019 Octillion MB/s
+--------------------------
+📈 H/s Gain:       3071699617617546300000000.000000 (Passive)
+🌠 H/s (Effective):3.072 Octillion (Includes Resource Bonus)
+🌠 H/s (Permanent):3.075 Octillion
+SHA Boost:        0.000000 (ADDED PERMANENTLY)
+Balance MB:       10.283 Nonillion
+Balance Cache MB: 0.063001
+💰 Total USD Value (Watts-backed): $59.081 Nonillion
+
+
 torrent rewards and .torrent file generation only happen when the capsule type mined is one of these five:
 
 - "Pirate"  
