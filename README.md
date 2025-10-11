@@ -12,6 +12,61 @@ i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennesse
 sorry for outburst i have the 28 day later rage disorder and dont do well with people not helping to make the world a better place.
 
 
+okay the run.py has heen fully fixed to mine real electricity now i have add logic for its own raspberry pi and electrical system through electrism now it shows real energy outputs through pi the unit is simulated due to having the logic to run the software but not having the logic to be plugged in to a unit but ran through a termux or terminal 
+
+Starting SHA Mining for wallet trust...
+🌠 SHA Boost PERMANENTLY +119.293 Septillion H/s to Wallet: trust
+🥴 Simulated coil spin at 1538116703089315814467275063296.00%
+🔥 Simulated resistor heat for 15381167030893159288164843520.00 seconds
+⚡ Simulated capacitor discharge
+
+--- Capsule Mined: SHA (SHA) ---
+Hash Found (VH_BTC): 91ceb2bf56...
+💵 Capsule MB Gained: 7.540 Octillion MB
+⚡ kWh Gained:     15.381 Octillion kWh
+🛰️ Bandwidth Gained: 33.929 Octillion MB/s
+--------------------------
+📈 H/s Gain:       596464618088105625000000.000000 (Passive)
+🌠 H/s (Effective):477.202 Septillion (Includes Resource Bonus)
+🌠 H/s (Permanent):597.061 Septillion
+SHA Boost:        119.293 Septillion (ADDED PERMANENTLY)
+Balance MB:       7.691 Octillion
+Balance Cache MB: 0.063001
+💰 Total USD Value (Watts-backed): $55.319 Octillion
+🥴 Simulated coil spin at 11547411148443038320190768021504.00%
+🔥 Simulated resistor heat for 115474111484430393053531865088.00 seconds
+⚡ Simulated capacitor discharge
+
+--- Capsule Mined: Electrism (SHA) ---
+Hash Found (VH_BTC): c26ae313d7...
+💵 Capsule MB Gained: 56.605 Octillion MB
+⚡ kWh Gained:     115.474 Octillion kWh
+🛰️ Bandwidth Gained: 56.605 Octillion MB/s
+--------------------------
+📈 H/s Gain:       597061082706193740000000.000000 (Passive)
+🌠 H/s (Effective):597.099 Septillion (Includes Resource Bonus)
+🌠 H/s (Permanent):597.658 Septillion
+SHA Boost:        0.000000 (ADDED PERMANENTLY)
+Balance MB:       64.296 Octillion
+Balance Cache MB: 0.063001
+💰 Total USD Value (Watts-backed): $381.748 Octillion
+^C
+⛔ Mining stopped by user.
+
+=== Manierism Megabytes Mining Menu ===
+1. Start CPU Mining (Select Rig)
+2. Start Wi-Fi Mining (Select Rig)
+3. Start SHA Capsule Mining (Select Rig)
+4. Start Cache Mining (Select Rig)
+5. Create New Rig / Wallet
+6. View Wallets & Rigs / Wallet Actions
+7. Exit
+Enter option (1-7):
+
+
+
+
+
 i do appreciate the donations of megabytes and other files it lets me know the project is still alive ♥️
 
 
