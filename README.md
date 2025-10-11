@@ -11,6 +11,123 @@ i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennesse
 ----
 sorry for outburst i have the 28 day later rage disorder and dont do well with people not helping to make the world a better place.
 
+---
+
+
+update 2.01 manierism megabytes rig 
+
+torrents have been added🤩🤩
+
+torrent rewards and .torrent file generation only happen when the capsule type mined is one of these five:
+
+- "Pirate"  
+- "Torrent"  
+- "Bootleg"  
+- "Seeder"  
+- "Swarm"
+
+These are the only capsule types that trigger:
+
+- torrentvaluemb rewards (half of the capsule MB)  
+- .torrent file creation with overlay constants and metadata  
+- symbolic payload discharge for remix, resale, or audit
+
+If you mine other capsule types like "SHA", "RAM", "TE2pi", or "Electrism", you’ll still earn capsule MB, kWh, bandwidth, and hash power — but no torrent MB and no .torrent file.
+
+
+Let’s walk through a full example of mining a torrent capsule on your rig — and then I’ll break down how often it hits.
+
+---
+
+🧪 Example: Mining a Torrent Capsule
+
+Let’s say you start SHA mining with a rig that has:
+
+- righashpower: 10,000 H/s  
+- cachevaluemb: 0  
+- capsulevaluemb: 0  
+- torrentvaluemb: 0  
+
+On the first tick, the mining loop randomly selects a capsule type. Suppose it picks:
+
+`
+capsule_type = "Torrent"
+`
+
+This triggers the torrent capsule logic:
+
+1. Hash Generation:
+   `python
+   vhhash = vhbtchashfunction("Torrent", "10000")
+   `
+
+2. Reward Calculation:
+   - Base MB reward roll: random between 1–15 → say it rolls 12
+   - Scaling factor: 1.0 (since effective hash power = base hash power)
+   - Reward MB:
+     `
+     reward_mb = 12  1.0  79000 = 948,000 MB
+     `
+
+3. Torrent Reward:
+   `python
+   torrentmb = rewardmb / 2 = 474,000 MB
+   wallet["torrentvaluemb"] += 474,000
+   `
+
+4. File Generation:
+   A .torrent file is created:
+   `
+   /storage/emulated/0/Download/manierismmegabytes/<walletid>Torrent_capsule.torrent
+   `
+
+5. Output: example 
+   `
+   --- Capsule Mined: Torrent (SHA) ---
+   Hash Found (VH_BTC): 1a2b3c4d5e...
+   💵 Capsule MB Gained: 948,000.000000 MB
+   ⚡ kWh Gained:        964,800.000000 kWh
+   🛰️ Bandwidth Gained: 948,000.000000 MB/s
+   🧲 Torrent Payload Gained: 474,000.000000 MB
+   💰 Total USD Value (Watts-backed): $4,740,000.00
+   `
+
+---
+
+🎯 How Often Do Torrent Capsules Hit?
+
+The mining loop randomly selects from this list of 25 capsule types:
+
+`python
+CUSTOM_REWARDS = [
+  ..., "Pirate", "Torrent", "Bootleg", "Seeder", "Swarm"
+]
+`
+
+There are 5 torrent-related types:
+
+- "Pirate"
+- "Torrent"
+- "Bootleg"
+- "Seeder"
+- "Swarm"
+
+So the probability of hitting a torrent capsule on any given tick is:
+
+`
+5 / 25 = 20%
+`
+
+That means, on average, 1 in every 5 capsules mined will be a torrent-type capsule, triggering:
+
+- A .torrent file
+- A torrentvaluemb reward (half of the capsule MB)
+- A symbolic payload for remix, resale, or discharge
+
+You can increase your odds by mining more often or modifying the CUSTOM_REWARDS list to weight torrent types more heavily.
+
+---
+manierism megabytes rig v2.0
 
 okay the run.py has heen fully fixed to mine real electricity now i have add logic for its own raspberry pi and electrical system through electrism now it shows real energy outputs through pi the unit is simulated due to having the logic to run the software but not having the logic to be plugged in to a unit but ran through a termux or terminal 
 
