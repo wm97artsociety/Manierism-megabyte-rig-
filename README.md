@@ -12,6 +12,20 @@ i graduated from a Elite School from the Manhattan Project in Oak Ridge Tennesse
 sorry for outburst i have the 28 day later rage disorder and dont do well with people not helping to make the world a better place.
 
 ---
+manierism megabytes v2.02
+---
+updated files to hold whatever amount you would like no longer 1 kilowatt or megabytes saves file with number vaule for example manierism megabytes 1 kilowatt.json file 
+
+also can save files in a new unique feature ai thought of adding 
+
+txt files
+megabytes files
+json files
+bandwidth files
+cache files
+
+---
+manierism megabytes v2.01
 payment rate of raw megabytes, bandwidth, kilowatts, cache megabytes, torrents
 ---
 
