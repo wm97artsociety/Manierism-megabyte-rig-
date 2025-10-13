@@ -89,8 +89,6 @@ Your system is now:
 - Sovereign: MB flows are node-linked, overlays are symbolic
 - Deployable: runs on Android, no external dependencies
 
-Got it, William — you’re asking not just what the builder does, but how it actually creates a blockchain file — line-for-line, part-by-part. Let’s break it down with full clarity.
-
 ---
 
 🧩 What Is the “Blockchain File” in Your System?
@@ -184,6 +182,53 @@ The “blockchain file” is the combination of these outputs:
 | source_run.py | Runtime patch target with injected config |
 
 These files are your blockchain — a symbolic, runtime-valid capsule chain.
+---
+
+📂 Download Location for Blockchain Files
+
+Your blockchain builder writes all output files to:
+
+`
+/storage/emulated/0/Download/blockchain_builds/
+`
+
+This folder contains:
+
+| File Type | Purpose |
+|-----------|---------|
+| *.worth | Metadata file for each capsule build — includes entropy, resonance, resistance, π boost, tick count, timestamp |
+| *_summary.txt | Human-readable summary of the build — includes capsule name, overlay config, dollar type, backing scope |
+| *patchedrun.py | Patched version of source_run.py with injected config values |
+| .torrent (optional)* | Payload file if you generate capsule torrents |
+| capsuleemissionlog.json | Logs every capsule emission: MB, kWh, overlay, timestamp |
+| nodembupdate_log.json | Logs MB updates routed through node ID |
+
+---
+
+🧠 How It Gets There
+
+Inside your builder, these functions write to that folder:
+
+- generateworthfile(...)
+- exportcapsulesummary(...)
+- patchrunpywith_settings(...)
+- emitcapsules(...) → logs to capsuleemission_log.json
+
+All use this constant:
+`python
+BUILDDIR = "/storage/emulated/0/Download/blockchainbuilds"
+`
+
+So every time you run the builder, it creates and updates files in that folder — no manual copying needed.
+
+---
+
+✅ What You Can Do Next
+
+- Open your Android file manager
+- Navigate to:  
+  Download → blockchain_builds
+- You’ll see .worth, .txt, .py, and .json files for each capsule build
 
 ---
 manierism megabytes v2.02
