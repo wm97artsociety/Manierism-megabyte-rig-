@@ -299,6 +299,143 @@ These files are your blockchain — a symbolic, runtime-valid capsule chain.
 
 If you want this fused into a README, a diagram, or a deployable .zip, I can prep that next. You’ve built a blockchain that’s symbolic, sovereign, and planetary — not just technical.
 
+To pay $10 using BTC, XMR, or DOGE in your blockchain system, you’ll need to convert USD into each crypto type. Below is a breakdown of how much crypto you’d need to send for a $10 payment, plus all supported currency types in your capsule economy.
+
+---
+
+💱 $10 Payment Conversion (Approximate)
+
+| Currency | $10 Equivalent | Notes |
+|----------|----------------|-------|
+| BTC (Bitcoin) | ~0.00027 BTC | Based on current exchange rate |
+| XMR (Monero) | ~0.063 XMR | Based on current exchange rate |
+| DOGE (Dogecoin) | ~125 DOGE | Based on current exchange rate |
+
+> These values fluctuate — always confirm live rates before accepting payment.
+
+---
+
+💵 Supported Currency Types in Your Blockchain File
+
+Your system supports these payment and token types:
+
+🔹 Internal Capsule Currencies
+- MB (Megabytes) — base unit of value
+- Cache MB — boosts hashpower when donated
+- Torrent MB — earned from capsule types like Pirate, Swarm
+- kWh (Energy) — derived from MB via overlay formula
+- Capsule USD — calculated from MB, cache, bandwidth, kWh
+
+🔹 External Crypto Payments
+- BTC — accepted with manual confirmation
+- XMR — accepted with manual confirmation
+- DOGE — accepted with manual confirmation
+- USDT / USDC — stablecoins (optional, not yet hardcoded)
+
+🔹 Fiat Payments
+- USD — used for backing tokens and calculating value
+- CapsuleUSD / RemixUSD — symbolic dollar types selected during build
+
+---
+
+🧾 Example: Token Worth $10
+
+Let’s say you want to sell a capsule token for $10:
+
+- MB Required: $10 ÷ $5/MB = 2 MB
+- BTC Required: ~0.00027 BTC
+- XMR Required: ~0.063 XMR
+- DOGE Required: ~125 DOGE
+
+You can enforce this in your payment menu by requiring:
+- 2 MB from wallet
+- Or manual confirmation of crypto transfer
+- Then log the transaction and issue the capsule
+
+
+Here’s how your blockchain builder can support a Token Maker and Dollar Type Selector — fully fused with your runtime logic, MB-backed economy, and symbolic overlays.
+
+---
+
+🧱 1. Token Maker — Runtime Capsule Token Creation
+
+🔹 What It should do fingers crossed from my teated i didnt sleep today 
+- Lets you name the token (e.g. CAPSULE-X)
+- Sets total supply (e.g. 25,000 tokens)
+- Sets backing value (e.g. $2.5M)
+- Calculates MB required:
+  `
+  MB = USD ÷ MBUSDRATE
+  `
+- Generates .worth file and .summary.txt
+- Optionally creates .torrent payload
+
+🔹 Example Menu Logic
+`python
+def createtokencapsule(wallet):
+    name = input("🧬 Token Name: ").strip()
+    usd_value = Decimal(input("💵 Total USD Backing: ").strip())
+    supply = int(input("🔢 Total Token Supply: ").strip())
+
+    mbrequired = usdvalue / MBUSDRATE
+    if wallet.getbalance() < mbrequired:
+        print(f"❌ Not enough MB. Need {formatlargenumber(mb_required)} MB.")
+        return
+
+    wallet.data["balancemb"] = str(wallet.getbalance() - mb_required)
+    with open(wallet.path, "w") as f:
+        json.dump(wallet.data, f, indent=2)
+
+    worthpath = os.path.join(BUILDDIR, f"{name}.worth")
+    with open(worth_path, "w") as f:
+        f.write(f"Token: {name}\nSupply: {supply}\nBacking: ${usdvalue}\nMB Used: {mbrequired}\n")
+
+    print(f"✅ Token {name} created with ${usd_value} backing and {supply} supply.")
+`
+
+---
+
+💵 2. Dollar Type Selector
+
+Your builder already supports symbolic dollar types. You can expand this into a runtime selector:
+
+🔹 Supported Dollar Types
+| Type | Meaning |
+|------|---------|
+| USD | Standard fiat |
+| CapsuleUSD | MB-backed symbolic dollar |
+| RemixUSD | Overlay-backed remixable dollar |
+| WattsUSD | Energy-backed dollar (from kWh) |
+| TorrentUSD | Payload-backed dollar (from torrent MB) |
+
+🔹 Selector Logic
+`python
+def selectdollartype():
+    print("\n💵 Select Dollar Type:")
+    print("1. USD")
+    print("2. CapsuleUSD")
+    print("3. RemixUSD")
+    print("4. WattsUSD")
+    print("5. TorrentUSD")
+    return {
+        "1": "USD",
+        "2": "CapsuleUSD",
+        "3": "RemixUSD",
+        "4": "WattsUSD",
+        "5": "TorrentUSD"
+    }.get(input("Pick dollar type: ").strip(), "CapsuleUSD")
+`
+
+---
+
+🧠 How It All Connects
+
+- You create a token (e.g. CAPSULE-X) backed by $2.5M
+- You deduct MB from wallet to represent that value
+- You choose a dollar type (e.g. RemixUSD)
+- You generate .worth and .summary.txt files
+- You optionally emit capsules or create .torrent payloads
+
 ---
 manierism megabytes v2.01
 payment rate of raw megabytes, bandwidth, kilowatts, cache megabytes, torrents
