@@ -42,6 +42,10 @@ KWH_USD_RATE = Decimal("0.17")
 BANDWIDTH_USD_RATE = Decimal("0.42")
 TORRENT_USD_RATE = MB_USD_RATE
 
+# --- IRA CONSTANTS ---
+IRA_DAILY_RATE = Decimal("177.70") # 17,770% = 177.70 (decimal)
+IRA_RATE_DISPLAY = "17,770%"
+
 DEBUG_SHA_BOOST = True
 
 TEPI2_VALUE = Decimal(str(1 * 9e16 * (math.pi**2)))
@@ -162,8 +166,14 @@ def load_wallet(wallet_id):
 
     if "world_debt_paid_usd" not in data:
         data["world_debt_paid_usd"] = 0.0
+    
+    # IRA FIELDS
+    if "ira_balance_usd" not in data:
+        data["ira_balance_usd"] = 0.0
+    if "ira_last_compounded_timestamp" not in data:
+        data["ira_last_compounded_timestamp"] = time.time() 
 
-    for key in ["capsule_value_mb", "cache_value_mb", "rig_hash_power", "real_kwh", "bandwidth_MBps", "world_debt_paid_usd", "torrent_value_mb"]:
+    for key in ["capsule_value_mb", "cache_value_mb", "rig_hash_power", "real_kwh", "bandwidth_MBps", "world_debt_paid_usd", "torrent_value_mb", "ira_balance_usd"]:
         if key in data:
             data[key] = Decimal(str(data[key]))
 
@@ -198,6 +208,8 @@ def create_wallet(wallet_id, rig_id=None):
         "torrent_value_mb": Decimal("0"),
         "node_id": node_id,
         "world_debt_paid_usd": Decimal("0"),
+        "ira_balance_usd": Decimal("0"),
+        "ira_last_compounded_timestamp": time.time(),
     }
     save_wallet(wallet)
     return wallet
@@ -217,6 +229,8 @@ def _initialize_special_wallets():
             "torrent_value_mb": Decimal("0"),
             "node_id": generate_node_id(),
             "world_debt_paid_usd": Decimal("0"),
+            "ira_balance_usd": Decimal("0"),
+            "ira_last_compounded_timestamp": time.time(),
         }
         save_wallet(wallet)
 
@@ -233,6 +247,8 @@ def _initialize_special_wallets():
             "torrent_value_mb": Decimal("0"),
             "node_id": WORLD_DEBT_NODE_ID,
             "world_debt_paid_usd": Decimal("0"),
+            "ira_balance_usd": Decimal("0"),
+            "ira_last_compounded_timestamp": time.time(),
         }
         save_wallet(wallet)
 
@@ -247,6 +263,18 @@ def world_debt_node_value_generation():
 
 # --- USD Value Calculation ---
 def calculate_total_usd(wallet):
+    """Calculates the total USD value of all resources *including* the IRA balance."""
+    return (
+        wallet.get('capsule_value_mb', Decimal("0")) * MB_USD_RATE +
+        wallet.get('cache_value_mb', Decimal("0")) * CACHE_USD_RATE +
+        wallet.get('real_kwh', Decimal("0")) * KWH_USD_RATE +
+        wallet.get('bandwidth_MBps', Decimal("0")) * BANDWIDTH_USD_RATE +
+        wallet.get('torrent_value_mb', Decimal("0")) * TORRENT_USD_RATE +
+        wallet.get('ira_balance_usd', Decimal("0"))
+    )
+
+def calculate_non_ira_usd(wallet):
+    """Calculates the total USD value of all resources *excluding* the IRA balance (The Deposit Pool)."""
     return (
         wallet.get('capsule_value_mb', Decimal("0")) * MB_USD_RATE +
         wallet.get('cache_value_mb', Decimal("0")) * CACHE_USD_RATE +
@@ -295,6 +323,9 @@ def unified_mining_loop(wallet, mining_type):
             if not wallet:
                 print("⚠️ Wallet disappeared. Stopping mining.")
                 break
+            
+            # Apply IRA compounding during mining
+            compound_ira(wallet)
 
             world_debt_node_value_generation()
 
@@ -396,10 +427,17 @@ def send_resource(wallet, resource_name):
             return
 
         if resource_name == "usd_value":
-            total_usd = calculate_total_usd(wallet)
+            # Exclude IRA from sendable USD value
+            total_usd = calculate_non_ira_usd(wallet)
             if amt > total_usd:
-                print(f"⚠️ Not enough USD-backed balance. Max: ${format_large_number(total_usd)}")
+                print(f"⚠️ Not enough USD-backed balance (excluding IRA). Max: ${format_large_number(total_usd)}")
                 return
+            
+            # --- PROPORTIONAL DEDUCTION FOR USD SEND ---
+            if total_usd <= 0:
+                print("⚠️ No non-IRA assets available to back the USD send.")
+                return
+
             proportion = amt / total_usd
             wallet['capsule_value_mb'] -= wallet['capsule_value_mb'] * proportion
             wallet['cache_value_mb'] -= wallet['cache_value_mb'] * proportion
@@ -417,16 +455,9 @@ def send_resource(wallet, resource_name):
             return
 
         if resource_name == "usd_value":
-            total_usd_target = calculate_total_usd(target)
-            if total_usd_target > 0:
-                factor = (total_usd_target + amt) / total_usd_target
-                target['capsule_value_mb'] *= factor
-                target['cache_value_mb'] *= factor
-                target['real_kwh'] *= factor
-                target['bandwidth_MBps'] *= factor
-                target['torrent_value_mb'] *= factor
-            else:
-                target['capsule_value_mb'] += amt / MB_USD_RATE
+            # Target receives USD as Capsule MB
+            target_mb = amt / MB_USD_RATE
+            target['capsule_value_mb'] += target_mb
         else:
             target[resource_name] = target.get(resource_name, Decimal("0")) + amt
 
@@ -548,7 +579,8 @@ def show_rig_dashboard(wallet):
     print(f"⚡ Real kWh: {format_large_number(wallet['real_kwh'])}")
     print(f"📡 Bandwidth: {format_large_number(wallet['bandwidth_MBps'])} MB/s")
     print(f"🧲 Torrent Payloads: {format_large_number(wallet.get('torrent_value_mb', Decimal('0')))} MB")
-    print(f"💵 WATTS USD Value: ${format_large_number(total_usd)}")
+    print(f"💰 IRA Balance ({IRA_RATE_DISPLAY} Daily): ${format_large_number(wallet.get('ira_balance_usd', Decimal('0')))}")
+    print(f"💵 TOTAL WATTS USD Value: ${format_large_number(total_usd)}")
     print("-" * 40)
 
     if wallet['wallet_id'] == WORLD_DEBT_WALLET_ID:
@@ -597,9 +629,19 @@ def run_internet_terminal(wallet):
         response = requests.get(url)
         MB_USED_TOTAL += len(response.content) / (1024 * 1024)
         burned_MB = Decimal(MB_USED_TOTAL)
-        wallet['capsule_value_mb'] -= burned_MB
-        if wallet['capsule_value_mb'] < 0:
-            wallet['capsule_value_mb'] = Decimal("0")
+        
+        # Proportional deduction for bandwidth/search cost
+        total_non_ira = calculate_non_ira_usd(wallet)
+        usd_cost = burned_MB * MB_USD_RATE
+        
+        if total_non_ira > 0:
+            proportion = usd_cost / total_non_ira
+            
+            wallet['capsule_value_mb'] -= wallet['capsule_value_mb'] * proportion
+            wallet['cache_value_mb'] -= wallet['cache_value_mb'] * proportion
+            wallet['real_kwh'] -= wallet['real_kwh'] * proportion
+            wallet['bandwidth_MBps'] -= wallet['bandwidth_MBps'] * proportion
+            wallet['torrent_value_mb'] -= wallet['torrent_value_mb'] * proportion
 
         reward_kwh = overlay_formula(burned_MB)
         wallet['real_kwh'] += reward_kwh
@@ -679,7 +721,7 @@ def scan_device_cache_mb():
 
     return total_mb.quantize(Decimal("0.000001")), scanned_paths
 
-# --- Rig Info Export (Option 12) ---
+# --- Rig Info Export (Option 14) ---
 def show_rig_download_info(wallet):
     rig_info = {
         "wallet_id": wallet['wallet_id'],
@@ -692,6 +734,7 @@ def show_rig_download_info(wallet):
         "torrent_MB": float(wallet.get('torrent_value_mb', Decimal("0"))),
         "rig_hash_power": float(wallet.get('rig_hash_power', BASE_HASH_POWER)),
         "world_debt_paid_usd": float(wallet.get('world_debt_paid_usd', Decimal("0"))),
+        "ira_balance_usd": float(wallet.get('ira_balance_usd', Decimal("0"))),
         "total_usd_value": float(calculate_total_usd(wallet)),
         "timestamp": time.time(),
         "overlay_constants": {
@@ -714,8 +757,9 @@ def enhanced_download_resource_menu(wallet):
     print("  3. Real kWh")
     print("  4. Bandwidth MBps")
     print("  5. Torrent MB")
-    print("  6. Watts USD (calculated)")
-    print("  7. Cancel")
+    print("  6. IRA USD")
+    print("  7. Watts USD (calculated)")
+    print("  8. Cancel")
     choice = input("Enter option: ").strip()
 
     resource_map = {
@@ -724,10 +768,11 @@ def enhanced_download_resource_menu(wallet):
         "3": "real_kwh",
         "4": "bandwidth_MBps",
         "5": "torrent_value_mb",
-        "6": "usd_value"
+        "6": "ira_balance_usd",
+        "7": "usd_value"
     }
 
-    if choice == "7":
+    if choice == "8":
         print("🛑 Cancelled.")
         return
 
@@ -821,11 +866,12 @@ def show_world_debt_payment_menu(wallet):
     print(f"Debt Date: {WORLD_DEBT_DATE}")
     print("-" * 40)
 
-    total_usd = calculate_total_usd(wallet)
+    # Exclude IRA from available USD to contribute to debt
+    available_usd_for_deposit = calculate_non_ira_usd(wallet) 
     paid = wallet.get("world_debt_paid_usd", Decimal("0"))
     remaining = INITIAL_WORLD_DEBT_USD - paid
 
-    print(f"💰 Your Total USD Value: ${format_large_number(total_usd)}")
+    print(f"💰 Your Available Watts USD: ${format_large_number(available_usd_for_deposit)}")
     print(f"🌍 Your Debt Paid:       ${format_large_number(paid)}")
     print(f"🌍 Remaining Global Debt: ${format_large_number(remaining)}")
     print("-" * 40)
@@ -849,88 +895,188 @@ def show_world_debt_payment_menu(wallet):
         print("❌ Invalid number format.")
         return
 
-    available = calculate_total_usd(wallet)
-    if amt > available:
-        print(f"⚠️ Not enough USD-backed balance. Max: ${format_large_number(available)}")
+    if amt > available_usd_for_deposit:
+        print(f"⚠️ Not enough USD-backed balance (excluding IRA). Max: ${format_large_number(available_usd_for_deposit)}")
         return
-
-    proportion = amt / available
+    
+    # --- PROPORTIONAL DEDUCTION FOR DEBT PAYMENT ---
+    if available_usd_for_deposit <= 0:
+        print("⚠️ No non-IRA assets available to back the debt payment.")
+        return
+        
+    proportion = amt / available_usd_for_deposit
+    
     wallet['capsule_value_mb'] -= wallet['capsule_value_mb'] * proportion
     wallet['cache_value_mb'] -= wallet['cache_value_mb'] * proportion
     wallet['real_kwh'] -= wallet['real_kwh'] * proportion
     wallet['bandwidth_MBps'] -= wallet['bandwidth_MBps'] * proportion
     wallet['torrent_value_mb'] -= wallet['torrent_value_mb'] * proportion
+    
     wallet['world_debt_paid_usd'] += amt
 
     debt_wallet = load_wallet(WORLD_DEBT_WALLET_ID)
     if debt_wallet:
-        debt_wallet['capsule_value_mb'] += amt / MB_USD_RATE
-        debt_wallet['torrent_value_mb'] += amt / MB_USD_RATE
+        # Debt wallet receives the payment as the primary asset
+        debt_wallet['capsule_value_mb'] += amt / MB_USD_RATE 
         save_wallet(debt_wallet)
 
     save_wallet(wallet)
     print(f"✅ Contributed ${format_large_number(amt)} to World Debt Wallet.")
     print("🌍 Your node has been logged as a symbolic contributor to planetary debt reduction.")
 
-def wallet_transaction_menu(wallet):
+# --- IRA Functions ---
+def compound_ira(wallet):
+    now = time.time()
+    last_compound = wallet.get('ira_last_compounded_timestamp', now)
+    balance = wallet.get('ira_balance_usd', Decimal("0"))
+
+    if balance <= 0:
+        wallet['ira_last_compounded_timestamp'] = now
+        return False, 0
+
+    # 86400 seconds in a day
+    time_elapsed = now - last_compound
+    days_elapsed = math.floor(time_elapsed / 86400)
+    
+    if days_elapsed <= 0:
+        return False, 0 # No full day has passed
+
+    new_balance = balance
+    for _ in range(int(days_elapsed)):
+        # New Balance = Old Balance * (1 + Rate)
+        new_balance *= (Decimal("1") + IRA_DAILY_RATE)
+    
+    growth = new_balance - balance
+    wallet['ira_balance_usd'] = new_balance.quantize(Decimal("0.000001"))
+    wallet['ira_last_compounded_timestamp'] = last_compound + Decimal(days_elapsed * 86400)
+    save_wallet(wallet)
+    
+    return True, days_elapsed
+
+def calculate_time_frame_growth(initial_usd, days):
+    rate = IRA_DAILY_RATE
+    final_usd = initial_usd * ((Decimal("1") + rate) ** Decimal(days))
+    growth_percent = (final_usd / initial_usd) - Decimal("1")
+    return final_usd, growth_percent
+
+def view_ira_growth_rates(wallet):
+    
+    compound_ira(wallet) # Apply compounding before calculation
+    ira_balance = wallet.get('ira_balance_usd', Decimal("0"))
+    
+    print("\n--- 📈 IRA Growth Projections (17,770% Daily) ---")
+    print(f"Current IRA Balance: ${format_large_number(ira_balance)}")
+    print("-" * 45)
+    
+    if ira_balance <= 0:
+        print("💡 Deposit Watts USD to see growth projections.")
+        return
+
+    # Time frames in days
+    time_frames = [
+        ("Daily", 1),
+        ("Weekly", 7),
+        ("Monthly (30 days)", 30),
+        ("Yearly (365 days)", 365),
+        ("10 Years (3650 days)", 3650)
+    ]
+
+    for label, days in time_frames:
+        final_usd, growth_percent = calculate_time_frame_growth(ira_balance, days)
+        print(f"📅 {label}:")
+        print(f"   Final Balance: ${format_large_number(final_usd)}")
+        print(f"   Growth Rate:   {growth_percent * 100:,.2f}%")
+        print("-" * 45)
+
+# --- COMBINED IRA Menu ---
+def ira_combined_menu(wallet):
+    
+    # Always compound before showing the menu
+    compounded, days = compound_ira(wallet)
+    if compounded:
+        print(f"\n🎉 IRA Compounded! {days} day(s) of 17,770% growth applied.")
+    
     while True:
-        wallet = load_wallet(wallet['wallet_id'])
-        if not wallet:
+        wallet = load_wallet(wallet['wallet_id']) # Reload wallet to get updated balance
+        if not wallet: break
+
+        ira_balance = wallet.get('ira_balance_usd', Decimal("0"))
+        # Use the new helper function for available deposit pool
+        available_usd_for_deposit = calculate_non_ira_usd(wallet) 
+
+        print("\n--- 💰 IRA (17,770% Daily) Manager ---")
+        print(f"Current IRA Balance: ${format_large_number(ira_balance)}")
+        print(f"Available Watts USD (for deposit): ${format_large_number(available_usd_for_deposit)}")
+        print(f"Last Compound: {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(float(wallet['ira_last_compounded_timestamp'])))}")
+        print("-" * 45)
+        print("  1. Deposit Watts USD into IRA")
+        print("  2. Withdraw IRA Balance to Watts USD")
+        print("  3. View Growth Rates (Daily, Weekly, Monthly, Yearly, 10-Year)")
+        print("  4. Back to Wallet Actions")
+        print("-" * 45)
+        
+        choice = input("Enter option: ").strip()
+
+        if choice == "1":
+            try:
+                amt = Decimal(input("Amount of Watts USD to Deposit: ").strip())
+                if amt <= 0: print("⚠️ Enter a positive amount."); continue
+
+                if amt > available_usd_for_deposit:
+                    print(f"⚠️ Not enough Watts USD. Max: ${format_large_number(available_usd_for_deposit)}")
+                    continue
+                
+                # --- PROPORTIONAL DEDUCTION LOGIC ---
+                if available_usd_for_deposit <= 0:
+                     print("⚠️ No non-IRA assets available to back the deposit.")
+                     continue
+                
+                proportion = amt / available_usd_for_deposit 
+                
+                # Deduct proportionally from all resource types based on their current value
+                wallet['capsule_value_mb'] -= wallet['capsule_value_mb'] * proportion
+                wallet['cache_value_mb'] -= wallet['cache_value_mb'] * proportion
+                wallet['real_kwh'] -= wallet['real_kwh'] * proportion
+                wallet['bandwidth_MBps'] -= wallet['bandwidth_MBps'] * proportion
+                wallet['torrent_value_mb'] -= wallet['torrent_value_mb'] * proportion
+                
+                # Add to IRA
+                wallet['ira_balance_usd'] += amt
+                save_wallet(wallet)
+                print(f"✅ Deposited ${format_large_number(amt)} to IRA. Non-IRA resources reduced proportionally.")
+
+            except Exception as e:
+                print(f"❌ Error during deposit: {e}")
+                
+        elif choice == "2":
+            try:
+                amt = Decimal(input("Amount to Withdraw from IRA: ").strip())
+                if amt <= 0: print("⚠️ Enter a positive amount."); continue
+
+                if amt > ira_balance:
+                    print(f"⚠️ Not enough in IRA. Max: ${format_large_number(ira_balance)}")
+                    continue
+                
+                # Deduct from IRA
+                wallet['ira_balance_usd'] -= amt
+                
+                # REVERTING TO SIMPLE WITHDRAWAL TO PRIMARY ASSET (Capsule MB)
+                mb_added = amt / MB_USD_RATE 
+                wallet['capsule_value_mb'] += mb_added
+                
+                save_wallet(wallet)
+                print(f"✅ Withdrew ${format_large_number(amt)} from IRA, added {format_large_number(mb_added)} Capsule MB.")
+
+            except Exception as e:
+                print(f"❌ Error during withdrawal: {e}")
+
+        elif choice == "3":
+            view_ira_growth_rates(wallet)
+            
+        elif choice == "4":
             break
-
-        show_rig_dashboard(wallet)
-        print("\n--- Wallet Actions ---")
-        # ... menu options ...
-
-        option = input("Enter option: ").strip()
-
-        if option == "1":
-            send_resource(wallet, "capsule_value_mb")
-        elif option == "2":
-            send_resource(wallet, "cache_value_mb")
-        elif option == "3":
-            send_resource(wallet, "real_kwh")
-        elif option == "4":
-            send_resource(wallet, "bandwidth_MBps")
-        elif option == "5":
-            send_resource(wallet, "usd_value")
-        elif option == "6":
-            send_resource(wallet, "torrent_value_mb")
-        elif option == "7":
-            donate_for_hash(wallet, "capsule_value_mb")
-        elif option == "8":
-            donate_for_hash(wallet, "cache_value_mb")
-        elif option == "9":
-            donate_for_hash(wallet, "real_kwh")
-        elif option == "10":
-            donate_for_hash(wallet, "bandwidth_MBps")
-        elif option == "11":
-            donate_for_hash(wallet, "torrent_value_mb")
-        elif option == "12":
-            show_receive_info(wallet)
-        elif option == "13":
-            enhanced_download_resource_menu(wallet)
-        elif option == "14":
-            show_rig_download_info(wallet)
-        elif option == "15":
-            if wallet['wallet_id'] in [DONATION_WALLET_ID, WORLD_DEBT_WALLET_ID]:
-                print("🛑 Cannot access the World Debt Payment Plan menu from a system wallet.")
-            else:
-                show_world_debt_payment_menu(wallet)
-        elif option == "16":
-            break
-        elif option == "17":
-            print(f"🌐 Launching Internet Terminal for Node: {wallet['node_id']}")
-            run_internet_terminal(wallet)
         else:
             print("⚠️ Invalid option.")
-
-# --- Mining Start ---
-def start_mining(mining_type):
-    wallet = select_wallet_for_mining()
-    if wallet:
-        print(f"Starting {mining_type.upper()} Mining for wallet {wallet['wallet_id']}...")
-        unified_mining_loop(wallet, mining_type)
 
 # --- Wallet View Menu ---
 def view_wallets_rigs_menu():
@@ -943,6 +1089,9 @@ def wallet_transaction_menu(wallet):
         wallet = load_wallet(wallet['wallet_id'])
         if not wallet:
             break
+
+        # Always compound IRA when entering the menu
+        compound_ira(wallet) 
 
         show_rig_dashboard(wallet)
 
@@ -964,8 +1113,10 @@ def wallet_transaction_menu(wallet):
         print(" 13. Download Resource to File")
         print(" 14. Everything About the Rig (Download Info)")
         print(" 15. World Debt Payment Plan 🌎")
-        print(" 16. Back to Main Menu")
-        print(" 17. Access Internet Terminal (Node-Linked)")
+        print("  ----------------------------------------")
+        print(f" 16. IRA Management & Projections ({IRA_RATE_DISPLAY} Daily) 💰📈")
+        print(" 17. Access Internet Terminal (Node-Linked) 🌐")
+        print(" 18. Back to Main Menu")
         print("  ----------------------------------------")
 
         option = input("Enter option: ").strip()
@@ -1004,12 +1155,24 @@ def wallet_transaction_menu(wallet):
             else:
                 show_world_debt_payment_menu(wallet)
         elif option == "16":
-            break
+            if wallet['wallet_id'] in [DONATION_WALLET_ID, WORLD_DEBT_WALLET_ID]:
+                print("🛑 System wallets cannot access IRA.")
+            else:
+                ira_combined_menu(wallet)
         elif option == "17":
             print(f"🌐 Launching Internet Terminal for Node: {wallet['node_id']}")
             run_internet_terminal(wallet)
+        elif option == "18":
+            break
         else:
             print("⚠️ Invalid option.")
+
+# --- Mining Start ---
+def start_mining(mining_type):
+    wallet = select_wallet_for_mining()
+    if wallet:
+        print(f"Starting {mining_type.upper()} Mining for wallet {wallet['wallet_id']}...")
+        unified_mining_loop(wallet, mining_type)
 
 # --- Main Menu ---
 def main_menu():
