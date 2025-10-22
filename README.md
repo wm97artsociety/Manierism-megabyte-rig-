@@ -7,6 +7,310 @@ Hold on to old wallets and rigs a program software will comeout to exchange the 
 
 -----
 
+tesla science experiment 
+
+1700 club frequency weapons mbz megabytes terahurtz
+
+Frequency mhz megabyte Tesla weapon 
+
+A. Notation & constants used (all numeric values shown)
+
+Planck constant: 
+
+Speed of light: 
+
+Wavelength: 
+
+Paper burn energy (estimate): 
+
+Distance:  so 
+
+
+Photon energy (exact):
+
+E_{\text{photon}} = \frac{h c}{\lambda} \;=\; \frac{6.626e-34\cdot 3.0e8}{4.05e-7}
+\;=\; 4.908148148148148\times 10^{-19}\ \mathrm{J/photon}
+
+(That is the basic building block used below.)
+
+
+---
+
+B. Your original (flawed) formula — why it said “No ignition”
+
+You previously used (roughly):
+
+ephoton_virtual = λ ÷ (c*h) ÷ (c*h)
+pulsepowervirtual = τ ÷ (ephoton_virtual * N) ÷ (ephoton_virtual * N)
+totalvirtual_power = pulsepowervirtual * npulses
+
+Algebraically that is:
+
+e_{\text{virtual}} = \frac{\lambda}{(c h)^2}
+
+P_{\text{pulse}}^{\text{virtual}} = \frac{\tau}{(e_{\text{virtual}} N)^2} 
+
+Two critical errors:
+
+1. Photon energy is  (multiply by  and divide by ). Your expression used  — that's the reciprocal and then squared — giving a gigantic, meaningless number for ephoton_virtual and then extremely tiny power when you inverted again.
+
+
+2. You use repeated division where correct physics needs multiplication of photon energy times number of photons to get pulse energy.
+
+
+
+Numeric result of the flawed chain (using the values you used: , , npulses=1e6):
+
+ (nonsensical for real photon energy)
+
+ (tiny)
+
+total ≈  — essentially zero compared to 280 J
+
+C. Correct (math‑teacher) formula — the right chain
+
+1. Photon energy:
+
+
+
+E_{\text{photon}} = \frac{h c}{\lambda} = 4.908148148148148\times 10^{-19}\ \mathrm{J/photon}
+
+2. Pulse energy for  photons:
+
+
+
+E_{\text{pulse}} = E_{\text{photon}}\times N
+
+3. Energy at distance  (inverse-square spherical spread; symbolic simplification):
+
+
+
+E_{\text{distance}} = \frac{E_{\text{pulse}}}{r^2}
+
+4. Ignition condition:
+
+
+
+\text{ignite if } E_{\text{distance}} \ge Q_{\text{burn}}.
+
+Worked example (symbolic N =  photons, as you used earlier):
+
+
+
+ (≈21,132 J)
+
+Compare to  → ignition (in symbolic simulation).
+
+
+
+---
+
+D. Now: How many photons and how many megabytes are required (the exact conversion)
+
+We solve for the pulse energy required at the source so that, after spreading to , the paper receives ≥ .
+
+1. Required pulse energy at source:
+
+
+
+E_{\text{pulse,req}} = Q_{\text{burn}}\cdot r^2 = 280\cdot232.2576 = 65032.128\ \mathrm{J}
+
+2. Photons required:
+
+
+
+N = \frac{E_{\text{pulse,req}}}{E_{\text{photon}}} = \frac{65032.128}{4.908148148148148\times10^{-19}}
+
+N \approx 1.324982988228192\times 10^{23}\ \text{photons}
+
+3. Convert photons → bytes → megabytes (symbolic mapping: 1 photon = 1 bit)
+
+
+
+photons per byte = 8
+
+bytes needed = 
+
+megabytes (MB) = bytes / 
+
+
+\boxed{\text{MB required} \approx 1.65622873528524\times10^{16}\ \text{MB}}
+
+That is about 1.656 × 10¹⁶ MB (≈ 16.56 quadrillion MB).
+
+
+---
+
+E. Compact code snippets (two ways) — for your run.py simulator (symbolic only)
+
+Flawed approach (what to avoid)
+
+# WRONG - do not use
+ephoton_virtual = lam / ((c*h)**2)
+pulsepowervirtual = tau / ((ephoton_virtual * N)**2)
+totalvirtual_power = pulsepowervirtual * npulses
+
+Correct teacher formula
+
+h = 6.626e-34
+c = 3e8
+lam = 405e-9
+E_photon = h*c/lam
+
+r = 15.24
+Qburn = 0.001 * 1400 * 200  # 280 J
+
+# If you pick N photons per pulse:
+E_pulse = E_photon * N
+E_at_distance = E_pulse / (r**2)
+ignite = E_at_distance >= Qburn
+
+Compute MB needed (exact)
+
+# Using the numeric results we computed:
+E_pulse_req = Qburn * r**2
+N_required = E_pulse_req / E_photon
+bytes_needed = N_required / 8
+MB_needed = bytes_needed / 1e6
+# MB_needed ≈ 1.65622873528524e16
+
+
+---
+
+F. Short answers / TL;DR
+
+Why your code said No: you used division in places that physics requires multiplication; that produced near-zero energy.
+
+Correct approach: compute photon energy , multiply by number of photons to get pulse energy, apply inverse square divide by , compare to burn energy.
+
+Megabytes required (symbolic mapping 1 photon = 1 bit):
+ to deliver one pulse that (symbolically) deposits 280 J at 50 ft.
+
+
+
+---
+
+If you’d like I can:
+
+produce a clean Kivy/Python simulator that accepts MB or photon count and shows the numeric chain (E_photon → E_pulse → E_distance → result) and a visual overlay; or
+
+show the same numbers assuming a different mapping
+ (e.g., 1 photon = 1 byte or 1 photon = 8 bits), or
+
+
+
+
+
+
+
+Perfect — let’s compute the symbolic bandwidth in MB/s your rig would need to deliver enough photons to burn a paper at 50 ft, using both frequency-based (MHz) and straight MB transfer approaches.
+
+We’ll use the previous numbers:
+
+MB needed per pulse: 
+
+Photon energy: 
+
+Distance: 50 ft → 15.24 m
+
+
+
+---
+
+1️⃣ Bandwidth for MHz pulsing
+
+If we fire pulses at f MHz, the MB/sec required is:
+
+\text{MB/sec} = \text{MB}_{\text{pulse}} \cdot f_\text{Hz}
+
+f in Hz: 
+
+Then:
+
+
+\text{MB/sec} = 1.656 \times 10^{16} \cdot 1\times10^6 \approx 1.656 \times 10^{22}\ \text{MB/s}
+
+That’s absurdly huge — physically impossible, but symbolic.
+
+
+Scaling:
+
+10 MHz → 
+
+1 THz → 
+
+
+
+---
+
+2️⃣ Bandwidth for “straight MB” transfer
+
+If we ignore frequency and just dump all MB at once, the MB/sec is simply:
+
+\text{MB/sec} = \frac{\text{MB}_{\text{pulse}}}{t_\text{sec}}
+
+For example, delivering in 1 second:
+
+
+\text{MB/sec} = 1.656 \times 10^{16}\ \text{MB/s}
+
+Delivering in 1 hour (3600 s):
+
+
+\text{MB/sec} = \frac{1.656 \times 10^{16}}{3600} \approx 4.6 \times 10^{12}\ \text{MB/s}
+
+Delivering in 1 day (86400 s):
+
+
+\text{MB/sec} = \frac{1.656 \times 10^{16}}{86400} \approx 1.92 \times 10^{11}\ \text{MB/s}
+
+> 🔹 Insight: Frequency-based pulsing massively increases the bandwidth requirement, while straight MB delivery is limited only by the time you allow for the pulse.
+
+
+
+
+---
+
+3️⃣ Quick Summary Table
+
+Mode	Example Rate	MB/sec Required
+
+MHz pulsing	1 MHz	1.656 × 10²² MB/s
+MHz pulsing	10 MHz	1.656 × 10²³ MB/s
+Straight MB	1 s	1.656 × 10¹⁶ MB/s
+Straight MB	1 hr	4.6 × 10¹² MB/s
+Straight MB	1 day	1.92 × 10¹¹ MB/s
+
+
+
+---
+
+✅ Takeaways:
+
+1. Megahertz pulsing → symbolic “instant ignition”, but bandwidth requirement is astronomically huge.
+
+
+2. Straight MB transfer → you can reduce MB/s by extending time, but still impossible with real hardware.
+
+
+3. All numbers are symbolic for your TeraBeam simulation or Mannerism rig.
+
+
+
+
+---
+
+I can also make a Python/Kivy simulator where you input:
+
+number of MB per pulse,
+
+pulse frequency (MHz or THz),
+
+total pulse duration,
+
+
+-----
+
 New IRA feature 17770% return a day
 
 --- Wallet Actions ---
