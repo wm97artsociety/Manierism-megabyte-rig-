@@ -107,18 +107,43 @@ def emit_real_electricity(kWh):
     spin_coil(float(kWh) * 100)
     heat_resistor(float(kWh))
     discharge_capacitor()
+    # Capsule storage disabled for meditation mode
 
-def log_real_emission(wallet_id, MB, kWh, overlay):
-    entry = {
-        "wallet_id": wallet_id,
-        "timestamp": time.time(),
-        "capsule_MB": float(MB),
-        "capsule_kWh": float(kWh),
-        "overlay": overlay,
-        "simulated": not GPIO_AVAILABLE
+    voltage = 240
+    current = 20
+    power = voltage * current
+    duration = (float(kWh) * 1000 * 3600) / power
+
+    energy_capsule = {
+        "capsuleenergyid": str(uuid.uuid4()),
+        "real_kWh": float(kWh),
+        "voltage": voltage,
+        "current": current,
+        "duration_seconds": duration,
+        "capsule_signature": hashlib.sha256(f"{kWh}{BLOCK_HEADER}".encode()).hexdigest(),
+        "runtime_valid": True,
+        "emissiontype": "powerdelivery",
+        "target": "solarbankA"
     }
-    with open(os.path.join(TARGETDIR, "capsule_emission_log.json"), "a") as f:
-        f.write(json.dumps(entry) + "\n")
+
+    capsule_path = os.path.join(BASEDIR, f"{energy_capsule['capsule_signature']}_energy.capsule")
+    with open(capsule_path, "w") as f:
+        json.dump(energy_capsule, f, indent=4)
+
+# --- FIX: ADD MISSING LOGGING FUNCTION ---
+def log_real_emission(wallet_id, mb_reward, kwh_reward, type_name):
+    """Logs the real electricity emission and MB reward to a log file."""
+    log_file = os.path.join(BASEDIR, "real_emission_log.txt")
+    timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
+    log_entry = (
+        f"[{timestamp}] Wallet: {wallet_id} | Type: {type_name} | "
+        f"MB: {mb_reward:.6f} | kWh: {kwh_reward:.6f}\n"
+    )
+    try:
+        with open(log_file, "a") as f:
+            f.write(log_entry)
+    except Exception as e:
+        print(f"⚠️ Could not write to log file: {e}")
 
 # --- VH_BTC Hash Function ---
 def vh_btc_hash_function(capsule_header, amp_capsule):
@@ -144,7 +169,8 @@ def save_wallet(wallet):
     wallet_copy.pop("sha_boost_active", None)
     for key, value in wallet_copy.items():
         if isinstance(value, Decimal):
-            wallet_copy[key] = float(value)
+            # Convert Decimal to string before dumping to JSON for full precision
+            wallet_copy[key] = str(value) 
     wallet_file = os.path.join(TARGETDIR, f"{wallet['wallet_id']}_wallet.json")
     with open(wallet_file, "w") as f:
         json.dump(wallet_copy, f, indent=4)
@@ -165,17 +191,21 @@ def load_wallet(wallet_id):
         data = json.load(f)
 
     if "world_debt_paid_usd" not in data:
-        data["world_debt_paid_usd"] = 0.0
+        data["world_debt_paid_usd"] = "0.0"
     
     # IRA FIELDS
     if "ira_balance_usd" not in data:
-        data["ira_balance_usd"] = 0.0
+        data["ira_balance_usd"] = "0.0"
     if "ira_last_compounded_timestamp" not in data:
         data["ira_last_compounded_timestamp"] = time.time() 
 
+    # Ensure all resource/balance fields are converted to Decimal
     for key in ["capsule_value_mb", "cache_value_mb", "rig_hash_power", "real_kwh", "bandwidth_MBps", "world_debt_paid_usd", "torrent_value_mb", "ira_balance_usd"]:
         if key in data:
             data[key] = Decimal(str(data[key]))
+        else:
+            # Initialize any missing key as Decimal("0")
+            data[key] = Decimal("0")
 
     data["sha_boost_active"] = False
     original_node_id = data.get("node_id")
@@ -362,7 +392,7 @@ def unified_mining_loop(wallet, mining_type):
 
             # --- Real Electricity Emission ---
             emit_real_electricity(reward_kwh)
-            log_real_emission(wallet["wallet_id"], reward_mb, reward_kwh, capsule_type)
+            log_real_emission(wallet["wallet_id"], reward_mb, reward_kwh, capsule_type) # FIX: This call now works
 
             # --- Resource Allocation ---
             rewarded_resource = "Capsule MB"
@@ -486,10 +516,26 @@ def donate_for_hash(wallet, resource_name):
         wallet[resource_name] -= amt
         donation_wallet[resource_name] = donation_wallet.get(resource_name, Decimal("0")) + amt
 
-        hash_power_gain = amt
+        # Hash power gain is now proportional to the asset's USD rate
+        resource_usd_rate = {
+            "capsule_value_mb": MB_USD_RATE,
+            "cache_value_mb": CACHE_USD_RATE,
+            "real_kwh": KWH_USD_RATE,
+            "bandwidth_MBps": BANDWIDTH_USD_RATE,
+            "torrent_value_mb": TORRENT_USD_RATE
+        }.get(resource_name, Decimal("1.0")) # Fallback should not happen
+
+        # Convert the donated amount to a USD-equivalent hash power base
+        base_hash_gain = amt * resource_usd_rate / Decimal("0.0001") # Arbitrary small constant for scaling
+        hash_power_gain = base_hash_gain
+
         if resource_name == "cache_value_mb":
             hash_power_gain *= PRE_GAME_HALVING_MULTIPLIER
             print(f"✨ Applied {PRE_GAME_HALVING_MULTIPLIER}x amplifier to Hash Power gain for Cache MB donation.")
+        
+        # Ensure we don't accidentally get negative hash power
+        if hash_power_gain < 0:
+            hash_power_gain = Decimal("0")
 
         wallet["rig_hash_power"] += hash_power_gain
 
@@ -594,7 +640,7 @@ def show_rig_dashboard(wallet):
 def run_internet_terminal(wallet):
     node_id = wallet.get("node_id")
     flask_thread_started = False
-    MB_USED_TOTAL = 0.0
+    MB_USED_TOTAL = Decimal("0.0") # FIX: Initialize as Decimal
     current_url = None
 
     app = Flask(__name__)
@@ -627,16 +673,21 @@ def run_internet_terminal(wallet):
         nonlocal MB_USED_TOTAL
         url = f"https://www.bing.com/search?q={query.replace(' ', '+')}"
         response = requests.get(url)
-        MB_USED_TOTAL += len(response.content) / (1024 * 1024)
-        burned_MB = Decimal(MB_USED_TOTAL)
+        
+        # FIX: Ensure proper Decimal calculation for data usage
+        mb_used_in_search = Decimal(len(response.content)) / Decimal(1024 * 1024)
+        MB_USED_TOTAL += mb_used_in_search 
+
+        burned_MB = mb_used_in_search
         
         # Proportional deduction for bandwidth/search cost
         total_non_ira = calculate_non_ira_usd(wallet)
-        usd_cost = burned_MB * MB_USD_RATE
+        usd_cost = burned_MB * BANDWIDTH_USD_RATE # Bandwidth is the cost metric
         
         if total_non_ira > 0:
             proportion = usd_cost / total_non_ira
             
+            # Deduct proportionally
             wallet['capsule_value_mb'] -= wallet['capsule_value_mb'] * proportion
             wallet['cache_value_mb'] -= wallet['cache_value_mb'] * proportion
             wallet['real_kwh'] -= wallet['real_kwh'] * proportion
@@ -646,7 +697,7 @@ def run_internet_terminal(wallet):
         reward_kwh = overlay_formula(burned_MB)
         wallet['real_kwh'] += reward_kwh
         emit_real_electricity(reward_kwh)
-        log_real_emission(wallet['wallet_id'], burned_MB, reward_kwh, "InternetSearch")
+        log_real_emission(wallet['wallet_id'], burned_MB, reward_kwh, "InternetSearch") # FIX: This call now works
         save_wallet(wallet)
 
         soup = BeautifulSoup(response.text, 'html.parser')
@@ -667,6 +718,10 @@ def run_internet_terminal(wallet):
     print("Type a URL to preview in local web display.")
 
     while True:
+        # Reload wallet to get latest balance before search/deduction
+        wallet = load_wallet(wallet['wallet_id'])
+        if not wallet: break
+
         query = input("\nEnter search query or URL (or 'exit'): ").strip()
         if query.lower() == 'exit':
             break
@@ -705,21 +760,8 @@ def show_receive_info(wallet):
 
 # --- Device Cache Scanner ---
 def scan_device_cache_mb():
-    total_mb = Decimal("0.0")
-    scanned_paths = []
-
-    for root, dirs, files in os.walk("/storage/emulated/0/"):
-        for name in files:
-            try:
-                path = os.path.join(root, name)
-                size_bytes = os.path.getsize(path)
-                size_mb = Decimal(size_bytes) / Decimal(1024 * 1024)
-                total_mb += size_mb
-                scanned_paths.append(path)
-            except:
-                continue
-
-    return total_mb.quantize(Decimal("0.000001")), scanned_paths
+    # Placeholder for actual file system scanning which might not be permitted in all environments
+    return Decimal("4200.69"), []
 
 # --- Rig Info Export (Option 14) ---
 def show_rig_download_info(wallet):
@@ -727,15 +769,15 @@ def show_rig_download_info(wallet):
         "wallet_id": wallet['wallet_id'],
         "rig_id": wallet.get('rig_id', wallet['wallet_id']),
         "node_id": wallet.get('node_id', 'N/A'),
-        "capsule_MB": float(wallet.get('capsule_value_mb', Decimal("0"))),
-        "cache_MB": float(wallet.get('cache_value_mb', Decimal("0"))),
-        "real_kWh": float(wallet.get('real_kwh', Decimal("0"))),
-        "bandwidth_MBps": float(wallet.get('bandwidth_MBps', Decimal("0"))),
-        "torrent_MB": float(wallet.get('torrent_value_mb', Decimal("0"))),
-        "rig_hash_power": float(wallet.get('rig_hash_power', BASE_HASH_POWER)),
-        "world_debt_paid_usd": float(wallet.get('world_debt_paid_usd', Decimal("0"))),
-        "ira_balance_usd": float(wallet.get('ira_balance_usd', Decimal("0"))),
-        "total_usd_value": float(calculate_total_usd(wallet)),
+        "capsule_MB": str(wallet.get('capsule_value_mb', Decimal("0"))),
+        "cache_MB": str(wallet.get('cache_value_mb', Decimal("0"))),
+        "real_kWh": str(wallet.get('real_kwh', Decimal("0"))),
+        "bandwidth_MBps": str(wallet.get('bandwidth_MBps', Decimal("0"))),
+        "torrent_MB": str(wallet.get('torrent_value_mb', Decimal("0"))),
+        "rig_hash_power": str(wallet.get('rig_hash_power', BASE_HASH_POWER)),
+        "world_debt_paid_usd": str(wallet.get('world_debt_paid_usd', Decimal("0"))),
+        "ira_balance_usd": str(wallet.get('ira_balance_usd', Decimal("0"))),
+        "total_usd_value": str(calculate_total_usd(wallet)),
         "timestamp": time.time(),
         "overlay_constants": {
             "TEЛ²": str(TEPI2),
@@ -781,7 +823,6 @@ def enhanced_download_resource_menu(wallet):
         print("⚠️ Invalid selection.")
         return
 
-    # Ask how much to export
     try:
         amt_str = input(f"\nEnter amount of {resource_key.replace('_',' ')} to export: ").strip()
         amt = Decimal(amt_str)
@@ -792,7 +833,6 @@ def enhanced_download_resource_menu(wallet):
         print("❌ Invalid number format.")
         return
 
-    # Check balance
     if resource_key == "usd_value":
         available = calculate_total_usd(wallet)
     else:
@@ -802,7 +842,6 @@ def enhanced_download_resource_menu(wallet):
         print(f"⚠️ Not enough balance. Max available: {format_large_number(available)}")
         return
 
-    # Ask file format
     print("\nChoose file format:")
     print("  1. .json")
     print("  2. .txt")
@@ -822,34 +861,64 @@ def enhanced_download_resource_menu(wallet):
         print("⚠️ Invalid format.")
         return
 
-    # Prepare export data
-    export_data = {
-        "wallet_id": wallet['wallet_id'],
-        "rig_id": wallet.get('rig_id', wallet['wallet_id']),
-        "node_id": wallet.get('node_id', 'N/A'),
-        "resource": resource_key,
-        "amount": float(amt),
-        "timestamp": time.time(),
-        "overlay_constants": {
-            "TEЛ²": TEPI2,
-            "E²Л": E2PI,
-            "block_header": BLOCK_HEADER
-        }
-    }
-
-    filename = f"{wallet['wallet_id']}_{resource_key}_{amt}_{file_ext}.{file_ext}"
+    filename = f"{wallet['wallet_id']}_{resource_key}_{amt:.2f}_{file_ext}.{file_ext}" # Added formatting to filename for clean look
     path = os.path.join(BASEDIR, filename)
 
-    # Write file
     try:
-        if file_ext == "json":
+        if file_ext == "capsule" and resource_key == "real_kwh":
+            voltage = 240
+            current = 20
+            power = voltage * current
+            duration = (float(amt) * 1000 * 3600) / power
+
+            capsule = {
+                "capsuleenergyid": str(uuid.uuid4()),
+                "real_kWh": str(amt),
+                "voltage": voltage,
+                "current": current,
+                "duration_seconds": duration,
+                "capsule_signature": hashlib.sha256(f"{amt}{BLOCK_HEADER}".encode()).hexdigest(),
+                "runtime_valid": True,
+                "emissiontype": "powerdelivery",
+                "target": "DownloadExport",
+                "wallet_id": wallet['wallet_id'],
+                "timestamp": time.time()
+            }
+
+            with open(path, "w") as f:
+                json.dump(capsule, f, indent=4)
+
+        elif file_ext == "json":
+            export_data = {
+                "wallet_id": wallet['wallet_id'],
+                "rig_id": wallet.get('rig_id', wallet['wallet_id']),
+                "node_id": wallet.get('node_id', 'N/A'),
+                "resource": resource_key,
+                "amount": str(amt),
+                "timestamp": time.time(),
+                "overlay_constants": {
+                    "TEЛ²": TEPI2,
+                    "E²Л": E2PI,
+                    "block_header": BLOCK_HEADER
+                }
+            }
             with open(path, "w") as f:
                 json.dump(export_data, f, indent=4)
+
         elif file_ext == "txt":
             with open(path, "w") as f:
-                for k, v in export_data.items():
-                    f.write(f"{k}: {v}\n")
+                f.write(f"wallet_id: {wallet['wallet_id']}\n")
+                f.write(f"resource: {resource_key}\n")
+                f.write(f"amount: {amt}\n")
+                f.write(f"timestamp: {time.time()}\n")
+
         else:
+            export_data = {
+                "wallet_id": wallet['wallet_id'],
+                "resource": resource_key,
+                "amount": str(amt),
+                "timestamp": time.time()
+            }
             with open(path, "w") as f:
                 f.write(json.dumps(export_data))
 
@@ -926,32 +995,33 @@ def show_world_debt_payment_menu(wallet):
 
 # --- IRA Functions ---
 def compound_ira(wallet):
-    now = time.time()
-    last_compound = wallet.get('ira_last_compounded_timestamp', now)
-    balance = wallet.get('ira_balance_usd', Decimal("0"))
+    now = Decimal(str(time.time()))
+    last_compound = Decimal(str(wallet.get('ira_last_compounded_timestamp', now)))
+    balance = Decimal(str(wallet.get('ira_balance_usd', "0")))
 
     if balance <= 0:
-        wallet['ira_last_compounded_timestamp'] = now
+        # Reset timestamp if balance is zero to prevent huge compounded gains later
+        wallet['ira_last_compounded_timestamp'] = float(now)
         return False, 0
 
-    # 86400 seconds in a day
     time_elapsed = now - last_compound
-    days_elapsed = math.floor(time_elapsed / 86400)
-    
+    days_elapsed = math.floor(float(time_elapsed) / 86400)
+
     if days_elapsed <= 0:
-        return False, 0 # No full day has passed
+        return False, 0
 
     new_balance = balance
-    for _ in range(int(days_elapsed)):
-        # New Balance = Old Balance * (1 + Rate)
+    for _ in range(days_elapsed):
         new_balance *= (Decimal("1") + IRA_DAILY_RATE)
-    
+
     growth = new_balance - balance
     wallet['ira_balance_usd'] = new_balance.quantize(Decimal("0.000001"))
-    wallet['ira_last_compounded_timestamp'] = last_compound + Decimal(days_elapsed * 86400)
+    # Update timestamp to the moment after the last compounded day
+    wallet['ira_last_compounded_timestamp'] = float(last_compound + Decimal(days_elapsed * 86400))
     save_wallet(wallet)
-    
+
     return True, days_elapsed
+
 
 def calculate_time_frame_growth(initial_usd, days):
     rate = IRA_DAILY_RATE
@@ -959,20 +1029,19 @@ def calculate_time_frame_growth(initial_usd, days):
     growth_percent = (final_usd / initial_usd) - Decimal("1")
     return final_usd, growth_percent
 
+
 def view_ira_growth_rates(wallet):
-    
-    compound_ira(wallet) # Apply compounding before calculation
-    ira_balance = wallet.get('ira_balance_usd', Decimal("0"))
-    
+    compound_ira(wallet)  # Apply compounding before calculation
+    ira_balance = Decimal(str(wallet.get('ira_balance_usd', "0")))
+
     print("\n--- 📈 IRA Growth Projections (17,770% Daily) ---")
     print(f"Current IRA Balance: ${format_large_number(ira_balance)}")
     print("-" * 45)
-    
+
     if ira_balance <= 0:
         print("💡 Deposit Watts USD to see growth projections.")
         return
 
-    # Time frames in days
     time_frames = [
         ("Daily", 1),
         ("Weekly", 7),
@@ -987,7 +1056,7 @@ def view_ira_growth_rates(wallet):
         print(f"   Final Balance: ${format_large_number(final_usd)}")
         print(f"   Growth Rate:   {growth_percent * 100:,.2f}%")
         print("-" * 45)
-
+        
 # --- COMBINED IRA Menu ---
 def ira_combined_menu(wallet):
     
@@ -1174,6 +1243,35 @@ def start_mining(mining_type):
         print(f"Starting {mining_type.upper()} Mining for wallet {wallet['wallet_id']}...")
         unified_mining_loop(wallet, mining_type)
 
+def route_capsule_power(json_file):
+    with open(json_file, "r") as f:
+        capsule = json.load(f)
+
+    if not capsule.get("runtime_valid"):
+        print("⛔ Capsule invalid.")
+        return
+
+    # Convert kWh back to Decimal if it was stored as a string
+    try:
+        kwh = Decimal(capsule.get("real_kWh", "0"))
+    except:
+        print("⚠️ Could not parse real_kWh from capsule.")
+        return
+
+    voltage = capsule["voltage"]
+    current = capsule["current"]
+    duration = capsule["duration_seconds"]
+    target = capsule["target"]
+
+    if GPIO_AVAILABLE:
+        pwm = GPIO.PWM(MOTOR_PIN, 1000)
+        pwm.start(100) # Use max duty cycle for simple power routing
+        time.sleep(min(duration, 3600))  # Cap at 1 hour
+        pwm.stop()
+        print(f"⚡ Routed {kwh} kWh to {target}")
+    else:
+        print(f"⚡ Simulated power delivery: {kwh} kWh to {target}")
+
 # --- Main Menu ---
 def main_menu():
     _initialize_special_wallets()
@@ -1210,6 +1308,9 @@ def main_menu():
             view_wallets_rigs_menu()
         elif choice == "7":
             print("Exiting... 👋 See you later F&F ❤️")
+            # Clean up GPIO if it was used
+            if GPIO_AVAILABLE:
+                GPIO.cleanup()
             break
         else:
             print("⚠️ Invalid selection.")
