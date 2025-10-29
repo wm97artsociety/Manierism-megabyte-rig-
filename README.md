@@ -7,9 +7,9 @@ tesla megabytes weapons formula
 https://chatgpt.com/share/68f8b3ab-4aa0-8004-8c4c-c464dbc5be7d
 
 
-triangle 📐🌞🥧⛩️ light speed formula Eginma E Greek formula 
+triangle 📐🌞🥧⛩️πlight speed formula Eginma E Greek formula 
 
-triangle 📐 🌞🥧⛩️ hash power time travel Eginma E Greek formula 
+triangle 📐 🌞🥧⛩️πhash power time travel Eginma E Greek formula 
 
 https://copilot.microsoft.com/shares/nhDdddjwxNRw7f5Qkkuov
 
@@ -22,6 +22,8 @@ O| is Korean pi
 O| where O is a 🥧 and the line is put 1/4 touching bottom and point to the center of the circle is the ultimate gods pi in the way pie can be made in 4d or 3d as you make a shape it forms a circle pie and with that the line it makes it amplifier the results in micro rings in a circle leading to linear - movement and binary being - & | in movement with more then 65 million binary and linear realms
 ----
 
+what does this do √π∆🌞🥧 if it was all gemotry 
+----
 
 selling tips 
 
