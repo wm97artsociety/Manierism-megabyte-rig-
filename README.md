@@ -31,6 +31,12 @@ Jewish pi is P in their alphabet
 latin, arbic or Muslim has a pie of a 🫐🥧😂 in their language pie up brooo pie up level up
 ----
 
+
+
+Egyptian alphabet letters are for human body and brain waves, greek formula for god abilities and wealth lol 😂 why you always looking at me 👁️‍🗨️eyes 👀 👀 👀 👀 👀 👀 😱
+----
+
+
 selling tips 
 
 
