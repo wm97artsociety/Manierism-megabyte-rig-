@@ -25,6 +25,12 @@ O| where O is a 🥧 and the line is put 1/4 touching bottom and point to the ce
 what does this do √π∆🌞🥧 if it was all gemotry 
 ----
 
+Jewish pi is P in their alphabet 
+----
+
+latin, arbic or Muslim has a pie of a 🫐🥧😂 in their language pie up brooo pie up level up
+----
+
 selling tips 
 
 
