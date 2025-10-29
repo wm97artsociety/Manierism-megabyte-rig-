@@ -13,6 +13,13 @@ triangle 📐 🌞🥧⛩️ hash power time travel Eginma E Greek formula
 
 https://copilot.microsoft.com/shares/nhDdddjwxNRw7f5Qkkuov
 
+TEЛ², E²Л, are e=mc^2 & Л Russian pi
+----
+
+O| is Korean pi 
+----
+
+O| where O is a 🥧 and the line is put 1/4 touching bottom is the ultimate gods pi in the way pie can be made in 4d or 3d as you make a shape it forms a circle pie and with that the line it makes it amplifier the results in micro rings in a circle leading to linear - movement and binary being - & | in movement with more then 65 million binary and linear realms
 ----
 
 
