@@ -33,7 +33,7 @@ latin, arbic or Muslim has a pie of a 🫐🥧😂 in their language pie up broo
 
 
 
-Egyptian alphabet letters are for human body and brain waves, greek formula for god abilities and wealth lol 😂 why you always looking at me 👁️‍🗨️eyes 👀 👀 👀 👀 👀 👀 😱
+Egyptian alphabet letters are for human body and brain waves, greek formula for god abilities and wealth lol 😂 why you always looking at me 👁️‍🗨️eyes 👀 👀 👀 👀 👀 👀 😱 didta or dida is detla and it mean turn to beetle 🪲 from pie triangle or circle 👨🔼⛩️🥧⭕🧬🐱
 ----
 
 
