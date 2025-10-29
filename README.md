@@ -6,6 +6,13 @@ tesla megabytes weapons formula
 
 https://chatgpt.com/share/68f8b3ab-4aa0-8004-8c4c-c464dbc5be7d
 
+
+triangle 📐🌞🥧⛩️ light speed formula Eginma E Greek formula 
+
+triangle 📐 🌞🥧⛩️ hash power time travel Eginma E Greek formula 
+
+https://copilot.microsoft.com/shares/nhDdddjwxNRw7f5Qkkuov
+
 ----
 
 
