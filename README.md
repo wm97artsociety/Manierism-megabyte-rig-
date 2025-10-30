@@ -59,6 +59,9 @@ Current Balance in Kilowatts (kWh): 9,613,273,519,984,765,568,501,366.886 Tredec
 Enter your bet in Kilowatts (kWh): 1000000000000000000000
 Bet placed: 1.000 Sextillion Kilowatts (kWh). New balance: 9,613,273,519,984,765,568,501,366.886 Tredecillion Kilowatts (kWh).
 
+
+The mini game is a file earning game but leads to cash if you sell you're files you dont need to worry about the collection of cash from bets the files are burned due to its just a mini game and i legally can not collect the money unless i am a casino so it was a loophole to be able to get you the game 🌞🐙
+
 ==================================================
 DEALER'S HAND:
 ┌───────┐    ┌───────┐
