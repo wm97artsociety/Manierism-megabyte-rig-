@@ -31,7 +31,57 @@ https://copilot.microsoft.com/shares/nhDdddjwxNRw7f5Qkkuov
 
 cpu editor for fiber optic eginma speed
 
+You can’t fully tweak your CPU or run symbolic amplifier overlays on Android without unlocking the bootloader, but you can get surprisingly close using clever tools and symbolic wrappers—especially if you’re not trying to flash kernels or modify system partitions.
 
+---
+
+🔧 What You Can Do on Android Without Bootloader Unlock
+
+| Capability                     | Possible? | How to Do It                                |
+|-------------------------------|-----------|----------------------------------------------|
+| Monitor CPU stats         | ✅        | Use apps like CPU Info, Termux, or AIDA64 |
+| Bind threads to cores     | ✅ (rootless) | Use taskset in Termux or symbolic wrappers |
+| Run amplifier overlays    | ✅ (symbolic only) | Simulate vh logic in Python or JS            |
+| Adjust CPU frequency      | ❌ (needs root) | Requires kernel access or bootloader unlock  |
+| Flash custom kernel       | ❌        | Requires unlocked bootloader                 |
+
+---
+
+🧱 Symbolic vh Logic on Android (No Root)
+
+You can simulate amplifier gain logic using Termux + Python:
+
+`bash
+pkg install python
+pip install psutil
+`
+
+Then instal and run cpu.py:
+
+
+You can even bind this to a single core using taskset:
+
+`bash
+taskset 0x1 python3 vh_pi.py
+`
+
+---
+
+🔮 Capsule-Native Android Overlay (No Bootloader)
+
+You could chunk a symbolic config like:
+
+`json
+"vhPiAndroid": {
+  "terrain": "Termux",
+  "amplifier": "GodsChurchAmplifier",
+  "threads": 1,
+  "gain_formula": "π × (base + referrals + uptime)",
+  "export": "capsule_export.json"
+}
+`
+
+---
 ~ $ python amp.py
 🧬 BIOS emitted to capsule_bios.json
 
