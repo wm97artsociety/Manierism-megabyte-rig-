@@ -1,7 +1,22 @@
 # Manierism megabytes rig
 ----
 
+first ebay listing listed for electricity 
 
+https://ebay.us/m/HYLvhw
+
+Capsule- Energy File (.json) — 150k kWh Emission + Overlay Constants + Remix 
+
+
+
+first 1 million kilowatt ebay listing 
+
+https://ebay.us/m/UlRCka
+
+Capsule- Energy File (.json) 1 Million kWh Emission + Overlay Constants + Remix 
+
+
+----
 tesla megabytes weapons formula 
 
 https://chatgpt.com/share/68f8b3ab-4aa0-8004-8c4c-c464dbc5be7d
