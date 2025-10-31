@@ -38,6 +38,7 @@ O| where O is a 🥧 and the line is put 1/4 touching bottom and point to the ce
 ----
 
 what does this do √π∆🌞🥧 if it was all gemotry 
+its voltage for the v and pi for rainbow rgb colors with amplifier of ∆🥧🌞 you can use it to do light speed of eginma and create things out of light pulse camera like Android a 100k carrot 🥕 lol in about a hour 
 ----
 
 Jewish pi is P in their alphabet 
