@@ -10,7 +10,9 @@ print(f"📂 Target Rigs Directory: {TARGETDIR}")
 
 setting up on andriod 
 
-
+BASEDIR = "/storage/emulated/0/Download/manierismmegabytes"
+TARGETDIR = os.path.join(BASEDIR, "rigs")
+os.makedirs(TARGETDIR, exist_ok=True)
 
 
 
