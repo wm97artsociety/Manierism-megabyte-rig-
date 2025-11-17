@@ -16,6 +16,25 @@ os.makedirs(TARGETDIR, exist_ok=True)
 
 -----
 
+supercomputer hashpower json file bridge for supercomputers template found in files of this folder for setting up the hashpower to use on a supercomputer for sha hashpower binary 
+
+{
+  "capsule_id": "vhbtc-william-1763367539",
+  "algorithm": "sha256d",
+  "declared": { "target_hs": 1e31, "threads": 64 },
+  "observed": {
+    "total_avg_hs": 9.8e13,
+    "per_worker": {
+      "w0": { "avg_hs": 1.55e12, "samples": 180 },
+      "w1": { "avg_hs": 1.62e12, "samples": 180 }
+    }
+  },
+  "audit_policy": { "expected_shares": 250000, "proofpolicy": ["sharelog","poolreceipt"] }
+}
+
+
+
+------
 new windows updates for selling hashpower even though bitcoin wont accept the mass amount of hashpower from you guys you can still sell online to super pc for hashpower like kilowatts <3
 
 {
