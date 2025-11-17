@@ -14,10 +14,143 @@ BASEDIR = "/storage/emulated/0/Download/manierismmegabytes"
 TARGETDIR = os.path.join(BASEDIR, "rigs")
 os.makedirs(TARGETDIR, exist_ok=True)
 
+-----
+
+new windows updates for selling hashpower even though bitcoin wont accept the mass amount of hashpower from you guys you can still sell online to super pc for hashpower like kilowatts <3
+
+{
+    "version": "1.0",
+    "type": "vhBTC",
+    "capsule_id": "vhbtc-william-1763367539",
+    "algorithm": "sha256d",
+    "hashrate": {
+        "value": 10000000000000000000000000000000,
+        "unit": "H/s"
+    },
+    "duration": {
+        "value": 24,
+        "unit": "hours"
+    },
+    "pool": {
+        "url": "stratum+tcp://pool.example.com:3333",
+        "username": "user.worker",
+        "password": "x"
+    },
+    "execution": {
+        "start_at": "2025-11-17T08:18:59Z",
+        "stop_at": "2025-11-18T08:18:59Z",
+        "throttle": 1.0,
+        "devices": [
+            "asic:all"
+        ]
+    },
+    "overlay": {
+        "symbol": "vhBTC",
+        "amplifier": "golden-ratio",
+        "constants": {
+            "\u03d5": 1.6180339887,
+            "\u03c0": 3.1415926535
+        }
+    },
+    "market": {
+        "resale_rights": "transferable",
+        "remix_rights": "allowed",
+        "price_usd": 12.5,
+        "license": "HashPower-24h-Slice"
+    },
+    "audit": {
+        "expected_shares": 250000,
+        "share_difficulty": "pool",
+        "proofpolicy": [
+            "sharelog",
+            "poolreceipt",
+            "capsulesignature"
+        ]
+    },
+    "signature": {
+        "algo": "ed25519",
+        "publickey": "BASE58PUBKEY",
+        "signature": "BASE64SIGOFCANONICALJSON"
+    }
+}
 
 
 
 
+## 1. **Interpret the Capsule**
+Your project needs a parser that reads the JSON fields:
+- `algorithm`: tells you what mining algorithm to run (`sha256d` in your file).
+- `hashrate.value`: the declared slice of hashpower.
+- `duration`: how long the slice should run.
+- `pool`: where the hashpower should be pointed (stratum URL, worker credentials).
+- `execution`: start/stop times, throttle, devices.
+- `audit`: how to prove delivery (share logs, receipts).
+- `signature`: authenticity of the capsule.
+
+---
+
+## 2. **Bind Capsule → Miner Config**
+You then translate capsule fields into miner configuration:
+- Generate a `cgminer.conf` or `bfgminer.conf` file from the capsule.
+- Example mapping:
+  ```json
+  {
+    "pools": [
+      {
+        "url": "stratum+tcp://pool.example.com:3333",
+        "user": "user.worker",
+        "pass": "x"
+      }
+    ],
+    "api-listen": true,
+    "api-allow": "W:127.0.0.1",
+    "devices": "all"
+  }
+  ```
+- The `hashrate.value` can be used to throttle or allocate ASICs proportionally.
+
+---
+
+## 3. **Execution Layer**
+- A **capsule manager daemon** watches for capsule files.
+- When a capsule is valid and within its execution window:
+  - Launch the miner with the generated config.
+  - Monitor hashrate via miner API.
+  - Stop the miner when `execution.stop_at` is reached.
+
+---
+
+## 4. **Proof & Audit**
+- Collect share logs and pool receipts during execution.
+- Bundle them back into the capsule under `audit.proofs`.
+- Sign the proof with your project’s key.
+- This makes the capsule verifiable and tradable.
+
+---
+
+## 5. **Tokenization (Optional)**
+- Mint a token that represents ownership of the capsule.
+- Holders can redeem the token for hashpower slices.
+- This is how you make “hashpower rights” tradable in your blockchain ecosystem.
+
+---
+
+## ⚠️ Reality Check
+- The declared number in your file (`10^31 H/s`) is **not physically achievable**.  
+- ASICs will only deliver their real capacity (e.g., ~100 TH/s each).  
+- Your project must record **observed hashrate** in proofs, so buyers see what was actually delivered.
+
+---
+
+## ✅ Summary
+As a project:
+1. Parse the capsule JSON.  
+2. Generate miner configs from its fields.  
+3. Launch miners during the execution window.  
+4. Collect proofs of delivered hashpower.  
+5. Optionally tokenize capsules for resale.  
+
+That’s how you turn a JSON capsule into **real hashpower for people to mine which only may be accepted by projects that work with this group for hashpower please understand mainstream tokens will not work with this logic but you can from a mainstream token from this project :)
 
 
 -----
