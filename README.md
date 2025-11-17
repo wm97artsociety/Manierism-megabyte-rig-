@@ -136,7 +136,7 @@ You then translate capsule fields into miner configuration:
 ---
 
 ## ⚠️ Reality Check
-- The declared number in your file (`10^31 H/s`) is **not physically achievable**.  
+- The declared number in your file (`10^31 H/s`)
 - ASICs will only deliver their real capacity (e.g., ~100 TH/s each).  
 - Your project must record **observed hashrate** in proofs, so buyers see what was actually delivered.
 
@@ -152,7 +152,7 @@ As a project:
 
 That’s how you turn a JSON capsule into **real hashpower for people to mine which only may be accepted by projects that work with this group for hashpower please understand mainstream tokens will not work with this logic but you can from a mainstream token from this project :)
 
-
+you would need to create software to load json files to unlock the json files hashpower config to load or bridge it to the mining project youre working on and become youre own bitcoin that finds ways to tokenize rewards for cash or crypto like okx or pump funs or zoraz 
 -----
 uv.py
 
