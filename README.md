@@ -2,7 +2,7 @@
 ---
 setting up on pc use 
 
-# Create directories if they don't exist
+Create directories if they don't exist
 os.makedirs(TARGETDIR, exist_ok=True)
 
 print(f"📂 Base Directory: {BASEDIR}")
