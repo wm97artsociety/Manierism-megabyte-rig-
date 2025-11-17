@@ -1,5 +1,16 @@
 # Manierism megabytes.
 ---
+# Marketplaces for Manierism Megabytes
+
+# Main Marketplace 
+https://manierismegabyte.infinityfreeapp.com/index.html
+
+# Sister Marketplace 
+https://payhip.com/Manierismmegabytes
+
+Soon a marketplace will be made to sell files on we were going to go with a ebay like marketplace but we will hold off tell we get the logic together for non digital items but we will do a file marketplace for now tell we get it set up to do non digital items :) look for the new update for the marketplace within 6 months but may process sooner 
+
+---
 setting up on pc use 
 
 Create directories if they don't exist
