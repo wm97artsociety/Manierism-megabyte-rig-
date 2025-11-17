@@ -1,15 +1,5 @@
 # Manierism megabytes.
 ---
-
-alter of life on github check files they changed my vodak file no jsonbin now you think you can think tank us 
-
-
-also if it keeps up i will take way megabytes and jaon files you may have created a file but you do not own the source or outcome of the file growth 📈  as far as of nov 8th i am not reasonable for you're rig blowing up thank git hub meownto you to 
-
-i will be taking my company to webhosting on it own no more github in near future 😘
-
-
------
 uv.py
 
 == Manierism Megabytes Mining Menu ===
