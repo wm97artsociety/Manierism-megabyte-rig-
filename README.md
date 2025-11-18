@@ -15,6 +15,38 @@ i did not mean to leave github i have adhd dislexia if i can get it right that i
 Soon a marketplace will be made to sell files on we were going to go with a ebay like marketplace but we will hold off tell we get the logic together for non digital items but we will do a file marketplace for now tell we get it set up to do non digital items :) look for the new update for the marketplace within 6 months but may process sooner 
 
 ---
+
+sunlight_egp.py 
+
+is a file set up for egp egpyt egp dollar rate 
+having a craze for power eginma i saw it fit 
+to take vodak file and make it for their power grid
+set up with all real kilowatt settings 
+and with that it is declared real power in capsules
+
+do you know what i missed what our power plant 
+if i had a larger community i would ask for community power plant name
+so it ties loyality and love for each other
+a dollar is amazing but love for one another goes above a dollar
+
+a couple other things were missed like location and such 
+but mainly the power plant to declar the real out put of energy
+so we now have Manierism Electrisim power plant
+
+if wanting to sign a PPA or power agreement with us 
+
+please email 
+
+wm97artsociety@gmail.com
+
+updated from time to time when storage gets to full 
+please do not hack this work email thank you 
+
+
+
+
+
+---
 setting up on pc use 
 
 Create directories if they don't exist
