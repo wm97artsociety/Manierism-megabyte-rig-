@@ -15,6 +15,17 @@ i did not mean to leave github i have adhd dislexia if i can get it right that i
 Soon a marketplace will be made to sell files on we were going to go with a ebay like marketplace but we will hold off tell we get the logic together for non digital items but we will do a file marketplace for now tell we get it set up to do non digital items :) look for the new update for the marketplace within 6 months but may process sooner 
 
 ---
+sun_egp.py
+
+is a file that has a reward much larger then sunlight egp
+
+OriginalThe base MB reward is amplified by 1,000,000,000
+
+New sunlight eph base MB reward is amplified by 1,000,000,000,000. due to 1.e+^4 example instead of standard rate of eginma casinos and time is done on double power eginma so instead of a rate like 1.+e4 for example its set up like a clock 1:54pm so when you do it as that rate its actually set up to do 1.e+^54 for a power of eginma at that speed for time then i took the nuculus of the atom of a power of 3 addon overley to get the new ampliferied rate im one last step away from seeing the suns and earths frequency together for a solar eiginma rate for freqeucy of power to mine :)
+
+
+
+
 
 sunlight_egp.py 
 
