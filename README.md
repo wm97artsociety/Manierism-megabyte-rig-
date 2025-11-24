@@ -7,6 +7,10 @@ https://manierismegabyte.infinityfreeapp.com/index.html
 
 # Stock Market (Mom & Pop exchange beta in works)
 
+trading halted for buying,selling tell i get the market working right 
+
+most likely done in 3 days 
+
 https://manierismegabyte.infinityfreeapp.com/stock.html?i=1
 
 # Sister Marketplace 
