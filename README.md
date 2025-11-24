@@ -5,6 +5,10 @@
 # Main Marketplace 
 https://manierismegabyte.infinityfreeapp.com/index.html
 
+# Stock Market (Mom & Pop exchange beta in works)
+
+https://manierismegabyte.infinityfreeapp.com/stock.html?i=1
+
 # Sister Marketplace 
 https://payhip.com/Manierismmegabytes
 
