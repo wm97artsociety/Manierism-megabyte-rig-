@@ -13,13 +13,15 @@ trading halted for buying,selling tell i get the market working right
 
 # - sell button (7 kilowatts $1 sell button)
 
+# - database update for one download per payment or use 
+
 # in progress 
 
 # - cryptocurrency cashout update if needed
 
 # - swap feature updated for all rewards with correct rate of conversion of epoch eginma light speed 
 
-# - database update for one download per payment or use 
+# - live order book update green sell now button, red buy now button 
 
 # - after trading will start 
 
