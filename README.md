@@ -11,13 +11,15 @@ trading halted for buying,selling tell i get the market working right
 
 # buy button fixed for $0.50 for 150 kilowatts 
 
-# in progress 
-
 # - sell button (7 kilowatts $1 sell button)
+
+# in progress 
 
 # - cryptocurrency cashout update if needed
 
 # - swap feature updated for all rewards with correct rate of conversion of epoch eginma light speed 
+
+# - database update for one download per payment or use 
 
 # - after trading will start 
 
