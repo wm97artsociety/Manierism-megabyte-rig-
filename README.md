@@ -11,7 +11,10 @@ trading halted for buying,selling tell i get the market working right
 
 # buy button fixed for $0.50 for 150 kilowatts 
 
-# - sell button (7 kilowatts $1 sell button)
+# - sell button (7 kilowatts $1 sell button) - $0.80 usd sent to account balances when sending $1 + $0.35 watts dollar per dollar exchanged  
+
+-80% kept to you for trading plus 35% given in watts for total profit 115% usd + watts dollar 
+- 20% first year marketplace fee 
 
 # - database update for one download per payment or use 
 
