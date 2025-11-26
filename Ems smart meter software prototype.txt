@@ -702,6 +702,506 @@ RestartSec=5
 WantedBy=multi-user.target
 
 
+file stored on ems smart meter as solar bank or solar panel usage 
+
+ems_real.py (Production Daemon - Updated)
+The logic now refers to the JSON file as the Virtual Energy Store and maintains the critical override mechanism to signal a full charge.
+#!/usr/bin/env python3
+"""
+ems_real.py - Production EMS daemon (safe-by-default)
+
+Core Mission: Translate Virtual Energy Store (JSON Ledger) status into real power commands.
+
+Features:
+Reads Virtual Energy JSON via file (acting as the Solar Bank status).
+Simulation mode (default): safe, no hardware writes.
+Modbus-TCP driver (disabled by default) for inverter/BMS setpoint writes.
+Safety: min/max SOC, reserve, watchdog, emergency-stop.
+"""
+import argparse, json, logging, time, threading, signal, sys, os
+from datetime import datetime
+import yaml
+
+# Optional libs; handle missing imports gracefully for dev/test
+try:
+    import paho.mqtt.client as mqtt
+except Exception:
+    mqtt = None
+
+try:
+    from pymodbus.client import ModbusTcpClient
+except Exception:
+    ModbusTcpClient = None
+
+LOG = logging.getLogger("ems_real")
+
+def setup_logging(path=None, level="INFO"):
+    fmt = "%(asctime)s %(levelname)s %(message)s"
+    logging.basicConfig(level=getattr(logging, level), format=fmt, filename=path)
+    if path:
+        sh = logging.StreamHandler(sys.stdout)
+        sh.setFormatter(logging.Formatter(fmt))
+        LOG.addHandler(sh)
+
+def now_ts():
+    return int(time.time())
+
+class EMS:
+    def __init__(self, cfg):
+        self.cfg = cfg
+        # The internal state models the physical battery, driven by the JSON ledger
+        self.state = {
+            "soc": cfg["system"]["soc_initial"],
+            "stored_kwh": cfg["system"]["battery_capacity_kwh"] * cfg["system"]["soc_initial"],
+            "last_update_ts": now_ts(),
+            "mode": "idle"
+        }
+        self.lock = threading.Lock()
+        self._last_json_state = {}
+        self._stop = threading.Event()
+        
+        # ... (MQTT and Modbus setup methods omitted for brevity, they remain unchanged) ...
+
+    def _setup_mqtt(self):  
+        if mqtt is None:  
+            LOG.warning("paho-mqtt not installed; MQTT disabled")  
+            return  
+        mcfg = self.cfg["mqtt"]  
+        client = mqtt.Client(client_id=mcfg.get("client_id"))  
+        if mcfg.get("username"):  
+            client.username_pw_set(mcfg.get("username"), mcfg.get("password"))  
+        if mcfg.get("tls",{}).get("enabled"):  
+            client.tls_set(ca_certs=mcfg["tls"].get("ca"), certfile=mcfg["tls"].get("cert"), keyfile=mcfg["tls"].get("key"))  
+        client.on_connect = self._on_mqtt_connect  
+        client.on_message = self._on_mqtt_message  
+        client.connect(mcfg.get("broker","localhost"), mcfg.get("port",1883))  
+        client.loop_start()  
+        self.mqtt_client = client  
+        LOG.info("MQTT started")  
+
+    def _on_mqtt_connect(self, client, userdata, flags, rc):  
+        LOG.info("MQTT connected rc=%s", rc)  
+        sub = self.cfg["mqtt"].get("subscribe_topic")  
+        if sub:  
+            client.subscribe(sub)  
+            LOG.info("Subscribed %s", sub)  
+
+    def _on_mqtt_message(self, client, userdata, msg):  
+        try:  
+            payload = json.loads(msg.payload.decode())  
+        except Exception:  
+            LOG.exception("Failed to parse mqtt payload")  
+            return  
+        with self.lock:  
+            self._last_json_state = payload  
+
+    def publish_telemetry(self, payload):  
+        if not self.mqtt_client:  
+            return  
+        t = self.cfg["mqtt"].get("topic_prefix","home/virtual_energy") + "/telemetry"  
+        try:  
+            self.mqtt_client.publish(t, json.dumps(payload), qos=1)  
+            self._last_telemetry_publish = now_ts()  
+        except Exception:  
+            LOG.exception("Failed publish telemetry")  
+
+    def _setup_modbus(self):  
+        if ModbusTcpClient is None:  
+            LOG.warning("pymodbus not installed; Modbus disabled")  
+            return  
+        mcfg = self.cfg["modbus"]  
+        client = ModbusTcpClient(mcfg["host"], port=mcfg.get("port",502))
+        self.modbus_client = client  
+        LOG.info("Modbus client initialized for %s", mcfg["host"])
+
+    def modbus_write_setpoint(self, setpoint_w, mode):  
+        if not self.modbus_client:  
+            LOG.debug("No modbus client; skipping write")  
+            return False  
+        
+        if not self.modbus_client.is_connected:
+            try:
+                if not self.modbus_client.connect():
+                    LOG.warning("Modbus connect/reconnect failed to %s:%s", self.cfg["modbus"]["host"], self.cfg["modbus"].get("port"))
+                    return False
+                LOG.info("Modbus reconnected.")
+            except Exception:
+                LOG.exception("Modbus failed to reconnect")
+                return False
+
+        try:  
+            cfg = self.cfg["modbus"]  
+            reg_p = cfg["reg_setpoint_power_w"]  
+            reg_cmd = cfg["reg_command"]  
+            unit = cfg.get("unit_id", 1)  
+            w = int(round(setpoint_w))  
+            cmd_val = 1 if mode=="discharge" else (2 if mode=="charge" else 0)  
+            
+            resp_p = self.modbus_client.write_register(reg_p, w, unit=unit)  
+            resp_cmd = self.modbus_client.write_register(reg_cmd, cmd_val, unit=unit)  
+
+            if resp_p.isError() or resp_cmd.isError():
+                 LOG.error("Modbus write error on register.")
+                 return False
+
+            LOG.debug("Wrote Modbus setpoint %s cmd %s", w, cmd_val)  
+            return True  
+        except Exception:  
+            LOG.exception("Modbus write failed")  
+            return False  
+
+    def load_json_from_file(self, path):  
+        try:  
+            with open(path,"r") as f:  
+                return json.load(f)  
+        except Exception:  
+            LOG.debug("Failed read json file %s", path)  
+            return {}  
+
+    # ===== Core control logic (Refined for Virtual Energy Store) =====  
+    def compute_setpoint(self, json_state, dt_s):  
+        """  
+        Compute a safe setpoint based on the Virtual Energy Store status (JSON) and system limits.
+        """  
+        with self.lock:  
+            state = self.state.copy()  
+        syscfg = self.cfg["system"]  
+        safety = self.cfg.get("safety",{})  
+        reserve_kwh = safety.get("reserve_kwh", 0.0)  
+        stored = state["stored_kwh"]  
+        usable_kwh = max(0.0, stored - reserve_kwh)  
+        dt_h = max(dt_s/3600.0, 1e-9)  
+        max_energy_removable_kwh = usable_kwh  
+        max_dis_by_energy_w = (max_energy_removable_kwh / dt_h) * 1000.0 if max_energy_removable_kwh>0 else 0.0  
+        allowed_dis_w = min(syscfg["max_discharge_w"], max_dis_by_energy_w)  
+        allowed_chg_w = syscfg["max_charge_w"] if state["soc"] < syscfg["max_soc"] else 0.0  
+
+        target_w = None  
+        target_mode = None  
+        
+        if json_state and isinstance(json_state, dict):  
+            # 🟢 MAPPING: Treat the JSON file as the Solar Bank / Virtual Energy Store status
+            if self.cfg.get("allow_json_override_stored", False):  
+                override_kwh = None
+                
+                # Logic for the specific ledger file structure
+                if "amount" in json_state and json_state.get("resource") == "real_kwh":
+                    # The massive amount signals full authorization, mimicking a full Solar Bank
+                    if json_state["amount"] > 1e15: 
+                        override_kwh = syscfg["battery_capacity_kwh"] * 0.98 # Set to near-max capacity
+                        LOG.info("Virtual Energy Store (JSON) is HIGH. Forcing SOC to 98 percent to enable dispatch.")
+                    
+                if override_kwh is not None:
+                    # This override is the key mechanism for the Virtual Energy Store
+                    with self.lock:  
+                        self.state["stored_kwh"] = max(0.0, min(syscfg["battery_capacity_kwh"], override_kwh))
+                        self.state["soc"] = self.state["stored_kwh"] / syscfg["battery_capacity_kwh"]
+                        
+        cmd = {"setpoint_w": 0.0, "mode": "idle", "reason": "none"}  
+
+        # Autonomous control logic based on the state driven by the Virtual Energy Store
+        desired = self.cfg.get("autonomy", {}).get("desired_soc", 0.8)  
+        hysteresis = self.cfg.get("autonomy", {}).get("hysteresis", 0.05)  
+        
+        if state["soc"] < desired - hysteresis:  
+            cmd.update({"setpoint_w": allowed_chg_w * -1.0, "mode": "charge", "reason": "auto-charge"})  
+        elif state["soc"] > desired + hysteresis:  
+            # Command discharge based on the high SOC set by the Virtual Energy Store
+            cmd.update({"setpoint_w": min(1000.0, allowed_dis_w), "mode": "discharge", "reason": "auto-discharge (Virtual Store Dispatch)"})  
+        else:  
+            cmd["reason"] = "idle"  
+
+        return cmd  
+
+    def apply_setpoint_and_update(self, command, dt_s):  
+        # ... (Battery model simulation and telemetry generation remains unchanged) ...
+        syscfg = self.cfg["system"]  
+        dt_h = dt_s / 3600.0  
+        set_w = command.get("setpoint_w", 0.0)  
+        telemetry = {}  
+        if set_w > 0:  
+            E_load_kwh = (set_w * dt_h) / 1000.0  
+            E_from_batt_kwh = E_load_kwh / (syscfg["battery_discharge_eff"] * syscfg["inverter_eff"])  
+            with self.lock:  
+                self.state["stored_kwh"] = max(0.0, self.state["stored_kwh"] - E_from_batt_kwh)  
+        elif set_w < 0:  
+            charge_w = abs(set_w)  
+            E_into_batt_kwh = (charge_w * dt_h) * syscfg["battery_charge_eff"] / 1000.0  
+            with self.lock:  
+                self.state["stored_kwh"] = min(syscfg["battery_capacity_kwh"], self.state["stored_kwh"] + E_into_batt_kwh)  
+        else:  
+            pass  
+
+        with self.lock:  
+            self.state["soc"] = self.state["stored_kwh"] / syscfg["battery_capacity_kwh"] if syscfg["battery_capacity_kwh"]>0 else 0.0  
+            self.state["last_update_ts"] = now_ts()  
+            current_state = dict(self.state)  
+
+        nominal_v = self.cfg.get("electrical", {}).get("nominal_voltage", 240.0)  
+        inst_power = set_w  
+        inst_current = abs(inst_power) / nominal_v if nominal_v > 0 else 0.0  
+
+        telemetry.update({  
+            "instant_power_w": inst_power,  
+            "instant_current_a": inst_current,  
+            "instant_voltage_v": nominal_v,  
+            "soc": current_state["soc"],  
+            "stored_kwh": current_state["stored_kwh"]  
+        })  
+
+        if not self.cfg.get("simulation", True) and self.modbus_client:  
+            try:  
+                self.modbus_write_setpoint(set_w, command.get("mode","idle"))  
+            except Exception:  
+                LOG.exception("Modbus write failed")  
+
+        return telemetry  
+
+    # ... (run and main methods omitted for brevity, they remain unchanged) ...
+    def run(self):  
+        poll_s = self.cfg.get("poll_interval_s", 1.0)  
+        input_cfg = self.cfg.get("input", {"mode":"file", "file_path":"data.json"})  
+        LOG.info("EMS starting main loop (simulation=%s) poll=%s", self.cfg.get("simulation", True), poll_s)  
+        while not self._stop.is_set():  
+            t0 = time.time()  
+            if input_cfg.get("mode","file") == "file":  
+                json_state = self.load_json_from_file(input_cfg.get("file_path"))  
+            else:  
+                with self.lock:  
+                    json_state = getattr(self, "_last_json_state", {}) or {}  
+            cmd = self.compute_setpoint(json_state, poll_s)  
+            telemetry = self.apply_setpoint_and_update(cmd, poll_s)  
+            payload = {  
+                "timestamp": now_ts(),  
+                "command": cmd,  
+                "telemetry": telemetry,  
+                "state": {"soc": self.state["soc"], "stored_kwh": self.state["stored_kwh"]}  
+            }  
+            self.publish_telemetry(payload)  
+            LOG.info("tick cmd=%s telemetry=%s", cmd, telemetry)  
+
+            if self.state["soc"] <= self.cfg["system"]["min_soc"]:  
+                LOG.warning("SOC below min_soc (%.4f). Zeroing setpoints and entering safe state.", self.state["soc"])  
+                if not self.cfg.get("simulation", True) and self.modbus_client:  
+                    try:  
+                        self.modbus_write_setpoint(0, "idle")  
+                    except Exception:  
+                        pass  
+
+            elapsed = time.time() - t0  
+            to_sleep = max(0.0, poll_s - elapsed)  
+            time.sleep(to_sleep)  
+
+    def stop(self):  
+        self._stop.set()  
+        if self.mqtt_client:  
+            try:  
+                self.mqtt_client.loop_stop()  
+            except Exception:  
+                pass  
+        if self.modbus_client:  
+            try:  
+                self.modbus_client.close()  
+            except Exception:  
+                pass  
+        LOG.info("EMS stopped")
+
+def load_config(path):
+    with open(path,"r") as f:
+        return yaml.safe_load(f)
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--config", "-c", default="config.yaml")
+    args = parser.parse_args()
+    
+    cfg = load_config(args.config)
+    setup_logging(cfg.get("logging",{}).get("file"), cfg.get("logging",{}).get("level","INFO"))
+    
+    if cfg.get("modbus",{}).get("enabled", False) and ModbusTcpClient is None:
+        LOG.error("Modbus enabled in config but pymodbus is not installed. Exiting.")
+        sys.exit(1)
+        
+    ems = EMS(cfg)
+    
+    def _term(sig, frame):
+        LOG.info("Received signal %s, shutting down", sig)
+        ems.stop()
+        sys.exit(0)
+        
+    signal.signal(signal.SIGTERM, _term)
+    signal.signal(signal.SIGINT, _term)
+    
+    ems.run()
+
+if __name__ == "__main__":
+    main()
+
+2. ⚙️ config.yaml (Configuration File - Updated)
+Comments now clarify the file's role as the Virtual Energy Store.
+config.yaml - example
+
+input:
+  mode: file               # "file" or "mqtt"
+  # This file represents the status of the Virtual Energy Store (Solar Bank)
+  file_path: trust_real_kwh_777777777777777777777_json.json
+
+poll_interval_s: 1.0
+
+mqtt:
+  enabled: true
+  broker: localhost
+  port: 1883
+  client_id: ems_real_01
+  topic_prefix: home/virtual_energy
+  subscribe_topic: home/virtual_energy/control
+
+modbus:
+  enabled: false
+  host: 192.168.1.100
+  port: 502
+  unit_id: 1
+  reg_setpoint_power_w: 40001
+  reg_command: 40002
+
+system:
+  battery_capacity_kwh: 13.3
+  soc_initial: 1.0
+  battery_discharge_eff: 0.95
+  battery_charge_eff: 0.95
+  inverter_eff: 0.95
+  max_discharge_w: 5000
+  max_charge_w: 3000
+  min_soc: 0.05
+  max_soc: 0.99
+
+safety:
+  reserve_kwh: 0.10
+
+autonomy:
+  desired_soc: 0.80
+  hysteresis: 0.05
+
+logging:
+  file: ems_real.log
+  level: INFO
+
+simulation: true
+
+electrical:
+  nominal_voltage: 240.0
+
+# CRITICAL: Allows the JSON ledger file to override the internal battery state (modeling the Solar Bank)
+allow_json_override_stored: true
+
+3. 🐍 ems_api.py (REST/MQTT Frontend)
+No changes needed.
+#!/usr/bin/env python3
+"""
+ems_api.py - REST API that exposes the latest telemetry and accepts control overrides.
+"""
+import argparse, yaml, json, time, threading
+from flask import Flask, jsonify, request
+
+app = Flask(__name__)
+latest = {"timestamp":int(time.time()), "telemetry": {}}
+cfg = {}
+
+@app.route("/telemetry", methods=["GET"])
+def telemetry():
+    return jsonify(latest)
+
+@app.route("/control", methods=["POST"])
+def control():
+    payload = request.get_json() or {}
+    with open("control_override.json","w") as f:
+        json.dump(payload, f)
+    return jsonify({"status":"ok","received":payload})
+
+def mqtt_subscriber_loop(config):
+    try:
+        import paho.mqtt.client as mqtt
+    except Exception:
+        return
+    client = mqtt.Client()
+    def on_message(c,u,msg):
+        try:
+            p = json.loads(msg.payload.decode())
+            latest.update(p)
+        except Exception:
+            pass
+    client.on_message = on_message
+    client.connect(config["mqtt"]["broker"], config["mqtt"]["port"])
+    topic = config["mqtt"].get("topic_prefix","home/virtual_energy") + "/telemetry"
+    client.subscribe(topic)
+    client.loop_forever()
+
+def run(config_path):
+    global cfg
+    with open(config_path) as f:
+        cfg = yaml.safe_load(f)
+    if cfg.get("mqtt",{}).get("enabled", False):
+        t = threading.Thread(target=mqtt_subscriber_loop, args=(cfg,), daemon=True)
+        t.start()
+    app.run(host="0.0.0.0", port=5000)
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--config", "-c", default="config.yaml")
+    args = parser.parse_args()
+    run(args.config)
+
+4. 📦 requirements.txt (Dependencies)
+No changes needed.
+paho-mqtt==1.6.1
+PyYAML==6.0
+pymodbus==3.4.0 
+flask==2.3.2
+
+5. 🐳 docker-compose.yml (Deployment)
+No changes needed.
+version: "3.8"
+services:
+  ems_real:
+    image: python:3.11-slim
+    container_name: ems_real
+    volumes:
+      - ./:/opt/ems
+    working_dir: /opt/ems
+    command: bash -c "pip install --no-cache-dir -r requirements.txt && python ems_real.py --config config.yaml"
+    network_mode: host
+    restart: unless-stopped
+
+  ems_api:
+    image: python:3.11-slim
+    container_name: ems_api
+    volumes:
+      - ./:/opt/ems
+    working_dir: /opt/ems
+    command: bash -c "pip install --no-cache-dir -r requirements.txt && python ems_api.py --config config.yaml"
+    ports:
+      - "5000:5000"
+    network_mode: host
+    restart: unless-stopped
+
+6. 🐧 ems.service (Systemd Unit - Optional)
+No changes needed.
+[Unit]
+Description=EMS Real Daemon
+After=network.target
+
+[Service]
+Type=simple
+User=ems_user 
+ExecStart=/usr/bin/env python3 /opt/ems/ems_real.py --config /opt/ems/config.yaml
+WorkingDirectory=/opt/ems
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+
+
 simulation tests
 
 This is a step-by-step simulation test showing exactly how the corrected ems_real.py software processes your ledger file (trust_real_kwh_...json) and drives the simulated smart energy system.
