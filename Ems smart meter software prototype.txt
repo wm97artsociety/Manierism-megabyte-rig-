@@ -1,3 +1,21 @@
+ems smart meter uses json files such as these from the rig 
+
+
+{
+    "wallet_id": "trust",
+    "rig_id": "trust",
+    "node_id": "c590fb1b-44c5-4bd9-b6d1-e2ce14fd1df3",
+    "resource": "real_kwh",
+    "amount": 7.777777777777778e+20,
+    "timestamp": 1761761325.975567,
+    "overlay_constants": {
+        "TE\u041b\u00b2": "TE\u041b\u00b2_CONST_8.88e+17",
+        "E\u00b2\u041b": "E\u00b2\u041b_CONST_2.54e+34",
+        "block_header": "MM_BLOCK_HEADER_2025"
+    }
+}
+
+
 the full EMS software I gave you will read your JSON file and use it to drive a smart-meter-controlled energy system, but only if:
  * Your smart meter provides real-time data in JSON (or your JSON file represents the smart meter's data),
  * Your inverter or power hardware supports remote control (Modbus-TCP, API, or vendor protocol),
