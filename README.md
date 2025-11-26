@@ -35,6 +35,20 @@ https://manierismegabyte.infinityfreeapp.com/stock.html?i=1
 # Sister Marketplace 
 https://payhip.com/Manierismmegabytes
 
+
+# new product added for ems Smart meters 
+
+EMS Smart meter prototype with Json load logic & power bank file system 
+
+# ⚡️ V-EMS Software Bio: The Digital Energy Conductor
+
+The Virtual Energy Management System (V-EMS) is a cutting-edge, proprietary control software designed to bridge the gap between abstract digital energy entitlements and the physical operation of home energy hardware. It functions as the digital brain of your smart energy setup, ensuring that the unique high-value entries in your digital ledger (the JSON file) are immediately and safely converted into usable power for your home.
+
+https://payhip.com/b/xI8J2
+
+
+---
+
 a new folder will be uploaded to help everyone set up a store to sell items where all you need to do is design the lahyout and use the backend through stripe products and php database on infinitityfree hosting static webhosting free 5 GB with possible hope of using 1 tb from terabox to host the extra space for products but thats for the challenge of trying to set up a marketplace for you guys to sell having personal is always best if a marketplace was to get shut down so when my ai gets more mbs ill upload the folder and take off my info for database and let you guys start fresh 
 
 i did not mean to leave github i have adhd dislexia if i can get it right that i over look things and have eginma light speed trigger things on frequency like seeing a cut on a person thats their but is not truly thier the next minute or seeing a baby in a floor mate and then the next second seeing a butterfly or looking at ashes of loved ones turn to loved ones of asshles but i appolygize i know it doesnt mean nothing but studying eginma has been a life long struggle that i learned was eginma 
