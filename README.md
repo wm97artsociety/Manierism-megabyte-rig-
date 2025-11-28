@@ -6,33 +6,7 @@
 https://manierismegabyte.infinityfreeapp.com/index.html
 
 
-# closed ai will not help the process of the marketplace and with that it has ended the process of getting you a marketplace maybe you find one somewhere eles but im done im moving out the usa 
-
-# Stock Market (Mom & Pop exchange beta in works)
-
-trading halted for buying,selling tell i get the market working right 
-
-# buy button fixed for $0.50 for 150 kilowatts 
-
-# - sell button (7 kilowatts $1 sell button) - $0.80 usd sent to account balances when sending $1 + $0.35 watts dollar per dollar exchanged  
-
--80% kept to you for trading plus 35% given in watts for total profit 115% usd + watts dollar 
-- 20% first year marketplace fee 
-
-# - database update for one download per payment or use 
-
-# in progress 
-
-# - cryptocurrency cashout update if needed
-
-# - swap feature updated for all rewards with correct rate of conversion of epoch eginma light speed 
-
-# - live order book update green sell now button, red buy now button 
-
-# - after trading will start 
-
-most likely done in 3 days 
-
+# Stock Market (Mom & Pop exchange beta mode actived looking for testers) 
 https://manierismegabyte.infinityfreeapp.com/stock.html?i=1
 
 # Sister Marketplace 
