@@ -5,6 +5,9 @@
 # Main Marketplace 
 https://manierismegabyte.infinityfreeapp.com/index.html
 
+
+# closed ai will not help the process of the marketplace and with that it has ended the process of getting you a marketplace maybe you find one somewhere eles but im done im moving out the usa 
+
 # Stock Market (Mom & Pop exchange beta in works)
 
 trading halted for buying,selling tell i get the market working right 
