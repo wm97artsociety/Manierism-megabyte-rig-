@@ -6,6 +6,13 @@
 
 https://manierism.loveslife.biz
 
+# sub market link (active)
+
+                home page
+https://manierismmegabyte.gamer.gd/index.html
+              stock market
+https://manierismmegabyte.gamer.gd/stocks.html
+
 
 # Stock Market (Mom & Pop exchange beta mode actived looking for testers) 
 https://manierism.loveslife.biz/stock.html?i=1
