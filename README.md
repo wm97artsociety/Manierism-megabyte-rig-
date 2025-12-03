@@ -2,12 +2,13 @@
 ---
 # Marketplaces for Manierism Megabytes
 
-# Main Marketplace 
-https://manierismegabyte.infinityfreeapp.com/index.html
+# Main Marketplace comes back on in 3 days
+
+https://manierism.loveslife.biz
 
 
 # Stock Market (Mom & Pop exchange beta mode actived looking for testers) 
-https://manierismegabyte.infinityfreeapp.com/stock.html?i=1
+https://manierism.loveslife.biz/stock.html?i=1
 
 # Sister Marketplace 
 https://payhip.com/Manierismmegabytes
