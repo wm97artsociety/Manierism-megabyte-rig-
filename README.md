@@ -11,7 +11,7 @@ https://manierism.loveslife.biz
                 
 home page: https://manierismmegabyte.gamer.gd/index.html
             
-stock market: https://manierismmegabyte.gamer.gd/stocks.html
+stock market: https://manierismmegabyte.gamer.gd/s.html 
 
 
 # Stock Market (Mom & Pop exchange beta mode actived looking for testers) 
