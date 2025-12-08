@@ -2,7 +2,9 @@
 ---
 # Marketplaces for Manierism Megabytes
 
-Manierism store template is here the only errors are to the swap features while adding you're own product links 
+Manierism store template is here the only errors are to the swap feature section needs a update to connect wallet balance php with swap feature and html logic 
+
+while adding you're own product links of course 
 
 Add you're hosting site info, product links change simple things on the marketplace and you're set to sell ❤️
 
