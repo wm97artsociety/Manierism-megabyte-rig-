@@ -1,5 +1,13 @@
 # Manierism megabytes.
 ---
+# i have tried to set this rig up many ways to get you guys actual usd or a form of fiat and every source has been faulty ai has not helped no country finds the source of the rig to use for a asset dollar right now it may become something if people add liquidity to a pool but to earn a reward for you to do something like mining without paying to transact for fiat is not possible at this time
+
+im not saying this money will be faulty forever it just may never be vauled by financial advisors or countries of fiat currency with that it makes it harder to actually turn it to a source of income for you guys its turned more to a study of electricity and if the luck is ever in you're favor to earn from this rig say to you're self you're blessed but i hooked many formulas over 30 to make this rig without a chance at making money no api is working no hashpower is getting paid for no bandwidth can be sold its almost like a internet boycot on you guys to have money so if you do use the money form you're own stores and logic for rewards try to earn money from the rewards such as watts dollar and setting up a play house to play games but ill be back later after helping my family 
+
+
+
+
+
 # Marketplaces for Manierism Megabytes
 
 Manierism store template is here the only errors are to the swap feature section needs a update to connect wallet balance php with swap feature and html logic 
