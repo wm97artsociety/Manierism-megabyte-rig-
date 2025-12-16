@@ -44,6 +44,23 @@ home page: https://manierismmegabyte.gamer.gd/index.html
             
 stock market: https://manierismmegabyte.gamer.gd/s.html 
 
+# Games with ad based win fall
+
+# Support the developer and Winfall
+# Click continue to play the game.
+
+# this game blockblast needs a touch of work to make it a winfall after i verify at least 72 hours of play on the sweep.html with payment i will set payment for winfall unlocking free play and rewards of usd 
+
+# with this ad based reward their is 4 style rewards to do that unlock the game play each one is a small task to build up the winfall usd rewards and unlocks more funding for the gameplay after the 4 rewards are done within 45-60 second staying on the page sometimes best on pc with camera for motion detection finger duck hunting style retro game 🎯 😀
+
+# this game is fun but needs just a touch of the older file i worked on to rotate blocks in hopes that my code is correct and if not let me know please that with the new update to the website it should load ad based rewards to build up winfall usd then once button is unlocked for reward it redirects you back to the game page to play the game 
+
+games:https://manierismmegabyte.gamer.gd/sweep.html
+
+# let me know if their is a error in ad based win fall rewards 
+
+# I found a legit and legalized way to run a sweepstakes casino that builds rewards for you guys to play under a win fall of sweepstakes and chance based winning or skill based logic gaming no need for licenses long live ceaser 
+
 
 # Stock Market (Mom & Pop exchange beta mode actived looking for testers) 
 https://manierism.loveslife.biz/stock.html?i=1
