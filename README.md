@@ -71,7 +71,39 @@ Ad funds from this html go to users and 2/10th of profit is stored for community
 
 As admin and co-founder i felt it was important to give at least 80% of profit to community as their is 15% tax on crypto currency for $10,000 and 36% or so for fiat currencies i felt it was right to give 65% profit back to community for crypto investments and 44% total profit in fiat for this watt epoch rig but with the eooch of $17 watt dollars it regives 36% able to resll for a full 1000% for a total kf 100 kilowatts exchangable to kilowatts at $9.017 a kilowatt making you a profit of 865% for cryptocurrency, and 844% for $1 used on the stock.html when someone buys you're 100 kilowatts making you a true profit in cash usd $84.40 for fiat anf $86.50 in cryptocurrency as community starts market fee is 20% when selling kilowatt or $0.20 fiat/crypto return of investment meaning when a sale haopens the fee is took and you are reward $0.80 to you're account 
 
-As time goes on this 20% will lovee to less then 2% we are just giving proper timing to growth epoch and light speed of rate of currency for fiat usd we can handle if we had more fundong the rate would lower for a better rate but starting out 20% helps growth of company to growth while each quarter of raised money of each year we will revaule the amount of percentage taken from community to be fair to everyone 
+While their is also other ways to epoch your account even on stocks, crypto or this rig 
+
+if you follow these steps here you can easily poach your money and get more reward for a token or Fiat 
+
+step one you start with a amount of per se $10 in one fiat currency or cryptocurrency 
+
+step 2 you look at the next conversion rate that doubles or quadruples the amount of tokens that you earn from Exchange 
+
+step three instead of cashing out that single exchange look for another token or fiat currency that multiplies that right by another decimal rate 
+
+so for example if one token has a rate of $10 USD for 100,000 tokens and the next rate has 200,000 tokens for that rate of $10 and the next conversion rate that you would have cashed out on before that has a conversion rate for this token set to have 555,000 tokens 
+
+each time that you convert the token to a lower decimal from the standard rate that you put in increases token supply of balance and dollar amount 
+
+so by the second or third transaction Exchange you have extra money to exchange from tokens 
+
+which can be a rate of a couple pennies in micro cents or dollars if you have larger funding 
+
+when doing this epoch please do research on each token to make sure there's enough funding and liquidy to swap over amounts 
+
+you can always use trusted exchanges that show liquidable tokens to exchange on for different rates of income rates for epoch
+
+Example for fiat/crypto epoch of light speed trading long live crypto currency and Satoshi nakamoto and their team of investors 
+
+(1) $10.00 usd 100,000 tokens tron - token price 0.001
+
+(2) $10.00 usd same vaule 125,000 tokens btt tron increase of 25,000 profit of 0.02 usd per say - token price 0.0005
+
+(3) $10.02 usd same vaule 275,000 tomens hamster tron increase of 150,000 profit of 0.15 usd per say - token price 0.00075
+
+(4) $10.17 usd same vaule 500,000 tokens wink tron increase of 225,000 profit of 0.40 usd per say - token price  0.00005
+
+As time goes on this 20% will lower to less then 2% we are just giving proper timing to growth epoch and light speed of rate of currency for fiat usd we can handle if we had more fundong the rate would lower for a better rate but starting out 20% helps growth of company to growth while each quarter of raised money of each year we will revaule the amount of percentage taken from community to be fair to everyone 
 
 We want to grow witb you guys bot take advantage of youre love, care and honesty so please stay and maybe will make this a mona lisa of the computer world it starts with you as a community it takes you the community to grow together to make it a utopia you want to see if you have a dream base it on these rewards and may the world bless you in fiat for trying just trying is all it took many of the great thinkers of our time think like them and if you get stuck we are always here to help with a dream to make you're life a little better in the future 
 
