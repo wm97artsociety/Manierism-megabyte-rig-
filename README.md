@@ -114,6 +114,31 @@ you can always use trusted exchanges that show liquidable tokens to exchange on 
 
 (4) $10.17 usd same vaule 500,000 tokens wink tron increase of 225,000 profit of 0.40 usd per say - token price  0.00005
 
+It works the same way on this htnl to make profit 
+
+You take each factor of grow for megabytes torrents kilowatts watts dollar and bandwidth 
+Swapping rates to make profit from one to another rate
+
+So for example 
+
+$0.05=(1)megabyte
+$0.017=(1)kilowatt
+$0.30=(1) bandwidth 
+$0.05=(1) torrents
+$0.05=(1) wattsdollar 
+
+You can swap bandwidth to megabytes or torrents then to kilowatts for a 29x multiplier on a dollar 
+making you a profit of around $30 total aftermarket fees total profit of $24 
+
+if you epoach the $24 again after selling it unlocks 3,600 kilowatts worth approximately $600
+
+Market fee 20% - $30
+
+True profit 80% to community user - $570 after epoch after selling 3,600 kilowatts 
+
+
+----
+
 As time goes on this 20% will lower to less then 2% we are just giving proper timing to growth epoch and light speed of rate of currency for fiat usd we can handle if we had more fundong the rate would lower for a better rate but starting out 20% helps growth of company to growth while each quarter of raised money of each year we will revaule the amount of percentage taken from community to be fair to everyone 
 
 We want to grow witb you guys bot take advantage of youre love, care and honesty so please stay and maybe will make this a mona lisa of the computer world it starts with you as a community it takes you the community to grow together to make it a utopia you want to see if you have a dream base it on these rewards and may the world bless you in fiat for trying just trying is all it took many of the great thinkers of our time think like them and if you get stuck we are always here to help with a dream to make you're life a little better in the future 
