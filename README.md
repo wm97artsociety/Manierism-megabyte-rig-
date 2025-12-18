@@ -20,6 +20,8 @@ and so on
 
 once you make the epoch which takes time to study and lose the grip on betting against a casino you unlock no worries but a game to play logically to win linear betting and if you do this correct you will always be able to turn $5 to $42 binaring you're money to infinity each time you make up to that amount cash out you will make no more funds its set on eginma rate for a casino which if its set at a standard rate its 1-3 bets losses 10 win or 15 double egima like a clock woth power amplifier overlay is 6-10 wins with 25 losses to 30 loses to get a win which is why you guys lose at the casino every time because you are not doing epoch eigma ligjt speed on your bets within 30 hands the epoch of hash power for crash party x goes to at least 20x to 100x in the middle so you have to eginma the rate of bet to 3-4th bet standard at $0.05 and if it hits 20x in 10 hands cash out the $0.80 its $0.30 more then you had it adds up for epoch because every bet increases the win odds like a lottery system by the time you hit 20 losses up to $0.80 total net losses go to $0.25 if it hits a 10x its $2.50 but if it his 20x its $5 then go back to bet base line of $0.05 and play again do not think you will win a huge amount from low betting the epoch is set to only $42 for $5 amount deposit with doubles eginma gold ratio overlay of pi formula with eginma boost for beting it fear isnwhen you are betting you think you will crash you must let the rocket or stock go up do not click buttons click one tike it fails you are only betting $0.05 to make $0.80 a 20 time profit which will hit 1/4the the tike on 120 spins so for every 30 spins at least 4 making you $3.60 profit total betting $0.05 a spin or net win balance after betting around $1.20 makijg you $2.40 in profit then wait for large amounts set you're self higher then 1.7x bets because micro balance betting is fornlarge amounts of more then 1,000-5,000 dollars to earn hundreds or $50 in micro payments but the risk idnhigher for a reward so you always set base like to what you can handle betting andnkeep going laddering  bets to 30-50 bets with that up to $30 total to possibly win $280 in profit you can start with any amount but the rate of win rate is higher wuen you add bigger money because its a crossing point to win per say if you have $5,000 maintaining a $0.05 eginma at 30 bets to $30 is a gold mine others its a risk at $30 so come with 6-10 times the eginma for another overlay of profit boost overlay and count it as the formula was but with a divide ➗ for base bets of $30 under $240-$300 for rate of win rate for.full epoch rate of light speed 
 
+---
+
 
 # Marketplaces for Manierism Megabytes
 
@@ -33,9 +35,13 @@ Happy holiday
 
 Thank you guys for 192 clones on this project cant wait to see what you guys make one day 
 
+---
+
 # Main Marketplace comes back on in 3 days
 
 https://manierism.loveslife.biz
+
+----
 
 # sub market link (active)
  
@@ -44,9 +50,12 @@ home page: https://manierismmegabyte.gamer.gd/index.html
             
 stock market: https://manierismmegabyte.gamer.gd/s.html 
 
+---
 
 # Stock Market (Mom & Pop exchange beta mode actived looking for testers) 
 https://manierism.loveslife.biz/stock.html?i=1
+
+----
 
 # Rig html (Watt epoch rig) 
 
@@ -93,7 +102,9 @@ when doing this epoch please do research on each token to make sure there's enou
 
 you can always use trusted exchanges that show liquidable tokens to exchange on for different rates of income rates for epoch
 
-Example for fiat/crypto epoch of light speed trading long live crypto currency and Satoshi nakamoto and their team of investors 
+----
+
+# Example for fiat/crypto epoch of light speed trading long live crypto currency and Satoshi nakamoto and their team of investors 
 
 (1) $10.00 usd 100,000 tokens tron - token price 0.001
 
@@ -107,7 +118,9 @@ As time goes on this 20% will lower to less then 2% we are just giving proper ti
 
 We want to grow witb you guys bot take advantage of youre love, care and honesty so please stay and maybe will make this a mona lisa of the computer world it starts with you as a community it takes you the community to grow together to make it a utopia you want to see if you have a dream base it on these rewards and may the world bless you in fiat for trying just trying is all it took many of the great thinkers of our time think like them and if you get stuck we are always here to help with a dream to make you're life a little better in the future 
 
-⚡ WATT Epoch Rig ⚡
+---
+
+# ⚡ WATT Epoch Rig ⚡
 Watt Tokens
 0.583959
 Watt Dollars
@@ -158,6 +171,8 @@ Epoch staking compounds continuously — rewards calculated securely on server. 
 
 The rig.html is in 100% working order thank the toster for the help of the holy toast may in bless everyone with bread 
 
+---
+
 # Sister Marketplace 
 https://payhip.com/Manierismmegabytes
 
@@ -165,6 +180,8 @@ https://payhip.com/Manierismmegabytes
 # new product added for ems Smart meters 
 
 EMS Smart meter prototype with Json load logic & power bank file system 
+
+---
 
 # ⚡️ W-EMS Software Bio: The Digital Energy Conductor
 
