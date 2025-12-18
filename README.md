@@ -136,6 +136,13 @@ Market fee 20% - $30
 
 True profit 80% to community user - $570 after epoch after selling 3,600 kilowatts 
 
+Tax amount token from gov $85.50 in crypto currency of 15%
+
+Tax amount token from gov $205.20 in fiat currency of 36% 
+
+Total net profit after taxes what you keep $484.50 in crypto currency 
+
+Total net profit after taxes what you keep $364.80 in fiat currency 
 
 ----
 
