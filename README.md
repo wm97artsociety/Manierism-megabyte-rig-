@@ -52,6 +52,29 @@ https://manierism.loveslife.biz/stock.html?i=1
 
 https://manierismmegabyte.gamer.gd/rig.html
 
+
+The watts epoch rig is perfect for no cpu but graphic acceleration  of web html to make hashpower from html it was the perfect fit for setting up sunlight egp py on html while at first it was going to be a free working energy file but to monetize the abilty of gpu or cpu on html i found graphic acceleration of html that fit for mining on html with this setting in google chrome or Firefox browsers it unlocks mh/s mining with rewards
+
+(1) Please go to settings of PC tablet or phone and unlock graphic acceleration from internet browser 
+
+(2)Then to system settings 
+
+(3)Click use graphic acceleration when available 
+
+This will unlock the feature of more then 3 million hash on 5g singal a second 
+
+Maybe in the future we turn it to a token and trade it for cash in liqiudity pool when more then $10 is raised 
+For 7% sell lock dip feature to 14% rebuy feature always storing 7% but unlocking stable trading as growth happens always increasing rate of profit but unlocking a specific trade amount of 7% each time using the $10 at start to trade for everyone but unlocks the flow of the money over time for approximately 7 months with 100 trades a day if set to token rate 0.01 if set to 0.001 it could be 70 months depending on epoch but staking rewards would be 36.4% or so appropriately on return for investment due to ad based growth of money from community 
+
+Ad funds from this html go to users and 2/10th of profit is stored for community team for daily living needs we take 20% while users take 80% profit together the more a user uses the html the more funds are given over time to community 
+
+
+As admin and co-founder i felt it was important to give at least 80% of profit to community as their is 15% tax on crypto currency for $10,000 and 36% or so for fiat currencies i felt it was right to give 65% profit back to community for crypto investments and 44% total profit in fiat for this watt epoch rig but with the eooch of $17 watt dollars it regives 36% able to resll for a full 1000% for a total kf 100 kilowatts exchangable to kilowatts at $9.017 a kilowatt making you a profit of 865% for cryptocurrency, and 844% for $1 used on the stock.html when someone buys you're 100 kilowatts making you a true profit in cash usd $84.40 for fiat anf $86.50 in cryptocurrency as community starts market fee is 20% when selling kilowatt or $0.20 fiat/crypto return of investment meaning when a sale haopens the fee is took and you are reward $0.80 to you're account 
+
+As time goes on this 20% will lovee to less then 2% we are just giving proper timing to growth epoch and light speed of rate of currency for fiat usd we can handle if we had more fundong the rate would lower for a better rate but starting out 20% helps growth of company to growth while each quarter of raised money of each year we will revaule the amount of percentage taken from community to be fair to everyone 
+
+We want to grow witb you guys bot take advantage of youre love, care and honesty so please stay and maybe will make this a mona lisa of the computer world it starts with you as a community it takes you the community to grow together to make it a utopia you want to see if you have a dream base it on these rewards and may the world bless you in fiat for trying just trying is all it took many of the great thinkers of our time think like them and if you get stuck we are always here to help with a dream to make you're life a little better in the future 
+
 ⚡ WATT Epoch Rig ⚡
 Watt Tokens
 0.583959
