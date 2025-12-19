@@ -146,6 +146,8 @@ Total net profit after taxes what you keep $364.80 in fiat currency
 
 ----
 
+# Epoch light speed airdrop method for profit 
+
 Take a simple airdrop like this pudgy penguin airdrop ending on December 30th 2025 https://penguinu.com/airdrop/ for 1,000,000 tokens and epoch the reward from $0.50 usd to $17 usd by this formula to turn a profit in the future 
 
  Growth Formula & Watts Dollar
