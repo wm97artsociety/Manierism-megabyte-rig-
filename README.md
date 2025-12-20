@@ -247,6 +247,59 @@ We want to grow witb you guys bot take advantage of youre love, care and honesty
 
 ---
 
+# starting a epoch light speed store off merchant credit line usd
+
+step one you go to a website like this that has a credit line of up to $1,000 
+
+Imagine if your paycheck could build your credit
+Get up to $1,000 to spend now. Build credit by paying it back automatically each time you get paid.4
+
+https://perpay.com/?_gl=1*1ks8hv4*_gcl_au*OTkzODI3ODE0LjE3NjYyMDY0OTUuMTM4MTI3NTQwMy4xNzY2MjA2NjY3LjE3NjYyMDgyNzA.
+
+you sign up on the URL above for per pay marketplace which is my personal URL for invitation 
+
+terms for using url 
+
+make you're first $60 purchase once signed up from this url and receive a bonus up of up to $1,000 to start a store for the American dream and $30-60 back in payment for purchase 
+
+its a true win win who doesnt love free cash and a product for signing up 
+
+dont feel like paying $60 for one month cut it to 3-5 months only pay $20 to $12 or so a month 
+
+if you go off the logic to profit from $12 payment 3 months is perfect because then you can list a item online for $20 get paid once a month for 3 months make $60 plus the $30-60 and sign up bonus of up to $1,000
+
+just do not sign up for the credit card that has fees the credit line does not and the marketplace comes with a app to use on mobile for quick drop shipping 
+
+step two 
+
+you fill out the details for a free credit line to receive up to $1,000 to purchase items 
+
+step 3 
+
+you use the above method from the formula above for epoch eigma light speed to 20e+ or 25e+ of the set amount
+
+setp 4
+
+you can set each item to a rate to mine for a reward once a full token is collected in pool ship asset from ad view payments 
+
+or
+
+you can do standard price payment with a epoch overlay for a payment system 
+
+step 5
+
+when working on the epoch enigma light speed formula for payment system 
+
+you can set your enigma light speed rate for USD return to around 50% in penny model trading to get accurate trading results or 500% for each dollar made for $10 its 5,000% and so on based on rate of 50% 
+
+this info should help you start a life over after covid use knowledge skill and love for a idea to make money do not let the world turn you cold by a thousands thoughts of being denied what you feel is meant for you
+
+strive to overcome the challenge and may the Galaxy bless you for the struggle and strength of trying for a better life 
+
+
+----
+
+
 # ⚡ WATT Epoch Rig ⚡
 Watt Tokens
 0.583959
