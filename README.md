@@ -249,6 +249,9 @@ We want to grow witb you guys bot take advantage of youre love, care and honesty
 
 # starting a epoch light speed store off merchant credit line usd
 
+# up to $1,000 free merchandise credit line https://perpay.com/?_gl=1*1ks8hv4*_gcl_au*OTkzODI3ODE0LjE3NjYyMDY0OTUuMTM4MTI3NTQwMy4xNzY2MjA2NjY3LjE3NjYyMDgyNzA.
+
+
 step one you go to a website like this that has a credit line of up to $1,000 
 
 Imagine if your paycheck could build your credit
