@@ -251,6 +251,7 @@ We want to grow witb you guys bot take advantage of youre love, care and honesty
 
 # up to $1,000 free merchandise credit line https://perpay.com/?_gl=1*1ks8hv4*_gcl_au*OTkzODI3ODE0LjE3NjYyMDY0OTUuMTM4MTI3NTQwMy4xNzY2MjA2NjY3LjE3NjYyMDgyNzA.
 
+# The site set me up with $450 to linear from $450 to binary of $4,500-10,000 over time with the ability to always linear back from the binary $10,000 to $450 to trade for $10,000 again for new products because a credit line does not stop flow of payments unless you abuse the system so you will always have that money if you invest it not use it for personal funds 
 
 step one you go to a website like this that has a credit line of up to $1,000 
 
