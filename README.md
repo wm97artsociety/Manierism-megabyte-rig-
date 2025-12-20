@@ -253,6 +253,10 @@ We want to grow witb you guys bot take advantage of youre love, care and honesty
 
 # The site set me up with $450 to linear from $450 to binary of $4,500-10,000 over time with the ability to always linear back from the binary $10,000 to $450 to trade for $10,000 again for new products because a credit line does not stop flow of payments unless you abuse the system so you will always have that money if you invest it not use it for personal funds 
 
+
+# up to $750 free merchandise credit line https://grouponefreedomcard.com/a/pg1_home.php
+# amount i got from merchant $750 for rate of $500 extra a month after bills 
+
 step one you go to a website like this that has a credit line of up to $1,000 
 
 Imagine if your paycheck could build your credit
