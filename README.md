@@ -1,13 +1,74 @@
 # Manierism megabytes.
 ---
-# you can thank the laws of the internet for a $0.18 hour payment that will not be added due to low cost payment of usage of time on platforms and as well as laws of physics denying the usage of this technology it is a play software that is all it is now have a good day 
+# Okay study group i have good news the rig rs html below is fully working and is now connected to mine hashpower for us together you can receive rewards and mine now cashout will come on stock market html as i fix the last couple updates to swap and exchange 
+
+# Mine Here and pan gold with me 
+# https://manierismmegabyte.gamer.gd/rg.html?i=1 
+
+WATT Epoch Rig
+
+CASH WINDFALL
+$3.02
+
+SUMO POT
+0.002896
+
+GOLD RESERVE
+0.000800
+
+Thank you for joining the pool
+Watt Tokens
+21.168368
+Watt Dollars
+7.519228
+Staked Watt Tokens
+0.000000
+0.0311 GramGold
+0.00906743
+Yeha Lets Pan For Dat Gold I Just Found a Nugget
+Sumokoin (SUMO)
+5.836603
+Hash Power
+112 H/s
+Kilowatts (kWh)
+50.302479
+Capsule MB
+108.42
+Cache MB
+74.87
+Bandwidth MB/s
+201.32
+Torrent Payloads MB
+65.8615
+Mine Off
+Mining active — powering the rig!
+Save Terminal Refresh All
+Epoch Mini Games
+Watch ad to play • Up to 1500× • 1% house fee feeds pots
+
+📺 Watch Ad to Play
+Locked
+Asset 
+Gold
+ Bet Amount 
+0.000000001
+🚀 Crash
+1.00×
+START CASHOUT
+💎 Mines
+
+5 Mines (1500×)
+ START MINES
+1.00×
+CASHOUT
+
+# the ;aws of physics are supposed to be altered to a persons logic not to a rule book with that i will keep studying tell i figure out my errors but mining is set for now :) so happy mining 
+
+# a blockchain maker comes next for you guys with api, terminal, and web based mining for you to mine just about anything so as of the next couple days we will have usd under a hash rate and other countrys currency for a hour rate with hashpower miner api, terminal, and webased for other assets like homes for smart meters and normal ones thats just one updated file thier is 16 new updates coming
+
+# with that it will unlock correct payment for hour wage for hashes for a hourly rate 
 
 
-
-
-# i have tried to set this rig up many ways to get you guys actual usd or a form of fiat and every source has been faulty ai has not helped no country finds the source of the rig to use for a asset dollar right now it may become something if people add liquidity to a pool but to earn a reward for you to do something like mining without paying to transact for fiat is not possible at this time
-
-im not saying this money will be faulty forever it just may never be vauled by financial advisors or countries of fiat currency with that it makes it harder to actually turn it to a source of income for you guys its turned more to a study of electricity and if the luck is ever in you're favor to earn from this rig say to you're self you're blessed but i hooked many formulas over 30 to make this rig without a chance at making money no api is working no hashpower is getting paid for no bandwidth can be sold its almost like a internet boycot on you guys to have money so if you do use the money form you're own stores and logic for rewards try to earn money from the rewards such as watts dollar and setting up a play house to play games but ill be back later after helping my family 
 
 this rig was only set up to study electricity turning the simple processor from a cpu or electricity hashing to a renewal energy it may one day turn to a QRL atom token but finding the right api or setup for this rig is complex gifting money they require me to fill out tax money returns for you to earn money so to give you 75% return on a api would be fractions of a dollar to raise the pool for liquidity but setting it to eginma speed of light changed the process of money a simple $5 with this eginma turns to $42 on fanduel fly x the highest it will go for a epoch at standard betting but losing after due to double eignma betting of power like a clock a standard bat of enigma is like pie or gold ratio so its 3.14 or 3.e+14 for rate with golden ratio of 1.4 or 1.e+4 which would mean to ladder the first 5 bets of $0.05 to a reach of total bet of $0.80 with $0.05 bets or then $0.25 then $0.35 then $0.50 then $0.75 then $1 then $1.50 then $2.50 then $7.50 then $14.50 then $30 and so on doubling you're bet for standard to beat a casino a epoch of a multiplayer of base line bet x mutipler x overlay multipler x eignma rate you would do a standard bet of $0.05 for 15-20 spins then ladder bets with a multipler rate of 2x or so a hand or spin times over lay of higher rate win of at least 20% or 20 times or up to 80% or 80 times multipler by eginma rate of speed of hash rate for multipler so you would do this for example 
 
