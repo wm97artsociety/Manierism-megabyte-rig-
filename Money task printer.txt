@@ -1,0 +1,493 @@
+
+
+- Exact folder layout  
+- Full code for every .py file  
+- Example config.json, log.txt, points.txt contents  
+- Clear comments so even a basic coder can follow  
+
+This version will:
+
+- Detect printer buttons  
+- Map raw codes → friendly names  
+- Open URLs (for your own tools/dashboards/tasks, not ad fraud)  
+- Wait for a set time  
+- Close the browser  
+- Log completions  
+- Track points  
+
+You can later plug in your own micro‑tasks or dashboards.
+
+---
+
+1. Folder structure
+
+Create this folder:
+
+`text
+printer_console/
+│
+├── detect_buttons.py
+├── printer_listener.py
+├── task_runner.py
+├── rewards.py
+├── config.json
+├── log.txt
+├── points.txt
+`
+
+Make all these files (you’ll paste code into them).
+
+---
+
+2. Install Python + libraries
+
+In Command Prompt (after installing Python and checking “Add Python to PATH”):
+
+`bash
+pip install pywinusb
+pip install selenium
+pip install requests
+`
+
+Install a browser driver for Selenium (e.g., ChromeDriver for Chrome) and make sure it’s on your PATH.
+
+---
+
+3. detect_buttons.py — find raw button codes
+
+This script prints raw data every time ANY HID button is pressed.
+
+`python
+
+detect_buttons.py
+
+Purpose: Listen to HID devices and print raw data when buttons are pressed.
+
+import pywinusb.hid as hid
+
+def onrawdata(data):
+    """
+    This function is called every time a HID report is received.
+    'data' is a list of bytes like [0, 23, 0, 0, 0, 0, 0, 0]
+    """
+    print("Raw HID data:", data)
+
+def main():
+    # Get all HID devices
+    alldevices = hid.HidDeviceFilter().getdevices()
+
+    if not all_devices:
+        print("No HID devices found. Is your printer connected?")
+        return
+
+    print("Found HID devices:")
+    for i, device in enumerate(all_devices):
+        print(f"{i}: {device.vendorname} - {device.productname}")
+
+    print("\nPick a device index that might be your printer.")
+    try:
+        index = int(input("Enter device index: "))
+    except ValueError:
+        print("Invalid index.")
+        return
+
+    if index < 0 or index >= len(all_devices):
+        print("Index out of range.")
+        return
+
+    device = all_devices[index]
+    print(f"Using device: {device.vendorname} - {device.productname}")
+
+    try:
+        device.open()
+    except Exception as e:
+        print("Failed to open device:", e)
+        return
+
+    # Set the raw data handler
+    device.setrawdatahandler(onraw_data)
+
+    print("Listening for button presses... Press CTRL+C to stop.")
+    try:
+        while True:
+            pass  # keep script alive
+    except KeyboardInterrupt:
+        print("\nStopping...")
+    finally:
+        device.close()
+
+if name == "main":
+    main()
+`
+
+Usage:
+
+`bash
+python detect_buttons.py
+`
+
+- Choose the device that looks like your printer  
+- Press a button on the printer  
+- You’ll see things like: Raw HID data: [0, 23, 0, 0, 0, 0, 0, 0]  
+- Write down which raw value changes for each button (often data[1] or similar).
+
+Example notes you’d make:
+
+`text
+data[1] = 23 -> "1" button
+data[1] = 41 -> "Cancel" button
+data[1] = 12 -> "Start" button
+`
+
+---
+
+4. config.json — button → task mapping
+
+You will name your buttons (BTN01, BTNCANCEL, etc.) and map them to tasks.
+
+`json
+{
+  "BTN_01": {
+    "type": "open_url",
+    "url": "https://example.com/tool1",
+    "duration_seconds": 15,
+    "reward_points": 1
+  },
+  "BTN_CANCEL": {
+    "type": "open_url",
+    "url": "https://example.com/dashboard",
+    "duration_seconds": 30,
+    "reward_points": 2
+  },
+  "BTN_START": {
+    "type": "open_url",
+    "url": "https://example.com/microtask",
+    "duration_seconds": 45,
+    "reward_points": 3
+  }
+}
+`
+
+You’ll later connect raw codes to these names.
+
+---
+
+5. rewards.py — handle points
+
+Simple file to read/update points.txt.
+
+`python
+
+rewards.py
+
+Purpose: Manage points storage in points.txt
+
+import os
+
+POINTS_FILE = "points.txt"
+
+def getcurrentpoints():
+    if not os.path.exists(POINTS_FILE):
+        return 0
+    try:
+        with open(POINTS_FILE, "r") as f:
+            content = f.read().strip()
+            return int(content) if content else 0
+    except:
+        return 0
+
+def add_points(amount):
+    current = getcurrentpoints()
+    new_total = current + amount
+    with open(POINTS_FILE, "w") as f:
+        f.write(str(new_total))
+    return new_total
+`
+
+Initialize points.txt with:
+
+`text
+0
+`
+
+---
+
+6. task_runner.py — open URL, wait, close, log, add points
+
+This file executes the task.
+
+`python
+
+task_runner.py
+
+Purpose: Run tasks defined in config (open URLs, wait, log, reward).
+
+import time
+import json
+from datetime import datetime
+
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+
+import rewards
+
+LOG_FILE = "log.txt"
+
+def logtask(buttonname, taskinfo, pointsawarded):
+    """
+    Append a line to log.txt documenting the completed task.
+    """
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    line = f"{timestamp} | {buttonname} | {taskinfo.get('url', '')} | +{points_awarded} points\n"
+    with open(LOG_FILE, "a", encoding="utf-8") as f:
+        f.write(line)
+    print("Logged task:", line.strip())
+
+def runopenurltask(buttonname, task_info):
+    """
+    Open a URL in a browser, wait, close, and reward points.
+    """
+    url = task_info.get("url")
+    duration = taskinfo.get("durationseconds", 10)
+    points = taskinfo.get("rewardpoints", 0)
+
+    if not url:
+        print(f"No URL specified for {button_name}")
+        return
+
+    print(f"Opening URL for {button_name}: {url}")
+
+    # Set up Chrome (or your browser of choice)
+    options = ChromeOptions()
+    options.add_argument("--disable-infobars")
+    options.add_argument("--start-maximized")
+
+    # If chromedriver is on PATH, no need to specify executable_path
+    driver = webdriver.Chrome(options=options)
+
+    try:
+        driver.get(url)
+        print(f"Waiting {duration} seconds...")
+        time.sleep(duration)
+    finally:
+        print("Closing browser...")
+        driver.quit()
+
+    # Reward points
+    newtotal = rewards.addpoints(points)
+    print(f"Awarded {points} points. New total: {new_total}")
+
+    # Log
+    logtask(buttonname, task_info, points)
+
+def runtask(buttonname, task_info):
+    """
+    Decide what to do based on the task type.
+    For now we only support 'open_url' to keep it simple.
+    """
+    tasktype = taskinfo.get("type")
+
+    if tasktype == "openurl":
+        runopenurltask(buttonname, task_info)
+    else:
+        print(f"Unknown task type for {buttonname}: {tasktype}")
+`
+
+---
+
+7. printer_listener.py — map raw codes → names → tasks
+
+This file listens for button presses and triggers taskrunner.runtask.
+
+You’ll need to edit the RAWCODETO_BUTTON dict to match your device.
+
+`python
+
+printer_listener.py
+
+Purpose: Listen for printer button presses and trigger tasks.
+
+import json
+import pywinusb.hid as hid
+
+import task_runner
+
+CONFIG_FILE = "config.json"
+
+1) Fill this after using detect_buttons.py
+
+Example mapping: raw value in data[1] -> friendly button name
+RAWCODETO_BUTTON = {
+    # Replace these with your actual codes
+    23: "BTN_01",
+    41: "BTN_CANCEL",
+    12: "BTN_START"
+    # Add more: rawcode: "BTNNAME"
+}
+
+def load_config():
+    with open(CONFIG_FILE, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+CONFIG = load_config()
+
+def handlebutton(buttonname):
+    """
+    Look up button_name in config and run its task.
+    """
+    taskinfo = CONFIG.get(buttonname)
+    if not task_info:
+        print(f"No task configured for {button_name}")
+        return
+
+    print(f"Running task for {button_name}")
+    taskrunner.runtask(buttonname, taskinfo)
+
+def onrawdata(data):
+    """
+    Called by pywinusb when the HID device sends data.
+    'data' is typically a list like [0, code, 0, 0, ...].
+    You may need to adjust which index you use based on your device.
+    """
+    if not data or len(data) < 2:
+        return
+
+    raw_code = data[1]  # often this is where the button code is
+    if raw_code == 0:
+        return  # ignore "no button" reports
+
+    print("Raw HID data:", data, "-> code:", raw_code)
+
+    buttonname = RAWCODETOBUTTON.get(raw_code)
+    if not button_name:
+        print(f"No mapping for raw code {rawcode}. Add it to RAWCODETOBUTTON.")
+        return
+
+    handlebutton(buttonname)
+
+def main():
+    # Find HID devices
+    alldevices = hid.HidDeviceFilter().getdevices()
+
+    if not all_devices:
+        print("No HID devices found. Is your printer connected?")
+        return
+
+    print("Found HID devices:")
+    for i, device in enumerate(all_devices):
+        print(f"{i}: {device.vendorname} - {device.productname}")
+
+    print("\nPick the device index that matches your printer.")
+    try:
+        index = int(input("Enter device index: "))
+    except ValueError:
+        print("Invalid index.")
+        return
+
+    if index < 0 or index >= len(all_devices):
+        print("Index out of range.")
+        return
+
+    device = all_devices[index]
+    print(f"Using device: {device.vendorname} - {device.productname}")
+
+    try:
+        device.open()
+    except Exception as e:
+        print("Failed to open device:", e)
+        return
+
+    device.setrawdatahandler(onraw_data)
+
+    print("Listening for printer button presses... Press CTRL+C to stop.")
+    try:
+        while True:
+            pass
+    except KeyboardInterrupt:
+        print("\nStopping listener...")
+    finally:
+        device.close()
+
+if name == "main":
+    main()
+`
+
+Key piece you manually control:
+
+`python
+RAWCODETO_BUTTON = {
+    23: "BTN_01",
+    41: "BTN_CANCEL",
+    12: "BTN_START"
+}
+`
+
+You build this from your detect_buttons.py findings.
+
+---
+
+8. log.txt and points.txt
+
+Create them as plain text files:
+
+log.txt — empty to start. The program will append lines like:
+
+`text
+2025-12-26 18:20:01 | BTN_01 | https://example.com/tool1 | +1 points
+2025-12-26 18:21:10 | BTN_CANCEL | https://example.com/dashboard | +2 points
+`
+
+points.txt
+
+`text
+0
+`
+
+---
+
+9. How to actually use all this
+
+1. Detect button codes:
+
+   `bash
+   python detect_buttons.py
+   `
+
+   - Pick the device index  
+   - Press each printer button  
+   - Note which data[1] value appears for which button  
+
+2. Fill RAWCODETOBUTTON in printerlistener.py:
+
+   `python
+   RAWCODETO_BUTTON = {
+       23: "BTN_01",
+       41: "BTN_CANCEL",
+       12: "BTN_START"
+       # etc...
+   }
+   `
+
+3. Create/adjust config.json with your URLs/tasks and point values.
+
+4. Make sure points.txt has 0 and log.txt exists (can be empty).
+
+5. Run the listener:
+
+   `bash
+   python printer_listener.py
+   `
+
+6. Press a printer button:
+
+   - Program sees raw HID data  
+   - Converts to BTN_01 (or whatever)  
+   - Looks up in config.json  
+   - Opens the URL  
+   - Waits  
+   - Closes  
+   - Logs  
+   - Adds points  
+
+Your old printer is now a physical micro‑task console to connect with the pc or monitor to open and make micro money from web use.
