@@ -1,6 +1,6 @@
 # Manierism megabytes.
 
-# Money task printer/ Money Task Arcade machine txt file  
+# Money task printer/ Money Task Arcade machine txt file  shopping network feature sleep and earn 😂😂 what do i buy today ohh the grinch suit 
 
 When i get my two bigger printer set up for the flow of money from fiat it will come from these two printer's to give more boost to mining at 50% given to users in rewards and 50% given to pool for growth meaning my 28 button printer will make a $0.01 every 30 seconds or less and my other one will make around $0.05 a 30 second round so as time goes on through the day the pool after creating this software would increase to $10.80 a day for the community off the two printers while $5.40 would be given to the community to fulfill metal, trading cards and extra hash power and fulfillment of more items like gems for bigger hash pool mining 
 
