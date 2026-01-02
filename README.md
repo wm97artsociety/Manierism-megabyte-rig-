@@ -45,6 +45,12 @@ if coded right you guys can list up to 100,000 items forever for as low as $1,00
 
  and she will maintain full rights to retrobae her christmas gift from a loving son 
 
+she was a offical top seller of ebay in 2017 selling over $30,000 in products to help the usa while the team for antiquefinder77 worked with ebay on the first photo ai button that is still used today on the home page to search and take photos to look items up 
+
+we would love for you to rejoin us in selling items not just buying them from us 
+
+we are offering 25 listings free to test the marketplace out but please no illiegal items thank you guys 
+
 # Stock Market (Mom & Pop exchange beta mode actived looking for testers) 
 https://manierism.loveslife.biz/stock.html?i=1
 
