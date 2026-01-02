@@ -1,10 +1,5 @@
 # Manierism megabytes.
 
-# no showed interest in this project 
-
-so this project has now been sold for a penny to anonymous buyer that felt this information in this product was what he needed to go on with his life if you're using this information or you're using this product please quit it is no longer your software to use
-
-
 
 
 # Money task printer/ Money Task Arcade machine txt file  shopping network feature sleep and earn 😂😂 what do i buy today ohh the grinch suit 
