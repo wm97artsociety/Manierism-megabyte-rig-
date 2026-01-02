@@ -1,4 +1,300 @@
-# Manierism megabytes.
+# Manierism megabytes
+
+# Marketplaces for Manierism Megabytes
+
+Manierism store template is here the only errors are to the swap feature section needs a update to connect wallet balance php with swap feature and html logic 
+
+while adding you're own product links of course 
+
+Add you're hosting site info, product links change simple things on the marketplace and you're set to sell ❤️
+
+Happy holiday 
+
+Thank you guys for 192 clones on this project cant wait to see what you guys make one day 
+
+---
+
+# Main Marketplace
+----
+
+# sub market link (active)
+ 
+                
+home page: https://manierismmegabyte.gamer.gd/index.html
+            
+stock market: https://manierismmegabyte.gamer.gd/s.html 
+
+---
+
+# epoch store ran by a loving mother of the project
+
+# as a kid she always wanted tiny homes for people to own where she could lease or sell plots of land for no less then $800 for a single room that could be built on by $350 each room she dreamed of having her own fleamarket to be able to sell people own places to sell to do the american dream 
+
+the market that is being made is a mix of selling at rate of listing products for payment plans that builds store credit and having the ability to sell items cutting the rate of cost it also allows the ability to mine for rewards just like the first html home page: https://manierismmegabyte.gamer.gd/rg.html for mining while allows listing to music for rewards in fiat currency and also the abilty to get paid for clean you heard it right 
+
+She will be offering time payments in micro payments to restart her million dollar cleaning business she once held a cleaning business in michigan that had flow of work with mansions but as she worked so hard to save up money to move on her own she worked three jobs and got sick with mutiple scriosis and got ill losing ability of half her body as a kid i prayed and prayed for her to get better each and every day for 8 months straight just in my head and after 7 months she begain to walk and talk again with the help of doctors and muscle building 
+
+would you join her in a life jounery and goal of finding a joy in selling items and passion in rebuilding her life after 20 years of building her self again
+
+website address in progress after replit finishes updates 
+
+if coded right you guys can list up to 100,000 items forever for as low as $1,000 
+
+
+setting up a epoch store pay little for 6 months, builds store credit and sends product while mining for rewards 
+
+# Stock Market (Mom & Pop exchange beta mode actived looking for testers) 
+https://manierism.loveslife.biz/stock.html?i=1
+
+----
+
+# Rig html (Watt epoch rig) 
+
+https://manierismmegabyte.gamer.gd/rig.html
+
+
+The watts epoch rig is perfect for no cpu but graphic acceleration  of web html to make hashpower from html it was the perfect fit for setting up sunlight egp py on html while at first it was going to be a free working energy file but to monetize the abilty of gpu or cpu on html i found graphic acceleration of html that fit for mining on html with this setting in google chrome or Firefox browsers it unlocks mh/s mining with rewards
+
+(1) Please go to settings of PC tablet or phone and unlock graphic acceleration from internet browser 
+
+(2)Then to system settings 
+
+(3)Click use graphic acceleration when available 
+
+This will unlock the feature of more then 3 million hash on 5g singal a second 
+
+Maybe in the future we turn it to a token and trade it for cash in liqiudity pool when more then $10 is raised 
+For 7% sell lock dip feature to 14% rebuy feature always storing 7% but unlocking stable trading as growth happens always increasing rate of profit but unlocking a specific trade amount of 7% each time using the $10 at start to trade for everyone but unlocks the flow of the money over time for approximately 7 months with 100 trades a day if set to token rate 0.01 if set to 0.001 it could be 70 months depending on epoch but staking rewards would be 36.4% or so appropriately on return for investment due to ad based growth of money from community 
+
+Ad funds from this html go to users and 2/10th of profit is stored for community team for daily living needs we take 20% while users take 80% profit together the more a user uses the html the more funds are given over time to community 
+
+
+As admin and co-founder i felt it was important to give at least 80% of profit to community as their is 15% tax on crypto currency for $10,000 and 36% or so for fiat currencies i felt it was right to give 65% profit back to community for crypto investments and 44% total profit in fiat for this watt epoch rig but with the eooch of $17 watt dollars it regives 36% able to resll for a full 1000% for a total kf 100 kilowatts exchangable to kilowatts at $9.017 a kilowatt making you a profit of 865% for cryptocurrency, and 844% for $1 used on the stock.html when someone buys you're 100 kilowatts making you a true profit in cash usd $84.40 for fiat anf $86.50 in cryptocurrency as community starts market fee is 20% when selling kilowatt or $0.20 fiat/crypto return of investment meaning when a sale haopens the fee is took and you are reward $0.80 to you're account 
+
+While their is also other ways to epoch your account even on stocks, crypto or this rig 
+
+if you follow these steps here you can easily poach your money and get more reward for a token or Fiat 
+
+step one you start with a amount of per se $10 in one fiat currency or cryptocurrency 
+
+step 2 you look at the next conversion rate that doubles or quadruples the amount of tokens that you earn from Exchange 
+
+step three instead of cashing out that single exchange look for another token or fiat currency that multiplies that right by another decimal rate 
+
+so for example if one token has a rate of $10 USD for 100,000 tokens and the next rate has 200,000 tokens for that rate of $10 and the next conversion rate that you would have cashed out on before that has a conversion rate for this token set to have 555,000 tokens 
+
+each time that you convert the token to a lower decimal from the standard rate that you put in increases token supply of balance and dollar amount 
+
+so by the second or third transaction Exchange you have extra money to exchange from tokens 
+
+which can be a rate of a couple pennies in micro cents or dollars if you have larger funding 
+
+when doing this epoch please do research on each token to make sure there's enough funding and liquidy to swap over amounts 
+
+you can always use trusted exchanges that show liquidable tokens to exchange on for different rates of income rates for epoch
+
+----
+
+# Example for fiat/crypto epoch of light speed trading long live crypto currency and Satoshi nakamoto and their team of investors 
+
+(1) $10.00 usd 100,000 tokens tron - token price 0.001
+
+(2) $10.00 usd same vaule 125,000 tokens btt tron increase of 25,000 profit of 0.02 usd per say - token price 0.0005
+
+(3) $10.02 usd same vaule 275,000 tomens hamster tron increase of 150,000 profit of 0.15 usd per say - token price 0.00075
+
+(4) $10.17 usd same vaule 500,000 tokens wink tron increase of 225,000 profit of 0.40 usd per say - token price  0.00005
+
+It works the same way on this htnl to make profit 
+
+You take each factor of grow for megabytes torrents kilowatts watts dollar and bandwidth 
+Swapping rates to make profit from one to another rate
+
+So for example 
+
+$0.05=(1)megabyte
+$0.017=(1)kilowatt
+$0.30=(1) bandwidth 
+$0.05=(1) torrents
+$0.05=(1) wattsdollar 
+
+You can swap bandwidth to megabytes or torrents then to kilowatts for a 29x multiplier on a dollar 
+making you a profit of around $30 total aftermarket fees total profit of $24 
+
+if you epoach the $24 again after selling it unlocks 3,600 kilowatts worth approximately $600
+
+Market fee 20% - $30
+
+True profit 80% to community user - $570 after epoch after selling 3,600 kilowatts 
+
+Tax amount token from gov $85.50 in crypto currency of 15%
+
+Tax amount token from gov $205.20 in fiat currency of 36% 
+
+Total net profit after taxes what you keep $484.50 in crypto currency 
+
+Total net profit after taxes what you keep $364.80 in fiat currency 
+
+----
+
+# Epoch light speed airdrop method for profit 
+
+Take a simple airdrop like this pudgy penguin airdrop ending on December 30th 2025 https://penguinu.com/airdrop/ for 1,000,000 tokens and epoch the reward from $0.50 usd to $17 usd by this formula to turn a profit in the future 
+
+ Growth Formula & Watts Dollar
+$0.50 to $17.00 Watts $ Epoch Rate 37.4% + 
+
+Eginma Light Speed
+
+CORE FORMULA
+
+FV = PV × (1 + 0.374)20 × Φ × Log₂c × E
+$0.50 to ~$20,000 to $17.00 Watts $
+
+37.4%
+Epoch Rate
+
+Annual compounding
+
+Φ × Log₂c × E
+Eginma Light Speed
+
+Golden Ratio × Compression × Energy
+
+$17.00
+Watts Dollar
+
+Energy-backed per $0.50 trade
+
+Energy + Symbolism = Dollar
+
+Every $0.50 creates $17.00 $ backed by pudgy penguin token
+
+Take the rate of 100,000 tokens and epoch it where each dollar that's flipped for a reward of ads bases $3-5 the growth of token always goes up because it crossrs lines when it dips and goes up steadys and finally goes up when it always has liquidity so set the epoch to a trade of 7% sell dip lock and 14% rebuy unlock feature to always flip $7 from $1 or 700% but truly 7% of eginma light speed 7e+ now if you take 0.20 for both flips you get a rate of $0.80 or 80% /800% given back to user with that its 8e+ in funding so when you set cashout to $25 you making $5 in profit for free then you linear that $5 with a feature like gift cards you can sell for $7.50-7.85 to make $2.50 profit two flips $10 total profit then you set that rate to 25% fee always going up by a small fee percentage for rate of growth of eginma so instead of 25e you do 27e rate of power amp eginma formula overlay 
+
+Dont act like you have money think you have no money how can i grow money with that say you have no money at all use this formula you dont need money but time to make profit on a linear $5 to start and a cash out to $25 and you will make money its a royalty $5 when you cash the first person out for $20 in money 
+
+With the token you take the formula i gave and you do a micro rate of 
+
+Add a Micro pennys at a rate of
+ $1.10000000.1.0000.1.0000000.1.00000000000000
+.
+
+ increasing decimals after 0. And before .0 Nine zeros and a 1 and increasing by 4,8,16,32,64 decimals with a 1 in front of it with the decimal of a dot in front of the 1 with increasing supply in token on the third decimal of the one have that micro token be mined with decimal rates given to user based on 7 zeros after the third decimal of the one micro penny  when liquidity is added for example when a token is at a micro penny rate of $0.000001000.0000 $50 is added in liquidy it creates the token to have 500 million tokens for a micro Penny equaling the right amount of wealth but gives the pool 1/5th the supply and 4/5th to the buyer for that token so it can control volatility when more liquidy is added to the token it increases the token amount to a new liquid amount put into the liquid pool with the amount that was added then when trading gets volatile the 7% stop trading and put a buy now feature on the token where it locks the token from being sold and must be bought up to 14% in a way like a stock market cryptocurrency combined trading feature to endorse cryptocurrency but to also embrace the stock market and how safe it is when you trade stocks and on the micro shares indicate in green and red when to sell a micro penny for example 0.00001975 the number 75 or indication of 60 to 95 should indicate green for selling because it almost equals a whole or half of penny with free transactions to collect your money then on tokens that are under 59 and below show an indicator in red and do this for each decimal rate of 1 whole number  of a Micro pennys at a rate of $0.000000001.0000.10000000.1000000000000000 increasing decimals after 0. Nine zeros and a 1 and increasing by 4,8,16,32,64 decimals with a 1 in front of it with the decimal of a dot in front of the 1 then in a table a graph that show different microcryptocurrency tools for micro pennies to earn extra money off from them but to also increase supply of liquidy and token pool and a way to sell each decimal of a micro token for max profit without pulling out the liquidy of the token and still works with the 7% dip stop trading and 14% increased trading ike I brought up early and also add a indicator to explain in deep analyst how the formula works based on this rate I brought up where it and also does a 3.5% pump in price each time 
+
+Formula 
+
+$0.000000001.0000.1.0000000.1.00000000000000.
+
+Micro penny amount
+
+X
+
+ USD amount token amount based on $1 USD amount with micro penny and decimals increasing by 4,8,16,32,64 decimals with a 1 in front of the decimal for 1 micro with the decimal of a dot in front of the 1 and behind it to make a micro thousand dollar penny a micro hundred dollar penny a micro ten dollar penny a micro penny dollar in decimals like binary 
+
+
+X
+
+500,000,000 tokens plus decimal amount of each token rate 
+
+X 
+
+3.5% pump increase for each trade 
+
+X
+
+7% STOP trading signal prevention of trading
+
+X
+
+14% PUMP buy feature to make token sell before it can be sold off 
+
+
+X 
+
+Trades
+
+X
+
+Days
+
+X
+
+Months
+
+X
+
+Years
+
+X
+
+Decades 
+
+----
+
+As time goes on this 20% will lower to less then 2% we are just giving proper timing to growth epoch and light speed of rate of currency for fiat usd we can handle if we had more fundong the rate would lower for a better rate but starting out 20% helps growth of company to growth while each quarter of raised money of each year we will revaule the amount of percentage taken from community to be fair to everyone 
+
+We want to grow witb you guys bot take advantage of youre love, care and honesty so please stay and maybe will make this a mona lisa of the computer world it starts with you as a community it takes you the community to grow together to make it a utopia you want to see if you have a dream base it on these rewards and may the world bless you in fiat for trying just trying is all it took many of the great thinkers of our time think like them and if you get stuck we are always here to help with a dream to make you're life a little better in the future 
+
+---
+
+# starting a epoch light speed store off merchant credit line usd
+
+# up to $1,000 free merchandise credit line https://perpay.com/?_gl=1*1ks8hv4*_gcl_au*OTkzODI3ODE0LjE3NjYyMDY0OTUuMTM4MTI3NTQwMy4xNzY2MjA2NjY3LjE3NjYyMDgyNzA.
+
+# The site set me up with $450 to linear from $450 to binary of $4,500-10,000 over time with the ability to always linear back from the binary $10,000 to $450 to trade for $10,000 again for new products because a credit line does not stop flow of payments unless you abuse the system so you will always have that money if you invest it not use it for personal funds 
+
+
+# up to $750 free merchandise credit line https://grouponefreedomcard.com/a/pg1_home.php
+# amount i got from merchant $750 for rate of $500 extra a month after bills 
+
+step one you go to a website like this that has a credit line of up to $1,000 
+
+Imagine if your paycheck could build your credit
+Get up to $1,000 to spend now. Build credit by paying it back automatically each time you get paid.4
+
+https://perpay.com/?_gl=1*1ks8hv4*_gcl_au*OTkzODI3ODE0LjE3NjYyMDY0OTUuMTM4MTI3NTQwMy4xNzY2MjA2NjY3LjE3NjYyMDgyNzA.
+
+you sign up on the URL above for per pay marketplace which is my personal URL for invitation 
+
+terms for using url 
+
+make you're first $60 purchase once signed up from this url and receive a bonus up of up to $1,000 to start a store for the American dream and $30-60 back in payment for purchase 
+
+its a true win win who doesnt love free cash and a product for signing up 
+
+dont feel like paying $60 for one month cut it to 3-5 months only pay $20 to $12 or so a month 
+
+if you go off the logic to profit from $12 payment 3 months is perfect because then you can list a item online for $20 get paid once a month for 3 months make $60 plus the $30-60 and sign up bonus of up to $1,000
+
+just do not sign up for the credit card that has fees the credit line does not and the marketplace comes with a app to use on mobile for quick drop shipping 
+
+step two 
+
+you fill out the details for a free credit line to receive up to $1,000 to purchase items 
+
+step 3 
+
+you use the above method from the formula above for epoch eigma light speed to 20e+ or 25e+ of the set amount
+
+setp 4
+
+you can set each item to a rate to mine for a reward once a full token is collected in pool ship asset from ad view payments 
+
+or
+
+you can do standard price payment with a epoch overlay for a payment system 
+
+step 5
+
+when working on the epoch enigma light speed formula for payment system 
+
+you can set your enigma light speed rate for USD return to around 50% in penny model trading to get accurate trading results or 500% for each dollar made for $10 its 5,000% and so on based on rate of 50% 
+
+this info should help you start a life over after covid use knowledge skill and love for a idea to make money do not let the world turn you cold by a thousands thoughts of being denied what you feel is meant for you
+
+strive to overcome the challenge and may the Galaxy bless you for the struggle and strength of trying for a better life 
+
 
 # boxing match for jake paul
 
@@ -472,291 +768,6 @@ and so on
 
 
 once you make the epoch which takes time to study and lose the grip on betting against a casino you unlock no worries but a game to play logically to win linear betting and if you do this correct you will always be able to turn $5 to $42 binaring you're money to infinity each time you make up to that amount cash out you will make no more funds its set on eginma rate for a casino which if its set at a standard rate its 1-3 bets losses 10 win or 15 double egima like a clock woth power amplifier overlay is 6-10 wins with 25 losses to 30 loses to get a win which is why you guys lose at the casino every time because you are not doing epoch eigma ligjt speed on your bets within 30 hands the epoch of hash power for crash party x goes to at least 20x to 100x in the middle so you have to eginma the rate of bet to 3-4th bet standard at $0.05 and if it hits 20x in 10 hands cash out the $0.80 its $0.30 more then you had it adds up for epoch because every bet increases the win odds like a lottery system by the time you hit 20 losses up to $0.80 total net losses go to $0.25 if it hits a 10x its $2.50 but if it his 20x its $5 then go back to bet base line of $0.05 and play again do not think you will win a huge amount from low betting the epoch is set to only $42 for $5 amount deposit with doubles eginma gold ratio overlay of pi formula with eginma boost for beting it fear isnwhen you are betting you think you will crash you must let the rocket or stock go up do not click buttons click one tike it fails you are only betting $0.05 to make $0.80 a 20 time profit which will hit 1/4the the tike on 120 spins so for every 30 spins at least 4 making you $3.60 profit total betting $0.05 a spin or net win balance after betting around $1.20 makijg you $2.40 in profit then wait for large amounts set you're self higher then 1.7x bets because micro balance betting is fornlarge amounts of more then 1,000-5,000 dollars to earn hundreds or $50 in micro payments but the risk idnhigher for a reward so you always set base like to what you can handle betting andnkeep going laddering  bets to 30-50 bets with that up to $30 total to possibly win $280 in profit you can start with any amount but the rate of win rate is higher wuen you add bigger money because its a crossing point to win per say if you have $5,000 maintaining a $0.05 eginma at 30 bets to $30 is a gold mine others its a risk at $30 so come with 6-10 times the eginma for another overlay of profit boost overlay and count it as the formula was but with a divide ➗ for base bets of $30 under $240-$300 for rate of win rate for.full epoch rate of light speed 
-
----
-
-
-# Marketplaces for Manierism Megabytes
-
-Manierism store template is here the only errors are to the swap feature section needs a update to connect wallet balance php with swap feature and html logic 
-
-while adding you're own product links of course 
-
-Add you're hosting site info, product links change simple things on the marketplace and you're set to sell ❤️
-
-Happy holiday 
-
-Thank you guys for 192 clones on this project cant wait to see what you guys make one day 
-
----
-
-# Main Marketplace comes back on in 3 days
-
-https://manierism.loveslife.biz
-
-----
-
-# sub market link (active)
- 
-                
-home page: https://manierismmegabyte.gamer.gd/index.html
-            
-stock market: https://manierismmegabyte.gamer.gd/s.html 
-
----
-
-# Stock Market (Mom & Pop exchange beta mode actived looking for testers) 
-https://manierism.loveslife.biz/stock.html?i=1
-
-----
-
-# Rig html (Watt epoch rig) 
-
-https://manierismmegabyte.gamer.gd/rig.html
-
-
-The watts epoch rig is perfect for no cpu but graphic acceleration  of web html to make hashpower from html it was the perfect fit for setting up sunlight egp py on html while at first it was going to be a free working energy file but to monetize the abilty of gpu or cpu on html i found graphic acceleration of html that fit for mining on html with this setting in google chrome or Firefox browsers it unlocks mh/s mining with rewards
-
-(1) Please go to settings of PC tablet or phone and unlock graphic acceleration from internet browser 
-
-(2)Then to system settings 
-
-(3)Click use graphic acceleration when available 
-
-This will unlock the feature of more then 3 million hash on 5g singal a second 
-
-Maybe in the future we turn it to a token and trade it for cash in liqiudity pool when more then $10 is raised 
-For 7% sell lock dip feature to 14% rebuy feature always storing 7% but unlocking stable trading as growth happens always increasing rate of profit but unlocking a specific trade amount of 7% each time using the $10 at start to trade for everyone but unlocks the flow of the money over time for approximately 7 months with 100 trades a day if set to token rate 0.01 if set to 0.001 it could be 70 months depending on epoch but staking rewards would be 36.4% or so appropriately on return for investment due to ad based growth of money from community 
-
-Ad funds from this html go to users and 2/10th of profit is stored for community team for daily living needs we take 20% while users take 80% profit together the more a user uses the html the more funds are given over time to community 
-
-
-As admin and co-founder i felt it was important to give at least 80% of profit to community as their is 15% tax on crypto currency for $10,000 and 36% or so for fiat currencies i felt it was right to give 65% profit back to community for crypto investments and 44% total profit in fiat for this watt epoch rig but with the eooch of $17 watt dollars it regives 36% able to resll for a full 1000% for a total kf 100 kilowatts exchangable to kilowatts at $9.017 a kilowatt making you a profit of 865% for cryptocurrency, and 844% for $1 used on the stock.html when someone buys you're 100 kilowatts making you a true profit in cash usd $84.40 for fiat anf $86.50 in cryptocurrency as community starts market fee is 20% when selling kilowatt or $0.20 fiat/crypto return of investment meaning when a sale haopens the fee is took and you are reward $0.80 to you're account 
-
-While their is also other ways to epoch your account even on stocks, crypto or this rig 
-
-if you follow these steps here you can easily poach your money and get more reward for a token or Fiat 
-
-step one you start with a amount of per se $10 in one fiat currency or cryptocurrency 
-
-step 2 you look at the next conversion rate that doubles or quadruples the amount of tokens that you earn from Exchange 
-
-step three instead of cashing out that single exchange look for another token or fiat currency that multiplies that right by another decimal rate 
-
-so for example if one token has a rate of $10 USD for 100,000 tokens and the next rate has 200,000 tokens for that rate of $10 and the next conversion rate that you would have cashed out on before that has a conversion rate for this token set to have 555,000 tokens 
-
-each time that you convert the token to a lower decimal from the standard rate that you put in increases token supply of balance and dollar amount 
-
-so by the second or third transaction Exchange you have extra money to exchange from tokens 
-
-which can be a rate of a couple pennies in micro cents or dollars if you have larger funding 
-
-when doing this epoch please do research on each token to make sure there's enough funding and liquidy to swap over amounts 
-
-you can always use trusted exchanges that show liquidable tokens to exchange on for different rates of income rates for epoch
-
-----
-
-# Example for fiat/crypto epoch of light speed trading long live crypto currency and Satoshi nakamoto and their team of investors 
-
-(1) $10.00 usd 100,000 tokens tron - token price 0.001
-
-(2) $10.00 usd same vaule 125,000 tokens btt tron increase of 25,000 profit of 0.02 usd per say - token price 0.0005
-
-(3) $10.02 usd same vaule 275,000 tomens hamster tron increase of 150,000 profit of 0.15 usd per say - token price 0.00075
-
-(4) $10.17 usd same vaule 500,000 tokens wink tron increase of 225,000 profit of 0.40 usd per say - token price  0.00005
-
-It works the same way on this htnl to make profit 
-
-You take each factor of grow for megabytes torrents kilowatts watts dollar and bandwidth 
-Swapping rates to make profit from one to another rate
-
-So for example 
-
-$0.05=(1)megabyte
-$0.017=(1)kilowatt
-$0.30=(1) bandwidth 
-$0.05=(1) torrents
-$0.05=(1) wattsdollar 
-
-You can swap bandwidth to megabytes or torrents then to kilowatts for a 29x multiplier on a dollar 
-making you a profit of around $30 total aftermarket fees total profit of $24 
-
-if you epoach the $24 again after selling it unlocks 3,600 kilowatts worth approximately $600
-
-Market fee 20% - $30
-
-True profit 80% to community user - $570 after epoch after selling 3,600 kilowatts 
-
-Tax amount token from gov $85.50 in crypto currency of 15%
-
-Tax amount token from gov $205.20 in fiat currency of 36% 
-
-Total net profit after taxes what you keep $484.50 in crypto currency 
-
-Total net profit after taxes what you keep $364.80 in fiat currency 
-
-----
-
-# Epoch light speed airdrop method for profit 
-
-Take a simple airdrop like this pudgy penguin airdrop ending on December 30th 2025 https://penguinu.com/airdrop/ for 1,000,000 tokens and epoch the reward from $0.50 usd to $17 usd by this formula to turn a profit in the future 
-
- Growth Formula & Watts Dollar
-$0.50 to $17.00 Watts $ Epoch Rate 37.4% + 
-
-Eginma Light Speed
-
-CORE FORMULA
-
-FV = PV × (1 + 0.374)20 × Φ × Log₂c × E
-$0.50 to ~$20,000 to $17.00 Watts $
-
-37.4%
-Epoch Rate
-
-Annual compounding
-
-Φ × Log₂c × E
-Eginma Light Speed
-
-Golden Ratio × Compression × Energy
-
-$17.00
-Watts Dollar
-
-Energy-backed per $0.50 trade
-
-Energy + Symbolism = Dollar
-
-Every $0.50 creates $17.00 $ backed by pudgy penguin token
-
-Take the rate of 100,000 tokens and epoch it where each dollar that's flipped for a reward of ads bases $3-5 the growth of token always goes up because it crossrs lines when it dips and goes up steadys and finally goes up when it always has liquidity so set the epoch to a trade of 7% sell dip lock and 14% rebuy unlock feature to always flip $7 from $1 or 700% but truly 7% of eginma light speed 7e+ now if you take 0.20 for both flips you get a rate of $0.80 or 80% /800% given back to user with that its 8e+ in funding so when you set cashout to $25 you making $5 in profit for free then you linear that $5 with a feature like gift cards you can sell for $7.50-7.85 to make $2.50 profit two flips $10 total profit then you set that rate to 25% fee always going up by a small fee percentage for rate of growth of eginma so instead of 25e you do 27e rate of power amp eginma formula overlay 
-
-Dont act like you have money think you have no money how can i grow money with that say you have no money at all use this formula you dont need money but time to make profit on a linear $5 to start and a cash out to $25 and you will make money its a royalty $5 when you cash the first person out for $20 in money 
-
-With the token you take the formula i gave and you do a micro rate of 
-
-Add a Micro pennys at a rate of
- $1.10000000.1.0000.1.0000000.1.00000000000000
-.
-
- increasing decimals after 0. And before .0 Nine zeros and a 1 and increasing by 4,8,16,32,64 decimals with a 1 in front of it with the decimal of a dot in front of the 1 with increasing supply in token on the third decimal of the one have that micro token be mined with decimal rates given to user based on 7 zeros after the third decimal of the one micro penny  when liquidity is added for example when a token is at a micro penny rate of $0.000001000.0000 $50 is added in liquidy it creates the token to have 500 million tokens for a micro Penny equaling the right amount of wealth but gives the pool 1/5th the supply and 4/5th to the buyer for that token so it can control volatility when more liquidy is added to the token it increases the token amount to a new liquid amount put into the liquid pool with the amount that was added then when trading gets volatile the 7% stop trading and put a buy now feature on the token where it locks the token from being sold and must be bought up to 14% in a way like a stock market cryptocurrency combined trading feature to endorse cryptocurrency but to also embrace the stock market and how safe it is when you trade stocks and on the micro shares indicate in green and red when to sell a micro penny for example 0.00001975 the number 75 or indication of 60 to 95 should indicate green for selling because it almost equals a whole or half of penny with free transactions to collect your money then on tokens that are under 59 and below show an indicator in red and do this for each decimal rate of 1 whole number  of a Micro pennys at a rate of $0.000000001.0000.10000000.1000000000000000 increasing decimals after 0. Nine zeros and a 1 and increasing by 4,8,16,32,64 decimals with a 1 in front of it with the decimal of a dot in front of the 1 then in a table a graph that show different microcryptocurrency tools for micro pennies to earn extra money off from them but to also increase supply of liquidy and token pool and a way to sell each decimal of a micro token for max profit without pulling out the liquidy of the token and still works with the 7% dip stop trading and 14% increased trading ike I brought up early and also add a indicator to explain in deep analyst how the formula works based on this rate I brought up where it and also does a 3.5% pump in price each time 
-
-Formula 
-
-$0.000000001.0000.1.0000000.1.00000000000000.
-
-Micro penny amount
-
-X
-
- USD amount token amount based on $1 USD amount with micro penny and decimals increasing by 4,8,16,32,64 decimals with a 1 in front of the decimal for 1 micro with the decimal of a dot in front of the 1 and behind it to make a micro thousand dollar penny a micro hundred dollar penny a micro ten dollar penny a micro penny dollar in decimals like binary 
-
-
-X
-
-500,000,000 tokens plus decimal amount of each token rate 
-
-X 
-
-3.5% pump increase for each trade 
-
-X
-
-7% STOP trading signal prevention of trading
-
-X
-
-14% PUMP buy feature to make token sell before it can be sold off 
-
-
-X 
-
-Trades
-
-X
-
-Days
-
-X
-
-Months
-
-X
-
-Years
-
-X
-
-Decades 
-
-----
-
-As time goes on this 20% will lower to less then 2% we are just giving proper timing to growth epoch and light speed of rate of currency for fiat usd we can handle if we had more fundong the rate would lower for a better rate but starting out 20% helps growth of company to growth while each quarter of raised money of each year we will revaule the amount of percentage taken from community to be fair to everyone 
-
-We want to grow witb you guys bot take advantage of youre love, care and honesty so please stay and maybe will make this a mona lisa of the computer world it starts with you as a community it takes you the community to grow together to make it a utopia you want to see if you have a dream base it on these rewards and may the world bless you in fiat for trying just trying is all it took many of the great thinkers of our time think like them and if you get stuck we are always here to help with a dream to make you're life a little better in the future 
-
----
-
-# starting a epoch light speed store off merchant credit line usd
-
-# up to $1,000 free merchandise credit line https://perpay.com/?_gl=1*1ks8hv4*_gcl_au*OTkzODI3ODE0LjE3NjYyMDY0OTUuMTM4MTI3NTQwMy4xNzY2MjA2NjY3LjE3NjYyMDgyNzA.
-
-# The site set me up with $450 to linear from $450 to binary of $4,500-10,000 over time with the ability to always linear back from the binary $10,000 to $450 to trade for $10,000 again for new products because a credit line does not stop flow of payments unless you abuse the system so you will always have that money if you invest it not use it for personal funds 
-
-
-# up to $750 free merchandise credit line https://grouponefreedomcard.com/a/pg1_home.php
-# amount i got from merchant $750 for rate of $500 extra a month after bills 
-
-step one you go to a website like this that has a credit line of up to $1,000 
-
-Imagine if your paycheck could build your credit
-Get up to $1,000 to spend now. Build credit by paying it back automatically each time you get paid.4
-
-https://perpay.com/?_gl=1*1ks8hv4*_gcl_au*OTkzODI3ODE0LjE3NjYyMDY0OTUuMTM4MTI3NTQwMy4xNzY2MjA2NjY3LjE3NjYyMDgyNzA.
-
-you sign up on the URL above for per pay marketplace which is my personal URL for invitation 
-
-terms for using url 
-
-make you're first $60 purchase once signed up from this url and receive a bonus up of up to $1,000 to start a store for the American dream and $30-60 back in payment for purchase 
-
-its a true win win who doesnt love free cash and a product for signing up 
-
-dont feel like paying $60 for one month cut it to 3-5 months only pay $20 to $12 or so a month 
-
-if you go off the logic to profit from $12 payment 3 months is perfect because then you can list a item online for $20 get paid once a month for 3 months make $60 plus the $30-60 and sign up bonus of up to $1,000
-
-just do not sign up for the credit card that has fees the credit line does not and the marketplace comes with a app to use on mobile for quick drop shipping 
-
-step two 
-
-you fill out the details for a free credit line to receive up to $1,000 to purchase items 
-
-step 3 
-
-you use the above method from the formula above for epoch eigma light speed to 20e+ or 25e+ of the set amount
-
-setp 4
-
-you can set each item to a rate to mine for a reward once a full token is collected in pool ship asset from ad view payments 
-
-or
-
-you can do standard price payment with a epoch overlay for a payment system 
-
-step 5
-
-when working on the epoch enigma light speed formula for payment system 
-
-you can set your enigma light speed rate for USD return to around 50% in penny model trading to get accurate trading results or 500% for each dollar made for $10 its 5,000% and so on based on rate of 50% 
-
-this info should help you start a life over after covid use knowledge skill and love for a idea to make money do not let the world turn you cold by a thousands thoughts of being denied what you feel is meant for you
-
-strive to overcome the challenge and may the Galaxy bless you for the struggle and strength of trying for a better life 
-
 
 ----
 
