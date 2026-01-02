@@ -1,5 +1,14 @@
 # Manierism megabytes.
 
+# boxing match for jake paul
+
+after i had a thought seeing his jaw blew out and busted i thought it was best to keep this rig live and online if someone such as him or even you was to fall on times of not having a asset or a dollar and had to make you're own it gives me no right to take that joy love or ability to use money away from anyone this kid searched his whole life like us to find a pursuit of happiness and at times it may have been a trading card or a sports event for me it was always selling a item that brought me joy the joy of seeing my mother or brother with what they needed so for him to chase his dream and never leave his family but just shoot for the moon and end up on a star to make a base of his own shows alot for a person lets embrace the goals we have because as of today this money stays in thebpeople care and ability to use it forever it matters to me when times are hard to have you're own dollar and assets some days i may have bad days like anyone but that doesnt not stop me from thibking right or fair on how money should be you guys have worked so hard for a dollar but never had one to call youre own please take this rig and make a follar of you're own a trading card post or store that takes in usd but gives you're dollar think of his shoes in youre feet or someoje like Eminem or a person who never has a asset to call their own as we grow and learn we learn that life is about what we can give and take and as you get older we want to either take or give more from age join me in giving the joy of their own money this year and assets take this rig to everyone and form their own dollars and assets they can make a life worth living i would never ask you to enslave you're self to work for a dollar where you have 1 penny and need food lights and bills paid because god would not ask me to do that to a human he would ask that i honor every yuman or animal on earth prosper with them and learn to work with humans when we dont have the things we need so then one day everyone has the same amount and no one ever feels lost or left out but took care of the right way that person would see fit for love and care 
+
+much love logan Paul and jake Paul keep making us proud to chase you're dreams maybe i can help with the dollar and some asset parts ♥️
+
+
+
+
 
 
 # Money task printer/ Money Task Arcade machine txt file  shopping network feature sleep and earn 😂😂 what do i buy today ohh the grinch suit 
