@@ -7,7 +7,15 @@ after i had a thought seeing his jaw blew out and busted i thought it was best t
 much love logan Paul and jake Paul keep making us proud to chase you're dreams maybe i can help with the dollar and some asset parts ♥️
 
 
+# I have a great new process for mining coming out 
 
+the process of mining that I'm going to work on is for ram megabyte mining so instead of the traditional CPU mining and different aspects to GPU I will focus on RAM and studying the fascination of megabytes and how they process on phones for how they load for shares of hash megabytes the only downside I'm running into is allowing older devices like 3G and 4G and iPhone save balances to their screens on the older devices and I'm having a heck of a time setting it up for handheld systems like PSPs and PS vitas 
+
+
+if anybody wants to help set up an API for setting up a payment stream for hashing megabytes and accepting certain data for hashing megabytes through ram in a Fiat country currency or a cryptocurrency would be truly helpful I will be collecting data as I mine with you guys on newer technology for megabytes without collecting IP data for people's technology and selling the mind information off from the rigs to start a token for you guys to sell hash megabyte processing units and data rigs at first it'll be a small payment of micro pennies and then hopefully they'll go to a larger share amount that equals a higher rate
+
+
+I wanted to set you guys up and ad rigminer where it mines the rotation of an ad for a click rate but no advertisement company will approve the $96 payment a day that it would bring you guys to use the software just on one cell phone I was thinking that everybody probably had around 5 or 10 cell phones or more in their home so what a guaranteed them at least $1,000 a day just for doing an ad rigminder like New York City for rotating ads but I was not able to complete the task so if you guys ever get the ability to please let me know and maybe I can implement the software on the HTML and rig so people can rotate ads and get paid off from a better ad rate or CPM rate for advertising
 
 
 
