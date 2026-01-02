@@ -28,6 +28,8 @@ stock market: https://manierismmegabyte.gamer.gd/s.html
 
 # epoch store ran by a loving mother of the project
 
+setting up a epoch store pay little for 6 months, builds store credit and sends product while mining for rewards
+
 # as a kid she always wanted tiny homes for people to own where she could lease or sell plots of land for no less then $800 for a single room that could be built on by $350 each room she dreamed of having her own fleamarket to be able to sell people own places to sell to do the american dream 
 
 the market that is being made is a mix of selling at rate of listing products for payment plans that builds store credit and having the ability to sell items cutting the rate of cost it also allows the ability to mine for rewards just like the first html home page: https://manierismmegabyte.gamer.gd/rg.html for mining while allows listing to music for rewards in fiat currency and also the abilty to get paid for clean you heard it right 
@@ -41,7 +43,7 @@ website address in progress after replit finishes updates
 if coded right you guys can list up to 100,000 items forever for as low as $1,000 
 
 
-setting up a epoch store pay little for 6 months, builds store credit and sends product while mining for rewards 
+ and she will maintain full rights to retrobae her christmas gift from a loving son 
 
 # Stock Market (Mom & Pop exchange beta mode actived looking for testers) 
 https://manierism.loveslife.biz/stock.html?i=1
