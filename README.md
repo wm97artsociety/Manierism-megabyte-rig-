@@ -32,8 +32,95 @@ Thank you guys for 192 clones on this project cant wait to see what you guys mak
             
  # music beta rig: https://manierismmegabyte.gamer.gd/music.html 
 
+# USD rate for hashes:  The net hash to USD rate is approximately $0.000000193 per hash.
 
 
+### Time to Mine 1 Unit of Each Reward Type
+
+These calculations assume **modern device mode** (full reward multiplier) and ignore global caps (e.g., for SUMO or MTG) for estimation purposes. Times account for the 23 H/s offset in effective hash rate from the code. Rewards are derived from the net USD value generated per second after the 20% pool fee.
+
+- **Hash rate (H/s)** values: 100, 1,000, 10,000, 100,000, and 1,000,000.
+- **Hash Tokens** are earned at a fixed rate (0.00008 every 30 seconds), independent of hash rate. Time to mine 1 Hash Token: **4.34 days**.
+- For all other rewards, times are to accumulate **1 full unit** (e.g., 1 Watt Token, 1 kWh, 1 MTG Card, etc.). Times are approximate for integer-based rewards like MTG Cards due to flooring in the code.
+- Very short times (seconds) are theoretical and may be limited by the 5-second reward interval in practice.
+
+#### At 100 H/s (effective: 77 H/s after offset)
+| Reward Type            | Time to Mine 1 Unit     |
+|------------------------|-------------------------|
+| Watt Tokens            | 7.79 days              |
+| Watt Dollars           | 7.79 days              |
+| 0.0311 Gram Gold       | 19.48 days             |
+| 1 oz Copper Bars       | 25.97 days             |
+| MTG Cards              | 6.23 hours             |
+| Sumokoin (SUMO)        | 56.11 minutes          |
+| Kilowatts (kWh)        | 3.19 hours             |
+| Capsule MB             | 7.48 minutes           |
+| Cache MB               | 11.22 minutes          |
+| Bandwidth MB/s         | 37.40 minutes          |
+| Torrent Payloads MB    | 1.12 minutes           |
+
+#### At 1,000 H/s (effective: 977 H/s after offset)
+| Reward Type            | Time to Mine 1 Unit     |
+|------------------------|-------------------------|
+| Watt Tokens            | 14.85 hours            |
+| Watt Dollars           | 14.85 hours            |
+| 0.0311 Gram Gold       | 1.55 days              |
+| 1 oz Copper Bars       | 2.07 days              |
+| MTG Cards              | 29.70 minutes          |
+| Sumokoin (SUMO)        | 4.46 minutes           |
+| Kilowatts (kWh)        | 15.16 minutes          |
+| Capsule MB             | 35.64 seconds          |
+| Cache MB               | 53.46 seconds          |
+| Bandwidth MB/s         | 2.97 minutes           |
+| Torrent Payloads MB    | 5.35 seconds           |
+
+#### At 10,000 H/s (effective: 9,977 H/s after offset)
+| Reward Type            | Time to Mine 1 Unit     |
+|------------------------|-------------------------|
+| Watt Tokens            | 1.46 hours             |
+| Watt Dollars           | 1.46 hours             |
+| 0.0311 Gram Gold       | 3.64 hours             |
+| 1 oz Copper Bars       | 4.85 hours             |
+| MTG Cards              | 2.91 minutes           |
+| Sumokoin (SUMO)        | 26.22 seconds          |
+| Kilowatts (kWh)        | 1.49 minutes           |
+| Capsule MB             | 3.49 seconds           |
+| Cache MB               | 5.24 seconds           |
+| Bandwidth MB/s         | 17.47 seconds          |
+| Torrent Payloads MB    | 0.52 seconds           |
+
+#### At 100,000 H/s (effective: 99,977 H/s after offset)
+| Reward Type            | Time to Mine 1 Unit     |
+|------------------------|-------------------------|
+| Watt Tokens            | 8.74 minutes           |
+| Watt Dollars           | 8.74 minutes           |
+| 0.0311 Gram Gold       | 21.84 minutes          |
+| 1 oz Copper Bars       | 29.12 minutes          |
+| MTG Cards              | 17.47 seconds          |
+| Sumokoin (SUMO)        | 2.62 seconds           |
+| Kilowatts (kWh)        | 8.90 seconds           |
+| Capsule MB             | 0.35 seconds           |
+| Cache MB               | 0.52 seconds           |
+| Bandwidth MB/s         | 1.75 seconds           |
+| Torrent Payloads MB    | 0.05 seconds           |
+
+#### At 1,000,000 H/s (effective: 999,977 H/s after offset)
+| Reward Type            | Time to Mine 1 Unit     |
+|------------------------|-------------------------|
+| Watt Tokens            | 52.42 seconds          |
+| Watt Dollars           | 52.42 seconds          |
+| 0.0311 Gram Gold       | 2.18 minutes           |
+| 1 oz Copper Bars       | 2.91 minutes           |
+| MTG Cards              | 1.75 seconds           |
+| Sumokoin (SUMO)        | 0.26 seconds           |
+| Kilowatts (kWh)        | 0.89 seconds           |
+| Capsule MB             | 0.03 seconds           |
+| Cache MB               | 0.05 seconds           |
+| Bandwidth MB/s         | 0.17 seconds           |
+| Torrent Payloads MB    | 0.01 seconds           |
+
+
+----
 
 
 # epoch store ran by a loving mother of the project
