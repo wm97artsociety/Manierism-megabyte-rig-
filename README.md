@@ -20,11 +20,21 @@ Thank you guys for 192 clones on this project cant wait to see what you guys mak
 # sub market link (active)
  
                 
-home page: https://manierismmegabyte.gamer.gd/index.html
+# home page: https://manierismmegabyte.gamer.gd/index.html
             
-stock market: https://manierismmegabyte.gamer.gd/s.html 
+# stock market: https://manierismmegabyte.gamer.gd/s.html 
 
 ---
+
+# sub market rig mining links (active) earn gold, copper digital rewards and crypto
+
+ # Rig html mining: https://manierismmegabyte.gamer.gd/rg.html
+            
+ # music beta rig: https://manierismmegabyte.gamer.gd/music.html 
+
+
+
+
 
 # epoch store ran by a loving mother of the project
 
@@ -51,14 +61,11 @@ we would love for you to rejoin us in selling items not just buying them from us
 
 we are offering 25 listings free to test the marketplace out but please no illiegal items thank you guys 
 
-# Stock Market (Mom & Pop exchange beta mode actived looking for testers) 
-https://manierism.loveslife.biz/stock.html?i=1
 
-----
+in progress two updates needed to the music rig and mining rig 
 
-# Rig html (Watt epoch rig) 
-
-https://manierismmegabyte.gamer.gd/rig.html
+# Retrobae: https://crypto-market-escrow--w7236763.replit.app/   new url comes later 
+-----
 
 
 The watts epoch rig is perfect for no cpu but graphic acceleration  of web html to make hashpower from html it was the perfect fit for setting up sunlight egp py on html while at first it was going to be a free working energy file but to monetize the abilty of gpu or cpu on html i found graphic acceleration of html that fit for mining on html with this setting in google chrome or Firefox browsers it unlocks mh/s mining with rewards
