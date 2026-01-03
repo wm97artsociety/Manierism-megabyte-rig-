@@ -121,6 +121,13 @@ These calculations assume **modern device mode** (full reward multiplier) and ig
 
 
 ----
+# looking for javscript task centers for html  
+
+# do no not have currency funding but if software is made would create software for payment if made correctly 
+
+Could anyone help me with hasing megabytes and micro task printers and ad rig centers on html through java script like hashing megabytes just needs to be hooked to up algorithm to solve math hashes or problems im using eignma pie to solve pie hashes and old devices do better then new ones at the hash and then it just needs a form of payment for so many share and this is how you do i figured out how to grow money you can give out any amount of money even a penny to make a profit just a standard penny and epoch it by rates of drops or supplements so if you supply 100 pennys then by the 101th round you collect 100 pennys and do it again each person gets a penny but at round 101 you collect 100-101 pennys from the 100 users you paid 1 penny to by playing a micro task for 1 penny then you unlock epoch by rating the system to go buy intrest if they want more ads if they say yes you show rate of hash for mining from coinimp to ad growth rate of say 3 video ads for $0.10 so then at 100 users you do the same thing profit $10 or $11 make epoch to 11% or 110% truly by 3 ads 100 users in ad center or hashing megabytes then by round 3 you go to 33% pulling of around 36% but you need at least 100-330 players or users so on videos you would say as soon as we have 100-330 players pool goes to $33 users profit 80% 20% goes to pool put in non profit play as user never pay tax make profit and trade on free trade because its untaxed and used by the world as a growth epoch then for micro task printers you need as many buttons as possible with selection and a ai system that can run a system to use the buttons to run the ads in you're logic because you want to mine the drive in the printer like cpus for rates where you do shares like i said for $20 starting out mining the drive of the printer for a task and then the overlay of profit for ad center and micro hashing tasks and ad rigs i mean its just like a pc but a block of a rig its worth $3000 but with having 2 $3000 printers why are they so much what do they do besides printing money illegally for some users truly think about it what does it hash or mine legally i also need idle monetizations from the time section of pc settings to a feature to make money so idle time can be monetized from just window login for window cash they never monetized their devices for idle time 
+
+
 
 
 # epoch store ran by a loving mother of the project
