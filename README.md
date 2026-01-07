@@ -1,6 +1,197 @@
 # Manierism megabytes
 
-# Marketplaces for Manierism Megabytes
+I'm lost for worth Bill gate explain what noodle is he knew noodle farmer 
+
+you no understand Bitch coin btc😂😂😂 is formed from Uncle Rodger noodle okay you must link up with Uncle Rodger and put him on stock market to explain to you what hash power noodle about your dollar very big our yin is based on a string of noodle we know want you to eat noodles the day we just tell you no thank you you donate Penny and we feed you tomorrow you working tiny Hut and if you produce enough chicken we let you go some of our workers might be midgets but we don't know their age so we accept anybody for workflow it's just our ethnicity of European Chinese men but for Uncle Rodger to explain this logic of a noodle to you you would have to travel to Asia and me Asian mob of noodle mob does Asian mob control food of noodle the food noodle of Asia control the mob of Asia okay now you might ask yourself how did they take a noodle and put it on the internet and make money will they have their own stock noodle exchange devil vote what picture is best noodle he sent it to their treasury they approved the money and devil still know he own noodle devil make us work everyday is sweatshop but we okay you stay home and don't meet our squid I just make that up you never know who squid is devil or squid noodle we have young Asian prime minister and he knows that noodle administration now you don't understand the US f*** my noodle market up Uncle Rodger told me that you did the wrong thing to Noodle and you did this formula to Noodle and now is the price of hash power and this half power program 24 billion hash on a computer now but you must travel to small Asian Network country of noodle mob and cashing your noodle mob bitch coin and when you get to see them it's like the matrix okay and John wick you no understand noodle mob control every food it is micro token of an oat and if you buy anything from France you buy everything in oat but you don't understand Sato no like this formula he say this formula for his dollar but you must make one in noodle he said this formula fit your dollar and your eigma but it don't fix his noodle mob oh wait he called me just a second go on noodle mob phone and he tell me if you let him in stock market more he may make you deal of noodle and he may upload noodle price for hash power and you never know you may have changed noodle for hash hour now he literally just make you do a penny micro penny for cryptocurrency you cash out the hash and guess what you have a noodle how many boxes you want to send them now sato you sent him noodle just one noodle in a big box😂😂😂 make it a big noodle so he has to cook it in a big pot😂😂😂 take all the noodle bake them down mix them together make them an egg noodle pot and when you do that make it big noodle get big straightener noodle thing because we think you full of noodles your ethics are not like this ethic Bitchcoin btc tell you something different 
+
+Me young white Asian man but at the same time you know understand something me turn a kid into 2 million are today through my brain 
+
+I show him special formula to always get trading cards for free you may ask why he wants this well now he is shareholder of Cher stock hold of courtyard now if you young rich Asian white man that think noodle  not like Bitch coin you not able to deal in Noodle company he make you noodle company expert he asked you to sell share of noodle Uncle Rodger get up with the stock video to spend the whole noodle economics of noodles and we do this with money because you know understand money I mean money 
+
+No you don't know this formula or you be rich in Bitch coin
+
+
+And when you done doing formula you going to be like Patrick the star going duh😂😂😂
+
+
+Because I did this the other day and it worked and it made me too much money and I went duh😂😂😂
+
+
+So I took this token at $2 2 Noodle 
+
+And I went to micronoodle
+
+And I went to Noodle that was like 0.0001 can I buy that noodle for ethereum price 
+
+And then what I do 
+
+Is I do this 
+
+I find another token that goes down by another four or seven zeros and I multiply my interest by hundreds 
+
+
+My $2 noodle turned to a billion 
+
+
+I supplied everybody in Asia 
+
+Mc chicken from API stream earlier 
+
+
+They ate a McChicken for a micro Penny today 
+
+
+But MacDonald make a billion dollars 
+
+
+They literally got to pay one micro penny 
+
+
+And it literally produce 8 billion 
+
+
+You not understand what you trading 
+
+
+You should be billionaire rich like buku hillbilly kid 
+
+
+You should be butt ass naked and saying my stock went up $8,000 points today I'm on cocaina
+
+
+You want to be in the Wall Street you have to be in the noodle first😂😂😂
+
+
+This is for the Ernie noodle rejects 
+
+
+
+The government said we have to let the Ernie noodle rejection like eBay did with guns 
+
+
+Or we know except fair share a trade in America 
+
+
+We in America so you do this sin 
+
+
+It is a dollar symbol with a line in the middle of it 
+
+
+It means is a sin dollar and it do a funny feature through an enigma 
+
+
+And a power feature 
+
+
+Which means multiply money or share rate of $0.84 of your actual $1 
+
+Which means you're $1 really worth a $1.84 
+
+
+Why you spend $1.84 on nothing 
+
+
+Sentosa you can come mine hashes with him 
+
+
+He charge you a fair share for your rate 
+
+
+He say you pay a $500 up front and noodle 
+
+
+You got to go miner
+
+
+And he give you 10 cent noodle to buy ramen noodle 
+
+
+He never said it was a digital anything 
+
+
+He told me today it is a noodle 
+
+Kung Fu Panda was right you not noodle expert 
+
+
+Now why my stock down 
+
+
+
+You make them lower my noodle 
+
+
+
+It's okay I'm going to do this formula on it anyways 
+
+You ruined my stock I just going to do this formula and it make it better rate and you trade on that stock and I get better payment okay 
+
+
+You trade the b******* Noodle and I will keep full Share rate
+
+
+Go to my noodle company 
+
+
+Go to gominer calm 
+
+And if you can do this formula you will not be fudged😂😂😂 by our bakery down the road 
+
+
+sin(1)×0.0001×1000000000000000 if you take the sin formula for our US dollar with the dollar symbol with the line in the middle which is a sin dollar with a line and the rate of a decimal share that you'll give it out by the amount of people that you'll get it actually increases your rate of money look at what it made from using this formula for your dollar that is just $1.84 USA you take $0.84 do the sin formula hook to bank api for interest of ad by rate of share of people actually get you the decimal rate of how much each person will produce but if you want the share value of what that will produce you do it by a multiplier of a phone number to see what something will grow too with the same number and if you want to see what a SIN number does to a reverse formula for a share rate you do the same rate but you do a percentage rate by a decimal system so if a decimal went up to a 1.0 you would do a thousand percent on that 1.0 to get the right sin amount and with that if you're doing a micro rate you have to times it by such a rate or a multiplier of a golden ratio plus enigma to pull off that sin dollar I'm not even going to quit using the f****** currency in the USA I'm just going to sit here and actually turn into a good formula
+
+
+so what you do to token is you take a two pack of ramen noodle when you go to prison and you do that formula above for sin with two noodle pack you need two you can do this with one but is better with two God always say two women is better for one noodle 
+
+but God told me I could have 17 women from my noodle 
+
+you say you might not think this formula is true 
+
+but sir you no understand the noodle 
+
+the hash power of our noodle make us noodle 
+
+
+you talk on the noodle you monetize on the noodle but you know understand the noodle make you noodles 
+
+
+the rate of the epoch of the current hash power is set at noodles 
+
+do you feel like you live in Florida Asian community 
+
+because I remember this time when I had noodle bacon but the government say no you may only eat 12 said noodle because you have to work it off from rig right now they say you may take Tulsa and noodle but if you take 25-cent they say you may only deal with noodles 
+
+Uncle Roger tell you noodle was everything in his time. 
+
+noodle tell you Asia mine off from noodle market 
+
+they tell you your dollar not value that nothing but their dollar always valued in a noodle 
+
+you no understand something you get token reward which is token reward for noodle 
+
+but none of you hook up to hash asian Mafia noodle 
+
+hash Asian Mafia is a special mafia they only deal with hash of noodle 
+
+these are the people you have to collect your 24 billion Noodle from 
+
+but you have to travel to a small Asian community to deal with your noodles 
+
+you don't even monetize a calculator 
+
+and you know understand something if hash power of noodles is said to noodles 
+
+
+then you have to go to the big Bill the big Bill of noodles cuz he only want you to eat noodle right now unless you meet Asia Mafia mob for noodle then they catch you out the hash power for your noodle 
+
+but your calculator ain't do nothing Asian white man say do nothing it do math on paper but math formula ain't no monetize to money 
+
+I should do a formula on calculator like this to teach you what you do to me through noodles
+
+Sato say it okay nephew I hit him with Uncle Roger the stock market going to be down in 5 days but these noodles they stay the same price I always promise you noodles so Uncle Rodger get William sato vibe so William teach Johnny Dame to turn gold into Noodle and noodle into gold so he just go back and forth Noodle and gold all day so you eat the noodle but you buy the gold because the gold then become a penny and you only buy the penny with 20 billion people then you become Johnny damn noodle supplier for micro hash rate of noodle but still you have to deal with Asian Mafia Johnny damn noodle he's the only one who got the gold of the noodle you not understand you go to Bill Bill is white Asian man he is white Asian man he do thing in Asia through computer when it first came out he tell you you can do this but he tell you get f***
+
+arketplaces for Manierism Megabytes
 
 Manierism store template is here the only errors are to the swap feature section needs a update to connect wallet balance php with swap feature and html logic 
 
