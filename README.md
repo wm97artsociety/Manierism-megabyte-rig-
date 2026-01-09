@@ -1,4 +1,37 @@
 # Manierism megabytes
+----
+
+sato noodle mob have me in small alice in boerdlands asia making cpu noodles its cool workshop
+
+I say i stay if i eat suger for one penny in krakin games
+
+he say these ones are new you should play it like lotus you love lotus achhh ciiii uncle roger tell you noodle mob matter years ago
+
+you no watch uncle roger 
+
+okay now you watching and looking up uncle roger 
+
+he told me opensea not a smart noodle they puddy pot in asia
+
+our market i show young william look like this 
+
+https://monalisabank.lovable.app
+
+
+now in china asia america have sin dollar we use it too but do you know we exchage the marketcap as noodle for $0.84 share rate of token
+
+oh yes we do youre math at $1 sin do $0.84 stock to make usd $ sin 
+
+asia figure sin out they make noodle by hand get pissed white american no love noodle at 1400000000000000000e idle number in head as they look and scream at noodle and come back do it 10 times wait get pissed off in asia cause golden ratio of no noodles to buy give power of asia korena pie and make 10 more pissed off make them 20 every 3.14e imagine another noodle come from brain to life once you make noodle and get pissed off from small work shop asia devil make you work less and you do that look back and forth asyou do it zone out when you see it in youre brain a vision of you doing that tilt the earths access in youre heard round the rainbow atom of the earth and with that stay pissed like bruce lee and with that when you look back and forth under that large 14e rate as you think with eyes open youre life what you are doing and a vision brain realm of the noodle being made transfer thought when you go from looking at noodle in life get pissed at the freqeuncy like airbender to pissed off small asia and make 24 noodles out of 20 by looking aat them in a pile but looking away making another noodle show up from youre eginma drink green tea and mangos and itll work for noodles 
+
+it works for money in the usa you take a stack of money do the same process and you end up from $300 sin dollar to above $1000 from youre brain it is pie okay simple 3.e14 like matrix matrix is a eginma of google web browser it is a terminal bakcend but front display okay with that you can get 24x the amount of 200 with that method no banks needed linear to binary but if you abuse it you deal with devil because it is a sin $ s l = $ + sin() on calcutor only s on our math cal and with thatb it explain money 
+
+every time you selll or give $1 you lose 0.84 plus taxed on 65% to85% by round 2 of a year in business you are at 150% in debt from 75% each time and it means that the order of business is faulty you then put it in non profit 80% user pool 20% epoch do share rates on the 20% to epoch to rate of 20 shares to make extra money 2000% becuase rothira is only 37.4% but true rate is 0.0374% because the rate would actually make $1.84 for full usd rate okay then you have the 37.4% a pie thats 37400% intrest why because if you trigger that rate on a dollar its actually this rate 0.0374 of 1000 for $1.000 so you go back the rate of numbers in 0s so then you do $0.0374 that is youre return on the roth ira 37.4% is 3 penny not 37.4 because that rate is at $1 37400 by flaw of the dollar if a dollar only goes up to $1 we only use number 1 then we are not using the thing in front of it okay to trigger the money its a formual like math you do sin first or for rupee lighting freqency voltage and = because it powers the result by power plant utilty to a epoch of sin by a greek god you all got left on earth with everything but a leader to explain it the 100th show kids on a planet dont kknow anything these greeks and others are youre gene thats why you understand this stuff but now you need to ask youre self is t a sin to make more noodles for community to feed hunger or when broke to think of a dollar that food should be free to eat money by items of joy food is free and with that you dont understand that it gets worse now that we found out so many new things we cant use our money tell our leader of our country not our goverment makes a list of what you can and cant do with youre money because sin is from devil and if anyone broke his sin he has a dollar or something aganist you i dont make calls but think if we use their eginma of a matrix e like i give you to trigger growth of noodle and money is it a sin or did god tell him make him a word sin for you people to stay away from his pie think he does 9.99hz i do 7.77hz its were he eat pie in head small circle trgger a effect so strong on n1-9 because he is 9.99hz whatever he do is through a sin you place so it is no sin on him but anger and you take full punishment it is true ask a church that is normal minded 
+
+
+
+
+------
 
 I'm lost for worth Bill gate explain what noodle is he knew noodle farmer 
 
