@@ -1,5 +1,11 @@
 # Manierism megabytes
 ----
+bill gates if that is you're real name from national treasure so what national government treasurer do you own mr bill if that is you're name now send this to everyone who is chill bill it says this for bill gates hes a 🤖ai says i hear you like Reese cups in Georgia or do you like motor oil 🛢️ 
+
+
+
+
+-----
 
 sato noodle mob have me in small alice in boerdlands asia making cpu noodles its cool workshop
 
