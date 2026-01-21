@@ -3,6 +3,9 @@
 
 https://manierismmegabyte.gamer.gd/rg.html
 
+
+new rewards coming daily 
+
 Mannerism Ad-Surfer
 The Ancient Arms of Manier
 The Ancient Arms of Manier - Framed Heraldic Print with Knight, Crossed Swords, Three Fish, and Fleur-de-Lis
@@ -51,7 +54,9 @@ Complete consecutive rounds of ads for $0.0007 each.
 100 Ads
 Redeem Thy Earnings (recurring ads) 
 
-Bitcoin (via Lootdest) $1.00 base exchange 
+Bitcoin (via Lootdest) $1.00 base exchange
+
+gift cards via $0.00007 usd micro task 
 
 Withdraw Gold
 Food Rewards: Top Ramen (Maruchan) - Markup Added
