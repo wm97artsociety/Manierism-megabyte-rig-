@@ -1,5 +1,96 @@
 # Manierism megabytes
 ----
+
+https://manierismmegabyte.gamer.gd/rg.html
+
+Mannerism Ad-Surfer
+The Ancient Arms of Manier
+The Ancient Arms of Manier - Framed Heraldic Print with Knight, Crossed Swords, Three Fish, and Fleur-de-Lis
+The Manier family crest displays a valiant knight in full armor, flanked by crossed swords of honor, offering three noble fish upon a crimson and gold field adorned with fleurs-de-lis. In ancient times, during a great famine that gripped the kingdom, the legendary Knight of Manier rode forth to serve his kings. With unmatched skill and unwavering loyalty, he braved treacherous waters and perilous hunts to provide three bountiful fish—symbols of abundance, faith, and royal favor. This act of provision saved the realm from starvation and earned the family eternal honor in heraldry: the knight for courage and service, the three fish for generosity and divine blessing, and the fleurs-de-lis for French noble lineage.
+
+📜 SYSTEM ACTIVE
+THY IP: you're home address
+Total Treasury Balance
+$0.0035
+Minimum extraction: $1.00 USD
+
+$0.0007
+Micro Task
+Patience required: 10s
+
+Enter Portal (Single Micro)
+$0.05
+Mega Task
+Patience: 3 Minutes
+
+Enter Portal
+Fish Catching Quest: Serve the Kings
+Honor the Manier legacy! Complete 40 Mega Tasks ($0.05 each) to "catch a fish" and earn $2.00 total reward. Track thy progress below.
+
+The ancient logic: 20 tasks + 20 tasks = 40 tasks → 2 + 2 = fish → a $2 fish diner! For the Knight of Manier did not count coins—he counted provision. Two halves of labor become one bountiful catch. 20 tasks pays for one fillet of a meat of fish in Michigan from the Manier family crest.
+
+Fish Caught: 0 / 40
+
+Begin Fish Quest
+Grape Picking Quest: Sample the Stores
+Embark on a new quest! "Pick" one grape at a time from stores like Walmart, Target, or any supermarket. Each pick requires completing a Micro Task ($0.0007 after 10s). If the grape is too bitter, pick another—no penalty, just taste the next! Earn slowly but surely.
+
+Fresh red grapes bunch on display at supermarket
+Grapes Picked: 0
+
+Begin Grape Quest
+The Gauntlet of Rounds
+Complete consecutive rounds of ads for $0.0007 each.
+
+5 Ads
+10 Ads
+15 Ads
+20 Ads
+25 Ads
+50 Ads
+100 Ads
+Redeem Thy Earnings (recurring ads) 
+
+Bitcoin (via Lootdest) $1.00 base exchange 
+
+Withdraw Gold
+Food Rewards: Top Ramen (Maruchan) - Markup Added
+Users earn balance via tasks. Redeem deducts the marked-up price from balance. Then order for Walmart pickup & email confirmation to wm97artsociety@gmail.com.
+
+Chicken Flavor (3 oz bag)
+Redeem price: $0.53
+View Photo & Product Redeem
+Beef Flavor (3 oz bag)
+Redeem price: $0.53
+View Photo & Product Redeem
+Pork Flavor (3 oz bag)
+Redeem price: $0.53
+View Photo & Product Redeem
+Creamy Chicken (3 oz bag)
+Redeem price: $0.53
+View Photo & Product Redeem
+Shrimp Flavor (3 oz bag)
+Redeem price: $0.56
+View Photo & Product Redeem
+Chili Flavor (3 oz bag)
+Redeem price: $0.56
+View Photo & Product Redeem
+Picante Chicken (3 oz bag)
+Redeem price: $0.56
+View Photo & Product Redeem
+Hot & Spicy Chicken (Cup) (2.25 oz)
+Redeem price: $0.71
+View Photo & Product Redeem
+Lime Chili with Shrimp (Cup) (2.25 oz)
+Redeem price: $0.71
+View Photo & Product Redeem
+Soy Sauce Flavor (3 oz bag)
+Redeem price: $0.53
+View Photo & Product Redeem
+
+
+
+----
 bill gates if that is you're real name from national treasure so what national government treasurer do you own mr bill if that is you're name now send this to everyone who is chill bill it says this for bill gates hes a 🤖ai says i hear you like Reese cups in Georgia or do you like motor oil 🛢️ 
 
 
