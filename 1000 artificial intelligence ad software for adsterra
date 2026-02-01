@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI_STREAMS_LIVE_PREVIEW_V7</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
+        body { background: #020202; color: #00ffcc; font-family: 'Fira Code', monospace; overflow: hidden; }
+        
+        /* Dropdown Menu Styling */
+        .dropdown { position: relative; display: inline-block; margin-right: 15px; }
+        .menu-link { 
+            background: none; border: 1px solid #00ffcc33; color: #00ffcc; 
+            padding: 2px 10px; cursor: pointer; font-size: 16px; border-radius: 2px;
+            transition: all 0.3s;
+        }
+        .menu-link:hover { background: #00ffcc22; border-color: #00ffcc; }
+        .dropdown-menu {
+            display: none; position: absolute; top: 100%; left: 0;
+            background: #050505; border: 1px solid #00ffcc;
+            min-width: 240px; z-index: 1000;
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.4); margin-top: 8px;
+        }
+        .dropdown-menu a {
+            color: #00ffcc; padding: 12px 16px; text-decoration: none;
+            display: block; font-size: 10px; text-transform: uppercase;
+            border-bottom: 1px solid #111; letter-spacing: 1px;
+        }
+        .dropdown-menu a:hover { background: #00ffcc; color: #000; }
+        .show { display: block; }
+
+        /* Grid & Preview Styling */
+        .grid-container { 
+            display: grid; 
+            grid-template-columns: repeat(20, 1fr); 
+            gap: 4px; 
+            padding: 10px;
+        }
+        .micro-box { 
+            width: 100%; aspect-ratio: 1/1; 
+            background: #000; border: 1px solid #1a1a1a; 
+            position: relative; overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .micro-box iframe { 
+            width: 1000px; height: 1000px; 
+            transform: scale(0.06); transform-origin: center center; 
+            opacity: 0; pointer-events: none; position: absolute;
+            transition: opacity 0.5s ease;
+        }
+        .micro-box.loaded { border-color: #00ffcc; background: #050505; }
+        .micro-box.loaded iframe { opacity: 1 !important; }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #00ffcc; }
+        #ai-overlay { transition: opacity 0.5s; pointer-events: none; }
+    </style>
+</head>
+<body class="h-screen flex flex-col p-2">
+
+(header menu example)
+
+    <header class="border-b border-[#00ffcc]/30 pb-2 mb-2 flex justify-between items-center">
+        <div class="flex items-center">
+            <div class="dropdown">
+                <button class="menu-link" onclick="toggleDropdown(event)">☰</button>
+                <div id="header-dropdown-menu" class="dropdown-menu">
+                    <a href="index.html">⚡ Electricity</a>
+                    <a href="watt.html">💰 Watts Dollar Capsules</a>
+                    <a href="data.html">💾 Data Market Center</a>
+                    <a href="s.html">📈 Stock Market</a>
+                    <a href="adrig.html">💾 Watt's rig</a>
+                    <a href="support.html">📧 Support</a>
+                </div>
+            </div>
+
+
+(header body example)
+
+
+
+            <div class="flex flex-col">
+                <h1 class="text-xs font-bold uppercase tracking-widest text-white">AI_Live_Visualizer_v6</h1>
+                <div class="flex gap-4 text-[9px] mt-1">
+                    <span id="ai-status" class="text-red-500 font-bold">NODE_OFFLINE</span>
+                    <span class="text-zinc-500">STREAMS: <span id="ready-count" class="text-white">0</span>/1000</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flex gap-4 items-center bg-zinc-900/50 p-2 rounded border border-zinc-800">
+            <div class="text-right px-2 border-r border-zinc-700">
+                <p class="text-[7px] text-zinc-500 uppercase">Watt Dollar (WATT_D)</p>
+                <p id="rev-wattd" class="text-[10px] font-bold text-white">0.000000</p>
+            </div>
+            <div class="text-right px-2">
+                <p class="text-[7px] text-zinc-500 uppercase">USD Balance</p>
+                <p id="rev-usd" class="text-[10px] font-bold text-green-400">$0.0000</p>
+            </div>
+            <button id="boot" class="bg-[#00ffcc] text-black px-4 py-1 text-[10px] font-bold uppercase hover:bg-white transition-all">BOOT_SYSTEM</button>
+        </div>
+    </header>
+
+    <main id="viewport" class="flex-1 overflow-y-auto custom-scrollbar relative border border-zinc-900 bg-black rounded-lg">
+        <div id="grid" class="grid-container"></div>
+        
+        <div id="ai-overlay" class="absolute inset-0 bg-black/70 z-10 flex flex-col items-center justify-center pointer-events-none">
+            <div id="loader-icon" class="w-8 h-8 border-2 border-[#00ffcc] border-t-transparent rounded-full animate-spin hidden"></div>
+            <p id="ai-msg" class="mt-4 text-[10px] text-[#00ffcc] tracking-[0.3em] font-bold uppercase">Ready for Deployment</p>
+            <div class="w-48 h-1 bg-zinc-800 mt-2 rounded-full overflow-hidden">
+                <div id="ai-bar" class="h-full bg-[#00ffcc] w-0 transition-all"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-2 text-[8px] flex justify-between items-center text-zinc-600 font-mono">
+        <div>CYCLE_ID: <span id="cyc-id" class="text-white">0</span></div>
+        <div id="timer-display" class="text-yellow-500 font-bold bg-yellow-950/20 px-3 py-1 rounded border border-yellow-900/50">STATUS: IDLE</div>
+        <div class="flex gap-3">
+            <span>WATT: <span id="rev-watt" class="text-purple-400">0.00</span></span>
+            <span class="text-[#00ffcc]">[ VISUAL_PRELOAD_ENABLED ]</span>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Controllers
+        function toggleDropdown(event) {
+            event.stopPropagation();
+            document.getElementById("header-dropdown-menu").classList.toggle("show");
+        }
+        window.onclick = function(event) {
+            if (!event.target.matches('.menu-link')) {
+                const dropdowns = document.getElementsByClassName("dropdown-menu");
+                for (let d of dropdowns) { if (d.classList.contains('show')) d.classList.remove('show'); }
+            }
+        }
+
+        // Logic Constants
+        const AD_URL = "https://www.effectivegatecpm.com/kakdw2kr?key=f3cf780f577070b1030e1e3d2b0cbf7f (example url for ads) ";  ( my url for ads but please change with adsterra.com publisher to set up)
+        const VAL_PER_AD = 0.0002;
+        const VAL_WATT_D = 0.017;
+        const VAL_WATT = 0.0000017;
+
+        let state = { running: false, cycle: 0, ready: 0, usd: 0, timer: 30 };
+
+        const elements = {
+            grid: document.getElementById('grid'),
+            boot: document.getElementById('boot'),
+            overlay: document.getElementById('ai-overlay'),
+            msg: document.getElementById('ai-msg'),
+            bar: document.getElementById('ai-bar'),
+            readyTxt: document.getElementById('ready-count'),
+            timerTxt: document.getElementById('timer-display'),
+            revUsd: document.getElementById('rev-usd'),
+            revWattD: document.getElementById('rev-wattd'),
+            revWatt: document.getElementById('rev-watt'),
+            status: document.getElementById('ai-status'),
+            cycTxt: document.getElementById('cyc-id'),
+            loader: document.getElementById('loader-icon')
+        };
+
+        // Initialize 1000 Grid Nodes
+        for(let i=0; i<1000; i++) {
+            const b = document.createElement('div');
+            b.className = 'micro-box';
+            b.id = `box-${i}`;
+            elements.grid.appendChild(b);
+        }
+
+        async function startPreload() {
+            if(!state.running) return;
+            state.ready = 0;
+            elements.readyTxt.innerText = "0";
+            elements.overlay.style.opacity = "1";
+            elements.loader.classList.remove('hidden');
+            elements.status.innerText = "VISUALIZING_STREAMS";
+            elements.status.className = "text-yellow-500";
+            elements.timerTxt.innerText = "STATUS: PRELOADING";
+
+            const batchSize = 50; // Smaller batches for better visual sequence
+            for (let i = 0; i < 1000; i += batchSize) {
+                if(!state.running) break;
+                elements.msg.innerText = `SYNCING_URL_DATA: ${i}-${i+batchSize}`;
+                
+                const batchPromises = [];
+                for (let j = 0; j < batchSize; j++) {
+                    const idx = i + j;
+                    const box = document.getElementById(`box-${idx}`);
+                    box.innerHTML = ''; 
+
+                    const p = new Promise(resolve => {
+                        const frame = document.createElement('iframe');
+                        frame.src = `${AD_URL}&node=${idx}&c=${state.cycle}&t=${Date.now()}`;
+                        const timeout = setTimeout(resolve, 8000); // 8s cap
+
+                        frame.onload = () => {
+                            clearTimeout(timeout);
+                            state.ready++;
+                            elements.readyTxt.innerText = state.ready;
+                            box.classList.add('loaded');
+                            elements.bar.style.width = `${(state.ready/1000)*100}%`;
+                            resolve();
+                        };
+                        box.appendChild(frame);
+                    });
+                    batchPromises.push(p);
+                }
+                await Promise.all(batchPromises);
+                // Force a tiny pause so user sees the batch appear
+                await new Promise(r => setTimeout(r, 50));
+            }
+
+            elements.overlay.style.opacity = "0.2";
+            elements.loader.classList.add('hidden');
+            elements.status.innerText = "STREAMS_ACTIVE";
+            elements.status.className = "text-green-500";
+            beginCountdown();
+        }
+
+        function beginCountdown() {
+            state.timer = 30;
+            const ticker = setInterval(() => {
+                if(!state.running) { clearInterval(ticker); return; }
+                state.timer--;
+                elements.timerTxt.innerText = `STATUS: BROADCASTING (${state.timer}s)`;
+                
+                if(state.timer <= 0) {
+                    clearInterval(ticker);
+                    updateBalances();
+                    state.cycle++;
+                    elements.cycTxt.innerText = state.cycle;
+                    startPreload();
+                }
+            }, 1000);
+        }
+
+        function updateBalances() {
+            state.usd += (1000 * VAL_PER_AD);
+            elements.revUsd.innerText = `$${state.usd.toFixed(4)}`;
+            elements.revWattD.innerText = (state.usd / VAL_WATT_D).toFixed(6);
+            elements.revWatt.innerText = (state.usd / VAL_WATT).toLocaleString();
+        }
+
+        elements.boot.onclick = () => {
+            if(state.running) { location.reload(); return; }
+            state.running = true;
+            elements.boot.innerText = "HALT_NODE";
+            elements.boot.className = "bg-red-600 text-white px-4 py-1 text-[10px] font-bold uppercase";
+            startPreload();
+        };
+    </script>
+</body>
+</html>
