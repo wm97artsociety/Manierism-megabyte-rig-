@@ -1,6 +1,13 @@
 # Manierism megabytes
 ----
 
+BREAKING NEWSSSSSS
+
+WE NOW HAVE 13 CENTS FOR NOODLES WHO WANTS THE FIRST PACK ;0
+
+
+
+
 Several new updates to past ideas and logic of project 
 
 a new file has come out 1000 artificial intelligence ad adsterra publisher html 
