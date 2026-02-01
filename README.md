@@ -1,6 +1,40 @@
 # Manierism megabytes
 ----
 
+Several new updates to past ideas and logic of project 
+
+a new file has come out 1000 artificial intelligence ad adsterra publisher html 
+
+the abiltiy to watch on andriod for best or ios at the moment over 500 ads in a matter of 3 minutes with full payment from adsterra 
+
+payments are always changing day to day 3 days ago cpm was at $1.47 at with this ai you could of had $2000 in a matter of 10 hours 
+
+but we will let you know higher paying days to join pool to mine 
+
+as it will come with a javascript to use the ai and also other type coinimp to flow youre payments to this amazing software social bar ads allowed us to give you
+
+i would of stuck with cpu but it was unlogical to only offer that much to you guys which is only 15 cents this gives at least 15 cents with 10,000 ads mined 
+
+so i hope the wait was worth it come check out the new watts rig file i still have the old one but i will add the balance and what not to our own style rig we are starting 
+
+to accept payments for 2026 for bitcoin at 150 satos for btc for $1 where every so often we buy 125 satos for $1 this will help our new gaming site out at 
+
+
+https://btcgames.lovable.app/
+
+it holds a ton of fun free games to play such as blackjack plinko slots crash heads or tails and many more games allows the abilty to do ad rig mining in another style but we will pay for this one to add more game play to the project 
+
+we signed with mode mobile to get around $20 a day every 1.3 days as long as we do the rewards to help users earn more money so the project has funding but not much we will add more ways to increase money as time goes on and unlock more ways to earn together the new ai is the best software i have worked on since helping with the ai photo button for ebay and talking about how it could search any product from a sight of a photo for likely matches and that talk now holds a button with over a billion clicks thanks to ebay and the american dream 
+
+tomorrow the java script for the ai comes to the public after tweaks of the software
+
+
+
+
+
+
+
+=====
 #1-3 photos of investing with Bitcoin 
 
 
