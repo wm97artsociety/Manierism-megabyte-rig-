@@ -1,5 +1,38 @@
 # Manierism megabytes
 ----
+# Main Marketplace
+----
+
+# sub market link (active)
+
+ for now a ad center tomorrow the gold rig 
+                
+# home page: https://btcadcenter.lovable.app
+
+earn a extra 100% from 81,000 ad shares that boost payouts from $0.00007 to $0.00014 and from $0.05 to $0.09 
+
+once the 81 shares of 1000 ads are done the round for that payment is complete and can not be repaid out 
+
+hurry now this ad center stays for good 
+
+we have 3 other marketplaces being fixed by next monthing including the gold rig and also btc games where you can earn extra from you're cpu but also Satos and do ads for $1.25-3 with $3-5 premium package for ad publishing of you're own photo and company earning of just $0.50 for trying out our new ad centers with you're own photos and earn $0.75 in btc for using the service a discount of $0.75 if you bring 5 at $1 ill add $0.25 to ad center rate so instead of $3 you would make $3.25 for each users forked index page if you bring 25 friends its $0.60 given to ad growth if you bring 100 friends its grown to $0.80 extra a ad rate so instead of $3 you get $3.80 in profit the rate is still being increased as we find members to do tasks for 50,100,250,500,1000 ads at a time 
+
+check screenshots for display of webpage and first main page for the company to make a income 
+
+at 1,400 ad views the company has given $2.00 but the pool has grown $0.80 meaning a 8%-80% increase on picked asset either cpu giving with slight ad to watch to grow money or ad cost to increase 
+
+so far we have put in $53 to ad growth which will grow to $114 if people use the webpage meaning that we will increase amount of game play by double and allowing the next pool to earn $57 extra as this money will stay in the pool the original $53 will be handed out with a epoch growth pool of $15-25 every 3 days meaning the rate for the ads will go up for momey to be earned 
+
+once the next set of $15+30 is put in for $45 and added to the $53 it makes the game click rate 10 times for a penny but getting the penny is the hard part so it would have to give a penny every 4 users clicks 25 ads then gift the $0.00007 usd  times or so then the penny for the bonus earned is gifted in a 4th 
+
+so then users would earn even more money as shares are bought and sold on the stock market it ties in the ability to cash out at least a share rate of $2.50-14 dollars a day from $40 and with that having double at $85-95 bring is to $5-30 a day on days it does 15% up patteren just trading the interest rate of change from dollars so if a stock is $2.15 and gain profit is $0.15 but you hold 75 shares at $40 you trade the $0.15 by the $1.15-1.16 rate for full profit on change interest and then wait for the gain to go from a $0.0 or $0.02- to a $0.16+ and trade $1.16 or $1.17 and with that trade the interest down to 7 shares at $0.03 interest and rebuy like on cashapp and with that it unlocks at least a 2 litter a day trading from 12 pm to 3 pm on the stock market for $36 ♥️
+
+today i bought a 2 liter of soda with my earning from kilowatts since i needed a drink at it costed 14 flips just as i wrote above in 10 minutes on cashapp to make $2.78 in profit 
+
+---
+
+
+
 
 BREAKING NEWSSSSSS
 
@@ -621,24 +654,6 @@ Happy holiday
 Thank you guys for 192 clones on this project cant wait to see what you guys make one day 
 
 ---
-
-# Main Marketplace
-----
-
-# sub market link (active)
- 
-                
-# home page: https://manierismmegabyte.gamer.gd/index.html
-            
-# stock market: https://manierismmegabyte.gamer.gd/s.html 
-
----
-
-# sub market rig mining links (active) earn gold, copper digital rewards and crypto
-
- # Rig html mining: https://manierismmegabyte.gamer.gd/rg.html
-            
- # music beta rig: https://manierismmegabyte.gamer.gd/music.html 
 
 # USD rate for hashes:  The net hash to USD rate is approximately $0.000000193 per hash.
 
