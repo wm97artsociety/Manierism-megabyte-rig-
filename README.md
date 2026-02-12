@@ -1,5 +1,19 @@
 # Manierism megabytes
 ----
+# Manierism USD paying rig
+
+the new file upload at 3:47pm feb 12th 2026 is a fully working rig with the same file types as free flowing energy rig but with watt token added with a ad resource payment of $0.0007 usd per ad task done 
+
+please be responsible and truthful as you say yes to the ads from going to google to see the ad it does stop mining tell you say yes and copy and paste the url into the search bar after you have the url you can do it every time by refresh to continue mining each 5 cycles it will apply the ad to grow money 
+
+version 2 coming out will have the ability to do epoch pools with that other 500+ members of the group raising funding we saved $0.0003 so every time 4people join mimimg we have a extra reward split by $0.0003 giving full reward rate back to the people 
+
+as more people use the rig it will profit to the community and each set of users will be given money
+
+cashouts start at $5 and come in btc to the community 
+
+
+-----
 # Main Marketplace
 ----
 
