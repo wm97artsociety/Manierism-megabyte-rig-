@@ -1,5 +1,74 @@
 # Manierism megabytes
 ----
+# Trading card rig USD paying
+
+### Deep Dive: The Trading Card Rig in Manierism Megabytes
+
+The **Trading Card Rig** is a core subsystem within the *Manierism Megabytes* (MM) mining framework—a Python-based simulation/game that blends cryptocurrency-inspired mining mechanics with resource management, real-world hardware simulation (e.g., GPIO for Raspberry Pi coils/resistors), and collectible trading cards. At its heart, the Trading Card Rig transforms abstract "mining" outputs (like capsule MB, kWh, and hash power) into tangible, tradable collectibles: **Sports Cards** and **Magic: The Gathering (MTG) Cards**. These aren't just digital tokens—they represent a hybrid economy where virtual rewards can be converted to physical items, traded between players, or sacrificed for gameplay boosts.
+
+Think of it as a **collector's loop** embedded in a broader "rig" ecosystem: Your mining rig (a wallet with hash power, resources, and a node ID) generates cards as passive rewards, which you can then leverage for social trading, real-world redemption, or power-ups. It's designed to evoke nostalgia (trading cards from the '90s) while tying into MM's themes of "electrism," torrents, and symbolic world debt reduction. Below, I'll break it down layer by layer—from mechanics and economy to code internals and strategic depth.
+
+#### 1. **Core Purpose: Bridging Virtual Mining to Real-World Collectibles**
+   - **The "Rig" Context**: In MM, your "rig" is a wallet file (e.g., `wallet_id_wallet.json`) that tracks mining stats like `capsule_value_mb` (mined data), `real_kwh` (energy simulation), and `rig_hash_power` (mining speed). The Trading Card Rig extends this by adding card-specific fields: `sports_cards` and `mtg_cards`. It's not a separate hardware rig—it's a **software module** that "rigs" the game toward collectibility.
+   - **Why Cards?** They add **scarcity and social layers** to pure number-crunching mining. While core mining yields scalable resources (e.g., infinite MB via hash growth), cards are **finite**: Only 5,000 Sports Cards and 24,000 MTG Cards exist globally (tracked in `card_inventory.json`). This creates a limited-supply economy, encouraging trading and hoarding.
+   - **Thematic Tie-In**: Cards align with MM's "pirate/torrent/bootleg" motifs (e.g., CUSTOM_REWARDS list includes "Pirate," "Seeder"). Earning a card feels like "bootlegging" a rare artifact from the digital swarm, redeemable for physical "payloads."
+
+#### 2. **Earning Cards: The Mining Integration**
+   - **Passive Reward Mechanism**: Cards are awarded via the `unified_mining_loop()`—the heart of all mining types (kinetic, Wi-Fi, SHA, cache). Every ~15 minutes (900 seconds, configurable via `CARD_INTERVAL`), the loop calls `award_random_card(wallet)`:
+     - It loads global inventory from `card_inventory.json`.
+     - Randomly picks Sports (50% chance if available) or MTG.
+     - Deducts 1 from `AVAILABLE_SPORTS_CARDS` or `AVAILABLE_MTG_CARDS`, adds to your wallet's `sports_cards` or `mtg_cards`.
+     - Saves inventory and wallet. If inventory is exhausted: "No more cards available!"
+   - **Frequency & Scaling**: In a 20-minute session (1200 seconds), you might earn 1 card. Longer runs (e.g., 75-year sim) yield dozens. It's gated behind mining uptime—no mining, no cards—tying it to hash power growth (HASH_GROWTH_RATE = 0.001 per tick).
+   - **Edge Cases**: If one type runs out, it biases toward the other. Debug mode doesn't affect cards, but SHA boosts indirectly speed up loops for more chances.
+
+   **Deep Code Insight**: 
+   ```python
+   def award_random_card(wallet):
+       load_card_inventory()  # Global check: sports=5000, mtg=24000 initially
+       if AVAILABLE_SPORTS_CARDS == 0 and AVAILABLE_MTG_CARDS == 0:
+           return False
+       is_sports = random.choice([True, False]) if both >0 else fallback
+       # ... increment wallet, decrement global, save
+   ```
+   This ensures **global scarcity**—your rig can't "mine" infinite cards; the ecosystem depletes over time.
+
+
+#### 2a. **price of token for this rig**
+
+watt token is carried over from the last rig of manierism usd rig and with that this rig gives trading cards with a small portion of cash around $0.00005 usd every time you watch a ad after 13 ads you are reward for a trading card 
+
+   
+#### 3. **Card Economy: Value, Trading, & Redemption**
+   - **Intrinsic Value**: Each card = **$0.025 USD** (`CARD_USD_VALUE`). Total potential: Sports ($125k), MTG ($600k). This folds into your rig's `calculate_total_usd(wallet)` for "Watts USD" (overall portfolio value). Cards boost your "net worth" without direct mining.
+   - **Trading System** (`trade_cards(from_wallet, to_wallet_id, sports_amt, mtg_amt)`):
+     - Peer-to-peer: Send exact amounts (e.g., 5 Sports + 2 MTG) to another wallet ID.
+     - Validation: Checks sender balance, non-negative amounts, at least 1 card.
+     - Logging: Appends to `card_transactions.json` with timestamp, from/to, amounts.
+     - No fees, but it's "on-chain" via wallet files—simulates blockchain transfers.
+     - Strategy: Trade for resources (e.g., swap cards for someone else's kWh) or speculate on scarcity.
+   - **Physical Redemption** (`process_shipping_payment(wallet, total_cards, location)`):
+     - **Real-World Bridge**: Convert digital cards to physical delivery! Deduct cards + shipping from `watts_token` (your USD-like balance).
+     - Tiers: USA ($6–$20) vs. Overseas ($30–$75) based on quantity (25–1,000 cards).
+     - Total cost: Cards ($0.025 ea.) + shipping. E.g., 100 USA cards = $2.50 + $6 = $8.50.
+     - Payout: Instructions to pay BTC (on-chain: `bc1qm...` or Lightning invoice) to wm97artsociety@gmail.com`. Ships to addresses around the world
+     - Deep Twist: Assumes proportional deduction but simplifies to zeroing balances if exact match—encourages bulk redemptions.
+   - **Donation for Power** (`donate_for_hash(wallet, "sports_cards")` or MTG):
+     - Sacrifice cards to the donation wallet (`WM-CPH0O7J3`) for **hash power boosts**: +100 H/s per card (`Decimal(int_amt) * Decimal("100")`).
+     - Ties into creator economy: Donations fund "global" resources, giving permanent mining speedups.
+     - Why? Cards are "wasted" for exponential growth—e.g., 10 cards = +1,000 H/s, accelerating future MB/kWh.
+
+   **Economy Balance**: Cards are **illiquid assets**—easy to earn/trade digitally, but redemption adds friction (shipping costs, BTC payment). This mirrors real trading card markets (e.g., eBay fees + shipping).
+
+#### 4. **UI & Management: The Card Menu**
+   - Accessed via Wallet Actions > Option 26: "Trading Card Menu."
+   - **show_card_balances(wallet)**: Displays counts + USD value, plus total portfolio slice.
+   - Sub-Menu:
+     1. **Trade**: Input target wallet + amounts → instant transfer + log.
+     2. **History**: Last 10 txns from `card_transactions.json` (e.g., "From WM97 to RIG2: 3 Sports + 1 MTG").
+     3. **Ship**: Select qty/location → pay/confirm → BTC instructions.
+     4. **Back**: To main wallet dashboard.
+
 # Manierism USD paying rig
 
 the new file upload at 3:47pm feb 12th 2026 is a fully working rig with the same file types as free flowing energy rig but with watt token added with a ad resource payment of $0.0007 usd per ad task done 
