@@ -19,7 +19,9 @@ Think of it as a **collector's loop** embedded in a broader "rig" ecosystem: You
      - Randomly picks Sports (50% chance if available) or MTG.
      - Deducts 1 from `AVAILABLE_SPORTS_CARDS` or `AVAILABLE_MTG_CARDS`, adds to your wallet's `sports_cards` or `mtg_cards`.
      - Saves inventory and wallet. If inventory is exhausted: "No more cards available!"
-   - **Frequency & Scaling**: In a 20-minute session (1200 seconds), you might earn 1 card. Longer runs (e.g., 75-year sim) yield dozens. It's gated behind mining uptime—no mining, no cards—tying it to hash power growth (HASH_GROWTH_RATE = 0.001 per tick).
+   - **Frequency & Scaling**: In a 15-minute session (900 seconds), you earn 1 card. Longer runs (e.g., 75-year sim) yield dozens. It's gated behind mining uptime—no mining, no cards—tying it to hash power growth (HASH_GROWTH_RATE = 0.001 per tick). while also earning $0.0005
+
+   - 
    - **Edge Cases**: If one type runs out, it biases toward the other. Debug mode doesn't affect cards, but SHA boosts indirectly speed up loops for more chances.
 
    **Deep Code Insight**: 
@@ -36,11 +38,13 @@ Think of it as a **collector's loop** embedded in a broader "rig" ecosystem: You
 
 #### 2a. **price of token for this rig**
 
-watt token is carried over from the last rig of manierism usd rig and with that this rig gives trading cards with a small portion of cash around $0.00005 usd every time you watch a ad after 13 ads you are reward for a trading card 
+watt token is carried over from the last rig of manierism usd rig and with that this rig gives trading cards with a small portion of cash around $0.0005 usd every time you do 4 ads after you are reward for a trading card 
 
    
 #### 3. **Card Economy: Value, Trading, & Redemption**
-   - **Intrinsic Value**: Each card = **$0.025 USD** (`CARD_USD_VALUE`). Total potential: Sports ($125k), MTG ($600k). This folds into your rig's `calculate_total_usd(wallet)` for "Watts USD" (overall portfolio value). Cards boost your "net worth" without direct mining.
+   - **Intrinsic Value**: Each card = **$0.052-0.25+ some cards are valued at higher rates its the luck of the all mighty trading card
+   -
+   - USD** (`CARD_USD_VALUE`). Total potential: Sports ($125k), MTG ($600k). This folds into your rig's `calculate_total_usd(wallet)` for "Watts USD" (overall portfolio value). Cards boost your "net worth" without direct mining.
    - **Trading System** (`trade_cards(from_wallet, to_wallet_id, sports_amt, mtg_amt)`):
      - Peer-to-peer: Send exact amounts (e.g., 5 Sports + 2 MTG) to another wallet ID.
      - Validation: Checks sender balance, non-negative amounts, at least 1 card.
