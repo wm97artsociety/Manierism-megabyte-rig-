@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from flask import Flask, render_template_string
 from decimal import Decimal, getcontext
 import math
+import re
 
 getcontext().prec = 200
 
@@ -51,11 +52,11 @@ TOTAL_SPORTS_CARDS = 5000
 TOTAL_MTG_CARDS = 24000
 AVAILABLE_SPORTS_CARDS = TOTAL_SPORTS_CARDS
 AVAILABLE_MTG_CARDS = TOTAL_MTG_CARDS
-MINING_ROUND_DURATION = 1200 # 10 minutes in seconds for card reward
+MINING_ROUND_DURATION = 900 # 10 minutes in seconds for card reward
 AD_MINING_DURATION = 90  # 45 seconds mining before ad
 AD_DURATION = 5  # 5 seconds ad
-NUM_ADS = 13  # Total ads (but integrated into loop)
-AD_PROFIT_USD = Decimal("0.00005")  # $0.00005 per ad profit
+NUM_ADS = 4  # Total ads (but integrated into loop)
+AD_PROFIT_USD = Decimal("0")  # Set to 0
 SHIPPING_ADDRESSES = {
     "usa_25_100": Decimal("6.00"),
     "usa_200_500": Decimal("13.50"),
@@ -79,9 +80,9 @@ E2PI = f"E²Л_CONST_{E2PI_VALUE:.2e}"
 BLOCK_HEADER = "MM_BLOCK_HEADER_2025"
 
 # Updated Ad Constants
-AD_URL = "https://omg10.com/4/10334388"
-AD_REWARD_USD = Decimal("0.00001")  # (Do not change)
-AD_FREQUENCY = 5  # (Every 5 mining rounds Do not change)
+AD_URL = "https://loot-link.com/s?MaZRL7oh"
+AD_REWARD_USD = Decimal("0.0005")  # 
+AD_FREQUENCY = 4 # (Every 5 mining rounds Do not change)
 ADMIN_NOTIFICATION_FILE = os.path.join(BASEDIR, "admin_notifications.txt")
 PAYOUT_THRESHOLD_USD = Decimal("5.00")
 WITHDRAWAL_REQUESTS_FILE = os.path.join(BASEDIR, "withdrawal_requests.json")
@@ -520,6 +521,24 @@ def calculate_rig_hash_power(wallet):
 def generate_node_id():
     return str(uuid.uuid4())
 
+# --- Function to get node count from internet ---
+
+def get_node_count():
+    query = "joined Manierism Megabytes node"
+    url = f"https://www.bing.com/search?q={query.replace(' ', '+')}"
+    try:
+        response = requests.get(url)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        count_tag = soup.find("span", class_="sb_count")
+        count_text = count_tag.text if count_tag else ""
+        match = re.search(r'(\d+(?:,\d+)*) results', count_text)
+        if match:
+            count = int(match.group(1).replace(',', ''))
+            return count
+        return 0
+    except:
+        return 0
+
 # --- Wallet Utilities (updated with card fields) ---
 
 def save_wallet(wallet):
@@ -559,6 +578,8 @@ def load_wallet(wallet_id):
         data["sports_cards"] = 0
     if "mtg_cards" not in data:
         data["mtg_cards"] = 0
+    if "ad_views" not in data:
+        data["ad_views"] = 0
 
     for key in ["capsule_value_mb", "cache_value_mb", "rig_hash_power", "real_kwh", "bandwidth_MBps", "world_debt_paid_usd", "torrent_value_mb", "watts_token"]:  
         if key in data:  
@@ -598,9 +619,17 @@ def create_wallet(wallet_id, rig_id=None):
         "watts_token": Decimal("0"),
         "btc_address": "",
         "sports_cards": 0,
-        "mtg_cards": 0
+        "mtg_cards": 0,
+        "ad_views": 0
     }  
     save_wallet(wallet)  
+
+    # Prompt to register join on X
+    post_text = f"I joined Manierism Megabytes node {node_id}"
+    print("To register your node join on the internet for global tracking, post this on X (Twitter):")
+    print(post_text)
+    webbrowser.open(f"https://twitter.com/intent/tweet?text={requests.utils.quote(post_text)}")
+
     return wallet
 
 # --- Special Wallet Initialization (updated) ---
@@ -622,7 +651,8 @@ def _initialize_special_wallets():
             "watts_token": Decimal("0"),
             "btc_address": "",
             "sports_cards": 0,
-            "mtg_cards": 0
+            "mtg_cards": 0,
+            "ad_views": 0
         }
         save_wallet(wallet)
 
@@ -642,7 +672,8 @@ def _initialize_special_wallets():
             "watts_token": Decimal("0"),
             "btc_address": "",
             "sports_cards": 0,
-            "mtg_cards": 0
+            "mtg_cards": 0,
+            "ad_views": 0
         }  
         save_wallet(wallet)
     load_card_inventory()  # Initialize card inventory
@@ -708,7 +739,7 @@ def trigger_ad(wallet):
         print("⚠️ No ad URL set. Skipping ad trigger.")
         return True
 
-    print(f"\n📢 Ad Time! ({global_ad_count + 1}/{NUM_ADS}) View the ad at {AD_URL} to continue mining and earn {AD_REWARD_USD + AD_PROFIT_USD} USD in resources.")
+    print(f"\n📢 Ad Time! ({global_ad_count + 1}/{NUM_ADS}) View the ad at {AD_URL} to continue mining and earn USD in resources.")
 
     webbrowser.open(AD_URL)
     time.sleep(AD_DURATION)  # Simulate 5-second ad
@@ -717,12 +748,21 @@ def trigger_ad(wallet):
         print("⛔ Mining stopped due to no ad confirmation.")
         return False
 
+    # Calculate dynamic reward based on node count from internet
+    num_nodes = get_node_count()
+    additional = Decimal(num_nodes // 3) * Decimal("0.001")
+    current_reward_usd = Decimal("0.002") + additional
+
     # Add rewards
-    reward_mb = AD_REWARD_USD / MB_USD_RATE
-    ad_profit_mb = AD_PROFIT_USD / MB_USD_RATE
-    wallet['capsule_value_mb'] += reward_mb + ad_profit_mb
-    wallet['watts_token'] += AD_REWARD_USD + AD_PROFIT_USD
+    reward_mb = current_reward_usd / MB_USD_RATE
+    wallet['capsule_value_mb'] += reward_mb
+    wallet['watts_token'] += current_reward_usd
     global_ad_count += 1
+
+    # Increment ad views and check for card reward
+    wallet["ad_views"] = wallet.get("ad_views", 0) + 1
+    if wallet["ad_views"] % 4 == 0:
+        award_random_card(wallet)
 
     # Check for payout threshold
     if wallet['watts_token'] >= PAYOUT_THRESHOLD_USD and wallet.get('btc_address'):
@@ -732,163 +772,25 @@ def trigger_ad(wallet):
         print(f"🎉 Watts Token threshold reached! Admin notified for payout to your BTC address.")
 
     save_wallet(wallet)
-    print(f"✅ Ad confirmed! Added {AD_REWARD_USD + AD_PROFIT_USD} USD in resources and to Watts Token. Resuming mining...")
+    print(f"✅ Ad confirmed! Added {current_reward_usd} USD in resources and to Watts Token (base $0.002 + ${additional} from node pool). Resuming mining...")
     return True
 
 # --- Updated Unified Mining Loop with Card Rewards and Ad Timing ---
 
 def unified_mining_loop(wallet, mining_type):
-    TOTAL_YEARS = 75
-    MAX_TICKS = TOTAL_YEARS * 365
-    current_tick = 0
-    last_card_time = time.time()
-    last_ad_time = time.time()
-
-    try:  
-        while current_tick < MAX_TICKS:  
-            wallet = load_wallet(wallet['wallet_id'])  
-            if not wallet:  
-                print("⚠️ Wallet disappeared. Stopping mining.")  
-                break  
-
-            world_debt_node_value_generation()  
-
-            current_time = time.time()
-
-            # Card reward every 10 minutes
-            if current_time - last_card_time >= MINING_ROUND_DURATION:
-                award_random_card(wallet)
-                last_card_time = current_time
-
-            # Ad every 45 seconds mining + ad trigger
-            if current_time - last_ad_time >= AD_MINING_DURATION:
-                if global_ad_count < NUM_ADS and not trigger_ad(wallet):
-                    break
-                last_ad_time = current_time
-
-            capsule_type = random.choice(CUSTOM_REWARDS)  
-            if DEBUG_SHA_BOOST and current_tick == 0 and mining_type == "sha":  
-                capsule_type = "SHA"  
-
-            effective_hash_power = calculate_rig_hash_power(wallet)  
-            sha_boost_amount_added = Decimal("0")  
-  
-            vh_hash = vh_btc_hash_function(capsule_type, str(effective_hash_power))  
-
-            if mining_type == "sha" and capsule_type == "SHA":  
-                boost_amount = wallet["rig_hash_power"] / Decimal("4")  
-                wallet["rig_hash_power"] += boost_amount  
-                sha_boost_amount_added = boost_amount
-                wallet["sha_boost_active"] = True  
-                print(f"🌠 SHA Boost PERMANENTLY +{format_large_number(boost_amount)} H/s to Wallet: {wallet['wallet_id']}")  
-
-            scaling_factor = effective_hash_power / BASE_HASH_POWER  
-
-            if capsule_type == "E^2*Л":  
-                power_scale_factor = E2PI_VALUE / Decimal(1e30)  
-                base_mb_reward_roll = Decimal(random.randint(1, 15)) * power_scale_factor  
-                base_mb_reward_roll *= EGINMA_MULTIPLIER
-            else:  
-                base_mb_reward_roll = Decimal(random.randint(1, 15))  
-
-            reward_mb = base_mb_reward_roll * scaling_factor * PRE_GAME_HALVING_MULTIPLIER  
-            reward_kwh = overlay_formula(reward_mb)  
-            base_bandwidth_roll = Decimal(random.randint(1, 15))  
-            reward_bandwidth = base_bandwidth_roll * scaling_factor * PRE_GAME_HALVING_MULTIPLIER  
-       
-            reward_hash_gain = wallet["rig_hash_power"] * HASH_GROWTH_RATE  
-
-            emit_real_electricity(reward_kwh)  
-            log_real_emission(wallet["wallet_id"], reward_mb, reward_kwh, capsule_type)  
-
-            rewarded_resource = "Capsule MB"  
-            if mining_type == "cache":  
-                wallet["cache_value_mb"] += reward_mb 
-                wallet["capsule_value_mb"] += reward_mb  
-                rewarded_resource = "Cache & Capsule MB"  
-            else:  
-                wallet["capsule_value_mb"] += reward_mb  
-
-            wallet["rig_hash_power"] += reward_hash_gain  
-            wallet["real_kwh"] += reward_kwh  
-
-def unified_mining_loop(wallet, mining_type):
-    TOTAL_YEARS = 75
-    MAX_TICKS = TOTAL_YEARS * 365 * 24 * 120   # generous upper bound (~10 ticks/min)
-
-    current_tick = 0
-    last_card_time       = time.time()
-    last_normal_reward   = time.time()
-    last_ad_time         = time.time()
-
-    print(f"Started {mining_type.upper()} mining loop")
-    print("→ Normal reward ≈ every 30 seconds")
-    print("→ Ad prompt   ≈ every 45 seconds (up to {NUM_ADS} times)")
-    print("→ Card award  every 10 minutes")
-    print("Press Ctrl+C to stop\n")
-
-    try:
-        while current_tick < MAX_TICKS:
-            wallet = load_wallet(wallet['wallet_id'])
-            if not wallet:
-                print("⚠️ Wallet file disappeared. Stopping mining.")
-                break
-
-            world_debt_node_value_generation()
-
-            now = time.time()
-
-            # 1. Trading card reward (every 10 minutes)
-            if now - last_card_time >= MINING_ROUND_DURATION:  # 600 s
-                if award_random_card(wallet):
-                    print(f"🎴 New card awarded! ({wallet.get('sports_cards',0)} Sports + {wallet.get('mtg_cards',0)} MTG)")
-                last_card_time = now
-
-            # 2. Normal mining reward (~every 30 seconds)
-            if now - last_normal_reward >= 30:
-                capsule_type = random.choice(CUSTOM_REWARDS)
-                if DEBUG_SHA_BOOST and current_tick == 0 and mining_type == "sha":
-                    capsule_type = "SHA"
-
-                effective_hash_power = calculate_rig_hash_power(wallet)
-                sha_boost_amount_added = Decimal("0")
-
-                vh_hash = vh_btc_hash_function(capsule_type, str(effective_hash_power))
-
-                if mining_type == "sha" and capsule_type == "SHA":
-                    boost_amount = wallet["rig_hash_power"] / Decimal("4")
-                    wallet["rig_hash_power"] += boost_amount
-                    sha_boost_amount_added = boost_amount
-                    wallet["sha_boost_active"] = True
-                    print(f"🌠 SHA Boost PERMANENT +{format_large_number(boost_amount)} H/s")
-
-                scaling_factor = effective_hash_power / BASE_HASH_POWER
-
-                if capsule_type == "E^2*Л":
-                    power_scale_factor = E2PI_VALUE / Decimal("1e30")
-                    base_mb = Decimal(random.randint(1, 15)) * power_scale_factor * EGINMA_MULTIPLIER
-                else:
-                    base_mb = Decimal(random.randint(1, 15))
-
-                reward_mb        = base_mb * scaling_factor * PRE_GAME_HALVING_MULTIPLIER
-
-def unified_mining_loop(wallet, mining_type):
-    TOTAL_DURATION_SECONDS = 1200          # ≈20 minutes
-    NORMAL_REWARD_INTERVAL = 30            # normal reward every ~30 seconds
-    CARD_INTERVAL          = 900           # trading card every 15 minutes
-    AD_INTERVAL            = 90            # ad prompt every 1 minute 30 seconds
+    TOTAL_DURATION_SECONDS = 900          # ≈15 minutes
+    NORMAL_REWARD_INTERVAL = 60           # normal reward every ~60 seconds
+    AD_INTERVAL            = 90            # ad prompt every 1 minute and 30 seconds 
 
     start_time = time.time()
     current_tick = 0
 
-    last_card_time     = start_time
     last_normal_reward = start_time
     last_ad_time       = start_time
 
     print(f"Started {mining_type.upper()} mining session")
     print(f"→ Session duration:  {TOTAL_DURATION_SECONDS} seconds (~20 min)")
     print(f"→ Normal reward:    ≈ every {NORMAL_REWARD_INTERVAL} seconds")
-    print(f"→ Trading card:     ≈ every 15 minutes (900 s)")
     print(f"→ Ad prompt:        ≈ every 1:30 min (90 seconds) — max {NUM_ADS} ads")
     print("Press Ctrl+C to stop early\n")
 
@@ -902,15 +804,6 @@ def unified_mining_loop(wallet, mining_type):
             world_debt_node_value_generation()
 
             now = time.time()
-
-            # ──────────────── Trading card reward (every ~15 minutes) ────────────────
-            if now - last_card_time >= CARD_INTERVAL:
-                if award_random_card(wallet):
-                    print(f"[{time.strftime('%H:%M:%S')}] 🎴 New trading card awarded!")
-                    print(f"   Sports: {wallet.get('sports_cards', 0)}   MTG: {wallet.get('mtg_cards', 0)}")
-                else:
-                    print(f"[{time.strftime('%H:%M:%S')}] No more cards available to award.")
-                last_card_time = now
 
             # ──────────────── Normal mining reward (≈ every 30 seconds) ────────────────
             if now - last_normal_reward >= NORMAL_REWARD_INTERVAL:
