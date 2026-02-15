@@ -275,13 +275,12 @@ def calculate_shipping_cost(card_count, location):
     return None
 
 def process_shipping_payment(wallet, total_cards, location):
-def process_shipping_payment(wallet, total_cards, location):
     cost = calculate_shipping_cost(total_cards, location)
     if not cost:
         print("Invalid quantity or location for shipping.")
         return False
 
-    card_value = total_cards * CARD_USD_VALUE
+    card_value = Decimal(total_cards) * CARD_USD_VALUE
     total_cost_usd = cost + card_value
 
     print("\n" + "="*60)
@@ -310,11 +309,31 @@ def process_shipping_payment(wallet, total_cards, location):
         print("Order cancelled. Please complete payment and try again.")
         return False
 
-    print("\n✅ Payment notification recorded. An admin will verify your transaction soon.")
-    print("Once confirmed, your cards will be shipped.")
-    print(f"Keep your transaction ID ready and check your email: {SHIPPING_EMAIL}")
+    # ────────────────────────────────────────────────
+    # NEW: Withdraw / remove the cards from the wallet
+    # ────────────────────────────────────────────────
+    total_user_cards = wallet.get("sports_cards", 0) + wallet.get("mtg_cards", 0)
 
-    # Optional: log the request for admin
+    if total_cards > total_user_cards:
+        print(f"⚠️  Error: You only have {total_user_cards} cards, but requested to ship {total_cards}.")
+        print("   Order cancelled — no cards were removed.")
+        return False
+
+    # Simple deduction logic: remove from sports first, then MTG if needed
+    remaining_to_remove = total_cards
+
+    if remaining_to_remove > 0:
+        remove_sports = min(remaining_to_remove, wallet.get("sports_cards", 0))
+        wallet["sports_cards"] -= remove_sports
+        remaining_to_remove -= remove_sports
+
+    if remaining_to_remove > 0:
+        wallet["mtg_cards"] -= remaining_to_remove
+
+    save_wallet(wallet)
+    print(f"✅ {total_cards} card(s) have been removed from your wallet balance for shipping.")
+
+    # Log the request for admin verification
     log_entry = {
         "timestamp": time.time(),
         "wallet_id": wallet['wallet_id'],
@@ -322,18 +341,26 @@ def process_shipping_payment(wallet, total_cards, location):
         "cards": total_cards,
         "location": location,
         "amount_usd": float(total_cost_usd),
+        "sports_after": wallet.get("sports_cards", 0),
+        "mtg_after": wallet.get("mtg_cards", 0),
         "status": "pending_payment_verification"
     }
     admin_log = os.path.join(BASEDIR, "shipping_requests.json")
-    requests = []
+    requests_list = []
     if os.path.exists(admin_log):
         with open(admin_log, "r") as f:
-            requests = json.load(f)
-    requests.append(log_entry)
+            requests_list = json.load(f)
+    requests_list.append(log_entry)
     with open(admin_log, "w") as f:
-        json.dump(requests, f, indent=2)
+        json.dump(requests_list, f, indent=2)
+
+    print("\n✅ Payment notification recorded. An admin will verify your transaction soon.")
+    print("Once confirmed, your cards will be physically shipped.")
+    print(f"Keep your transaction ID / proof ready and check your email: {SHIPPING_EMAIL}")
+    print("Cards have been deducted from your digital balance.")
 
     return True
+
 # --- Blackjack Mini-Game Constants & Utilities (unchanged) ---
 
 CARD_SYMBOLS = {
