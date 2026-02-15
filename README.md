@@ -202,6 +202,26 @@ Set up a index home page from AI help just type I need this color html or style 
 Set up a bonus page for terminal or url Im setting up on manierism megabytes rig to produce money or from loveable which is easy it'll do all the work in 3 days or for $25 for a month for work 
 And then on the bonus page you put in words please go back to the terminal or url page with a link box to click and then make that page on loveable ai website maker or grok for websites like infinity hosting for more freedom in coding 
 
+# handrich multiple sclerosis foundation ETF$
+
+from a loving mother 
+
+she worked 3 jobs which made her very ill with multiple sclerosis at one of the youngest age rates in history of 2000-2010 years at 28 years old 
+
+she taught me to try and explore new micro ways to start businesses and at first it was $100 to start one now i have it down to $5 a micro start up and a free micro start up store 
+
+i set this rig up to give back to home owners
+
+but their with be a handrich MS society foundation paid out in usd for a rate of $5000 a day just like free homes 
+
+we also seen mothers go through a issue with toy clean up so i if i was to set you a url or rig to process a rate of up to $5000 to pick up toys would it help with epoch rates of 3.2x on 500 people joining approximately 
+
+# Mcfamily and Friends ETF$ 
+also we need a McFamily and friends 
+rig for micro McChicken and 2 for 1 deals if we 35 ads it pays for one McChicken if we find 500 people it gives the rate of $3 cost approximately to $1500 a share rate and $45,000 for food lol 😂
+
+tomorrow i set up mcfamily and friends McDonald's reward straight cash but traded as a digital food 
+
 # Trading card rig USD paying
 
 ### Deep Dive: The Trading Card Rig in Manierism Megabytes
