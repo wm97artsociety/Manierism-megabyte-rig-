@@ -275,33 +275,65 @@ def calculate_shipping_cost(card_count, location):
     return None
 
 def process_shipping_payment(wallet, total_cards, location):
+def process_shipping_payment(wallet, total_cards, location):
     cost = calculate_shipping_cost(total_cards, location)
     if not cost:
         print("Invalid quantity or location for shipping.")
         return False
 
-    total_cost = cost + (total_cards * CARD_USD_VALUE)  # Cards + shipping
-    if wallet.get("watts_token", Decimal("0")) < total_cost:
-        print(f"Not enough Watts Token. Need ${total_cost}, have ${wallet.get('watts_token')}")
+    card_value = total_cards * CARD_USD_VALUE
+    total_cost_usd = cost + card_value
+
+    print("\n" + "="*60)
+    print("📦 PHYSICAL TRADING CARD SHIPPING ORDER")
+    print("="*60)
+    print(f"Cards to ship:     {total_cards}")
+    print(f"Location:          {location.upper()}")
+    print(f"Card value:        ${format_large_number(card_value)}")
+    print(f"Shipping fee:      ${format_large_number(cost)}")
+    print(f"Total to pay:      ${format_large_number(total_cost_usd)} USD")
+    print("\nPayment methods:")
+    print(f"  Bitcoin (on-chain):  {BTC_ONCHAIN_WALLET}")
+    print(f"  Lightning Network:   {BTC_LIGHTNING_WALLET}")
+    print("\nImportant:")
+    print(f"  • Send exactly ${format_large_number(total_cost_usd)} worth of BTC")
+    print(f"  • Include this memo/reference in the transaction:")
+    print(f"    Wallet: {wallet['wallet_id']}")
+    print(f"    Cards: {total_cards} ({location.upper()})")
+    print(f"  • After sending, contact: {SHIPPING_EMAIL}")
+    print(f"  • We will verify payment and ship to:")
+    print(f"    {SHIPPING_ADDRESS}")
+    print("="*60)
+
+    confirm = input("\nHave you sent the payment? (yes/no): ").strip().lower()
+    if confirm != 'yes':
+        print("Order cancelled. Please complete payment and try again.")
         return False
 
-    wallet["watts_token"] -= total_cost
-    # Deduct cards (assume user confirms total from balances)
-    total_user_cards = wallet.get("sports_cards", 0) + wallet.get("mtg_cards", 0)
-    if total_cards > total_user_cards:
-        print("Not enough cards.")
-        wallet["watts_token"] += total_cost  # Refund
-        return False
-    # Proportionally deduct (simplified: deduct all if exact, else pro-rate)
-    wallet["sports_cards"] = 0
-    wallet["mtg_cards"] = 0
-    save_wallet(wallet)
+    print("\n✅ Payment notification recorded. An admin will verify your transaction soon.")
+    print("Once confirmed, your cards will be shipped.")
+    print(f"Keep your transaction ID ready and check your email: {SHIPPING_EMAIL}")
 
-    print(f"✅ Shipping processed! Cost: ${total_cost}. Pay to BTC: {BTC_ONCHAIN_WALLET} or Lightning: {BTC_LIGHTNING_WALLET}")
-    print(f"Shipping to: {SHIPPING_ADDRESS}")
-    print(f"Contact: {SHIPPING_EMAIL}")
+    # Optional: log the request for admin
+    log_entry = {
+        "timestamp": time.time(),
+        "wallet_id": wallet['wallet_id'],
+        "node_id": wallet.get("node_id", "N/A"),
+        "cards": total_cards,
+        "location": location,
+        "amount_usd": float(total_cost_usd),
+        "status": "pending_payment_verification"
+    }
+    admin_log = os.path.join(BASEDIR, "shipping_requests.json")
+    requests = []
+    if os.path.exists(admin_log):
+        with open(admin_log, "r") as f:
+            requests = json.load(f)
+    requests.append(log_entry)
+    with open(admin_log, "w") as f:
+        json.dump(requests, f, indent=2)
+
     return True
-
 # --- Blackjack Mini-Game Constants & Utilities (unchanged) ---
 
 CARD_SYMBOLS = {
