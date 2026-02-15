@@ -52,7 +52,7 @@ TOTAL_SPORTS_CARDS = 5000
 TOTAL_MTG_CARDS = 24000
 AVAILABLE_SPORTS_CARDS = TOTAL_SPORTS_CARDS
 AVAILABLE_MTG_CARDS = TOTAL_MTG_CARDS
-MINING_ROUND_DURATION = 900 # 10 minutes in seconds for card reward
+MINING_ROUND_DURATION = 360 # 6 minutes in seconds for card reward
 AD_MINING_DURATION = 90  # 45 seconds mining before ad
 AD_DURATION = 5  # 5 seconds ad
 NUM_ADS = 4  # Total ads (but integrated into loop)
@@ -80,8 +80,8 @@ E2PI = f"E²Л_CONST_{E2PI_VALUE:.2e}"
 BLOCK_HEADER = "MM_BLOCK_HEADER_2025"
 
 # Updated Ad Constants
-AD_URL = "https://loot-link.com/s?MaZRL7oh"
-AD_REWARD_USD = Decimal("0.0005")  # 
+AD_URL = "https://lootdest.org/s?MABybq9J"
+AD_REWARD_USD = Decimal("0.01")  # 
 AD_FREQUENCY = 4 # (Every 5 mining rounds Do not change)
 ADMIN_NOTIFICATION_FILE = os.path.join(BASEDIR, "admin_notifications.txt")
 PAYOUT_THRESHOLD_USD = Decimal("5.00")
