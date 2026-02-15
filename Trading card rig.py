@@ -1065,39 +1065,77 @@ def view_withdrawal_requests():
 # --- Updated Card Balance and Trading Menu ---
 
 def show_card_balances(wallet):
-    print(f"\n--- Trading Card Balances ---")
-    print(f"🎴 Sports Cards: {wallet.get('sports_cards', 0)} (Value: ${format_large_number(Decimal(wallet.get('sports_cards', 0)) * CARD_USD_VALUE)})")
-    print(f"🎴 MTG Cards: {wallet.get('mtg_cards', 0)} (Value: ${format_large_number(Decimal(wallet.get('mtg_cards', 0)) * CARD_USD_VALUE)})")
-    print(f"Total Cards Value: ${format_large_number(calculate_total_usd(wallet) - (wallet.get('capsule_value_mb', Decimal("0")) * MB_USD_RATE + ... ))}")  # Simplified
+    print("\n--- Trading Card Balances ---")
+    
+    sports = wallet.get('sports_cards', 0)
+    mtg    = wallet.get('mtg_cards', 0)
+    
+    sports_value = Decimal(sports) * CARD_USD_VALUE
+    mtg_value    = Decimal(mtg)    * CARD_USD_VALUE
+    total_card_value = sports_value + mtg_value
+    
+    print(f"🎴 Sports Cards: {sports:>6}    (Value: ${format_large_number(sports_value):>12})")
+    print(f"🎴 MTG Cards:    {mtg:>6}    (Value: ${format_large_number(mtg_value):>12})")
+    print(f"───────────────────────────────")
+    print(f"Total Cards Value:           ${format_large_number(total_card_value):>12}")
+    print(f"Total USD (all assets):      ${format_large_number(calculate_total_usd(wallet))}")
+
 
 def card_trading_menu(wallet):
     while True:
         show_card_balances(wallet)
+        
         print("\n--- Card Actions ---")
         print("1. Trade Cards to Another Wallet")
         print("2. View Transaction History")
         print("3. Ship Cards for Physical Delivery")
         print("4. Back to Wallet Menu")
+        
         choice = input("Enter option: ").strip()
+        
         if choice == "1":
             target_id = input("Enter target Wallet ID: ").strip()
-            sports_amt = int(input("Sports cards to trade: ").strip() or 0)
-            mtg_amt = int(input("MTG cards to trade: ").strip() or 0)
-            trade_cards(wallet, target_id, sports_amt, mtg_amt)
+            try:
+                sports_amt = int(input("Sports cards to trade: ").strip() or "0")
+                mtg_amt    = int(input("MTG cards to trade: ").strip() or "0")
+                if sports_amt < 0 or mtg_amt < 0:
+                    print("Amounts cannot be negative.")
+                    continue
+                trade_cards(wallet, target_id, sports_amt, mtg_amt)
+            except ValueError:
+                print("Please enter valid integer amounts.")
+                
         elif choice == "2":
             txs = load_transactions()
-            print("\n--- Transaction History ---")
-            for tx in txs[-10:]:  # Last 10
-                print(f"From {tx['from_wallet']} to {tx['to_wallet']}: {tx['sports']} Sports + {tx['mtg']} MTG ({time.ctime(tx['timestamp'])})")
+            if not txs:
+                print("No card transactions yet.")
+            else:
+                print("\n--- Recent Card Transactions (last 10) ---")
+                for tx in txs[-10:]:
+                    ts = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(tx['timestamp']))
+                    print(f"{ts} | {tx['from_wallet'][:8]}… → {tx['to_wallet'][:8]}… : "
+                          f"{tx['sports']} Sports + {tx['mtg']} MTG")
+                    
         elif choice == "3":
-            total_cards = int(input("Total cards to ship: ").strip())
-            location = input("Location (USA/Overseas): ").strip()
-            process_shipping_payment(wallet, total_cards, location)
+            try:
+                total_cards = int(input("Total cards to ship: ").strip())
+                if total_cards <= 0:
+                    print("Must ship at least 1 card.")
+                    continue
+                location = input("Location (USA / Overseas): ").strip().lower()
+                if location not in ["usa", "overseas"]:
+                    print("Please enter USA or Overseas.")
+                    continue
+                process_shipping_payment(wallet, total_cards, location)
+            except ValueError:
+                print("Please enter a valid number of cards.")
+                
         elif choice == "4":
             break
+            
         else:
-            print("Invalid option.")
-
+            print("Invalid option. Please choose 1–4.")
+            
 # --- Wallet Selection (unchanged) ---
 
 def _get_all_wallets():
