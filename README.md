@@ -216,6 +216,10 @@ but their with be a handrich MS society foundation paid out in usd for a rate of
 
 we also seen mothers go through a issue with toy clean up so i if i was to set you a url or rig to process a rate of up to $5000 to pick up toys would it help with epoch rates of 3.2x on 500 people joining approximately 
 
+while to make a sad sorry even better so do feel sorrow i prayed and prayed every day for 7-8 months at home and school talking only to the lord and waited for my mom to heal and one day her left side of her body started to work my prayer as a kid was my mom to have a great healthy life no matter a sickness 
+
+they'res days ive watched her pass away from studying her sleep but i pray and she comes back to life ive never called a morge because life is forever it goes on never ending as long as you pull a sleeping person from a realm of binary sleep to any n1-9 even using e=mc^2 and =^2 because it takes the formula Einstein was studying for the Apple that came to him from a parallel dimension which at the time he probably thought was a double-power realm of enigma equals mass over time and see segment in binary for a double feature power which would be a parallel frame in a way of an altered reality with the way =^2 is set up it rewrites everything from that formula straight to E equals MC giving our linear time through te kilowatts manierism megabytes rig 
+
 # Mcfamily and Friends ETF$ 
 also we need a McFamily and friends 
 rig for micro McChicken and 2 for 1 deals if we 35 ads it pays for one McChicken if we find 500 people it gives the rate of $3 cost approximately to $1500 a share rate and $45,000 for food lol 😂
