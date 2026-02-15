@@ -837,7 +837,7 @@ def trigger_ad(wallet):
 # --- Updated Unified Mining Loop with Card Rewards and Ad Timing ---
 
 def unified_mining_loop(wallet, mining_type):
-    TOTAL_DURATION_SECONDS = 900          # ≈15 minutes
+    TOTAL_DURATION_SECONDS = 36000         # ≈around 24 hours of mining at one time 
     NORMAL_REWARD_INTERVAL = 60           # normal reward every ~60 seconds
     AD_INTERVAL            = 90            # ad prompt every 1 minute and 30 seconds 
 
