@@ -1,5 +1,194 @@
 # Manierism megabytes
 ----
+
+# Free homes python script buy a home for $0.036 penny at rate of 500 friends for 500 tasks each 
+
+⭐ FreeHome Token Rig
+
+A Simulation Module in the Manierism Megabytes Ecosystem
+
+The FreeHome Token Rig is a companion subsystem within the Manierism Megabytes (MM) mining universe. While the Trading Card Rig focuses on collectible scarcity and physical redemption, the FreeHome Token Rig explores task‑scaling mechanics, group participation, and resource pooling inside a simulated mining economy.
+
+This rig models how task cycles, reward intervals, and group size influence the total output of a shared mining session. It is not a financial product — it is a mathematical simulation designed to show how scaling works when many participants perform repeated tasks at fixed intervals.
+
+Below is a full breakdown of how the FreeHome Token Rig works, how it integrates with the MM ecosystem, and how its task‑scaling engine is structured.
+
+---
+
+1. Core Purpose:
+
+Modeling Group Task Output in a Mining Simulation
+
+In the MM universe, a “rig” is a Python module that simulates:
+
+- mining cycles  
+- reward intervals  
+- ad‑triggered events  
+- hash‑power growth  
+- capsule MB generation  
+- resource scaling  
+
+The FreeHome Token Rig adds a new dimension:  
+group‑based task scaling.
+
+Instead of focusing on collectibles (like the Trading Card Rig), this module explores:
+
+- how many tasks one participant completes per day  
+- how many reward events occur  
+- how group size multiplies output  
+- how task‑value affects total simulated output  
+- how long it takes a group to reach a target number  
+
+This is a math engine, not a financial system.
+
+---
+
+2. Task Engine:
+
+How the Simulation Calculates Output
+
+The FreeHome Token Rig uses a simple but powerful formula set to model task cycles.
+
+2.1 Tasks per Miner per Day
+
+Each participant performs tasks at a fixed interval:
+
+\[
+\text{tasks} = \frac{\text{hours} \times 3600}{\text{ad\_interval}}
+\]
+
+Example (24 hours, 90‑second interval):
+
+- 24 hours = 86,400 seconds  
+- 86,400 ÷ 90 = 960 tasks per miner per day
+
+2.2 Reward Events per Miner
+
+Your rig defines:
+
+- 5 rounds per cycle  
+- 100 cycles per session  
+
+So:
+
+\[
+\text{reward\_events} = 5 \times 100 = 500
+\]
+
+Combined with mining rewards, the total becomes:
+
+\[
+\text{total\_events} \approx 1800 \text{ per miner per day}
+\]
+
+2.3 Task‑Value Simulation
+
+Each task has a configurable “value”:
+
+\[
+\text{task\_value} = 0.036
+\]
+
+This is not real currency — it is a simulation variable.
+
+2.4 Group Scaling
+
+If N participants join:
+
+\[
+\text{group\output} = N \times \text{blended\per\_miner}
+\]
+
+This shows how group size affects total output.
+
+---
+
+3. FreeHome Token:
+
+A Simulation Token for Group Progress
+
+The FreeHome Token is not a cryptocurrency.  
+It is a counter used to measure:
+
+- total tasks completed  
+- total reward events  
+- group progress toward a target number  
+
+The rig includes:
+
+- estimate_pool() — calculates per‑miner and group totals  
+- printpoolsummary() — prints a readable summary  
+- runpoolsimulation() — runs the preset scenario  
+
+This mirrors the Trading Card Rig’s structure, but instead of cards, it tracks task‑units.
+
+---
+
+4. Integration with the MM Ecosystem
+
+The FreeHome Token Rig fits into the MM universe the same way the Trading Card Rig does:
+
+✔ Uses the same wallet system
+Each wallet can store:
+
+- capsule MB  
+- cache MB  
+- kWh  
+- bandwidth  
+- torrent MB  
+- watts_token  
+- node_id  
+
+✔ Uses the same mining loop
+The unified mining loop still:
+
+- triggers ads  
+- generates capsule MB  
+- logs kWh  
+- grows hash power  
+- produces torrent payloads  
+
+✔ Adds a new module
+home_pool.py becomes a standalone simulation engine.
+
+✔ Adds a new menu option
+“Task Scaling Simulation”  
+→ runs the FreeHome Token model.
+
+---
+
+5. Example Preset Scenario (Built Into the Rig)
+
+The rig includes a preset simulation:
+
+- 500 participants  
+- 24 hours  
+- 90‑second interval  
+- 5 rounds × 100 cycles  
+- ~1800 reward events per miner  
+- task‑value = 0.036  
+
+This produces a readable summary showing:
+
+- tasks per miner  
+- reward events  
+- total events  
+- per‑miner output  
+- group output  
+
+can you get 0.036$ task rate× node amount of people to join in mining? the rig adds rate of  people mining and says 500 people for a home minimum to activate a free homes for $0.036 ×5 rounds of ads 1 scroll ad 3 idle time ads 1 video ad ×100 mining rounds $18 million dollars buys over 480,000 homes in 100 ad rounds would you guys buy homes with me free homes every 100 ads by rate of whatever amount joins the terminal to mine from the python file connected to the internet to verify people that join mining 100 tasks it pays for a $28,000 on 500 tasks for $0.036 penny which then allow it to be loaned out on aruppe for a dollar each 6months for taxes and brought to a rate of $6 paid by a dollar rate a month examples 1,000,000 users to make extra $4,000,000 to buy another rate of 32,000 homes and after 10,000 ads it gives each cryptocurrency user a free home think about it you make $4 million each $18 million you make off the homes for free non profit it you charge nothing on taxes and you profit when it comes to $22 million in sales with that you unlock a flow of 4 euros if you go with $60,000 homes you can do 6 ruppe instead to back it by grease for $45-90 in a trust for over seas tying banks from their country to home rates where we use their banking to profit on as global trades but with that the abilty to do overall better in a group in a economic form with that if i can get 1,000 people to get on for a rate of 0.036 dollar vaule ×1000 people needed ×5 rounds ×100 share tick rounds of task×1800 total amount of rewards a day to do for 24 buys everyone a home in 24 hours for $38,000 and cost 32.4 million can you find me 1000 people to mine $38,000 a day of a micro $3,800 share of rewards for a etf for homes
+
+how to make the idea work on url web based
+
+Make a lootlabs account 
+Do max profit not task profit
+Set up a website on infinity hosting for free
+Wait 3 days for processing time
+Set up a index home page from AI help just type I need this color html or style design with this layout for a page that talks about my idea for selling homes and buying them 
+
+Set up a bonus page for terminal or url Im setting up on manierism megabytes rig to produce money or from loveable which is easy it'll do all the work in 3 days or for $25 for a month for work 
+And then on the bonus page you put in words please go back to the terminal or url page with a link box to click and then make that page on loveable ai website maker or grok for websites like infinity hosting for more freedom in coding 
+
 # Trading card rig USD paying
 
 ### Deep Dive: The Trading Card Rig in Manierism Megabytes
