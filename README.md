@@ -1,7 +1,20 @@
 # Manierism megabytes
 ----
 
-# Free homes python script buy a home for $0.036 penny at rate of 500 friends for 500 tasks each 
+# Free home Electric Task Financial system 
+
+# manierism first ETF token for homes
+
+
+A electronic task financial system to manierism rigs is a task system that backs a share group with asset to trade for future gains or losses in a economy backing a small rate by a task group for a larger rate the more user the more the task grows for a growth of assets 
+
+if 500 people join it gives 1 home or so but if 5000 people join it gives 10 homes 1 home for them and 9 homes for their friends 
+
+ETF'$ are special in manierism because it takes a task and backs it by a assets that can be anything even a Bitcoin 
+
+what unique is that it gives a new style to mining and allows a transfer of low amounts of task where if 500 people give a rate of 500 ads then 5000 would give the rate of 50 for example at 100,000 it would be a non profit donation and that is all manierism megabytes rig has become and will be for future growth it protects assets and binds taxes making it a Amazon but also a ebay and forms the abilty to offer shares and other assets to even kids while having one share holder own the stock but back it by its own micro ETF and with that it makes a task at least $0.036 and the ability at 360,000 people to make a home a micro payment and a ad rate of $360,000 per person broken down to $1,000 click rate ETF$ and grows the pool to a rate of shares for a home at 50 task for a reward of a home when pool it actived and split by user for future set up tomorrow anything beyond 360,000 people is a epoch growth pool at 1.2 million for 3 times the amount making homes have a task of $5,000 per ETF$ and the abilty to do 10 ETF$ to make a home
+
+Free homes python script buy a home for $0.036 penny at rate of 500 friends for 500 tasks each 
 
 ⭐ FreeHome Token Rig
 
