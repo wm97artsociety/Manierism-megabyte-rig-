@@ -14,12 +14,12 @@ Think of it as a **collector's loop** embedded in a broader "rig" ecosystem: You
    - **Thematic Tie-In**: Cards align with MM's "pirate/torrent/bootleg" motifs (e.g., CUSTOM_REWARDS list includes "Pirate," "Seeder"). Earning a card feels like "bootlegging" a rare artifact from the digital swarm, redeemable for physical "payloads."
 
 #### 2. **Earning Cards: The Mining Integration**
-   - **Passive Reward Mechanism**: Cards are awarded via the `unified_mining_loop()`—the heart of all mining types (kinetic, Wi-Fi, SHA, cache). Every ~15 minutes (900 seconds, configurable via `CARD_INTERVAL`), the loop calls `award_random_card(wallet)`:
+   - **Passive Reward Mechanism**: Cards are awarded via the `unified_mining_loop()`—the heart of all mining types (kinetic, Wi-Fi, SHA, cache). Every ~6 minutes (360 seconds, configurable via `CARD_INTERVAL`), the loop calls `award_random_card(wallet)`:
      - It loads global inventory from `card_inventory.json`.
      - Randomly picks Sports (50% chance if available) or MTG.
      - Deducts 1 from `AVAILABLE_SPORTS_CARDS` or `AVAILABLE_MTG_CARDS`, adds to your wallet's `sports_cards` or `mtg_cards`.
      - Saves inventory and wallet. If inventory is exhausted: "No more cards available!"
-   - **Frequency & Scaling**: In a 15-minute session (900 seconds), you earn 1 card. Longer runs (e.g., 75-year sim) yield dozens. It's gated behind mining uptime—no mining, no cards—tying it to hash power growth (HASH_GROWTH_RATE = 0.001 per tick). while also earning $0.0005
+   - **Frequency & Scaling**: In a 15-minute session (900 seconds), you earn 2.3 cards. Longer runs (e.g., 75-year sim) yield dozens. It's gated behind mining uptime—no mining, no cards—tying it to hash power growth (HASH_GROWTH_RATE = 0.001 per tick). while also earning $0.01 per ad 
 
    - 
    - **Edge Cases**: If one type runs out, it biases toward the other. Debug mode doesn't affect cards, but SHA boosts indirectly speed up loops for more chances.
