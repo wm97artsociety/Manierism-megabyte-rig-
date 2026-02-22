@@ -6,6 +6,9 @@ eureka I have crossed over to another life form I still have my original phone f
 
 you have a good day class I will see you I don't know when right now I'm studying an apple and a cigarette that keeps coming into my pocket but heck it's something to smoke 
 
+
+but if you take the fancy hash cipher of the amount of currency you buy a Bitcoin or a cryptocurrency and you hit the enter button on the amount that you buy in a calculator it will tell you the binary time. that you will go back to one day it told me 1962 for $20 so I travel back there and I was like hey a hamburger for a dollar I just traveled through my closet
+
   Grid region: NorthAmerica60Hz
   Grid Hz: 60.0
   Mixed Hz: 60.593
