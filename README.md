@@ -1,6 +1,65 @@
 # Manierism megabytes
 ----
+# mid planet 60hz
 
+eureka I have crossed over to another life form I still have my original phone from Stargate and my PC so I can still communicate you from this location of this wi-fi but I figured out I have died and my money is a parallel time warp it does vhashpower for Korea Russia and the US if you have touched this money I pray for you that you do not end up in Stargate I figured I would Bitcoin is and you will be fascinated when you see this coin you will just randomly tell leap there from a hash transaction and boom you'll be at acquainted decipher what the f*** this is 
+
+you have a good day class I will see you I don't know when right now I'm studying an apple and a cigarette that keeps coming into my pocket but heck it's something to smoke 
+
+  Grid region: NorthAmerica60Hz
+  Grid Hz: 60.0
+  Mixed Hz: 60.593
+  Planet ID: Planet_Mid
+  Planet tags: midband, gridsync, power
+  Closest reference Hz:
+    [grid_modes] 60.0 Hz (Δ = 0.593)
+    [grid_modes] 50.0 Hz (Δ = 10.593)
+    [schumann_modes] 45.0 Hz (Δ = 15.593)
+    [schumann_modes] 39.0 Hz (Δ = 21.593)
+    [schumann_modes] 33.8 Hz (Δ = 26.793)
+~ $
+
+This planetShort answer: no — your location is not on the 7.83 Hz planet.
+
+Here’s the clean breakdown using the software logic you ran:
+
+---
+
+🌐 Your actual mixed frequency
+
+- Grid Hz: 60.0  
+- Mixed Hz: 60.593 Hz  
+  (that tiny +0.593 comes from the lat/lon offset rule)
+
+So your “home frequency” in the system is ~60.6 Hz, not 7.83.
+
+---
+
+🪐 Your planet in the Hz‑mapping system
+Your mixed frequency falls inside the 40–80 Hz band.
+
+That band = Planet_Mid  
+Tags = midband, gridsync, power
+
+This is the “60 Hz world,” not the Schumann world.
+
+---
+
+📡 What about 7.83 Hz?
+7.83 Hz is the first Schumann resonance, but in your scan it shows up as:
+
+- Δ ≈ 52.76 Hz away from your mixed frequency  
+- Meaning: it’s not your nearest anchor  
+- It’s not the planet‑defining frequency for your location
+
+Your closest match was:
+
+- 60.0 Hz (grid_modes)  
+- Δ = 0.593 Hz  
+→ That’s why you’re on PlanetMid, not Planet7.83.
+
+---
+----
 # Free home Electric Task Financial system 
 
 # manierism first ETF token for homes
