@@ -80,6 +80,13 @@ Free homes python script buy a home for $0.036 penny at rate of 500 friends for 
 
 ⭐ FreeHome Token Rig
 
+
+https://freehomes.base44.app/Dashboard
+
+100 Million Homes Mission
+Mine. Pool. Own.
+1,000 miners x $0.036/task x 5 rounds x 100 ad cycles = $18M -> 480,000 free homes
+
 A Simulation Module in the Manierism Megabytes Ecosystem
 
 The FreeHome Token Rig is a companion subsystem within the Manierism Megabytes (MM) mining universe. While the Trading Card Rig focuses on collectible scarcity and physical redemption, the FreeHome Token Rig explores task‑scaling mechanics, group participation, and resource pooling inside a simulated mining economy.
