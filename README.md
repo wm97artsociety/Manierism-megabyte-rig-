@@ -3,6 +3,9 @@
 
 # cvs exchange file for bin, torrents and cache megabytes paper digital etf dollar system 
 
+
+i created the idea in 2019 for a digital dollar but it did not go through i wanted it to back the trust of our debt dollar for the usa because if you look at the left top of the dollar it does say its only used for debt so i wanted to ask the government for a treasury that backed the dollar with a background dollar to back it from collapse but people got made just normal people and it was misread to the public from a mistrusted source and my metadata from 2019 does show from cricket mobile i am the creator of the idea with other digital dollars but it was only to back money but was expressed to the public as a way to over turn the public when i txted google the idea just like you can think tank a idea for anything if they make it out of the 20,000 people youre ip address uses to send ip checks someome may use your love we would have a system by me may do but it is un listed to the public because of false ideology not no one fault just as humans we take things way to advanced and never know a true story so hope it helps the 2019 year 
+
 **Here's a complete, practical guide** to sell small packets of **sugar, teas, and spices pi ** as a micro-business using your exact specs:
 
 - **Item cost**: $0.03–$0.10 each (realistic — bulk sugar packets are often ~$0.014–$0.05, tea bags/spice samples ~$0.03–$0.08 from Alibaba, restaurant supply sites, or Amazon bulk).
