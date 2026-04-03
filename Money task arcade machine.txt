@@ -1,0 +1,817 @@
+This version will:
+
+- Detect arcade buttons (via USB encoder)  
+- Map button codes → friendly names  
+- Play video ads fullscreen on the arcade screen (secondary monitor)  
+- Wait for the video to finish or a set time  
+- Stop the ad cleanly  
+- Log completions  
+- Track points  
+
+You can later plug in your own ad videos, attract loops, or even launch games after ads.
+
+---
+
+1. Folder structure
+
+Create this folder:
+
+```
+arcade_ad_console/
+│
+├── detect_gamepad.py
+├── ad_listener.py
+├── ad_player.py
+├── rewards.py
+├── config.json
+├── log.txt
+├── points.txt
+└── ads/                  (create this folder and put your .mp4 ad files here)
+```
+
+Make all these files (you’ll paste code into them).
+
+---
+
+2. Install Python + libraries
+
+In Command Prompt (after installing Python and checking “Add Python to PATH”):
+
+```
+pip install pygame
+pip install inputs
+```
+
+No browser driver needed — we use pygame to play videos.
+
+---
+
+3. detect_gamepad.py — find button codes
+
+This script prints events every time you press a button on your USB arcade encoder.
+
+```python
+# detect_gamepad.py
+# Purpose: Listen to your arcade USB controller and print button press data.
+
+import inputs
+
+def main():
+    print("Arcade button detection started.")
+    print("Press every button on your arcade controls.\n")
+
+    try:
+        while True:
+            events = inputs.get_gamepad()
+            for event in events:
+                print(f"Type: {event.ev_type} | Code: {event.code} | State: {event.state}")
+    except KeyboardInterrupt:
+        print("\nStopping...")
+    
+if __name__ == "__main__":
+    main()
+```
+
+Usage:
+
+```
+python detect_gamepad.py
+```
+
+- Press each button on the arcade machine  
+- You’ll see things like: Type: Key | Code: BTN_SOUTH | State: 1  
+- Write down which code appears for each button when State: 1 (often BTN_SOUTH, BTN_START, etc.).
+
+Example notes you’d make:
+
+```
+BTN_SOUTH  -> Player 1 A button
+BTN_START  -> Start button
+BTN_SELECT -> Coin button
+```
+
+---
+
+4. config.json — button → ad mapping
+
+You will name your buttons (AD_PLAYER1_A, AD_START, etc.) and map them to ad videos.
+
+```json
+{
+  "AD_PLAYER1_A": {
+    "ad_file": "ads/ad1.mp4",
+    "duration_seconds": 30,
+    "reward_points": 5
+  },
+  "AD_START": {
+    "ad_file": "ads/attract_loop.mp4",
+    "duration_seconds": 60,
+    "reward_points": 1
+  },
+  "AD_COIN": {
+    "ad_file": "ads/special_offer.mp4",
+    "reward_points": 10
+  }
+}
+```
+
+You’ll later connect button codes to these names.
+
+---
+
+5. rewards.py — handle points
+
+Simple file to read/update points.txt.
+
+```python
+# rewards.py
+# Purpose: Manage points storage in points.txt
+
+import os
+
+POINTS_FILE = "points.txt"
+
+def get_current_points():
+    if not os.path.exists(POINTS_FILE):
+        return 0
+    try:
+        with open(POINTS_FILE, "r") as f:
+            content = f.read().strip()
+            return int(content) if content else 0
+    except:
+        return 0
+
+def add_points(amount):
+    current = get_current_points()
+    new_total = current + amount
+    with open(POINTS_FILE, "w") as f:
+        f.write(str(new_total))
+    return new_total
+```
+
+Initialize points.txt with:
+
+```
+0
+```
+
+---
+
+6. ad_player.py — play ad, wait, stop, log, add points
+
+This file executes the ad playback.
+
+```python
+# ad_player.py
+# Purpose: Run ad playback (play video, wait, stop, log, reward).
+
+import time
+from datetime import datetime
+import pygame
+
+import rewards
+
+LOG_FILE = "log.txt"
+
+def log_task(button_name, ad_file, points_awarded):
+    """
+    Append a line to log.txt documenting the completed ad.
+    """
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    line = f"{timestamp} | {button_name} | Played {ad_file} | +{points_awarded} points\n"
+    with open(LOG_FILE, "a", encoding="utf-8") as f:
+        f.write(line)
+    print("Logged task:", line.strip())
+
+def run_ad_playback(button_name, task_info):
+    """
+    Play a video ad fullscreen on the secondary monitor, wait, stop, and reward points.
+    """
+    ad_file = task_info.get("ad_file")
+    duration = task_info.get("duration_seconds")
+    points = task_info.get("reward_points", 0)
+
+    if not ad_file:
+        print(f"No ad_file specified for {button_name}")
+        return
+
+    print(f"Playing ad for {button_name}: {ad_file}")
+
+    pygame.init()
+
+    if pygame.display.get_num_video_modes() < 2:
+        print("Only one screen detected! Connect your arcade monitor as second display.")
+        return
+
+    # Open fullscreen on SECONDARY monitor (display=1)
+    screen = pygame.display.set_mode((1920, 1080), pygame.FULLSCREEN, display=1)  # Adjust resolution if needed
+    pygame.mouse.set_visible(False)
+
+    try:
+        movie = pygame.movie.Movie(ad_file)
+        movie.play()
+        print(f"Ad playing... (duration limit: {duration if duration else 'until end'})")
+
+        start_time = time.time()
+        while movie.get_busy():
+            if duration and (time.time() - start_time >= duration):
+                break
+            time.sleep(0.1)
+
+        movie.stop()
+    except Exception as e:
+        print(f"Error playing ad: {e}")
+    finally:
+        pygame.quit()
+        print("Ad stopped.")
+
+    # Reward points
+    new_total = rewards.add_points(points)
+    print(f"Awarded {points} points. New total: {new_total}")
+
+    # Log
+    log_task(button_name, ad_file, points)
+
+def run_task(button_name, task_info):
+    """
+    Decide what to do based on the task type.
+    For now we only support ad playback.
+    """
+    run_ad_playback(button_name, task_info)
+```
+
+---
+
+7. ad_listener.py — map codes → names → tasks
+
+This file listens for button presses and triggers ad_player.run_task.
+
+You’ll need to edit the CODE_TO_BUTTON dict to match your device.
+
+```python
+# ad_listener.py
+# Purpose: Listen for arcade button presses and trigger ads.
+
+import json
+import inputs
+
+import ad_player
+
+CONFIG_FILE = "config.json"
+
+# 1) Fill this after using detect_gamepad.py
+# Example mapping: button code -> friendly button name
+CODE_TO_BUTTON = {
+    # Replace these with your actual codes
+    "BTN_SOUTH":  "AD_PLAYER1_A",
+    "BTN_START":  "AD_START",
+    "BTN_SELECT": "AD_COIN"
+    # Add more: "code": "AD_NAME"
+}
+
+def load_config():
+    with open(CONFIG_FILE, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+CONFIG = load_config()
+
+def handle_button(button_name):
+    """
+    Look up button_name in config and run its task.
+    """
+    task_info = CONFIG.get(button_name)
+    if not task_info:
+        print(f"No task configured for {button_name}")
+        return
+
+    print(f"Running task for {button_name}")
+    ad_player.run_task(button_name, task_info)
+
+def main():
+    print("Listening for arcade button presses... Press CTRL+C to stop.")
+
+    try:
+        while True:
+            events = inputs.get_gamepad()
+            for event in events:
+                if event.ev_type == "Key" and event.state == 1:  # Button press down
+                    print(f"Detected button: {event.code}")
+
+                    button_name = CODE_TO_BUTTON.get(event.code)
+                    if not button_name:
+                        print(f"No mapping for code {event.code}. Add it to CODE_TO_BUTTON.")
+                        continue
+
+                    handle_button(button_name)
+    except KeyboardInterrupt:
+        print("\nStopping listener...")
+    
+
+if __name__ == "__main__":
+    main()
+```
+
+Key piece you manually control:
+
+```python
+CODE_TO_BUTTON = {
+    "BTN_SOUTH":  "AD_PLAYER1_A",
+    "BTN_START":  "AD_START",
+    "BTN_SELECT": "AD_COIN"
+}
+```
+
+You build this from your detect_gamepad.py findings.
+
+---
+
+8. log.txt and points.txt
+
+Create them as plain text files:
+
+log.txt — empty to start. The program will append lines like:
+
+```
+2025-12-26 18:20:01 | AD_PLAYER1_A | Played ads/ad1.mp4 | +5 points
+2025-12-26 18:21:10 | AD_START     | Played ads/attract_loop.mp4 | +1 points
+```
+
+points.txt
+
+```
+0
+```
+
+---
+
+9. How to actually use all this
+
+1. Detect button codes:
+
+   ```
+   python detect_gamepad.py
+   ```
+
+   - Press each arcade button  
+   - Note which code value appears for which button  
+
+2. Fill CODE_TO_BUTTON in ad_listener.py:
+
+   ```python
+   CODE_TO_BUTTON = {
+       "BTN_SOUTH":  "AD_PLAYER1_A",
+       "BTN_START":  "AD_START",
+       "BTN_SELECT": "AD_COIN"
+       # etc...
+   }
+   ```
+
+3. Create/adjust config.json with your ad files and point values.
+
+4. Make sure points.txt has 0 and log.txt exists (can be empty).
+
+5. Run the listener:
+
+   ```
+   python ad_listener.py
+   ```
+
+6. Press an arcade button:
+
+   - Program sees the button code  
+   - Converts to AD_PLAYER1_A (or whatever)  
+   - Looks up in config.json  
+   - Plays the ad fullscreen on the arcade screen  
+   - Waits  
+   - Stops  
+   - Logs  
+   - Adds points  
+
+Your old arcade machine is now a physical ad console to connect with the pc or monitor to play ads and earn points from real use.    - Exact folder layout  
+- Full code for every .py file  
+- Example config.json, log.txt, points.txt contents  
+- Clear comments so even a basic coder can follow  
+
+This version will:
+
+- Detect arcade buttons (via USB encoder)  
+- Map button codes → friendly names  
+- Play video ads fullscreen on the arcade screen (secondary monitor)  
+- Wait for the video to finish or a set time  
+- Stop the ad cleanly  
+- Log completions  
+- Track points  
+
+You can later plug in your own ad videos, attract loops, or even launch games after ads.
+
+---
+
+1. Folder structure
+
+Create this folder:
+
+```
+arcade_ad_console/
+│
+├── detect_gamepad.py
+├── ad_listener.py
+├── ad_player.py
+├── rewards.py
+├── config.json
+├── log.txt
+├── points.txt
+└── ads/                  (create this folder and put your .mp4 ad files here)
+```
+
+Make all these files (you’ll paste code into them).
+
+---
+
+2. Install Python + libraries
+
+In Command Prompt (after installing Python and checking “Add Python to PATH”):
+
+```
+pip install pygame
+pip install inputs
+```
+
+No browser driver needed — we use pygame to play videos.
+
+---
+
+3. detect_gamepad.py — find button codes
+
+This script prints events every time you press a button on your USB arcade encoder.
+
+```python
+# detect_gamepad.py
+# Purpose: Listen to your arcade USB controller and print button press data.
+
+import inputs
+
+def main():
+    print("Arcade button detection started.")
+    print("Press every button on your arcade controls.\n")
+
+    try:
+        while True:
+            events = inputs.get_gamepad()
+            for event in events:
+                print(f"Type: {event.ev_type} | Code: {event.code} | State: {event.state}")
+    except KeyboardInterrupt:
+        print("\nStopping...")
+    
+if __name__ == "__main__":
+    main()
+```
+
+Usage:
+
+```
+python detect_gamepad.py
+```
+
+- Press each button on the arcade machine  
+- You’ll see things like: Type: Key | Code: BTN_SOUTH | State: 1  
+- Write down which code appears for each button when State: 1 (often BTN_SOUTH, BTN_START, etc.).
+
+Example notes you’d make:
+
+```
+BTN_SOUTH  -> Player 1 A button
+BTN_START  -> Start button
+BTN_SELECT -> Coin button
+```
+
+---
+
+4. config.json — button → ad mapping
+
+You will name your buttons (AD_PLAYER1_A, AD_START, etc.) and map them to ad videos.
+
+```json
+{
+  "AD_PLAYER1_A": {
+    "ad_file": "ads/ad1.mp4",
+    "duration_seconds": 30,
+    "reward_points": 5
+  },
+  "AD_START": {
+    "ad_file": "ads/attract_loop.mp4",
+    "duration_seconds": 60,
+    "reward_points": 1
+  },
+  "AD_COIN": {
+    "ad_file": "ads/special_offer.mp4",
+    "reward_points": 10
+  }
+}
+```
+
+You’ll later connect button codes to these names.
+
+---
+
+5. rewards.py — handle points
+
+Simple file to read/update points.txt.
+
+```python
+# rewards.py
+# Purpose: Manage points storage in points.txt
+
+import os
+
+POINTS_FILE = "points.txt"
+
+def get_current_points():
+    if not os.path.exists(POINTS_FILE):
+        return 0
+    try:
+        with open(POINTS_FILE, "r") as f:
+            content = f.read().strip()
+            return int(content) if content else 0
+    except:
+        return 0
+
+def add_points(amount):
+    current = get_current_points()
+    new_total = current + amount
+    with open(POINTS_FILE, "w") as f:
+        f.write(str(new_total))
+    return new_total
+```
+
+Initialize points.txt with:
+
+```
+0
+```
+
+---
+
+6. ad_player.py — play ad, wait, stop, log, add points
+
+This file executes the ad playback.
+
+```python
+# ad_player.py
+# Purpose: Run ad playback (play video, wait, stop, log, reward).
+
+import time
+from datetime import datetime
+import pygame
+
+import rewards
+
+LOG_FILE = "log.txt"
+
+def log_task(button_name, ad_file, points_awarded):
+    """
+    Append a line to log.txt documenting the completed ad.
+    """
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    line = f"{timestamp} | {button_name} | Played {ad_file} | +{points_awarded} points\n"
+    with open(LOG_FILE, "a", encoding="utf-8") as f:
+        f.write(line)
+    print("Logged task:", line.strip())
+
+def run_ad_playback(button_name, task_info):
+    """
+    Play a video ad fullscreen on the secondary monitor, wait, stop, and reward points.
+    """
+    ad_file = task_info.get("ad_file")
+    duration = task_info.get("duration_seconds")
+    points = task_info.get("reward_points", 0)
+
+    if not ad_file:
+        print(f"No ad_file specified for {button_name}")
+        return
+
+    print(f"Playing ad for {button_name}: {ad_file}")
+
+    pygame.init()
+
+    if pygame.display.get_num_video_modes() < 2:
+        print("Only one screen detected! Connect your arcade monitor as second display.")
+        return
+
+    # Open fullscreen on SECONDARY monitor (display=1)
+    screen = pygame.display.set_mode((1920, 1080), pygame.FULLSCREEN, display=1)  # Adjust resolution if needed
+    pygame.mouse.set_visible(False)
+
+    try:
+        movie = pygame.movie.Movie(ad_file)
+        movie.play()
+        print(f"Ad playing... (duration limit: {duration if duration else 'until end'})")
+
+        start_time = time.time()
+        while movie.get_busy():
+            if duration and (time.time() - start_time >= duration):
+                break
+            time.sleep(0.1)
+
+        movie.stop()
+    except Exception as e:
+        print(f"Error playing ad: {e}")
+    finally:
+        pygame.quit()
+        print("Ad stopped.")
+
+    # Reward points
+    new_total = rewards.add_points(points)
+    print(f"Awarded {points} points. New total: {new_total}")
+
+    # Log
+    log_task(button_name, ad_file, points)
+
+def run_task(button_name, task_info):
+    """
+    Decide what to do based on the task type.
+    For now we only support ad playback.
+    """
+    run_ad_playback(button_name, task_info)
+```
+
+---
+
+7. ad_listener.py — map codes → names → tasks
+
+This file listens for button presses and triggers ad_player.run_task.
+
+You’ll need to edit the CODE_TO_BUTTON dict to match your device.
+
+```python
+# ad_listener.py
+# Purpose: Listen for arcade button presses and trigger ads.
+
+import json
+import inputs
+
+import ad_player
+
+CONFIG_FILE = "config.json"
+
+# 1) Fill this after using detect_gamepad.py
+# Example mapping: button code -> friendly button name
+CODE_TO_BUTTON = {
+    # Replace these with your actual codes
+    "BTN_SOUTH":  "AD_PLAYER1_A",
+    "BTN_START":  "AD_START",
+    "BTN_SELECT": "AD_COIN"
+    # Add more: "code": "AD_NAME"
+}
+
+def load_config():
+    with open(CONFIG_FILE, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+CONFIG = load_config()
+
+def handle_button(button_name):
+    """
+    Look up button_name in config and run its task.
+    """
+    task_info = CONFIG.get(button_name)
+    if not task_info:
+        print(f"No task configured for {button_name}")
+        return
+
+    print(f"Running task for {button_name}")
+    ad_player.run_task(button_name, task_info)
+
+def main():
+    print("Listening for arcade button presses... Press CTRL+C to stop.")
+
+    try:
+        while True:
+            events = inputs.get_gamepad()
+            for event in events:
+                if event.ev_type == "Key" and event.state == 1:  # Button press down
+                    print(f"Detected button: {event.code}")
+
+                    button_name = CODE_TO_BUTTON.get(event.code)
+                    if not button_name:
+                        print(f"No mapping for code {event.code}. Add it to CODE_TO_BUTTON.")
+                        continue
+
+                    handle_button(button_name)
+    except KeyboardInterrupt:
+        print("\nStopping listener...")
+    
+
+if __name__ == "__main__":
+    main()
+```
+
+Key piece you manually control:
+
+```python
+CODE_TO_BUTTON = {
+    "BTN_SOUTH":  "AD_PLAYER1_A",
+    "BTN_START":  "AD_START",
+    "BTN_SELECT": "AD_COIN"
+}
+```
+
+You build this from your detect_gamepad.py findings.
+
+---
+
+8. log.txt and points.txt
+
+Create them as plain text files:
+
+log.txt — empty to start. The program will append lines like:
+
+```
+2025-12-26 18:20:01 | AD_PLAYER1_A | Played ads/ad1.mp4 | +5 points
+2025-12-26 18:21:10 | AD_START     | Played ads/attract_loop.mp4 | +1 points
+```
+
+points.txt
+
+```
+0
+```
+
+---
+
+9. How to actually use all this
+
+1. Detect button codes:
+
+   ```
+   python detect_gamepad.py
+   ```
+
+   - Press each arcade button  
+   - Note which code value appears for which button  
+
+2. Fill CODE_TO_BUTTON in ad_listener.py:
+
+   ```python
+   CODE_TO_BUTTON = {
+       "BTN_SOUTH":  "AD_PLAYER1_A",
+       "BTN_START":  "AD_START",
+       "BTN_SELECT": "AD_COIN"
+       # etc...
+   }
+   ```
+
+3. Create/adjust config.json with your ad files and point values.
+
+4. Make sure points.txt has 0 and log.txt exists (can be empty).
+
+5. Run the listener:
+
+   ```
+   python ad_listener.py
+   ```
+
+6. Press an arcade button:
+
+   - Program sees the button code  
+   - Converts to AD_PLAYER1_A (or whatever)  
+   - Looks up in config.json  
+   - Plays the ad fullscreen on the arcade screen  
+   - Waits  
+   - Stops  
+   - Logs  
+   - Adds points  
+
+Your old arcade machine is now a physical ad console to connect with the pc or monitor to play ads and earn points from real use and earns fiat by playing.                  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

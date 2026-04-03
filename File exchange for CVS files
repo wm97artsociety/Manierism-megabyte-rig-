@@ -1,0 +1,166 @@
+import os
+import shutil
+import time
+import json
+from pathlib import Path
+
+def human_size(bytes_size):
+    """Convert bytes to human readable format"""
+    for unit in ['B', 'KiB', 'MiB', 'GiB', 'TiB']:
+        if bytes_size < 1024:
+            return f"{bytes_size:.1f} {unit}"
+        bytes_size /= 1024
+    return f"{bytes_size:.1f} PiB"
+
+def should_convert(filename, size_bytes):
+    """Decide if this file should be turned into .csv + .json"""
+    name_lower = filename.lower()
+    ext = os.path.splitext(filename)[1].lower()
+    
+    size_mb = size_bytes / (1024 * 1024)
+    
+    # Explicit extensions we want
+    if ext in {'.bin', '.torrent', '.dat', '.part', '.tmp', '.old'}:
+        return True
+    
+    # Cache-like files: big, has "cache" in name, or typical cache patterns
+    if size_mb >= 1 and any(word in name_lower for word in [
+        'cache', 'temp', 'thumbnail', 'preview', 'chunk', 'piece', 'magnet'
+    ]):
+        return True
+    
+    return False
+
+def create_nft_metadata_json(csv_path: Path, original_filename: str, size_bytes: int):
+    """Create OpenSea-compatible NFT metadata JSON next to the .csv"""
+    size_mb = size_bytes / (1024 * 1024)
+    size_str = human_size(size_bytes)
+    
+    # Guess category
+    name_lower = original_filename.lower()
+    category = "Unknown"
+    if '.torrent' in name_lower or 'magnet' in name_lower or 'torrent' in name_lower:
+        category = "Torrent / Magnet Data"
+    elif any(w in name_lower for w in ['cache', 'temp', 'thumbnail', 'chunk']):
+        category = "Cache / Temp File"
+    elif any(w in name_lower for w in ['bin', '.dat', '.part']):
+        category = "Binary / Chunk Data"
+    
+    metadata = {
+        "name": f"Manierism Megabytes Rig - {original_filename} ({size_str})",
+        "description": (
+            f"Binary file (originally '{original_filename}') converted to .csv extension. "
+            "Contains raw torrent, cache, bin, or bandwidth-related megabyte data. "
+            "Suitable for NFT-backed storage/value representation (e.g. hashpower, bandwidth proof, "
+            "CoinImp-integrated rig assets). Data unchanged — rename back to original extension to use."
+        ),
+        "animation_url": f"file://{csv_path.name}",  # relative; replace with IPFS/http later
+        # "image": "https://example.com/preview.jpg",          # ← add your own preview screenshot if you want
+        "external_url": "https://example.com/rig-dashboard",   # ← change to your CoinImp/value page
+        "attributes": [
+            {"trait_type": "Size", "value": f"{size_mb:.2f}", "display_type": "number", "max_value": 100000},
+            {"trait_type": "Size (human)", "value": size_str},
+            {"trait_type": "Category", "value": category},
+            {"trait_type": "Original Extension", "value": os.path.splitext(original_filename)[1] or "none"},
+            {"trait_type": "File Type", "value": "CSV-disguised Binary"},
+            {"trait_type": "Potential Use", "value": "Manierism Megabytes Rig NFT"}
+        ],
+        # Optional: you can add more later (e.g. "hashpower": "pending", etc.)
+    }
+    
+    json_path = csv_path.with_suffix(".json")
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump(metadata, f, indent=2, ensure_ascii=False)
+    
+    print(f"  → Created metadata: {json_path.name}")
+
+def convert_files_to_csv(start_folder, output_folder_name="csv_converted"):
+    output_dir = Path(start_folder) / output_folder_name
+    output_dir.mkdir(exist_ok=True)
+    
+    print(f"\nStarting search in:  {start_folder}")
+    print(f"Converted files + JSON metadata will go to:  {output_dir}\n")
+    print("Scanning... (this can take several minutes)\n")
+    
+    count = 0
+    errors = 0
+    start_time = time.time()
+    
+    for root, dirs, files in os.walk(start_folder, topdown=True, followlinks=False):
+        # Skip some very common system folders to speed up & avoid permission issues
+        dirs[:] = [d for d in dirs if d not in {
+            '$RECYCLE.BIN', 'System Volume Information', 'AppData', '.Trash', 'node_modules'
+        }]
+        
+        for filename in files:
+            file_path = Path(root) / filename
+            try:
+                size_bytes = file_path.stat().st_size
+            except (PermissionError, FileNotFoundError):
+                errors += 1
+                continue
+            
+            if should_convert(filename, size_bytes):
+                new_name = Path(filename).stem + ".csv"
+                dest_path = output_dir / new_name
+                
+                # Avoid name collision
+                counter = 1
+                while dest_path.exists():
+                    dest_path = output_dir / f"{Path(filename).stem}_{counter}.csv"
+                    counter += 1
+                
+                try:
+                    shutil.copy2(file_path, dest_path)
+                    size_str = human_size(size_bytes)
+                    print(f"  ✓  {size_str:>8}   {filename}  →  {dest_path.name}")
+                    
+                    # Step 4: Create NFT metadata JSON
+                    create_nft_metadata_json(dest_path, filename, size_bytes)
+                    
+                    count += 1
+                except Exception as e:
+                    print(f"  ✗  Cannot process {filename}  →  {e}")
+                    errors += 1
+    
+    elapsed = time.time() - start_time
+    print(f"\nFinished in {elapsed:.1f} seconds.")
+    print(f"Processed: {count} files (with .csv + .json pairs)")
+    print(f"Errors/skipped: {errors}")
+    print(f"Output folder: {output_dir}")
+    print("\nNext steps:")
+    print("• Upload .csv + .json pairs to nft.storage / Pinata / IPFS")
+    print("• Replace animation_url with real IPFS/http link in each .json")
+    print("• Mint on OpenSea (Polygon) using the .json metadata")
+
+# ────────────────────────────────────────────────
+if __name__ == "__main__":
+    print("=== BIN / TORRENT / CACHE → .csv + NFT JSON converter ===\n")
+    print("Examples of good starting folders:")
+    print("  Windows →  C:\\Users\\Wm97\\Downloads")
+    print("             C:\\")
+    print("  Phone (Termux) →  /storage/emulated/0/Download")
+    print("                     /sdcard")
+    print()
+
+    while True:
+        path = input("Enter folder/drive to search (or press Enter to quit): ").strip()
+        if not path:
+            print("Bye.")
+            break
+        
+        path = os.path.expanduser(path)
+        path = os.path.expandvars(path)
+        
+        if not os.path.isdir(path):
+            print("→ Not a valid folder. Try again.\n")
+            continue
+        
+        try:
+            os.listdir(path)  # quick permission check
+        except PermissionError:
+            print("→ No permission to read this folder. Try running as administrator/root.\n")
+            continue
+        
+        convert_files_to_csv(path)
+        print("\n" + "="*60 + "\n")
