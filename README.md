@@ -2,6 +2,53 @@
 ----
 
 
+
+Here's a practical breakdown of how to **sell wallets/rigs** from this Manierism Megabytes script, along with realistic pricing guidance based on runtime (1 minute to 24 hours). on only 3 hash power 
+
+### How to Sell Wallets
+1. **Run the mining** on a device (Android phone/tablet via Termux or similar, given the `/storage/emulated/0` paths).
+2. After the desired time, stop the mining (Ctrl+C or let it finish).
+3. The wallet data is saved automatically in:  
+   `/storage/emulated/0/Download/manierismmegabytes/rigs/{wallet_id}_wallet.json`
+4. To sell:
+   - Share the **Wallet ID** (and optionally the full JSON file or Node ID).
+   - The buyer can then use option 7 in the menu → "View Wallets & Rigs" → enter the Wallet ID to load/import it.
+   - Or send them the `_wallet.json` file directly — they place it in their `rigs/` folder and load via the menu.
+5. **Important**: The buyer should **not** run mining on it immediately if you want to sell the accumulated resources/hash power as-is. Once they load it, they can continue mining, donate for extra hash, or download resources.
+
+Wallets are basically "pre-mined accounts" with accumulated **Capsule MB**, **Cache MB**, **kWh**, **Bandwidth**, and **permanent Hash Power**.
+
+### Pricing Guide (Based on Runtime and Mining Type)
+The script has **extremely aggressive** multipliers (especially the 79,000× pre-game halving), so values grow insanely fast after ~30–60 minutes. Pricing should reflect the **USD value** shown in the dashboard (Capsule MB at $5 each, Cache MB & Bandwidth at $0.42, kWh at $0.17) plus a premium for the **permanent Hash Power** (which makes future mining much stronger).
+
+Here's a realistic market-based pricing table (seller's perspective). These are **suggested asking prices** — actual sales depend on demand, trust, and how "real" this economy feels to buyers. Prices assume average rolls and no major SHA boosts or cache donations during the run.
+
+| Runtime       | Mining Type          | Approx. Total USD Value (dashboard) | Suggested Selling Price | Notes |
+|---------------|----------------------|-------------------------------------|--------------------------|-------|
+| **1 minute** | Any                 | ~$0–$5                             | $1–$5                   | Almost nothing accumulates. Sell cheap or bundle multiple short runs. |
+| **30–60 minutes** | Fixed 3 H/s        | ~$40k–$50k                         | $10–$50                 | Fixed mode gives no permanent hash growth. Low value long-term. |
+| **30–60 minutes** | CPU / WiFi / SHA   | ~$150M–$170M                       | $20–$150                | Hash power grows a bit (~+4–5%). SHA may add occasional boosts. |
+| **30–60 minutes** | Cache Mining       | ~$170M–$180M                       | $30–$200                | Best short-term: doubles Capsule + Cache MB. Highest immediate value. |
+| **12–24 hours** | Fixed 3 H/s        | ~$1.1M–$1.2M                       | $50–$300                | Still no hash growth. Mostly for collectors. |
+| **12–24 hours** | CPU / WiFi / SHA   | **~$7.2 Billion**                  | $100–$1,000+            | Hash power ~30k H/s. Extremely high future earning potential. |
+| **12–24 hours** | **Cache Mining**   | **~$7.7 Billion**                  | **$200–$2,000+**        | **Best to sell** — highest resources + same hash growth. |
+
+#### Key Pricing Factors & Tips
+- **Cache Mining (Option 5)** is the most valuable to run and sell — it rewards **both** Capsule MB and Cache MB per tick, giving roughly double the resource value.
+- **SHA Mining (Option 4)** can be fun for occasional big temporary boosts, but normal CPU/WiFi is similar most of the time.
+- **Fixed 3 H/s (Option 1)** is the weakest for selling — no permanent hash growth, so future earnings stay tiny. Price it much lower.
+- **Hash Power premium**: Add extra value for wallets with high permanent H/s (e.g., after 24h normal mining it reaches ~30k H/s). Buyers care about this because all future rewards scale with it.
+- **Short runs (under 10 min)**: Sell in bulk (e.g., 10× 5-minute wallets) or very cheap.
+- **Long runs**: Charge more, but be transparent about how long it actually ran. Include screenshots of the final dashboard.
+- **Donations trick**: If you donate Cache MB to the creator wallet (Option 6), you get **79,000× hash power boost** per MB donated. This can make a wallet insanely strong very quickly — but it costs you the Cache MB balance. Some sellers use this to create "super rigs" and charge premium.
+
+### Realistic Advice for Sellers
+- Start small: Run a few 30–60 minute cache mining sessions and sell for $20–$100 each to test demand.
+- The numbers are comically large due to the 79,000× multiplier — treat this as a fun simulation/game rather than serious crypto. Most "value" exists only inside this script.
+- Build trust: Share dashboard screenshots, exact runtime, mining type, and final stats.
+- You can also sell the **JSON file** itself or even offer to run the mining for the buyer remotely (if they trust you with their wallet ID).
+
+
 # cvs exchange file for bin, torrents and cache megabytes paper digital etf dollar system 
 
 
