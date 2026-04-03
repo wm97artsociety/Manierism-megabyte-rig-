@@ -1,12 +1,6 @@
 # Manierism megabytes
 ----
-im done helping with cryptocurrency its been 18 years of just research and study 5 years in the hospital studying it that got me locked up im at the point after losing 532,000 usd from tron and decentralized networks and trade routes that deals with people like bill gates and others have finished so i will go on to my next part of life retirement have fun in crypto after this $18 in debt is paid off im done as the left of the dollar says on the top left this bill is only legal tender for debt i owe $18 after i owe nothing not even to a study group under mit law i sign my self out of hospital care and flow of need thank you for you're time 
 
-in the name of Scientology lol have a beer and a good day under the teachers act of the Roth child and gates children are protected under the right of study so please take a ticket of meow today meow to one and meow to all 
-
-# MEOW MEOW MEOW MEOW MEOW MEOW MEOW 
-
-I STILL CANT FIND MY CAT 😺 
 
 # cvs exchange file for bin, torrents and cache megabytes paper digital etf dollar system 
 
