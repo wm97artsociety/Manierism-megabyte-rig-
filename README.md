@@ -1,5 +1,9 @@
 # Manierism megabytes
 ----
+
+# pirate bay 2-0
+
+still owned by mit group for btt contact ran by wm97 data logs go to donald trump and 1% is given to admin the orginal team with doanld trump will be able to verify data for legal rights but if you make a mistake we shall fix it together free trade 1% marketplace to maintain useage $16 to go for store fee
 pirate bay was took down and used as a trafficking site for data at pirate bay.org as a pirate arggg i over took the system and the real pirate bay 2-0 is located here 
 
 https://piratebay2-0.base44.app
