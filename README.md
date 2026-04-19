@@ -1,5 +1,30 @@
 # Manierism megabytes
 ----
+pirate bay was took down and used as a trafficking site for data at pirate bay.org as a pirate arggg i over took the system and the real pirate bay 2-0 is located here 
+
+https://piratebay2-0.base44.app
+
+
+with this as long as you find a legal way to ship, deliver and sell you may sell just about anything from a file photo or government contractor 
+
+welcome to the boat argggg matyyyyyy swab the deck 
+
+1% fee when sold
+
+okx dapp activated 😉
+
+btt token 7% dip 14% buy unlock 20% dump pool 7% recollection pool fee stabling prices for future trades 
+
+soon more tokens will be added 
+
+first centralized decentralized marketplace approved by donald Trump 
+
+their will be guides on what is the right way to sell certain items by law 
+
+----------
+
+
+
 
 
 
